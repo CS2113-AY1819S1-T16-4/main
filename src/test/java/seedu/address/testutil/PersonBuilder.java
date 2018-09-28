@@ -52,6 +52,14 @@ public class PersonBuilder {
     }
 
     /**
+     * Sets the {@code EmployeeId} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withEmployeeId(String employeeId) {
+        this.employeeId = new EmployeeId(employeeId);
+        return this;
+    }
+
+    /**
      * Sets the {@code Name} of the {@code Person} that we are building.
      */
     public PersonBuilder withName(String name) {
