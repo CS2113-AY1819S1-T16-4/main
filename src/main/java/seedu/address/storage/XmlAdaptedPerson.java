@@ -118,7 +118,8 @@ public class XmlAdaptedPerson {
         final Address modelAddress = new Address(address);
 
         if (employeeId == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, EmployeeId.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, EmployeeId.class
+                    .getSimpleName()));
         }
         final EmployeeId modelEmployeeId = new EmployeeId(employeeId);
 
