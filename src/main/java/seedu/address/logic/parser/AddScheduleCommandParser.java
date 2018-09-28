@@ -17,6 +17,7 @@ public class AddScheduleCommandParser implements Parser<AddScheduleCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the {@code RemarkCommand}
      * and returns a {@code RemarkCommand} object for execution.
+     *
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddScheduleCommand parse(String args) throws ParseException {
@@ -26,7 +27,8 @@ public class AddScheduleCommandParser implements Parser<AddScheduleCommand> {
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (IllegalValueException ive) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddScheduleCommand.MESSAGE_USAGE), ive);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    AddScheduleCommand.MESSAGE_USAGE), ive);
         }
         String schedule = argMultimap.getValue(PREFIX_SCHEDULE).orElse("");
         return new AddScheduleCommand(index, new Schedule(schedule));

@@ -34,10 +34,10 @@ public class AddScheduleCommand extends Command {
     private final Schedule schedule;
 
     /**
-     * @param index of the person in the filtered person list to edit the remark
+     * @param index    of the person in the filtered person list to edit the remark
      * @param schedule of the person to be updated to
      */
-    public AddScheduleCommand (Index index, Schedule schedule) {
+    public AddScheduleCommand(Index index, Schedule schedule) {
         requireAllNonNull(index, schedule);
         this.index = index;
         this.schedule = schedule;
@@ -45,18 +45,19 @@ public class AddScheduleCommand extends Command {
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
-    List<Person> lastShownList = model.getFilteredPersonList();
-         if (index.getZeroBased() >= lastShownList.size()) {
-        throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-    }
-    Person personToEdit = lastShownList.get(index.getZeroBased());
-    Person editedPerson = new Person(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
-            personToEdit.getAddress(), schedule, personToEdit.getTags());
-         model.updatePerson(personToEdit, editedPerson);
+        List<Person> lastShownList = model.getFilteredPersonList();
+        if (index.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        }
+        Person personToEdit = lastShownList.get(index.getZeroBased());
+        Person editedPerson = new Person(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
+                personToEdit.getAddress(), schedule, personToEdit.getTags());
+        model.updatePerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         model.commitAddressBook();
-         return new CommandResult(generateSuccessMessage(editedPerson));
-}
+        return new CommandResult(generateSuccessMessage(editedPerson));
+    }
+
     /**
      * Generates a command execution success message based on whether the remark is added to or removed from
      * {@code personToEdit}.
