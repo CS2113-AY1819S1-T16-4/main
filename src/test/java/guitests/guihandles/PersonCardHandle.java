@@ -15,6 +15,7 @@ import seedu.address.model.person.Person;
  */
 public class PersonCardHandle extends NodeHandle<Node> {
     private static final String ID_FIELD_ID = "#id";
+    private static final String EMPLOYEEID_FIELD_ID = "#employeeId";
     private static final String NAME_FIELD_ID = "#name";
     private static final String ADDRESS_FIELD_ID = "#address";
     private static final String PHONE_FIELD_ID = "#phone";
@@ -22,6 +23,7 @@ public class PersonCardHandle extends NodeHandle<Node> {
     private static final String TAGS_FIELD_ID = "#tags";
 
     private final Label idLabel;
+    private final Label employeeIdLabel;
     private final Label nameLabel;
     private final Label addressLabel;
     private final Label phoneLabel;
@@ -31,6 +33,7 @@ public class PersonCardHandle extends NodeHandle<Node> {
     public PersonCardHandle(Node cardNode) {
         super(cardNode);
 
+        employeeIdLabel = getChildNode(EMPLOYEEID_FIELD_ID);
         idLabel = getChildNode(ID_FIELD_ID);
         nameLabel = getChildNode(NAME_FIELD_ID);
         addressLabel = getChildNode(ADDRESS_FIELD_ID);
@@ -44,6 +47,8 @@ public class PersonCardHandle extends NodeHandle<Node> {
                 .map(Label.class::cast)
                 .collect(Collectors.toList());
     }
+
+    public String getEmployeeId() { return employeeIdLabel.getText(); }
 
     public String getId() {
         return idLabel.getText();
