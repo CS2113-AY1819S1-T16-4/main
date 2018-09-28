@@ -12,6 +12,7 @@ import javax.xml.bind.annotation.XmlElement;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.EmployeeId;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -24,6 +25,8 @@ public class XmlAdaptedPerson {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
 
+    @XmlElement(required = true)
+    private String employeeId;
     @XmlElement(required = true)
     private String name;
     @XmlElement(required = true)
@@ -61,6 +64,7 @@ public class XmlAdaptedPerson {
      * @param source future changes to this will not affect the created XmlAdaptedPerson
      */
     public XmlAdaptedPerson(Person source) {
+        employeeId = source.getEmployeeId().value;
         name = source.getName().fullName;
         phone = source.getPhone().value;
         email = source.getEmail().value;
@@ -113,8 +117,14 @@ public class XmlAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
+        if (employeeId == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, EmployeeId.class
+                    .getSimpleName()));
+        }
+        final EmployeeId modelEmployeeId = new EmployeeId(employeeId);
+
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags);
+        return new Person(modelEmployeeId, modelName, modelPhone, modelEmail, modelAddress, modelTags);
     }
 
     @Override
