@@ -21,4 +21,5 @@ public class ScheduleTest {
         Schedule differentRemark = new Schedule("Bye");
         assertFalse(remark.equals(differentRemark));
     }
+
 }
