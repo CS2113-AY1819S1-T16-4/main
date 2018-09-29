@@ -5,15 +5,17 @@ import java.nio.file.Path;
 import java.util.Optional;
 
 import seedu.address.commons.events.model.AddressBookChangedEvent;
+import seedu.address.commons.events.model.ExpensesListChangedEvent;
 import seedu.address.commons.events.storage.DataSavingExceptionEvent;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyExpensesList;
 import seedu.address.model.UserPrefs;
 
 /**
  * API of the Storage component
  */
-public interface Storage extends AddressBookStorage, UserPrefsStorage {
+public interface Storage extends AddressBookStorage, ExpensesListStorage, UserPrefsStorage {
 
     @Override
     Optional<UserPrefs> readUserPrefs() throws DataConversionException, IOException;
@@ -36,4 +38,20 @@ public interface Storage extends AddressBookStorage, UserPrefsStorage {
      * Raises {@link DataSavingExceptionEvent} if there was an error during saving.
      */
     void handleAddressBookChangedEvent(AddressBookChangedEvent abce);
+
+    @Override
+    Path getExpensesListFilePath();
+
+    @Override
+    Optional<ReadOnlyExpensesList> readExpensesList() throws DataConversionException, IOException;
+
+    @Override
+    void saveExpensesList(ReadOnlyExpensesList expensesList) throws IOException;
+
+    /**
+     * Saves the current version of the Expenses List to the hard disk.
+     *   Creates the data file if it is missing.
+     * Raises {@link DataSavingExceptionEvent} if there was an error during saving.
+     */
+    void handleExpensesListChangedEvent(ExpensesListChangedEvent elce);
 }

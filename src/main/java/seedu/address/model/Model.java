@@ -4,6 +4,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.person.Person;
+import seedu.address.model.expenses.Expenses;
 
 /**
  * The API of the Model component.
@@ -14,14 +15,18 @@ public interface Model {
 
     /** Clears existing backing model and replaces with the provided new data. */
     void resetData(ReadOnlyAddressBook newData);
+    void resetDataExpenses(ReadOnlyExpensesList newData);
 
     /** Returns the AddressBook */
     ReadOnlyAddressBook getAddressBook();
+    ReadOnlyExpensesList getExpensesList();
 
     /**
      * Returns true if a person with the same identity as {@code person} exists in the address book.
      */
     boolean hasPerson(Person person);
+
+    boolean hasExpenses(Expenses expenses);
 
     /**
      * Deletes the given person.
@@ -29,11 +34,15 @@ public interface Model {
      */
     void deletePerson(Person target);
 
+    void deleteExpenses(Expenses target);
+
     /**
      * Adds the given person.
      * {@code person} must not already exist in the address book.
      */
     void addPerson(Person person);
+
+    void addExpenses (Expenses expenses);
 
     /**
      * Replaces the given person {@code target} with {@code editedPerson}.
@@ -41,6 +50,7 @@ public interface Model {
      * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
      */
     void updatePerson(Person target, Person editedPerson);
+    void updateExpenses(Expenses target, Expenses editedExpenses);
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
@@ -75,4 +85,5 @@ public interface Model {
      * Saves the current address book state for undo/redo.
      */
     void commitAddressBook();
+    void commitExpensesList();
 }
