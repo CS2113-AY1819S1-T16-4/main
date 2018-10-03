@@ -2,7 +2,9 @@ package seedu.address.logic.parser;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMPLOYEE_EXPENSES_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EXPENSES_AMOUNT;
+
 import java.util.stream.Stream;
+
 import seedu.address.logic.commands.AddExpensesCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.expenses.EmployeeExpensesId;
@@ -25,7 +27,7 @@ public class AddExpensesCommandParser implements Parser<AddExpensesCommand> {
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddExpensesCommand.MESSAGE_USAGE));
         }
-        EmployeeExpensesId employeeExpensesId= ParserUtil.parseEmployeeExpensesId(argMultimap.getValue
+        EmployeeExpensesId employeeExpensesId = ParserUtil.parseEmployeeExpensesId(argMultimap.getValue
                 (PREFIX_EMPLOYEE_EXPENSES_ID).get());
         ExpensesAmount expensesAmount = ParserUtil.parseExpensesAmount(argMultimap.getValue(PREFIX_EXPENSES_AMOUNT)
                 .get());

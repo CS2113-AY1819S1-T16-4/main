@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * {@code AddressBook} that keeps track of its own history.
  */
-public class VersionedExpensesList extends ExpensesList{
+public class VersionedExpensesList extends ExpensesList {
     private final List<ReadOnlyExpensesList> expensesStateList;
     private int currentStatePointer;
 

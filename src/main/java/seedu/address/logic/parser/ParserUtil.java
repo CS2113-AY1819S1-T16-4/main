@@ -10,7 +10,6 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.expenses.EmployeeExpensesId;
-import seedu.address.model.expenses.Expenses;
 import seedu.address.model.expenses.ExpensesAmount;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.DateOfBirth;
