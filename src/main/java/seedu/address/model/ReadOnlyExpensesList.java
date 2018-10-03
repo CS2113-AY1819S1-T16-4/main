@@ -10,4 +10,4 @@ public interface ReadOnlyExpensesList {
      * This list will not contain any duplicate Expenses.
      */
     ObservableList<Expenses> getExpensesRequestList();
-
+}
