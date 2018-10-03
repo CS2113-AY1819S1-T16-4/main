@@ -12,32 +12,43 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
+import seedu.address.commons.events.model.ExpensesListChangedEvent;
+import seedu.address.model.expenses.Expenses;
 import seedu.address.model.person.Person;
 
 /**
+ * Solution below adapted from @@author {Hafizuddin-NUS}
  * Represents the in-memory model of the address book data.
  */
 public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final VersionedAddressBook versionedAddressBook;
+    private final VersionedExpensesList versionedExpensesList;
     private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Expenses> filteredExpenses;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, UserPrefs userPrefs) {
+    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyExpensesList expensesList, UserPrefs userPrefs) {
         super();
         requireAllNonNull(addressBook, userPrefs);
 
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
         versionedAddressBook = new VersionedAddressBook(addressBook);
+        versionedExpensesList = new VersionedExpensesList(expensesList);
         filteredPersons = new FilteredList<>(versionedAddressBook.getPersonList());
+        filteredExpenses = new FilteredList<>(versionedExpensesList.getExpensesRequestList());
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new AddressBook(), new ExpensesList(), new UserPrefs());
+    }
+
+    public ModelManager(ReadOnlyAddressBook addressBook, UserPrefs userPrefs) {
+        this(addressBook, new ExpensesList(), userPrefs);
     }
 
     @Override
@@ -47,13 +58,29 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public void resetDataExpenses(ReadOnlyExpensesList newData) {
+        versionedExpensesList.resetData(newData);
+        indicateExpensesListChanged();
+    }
+
+    @Override
     public ReadOnlyAddressBook getAddressBook() {
         return versionedAddressBook;
+    }
+
+    @Override
+    public ReadOnlyExpensesList getExpensesList() {
+        return versionedExpensesList;
     }
 
     /** Raises an event to indicate the model has changed */
     private void indicateAddressBookChanged() {
         raise(new AddressBookChangedEvent(versionedAddressBook));
+    }
+
+    /** Raises an event to indicate the model has changed */
+    private void indicateExpensesListChanged() {
+        raise(new ExpensesListChangedEvent(versionedExpensesList));
     }
 
     @Override
@@ -63,9 +90,21 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public boolean hasExpenses(Expenses expenses) {
+        requireNonNull(expenses);
+        return versionedExpensesList.hasExpenses(expenses);
+    }
+
+    @Override
     public void deletePerson(Person target) {
         versionedAddressBook.removePerson(target);
         indicateAddressBookChanged();
+    }
+
+    @Override
+    public void deleteExpenses(Expenses target) {
+        versionedExpensesList.removeExpenses(target);
+        indicateExpensesListChanged();
     }
 
     @Override
@@ -76,12 +115,26 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public void addExpenses(Expenses expenses) {
+        versionedExpensesList.addExpenses(expenses);
+        indicateExpensesListChanged();
+    }
+
+    @Override
     public void updatePerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
 
         versionedAddressBook.updatePerson(target, editedPerson);
         indicateAddressBookChanged();
     }
+
+    @Override
+    public void updateExpenses(Expenses target, Expenses editedExpenses) {
+        requireAllNonNull(target, editedExpenses);
+        versionedExpensesList.updateExpenses(target, editedExpenses);
+        indicateExpensesListChanged();
+    }
+
 
     //=========== Filtered Person List Accessors =============================================================
 
@@ -128,6 +181,12 @@ public class ModelManager extends ComponentManager implements Model {
     public void commitAddressBook() {
         versionedAddressBook.commit();
     }
+
+    @Override
+    public void commitExpensesList() {
+        versionedExpensesList.commit();
+    }
+
 
     @Override
     public boolean equals(Object obj) {

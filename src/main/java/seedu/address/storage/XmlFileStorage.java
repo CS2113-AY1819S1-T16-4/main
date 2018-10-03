@@ -25,6 +25,18 @@ public class XmlFileStorage {
     }
 
     /**
+     * Saves the given expenses list data to the specified file.
+     */
+    public static void saveDataToFile(Path file, XmlSerializableExpensesList expensesList)
+            throws FileNotFoundException {
+        try {
+            XmlUtil.saveDataToFile(file, expensesList);
+        } catch (JAXBException e) {
+            throw new AssertionError("Unexpected exception " + e.getMessage(), e);
+        }
+    }
+
+    /**
      * Returns address book in the file or an empty address book
      */
     public static XmlSerializableAddressBook loadDataFromSaveFile(Path file) throws DataConversionException,
@@ -36,4 +48,15 @@ public class XmlFileStorage {
         }
     }
 
+    /**
+     * Returns expenses list in the file or an empty expenses list
+     */
+    public static XmlSerializableExpensesList loadDataFromExpensesSaveFile(Path file) throws DataConversionException,
+            FileNotFoundException {
+        try {
+            return XmlUtil.getDataFromFile(file, XmlSerializableExpensesList.class);
+        } catch (JAXBException e) {
+            throw new DataConversionException(e);
+        }
+    }
 }
