@@ -11,9 +11,9 @@ import seedu.address.model.ReadOnlyExpensesList;
  * Represents a storage for {@link seedu.address.model.AddressBook}.
  */
 public interface ExpensesListStorage {
-        /**
-         * Returns the file path of the data file.
-         */
+    /**
+     * Returns the file path of the data file.
+     */
     Path getExpensesListFilePath();
 
     /**
