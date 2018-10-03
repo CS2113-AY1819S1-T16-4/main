@@ -13,6 +13,7 @@ public class UserPrefs {
 
     private GuiSettings guiSettings;
     private Path addressBookFilePath = Paths.get("data" , "addressbook.xml");
+    private Path expensesListFilePath = Paths.get("data" , "expenses.xml");
 
     public UserPrefs() {
         setGuiSettings(500, 500, 0, 0);
@@ -33,9 +34,15 @@ public class UserPrefs {
     public Path getAddressBookFilePath() {
         return addressBookFilePath;
     }
+    public Path getExpensesListFilePath() {
+        return expensesListFilePath;
+    }
 
     public void setAddressBookFilePath(Path addressBookFilePath) {
         this.addressBookFilePath = addressBookFilePath;
+    }
+    public void setExpensesListFilePath(Path expensesListFilePath) {
+        this.expensesListFilePath = expensesListFilePath;
     }
 
     @Override
