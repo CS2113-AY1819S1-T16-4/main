@@ -12,8 +12,11 @@ import seedu.address.commons.core.GuiSettings;
 public class UserPrefs {
 
     private GuiSettings guiSettings;
+
+    //-----------------------------------------------
     private Path addressBookFilePath = Paths.get("data" , "addressbook.xml");
     private Path expensesListFilePath = Paths.get("data" , "expenses.xml");
+    private Path scheduleListFilePath = Paths.get("data" , "schedulelist.xml");
 
     public UserPrefs() {
         setGuiSettings(500, 500, 0, 0);
@@ -31,20 +34,24 @@ public class UserPrefs {
         guiSettings = new GuiSettings(width, height, x, y);
     }
 
+    //-----------------------------------------------
     public Path getAddressBookFilePath() {
         return addressBookFilePath;
     }
-    public Path getExpensesListFilePath() {
-        return expensesListFilePath;
+    public Path getExpensesListFilePath() { return expensesListFilePath; }
+    public Path getScheduleListFilePath() {
+        return scheduleListFilePath;
     }
 
     public void setAddressBookFilePath(Path addressBookFilePath) {
         this.addressBookFilePath = addressBookFilePath;
     }
-    public void setExpensesListFilePath(Path expensesListFilePath) {
-        this.expensesListFilePath = expensesListFilePath;
+    public void setExpensesListFilePath(Path expensesListFilePath) { this.expensesListFilePath = expensesListFilePath; }
+    public void setScheduleListFilePath(Path scheduleListFilePath) {
+        this.scheduleListFilePath = scheduleListFilePath;
     }
 
+    //-----------------------------------------------
     @Override
     public boolean equals(Object other) {
         if (other == this) {

@@ -1,6 +1,6 @@
 package seedu.address.commons.events.model;
 import seedu.address.commons.events.BaseEvent;
-import seedu.address.model.ReadOnlyExpensesList;
+import seedu.address.model.expenses.ReadOnlyExpensesList;
 
 /** Indicates the ExpensesList in the model has changed*/
 public class ExpensesListChangedEvent extends BaseEvent {
