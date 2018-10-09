@@ -8,8 +8,8 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.person.exceptions.DuplicatePersonException;
-import seedu.address.model.person.exceptions.PersonNotFoundException;
+import seedu.address.model.schedule.exceptions.DuplicateScheduleException;
+import seedu.address.model.schedule.exceptions.ScheduleNotFoundException;
 
 /**
  * A list of persons that enforces uniqueness between its elements and does not allow nulls.
@@ -41,7 +41,7 @@ public class UniqueScheduleList implements Iterable<Schedule> {
     public void add(Schedule toAddSchedule) {
         requireNonNull(toAddSchedule);
         if (contains(toAddSchedule)) {
-            throw new DuplicatePersonException();
+            throw new DuplicateScheduleException();
         }
         internalList.add(toAddSchedule);
     }
@@ -56,11 +56,11 @@ public class UniqueScheduleList implements Iterable<Schedule> {
 
         int index = internalList.indexOf(target);
         if (index == -1) {
-            throw new PersonNotFoundException();
+            throw new ScheduleNotFoundException();
         }
 
         if (!target.isSameSchedule(editedSchedule) && contains(editedSchedule)) {
-            throw new DuplicatePersonException();
+            throw new DuplicateScheduleException();
         }
 
         internalList.set(index, editedSchedule);
@@ -73,7 +73,7 @@ public class UniqueScheduleList implements Iterable<Schedule> {
     public void remove(Schedule toRemove) {
         requireNonNull(toRemove);
         if (!internalList.remove(toRemove)) {
-            throw new PersonNotFoundException();
+            throw new ScheduleNotFoundException();
         }
     }
 
@@ -89,7 +89,7 @@ public class UniqueScheduleList implements Iterable<Schedule> {
     public void setSchedules(List<Schedule> schedules) {
         requireAllNonNull(schedules);
         if (!personsAreUnique(schedules)) {
-            throw new DuplicatePersonException();
+            throw new DuplicateScheduleException();
         }
 
         internalList.setAll(schedules);
