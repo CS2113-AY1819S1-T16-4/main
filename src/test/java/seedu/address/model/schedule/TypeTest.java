@@ -29,8 +29,9 @@ public class TypeTest {
         // invalid type
         assertFalse(Type.isValidType("")); // empty string
         assertFalse(Type.isValidType(" ")); // spaces only
-        assertFalse(Type.isValidType("W69K")); // middle chars no match
-        assertFalse(Type.isValidType("W69K")); // middle chars no match
+        assertFalse(Type.isValidType("W69K")); // middle chars wrong no match
+        assertFalse(Type.isValidType("okWORK")); // extra chars in front no match
+        assertFalse(Type.isValidType("WORKok")); // extra chars behind no match
 
         // valid type
         assertTrue(Type.isValidType("WORK"));

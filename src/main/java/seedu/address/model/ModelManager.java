@@ -152,7 +152,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void deleteSchedule(Schedule target) {
-        versionedScheduleList.removePerson(target);
+        versionedScheduleList.removeSchedule(target);
         indicateScheduleListChanged();
     }
 

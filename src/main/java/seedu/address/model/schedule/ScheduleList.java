@@ -87,7 +87,7 @@ public class ScheduleList implements ReadOnlyScheduleList {
      * Removes {@code key} from this {@code AddressBook}.
      * {@code key} must exist in the address book.
      */
-    public void removePerson(Schedule key) {
+    public void removeSchedule(Schedule key) {
         schedules.remove(key);
     }
 

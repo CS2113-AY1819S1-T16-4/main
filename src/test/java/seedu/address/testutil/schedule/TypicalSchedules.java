@@ -32,7 +32,7 @@ public class TypicalSchedules {
             .withDate("07/07/2019").withType("LEAVE").build();
 
     // Manually added - Person's details found in {@code CommandTestUtil}
-    public static final Schedule AMY = new ScheduleBuilder().withEmployeeId("000001")
+    public static final Schedule AMY = new ScheduleBuilder().withEmployeeId("000010")
             .withDate("01/01/2019").withType("WORK").build();
     public static final Schedule BOB = new ScheduleBuilder().withEmployeeId("000001")
             .withDate("01/01/2019").withType("WORK").build();

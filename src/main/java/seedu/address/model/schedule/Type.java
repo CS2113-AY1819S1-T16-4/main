@@ -9,13 +9,12 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Type {
 
     public static final String MESSAGE_TYPE_CONSTRAINTS =
-            "TYPE should only contain alphanumeric characters and spaces, and it should not be blank";
+            "TYPE should only be WORK or LEAVE, case not sensitive and it should not be blank";
 
     /*
-     * The first character of the Type must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
+     * Type must either be WORK or LEAVE, exact match.
      */
-    public static final String TYPE_VALIDATION_REGEX = "(^WORK$|^LEAVE$)";
+    public static final String TYPE_VALIDATION_REGEX = "(^LEAVE$)|(^WORK$)";
 
 
     public final String value;

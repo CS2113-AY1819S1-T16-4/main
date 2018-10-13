@@ -1,7 +1,9 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_SCHEDULES;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import seedu.address.commons.core.Messages;
@@ -10,6 +12,8 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
+import seedu.address.model.schedule.NricScheduleContainsKeywordsPredicate;
+import seedu.address.model.schedule.Schedule;
 
 /**
  * Deletes a person identified using it's displayed index from the address book.
@@ -25,11 +29,14 @@ public class DeleteCommand extends Command {
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
 
+    private NricScheduleContainsKeywordsPredicate predicateNric;
+
     private final Index targetIndex;
 
     public DeleteCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
     }
+
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
@@ -42,7 +49,23 @@ public class DeleteCommand extends Command {
 
         Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deletePerson(personToDelete);
+
+
+        //Delete schedule related to person
+        List<String> nricList = new ArrayList<>();
+        List<Schedule> lastShownListSchedule;
+        nricList.add(personToDelete.getEmployeeId().value);
+        predicateNric = new NricScheduleContainsKeywordsPredicate(nricList);
+        model.updateFilteredScheduleList(predicateNric);
+        lastShownListSchedule = model.getFilteredScheduleList();
+        while (lastShownListSchedule.size() != 0) {
+            Schedule scheduleToDelete = lastShownListSchedule.get(0);
+            model.deleteSchedule(scheduleToDelete);
+        }
+        model.updateFilteredScheduleList(PREDICATE_SHOW_ALL_SCHEDULES);
+        model.commitScheduleList();
         model.commitAddressBook();
+
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, personToDelete));
     }
 
