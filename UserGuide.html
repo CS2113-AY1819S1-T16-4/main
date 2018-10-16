@@ -106,62 +106,97 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 <div class="paragraph">
 <p><strong>An employee can have the following fields associated:</strong></p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p>Employee Id</p>
-</li>
-<li>
-<p>Name</p>
-</li>
-<li>
-<p>Date of Birth</p>
-</li>
-<li>
-<p>Phone Number</p>
-</li>
-<li>
-<p>Email</p>
-</li>
-<li>
-<p>Department</p>
-</li>
-<li>
-<p>Position/Rank</p>
-</li>
-<li>
-<p>Address</p>
-</li>
-<li>
-<p>Salary</p>
-</li>
-<li>
-<p>Bonus</p>
-</li>
-<li>
-<p>Expenses/Claims</p>
-</li>
-<li>
-<p>Leave Balance</p>
-</li>
-</ul>
-</div>
+<table class="tableblock frame-all grid-all" style="width: 40%;">
+<colgroup>
+<col style="width: 62.5%;">
+<col style="width: 37.5%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Field Name</th>
+<th class="tableblock halign-left valign-top">Prefix</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Employee Id</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">id/</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">n/</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Date of Birth</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">dob/</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Phone Number</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">p/</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Email</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">e/</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Department</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">d/</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Position/Rank</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">r/</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Address</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">a/</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Salary</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">s/</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Bonus</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Expenses/Claims</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Leave Balance</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+</tr>
+</tbody>
+</table>
 <div class="paragraph">
 <p><strong>An employee can incur the following expenses</strong></p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p>Medical Expenses</p>
-</li>
-<li>
-<p>Travel Expenses</p>
-</li>
-<li>
-<p>Miscellaneous Expenses</p>
-</li>
-</ul>
-</div>
+<table class="tableblock frame-all grid-all" style="width: 40%;">
+<colgroup>
+<col style="width: 62.5%;">
+<col style="width: 37.5%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Field Name</th>
+<th class="tableblock halign-left valign-top">Prefix</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Medical Expenses</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Travel Expenses</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Miscellaneous Expenses</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 <div class="sect1">
@@ -196,7 +231,7 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 <p>Filter the employee list and only display selected fields.</p>
 </div>
 <div class="paragraph">
-<p>Format: <code>filter [NAME] [ADDRESS] [PHONE_NUMBER]</code> (include as per needed)</p>
+<p>Format: <code>filter d/DEPARTMENT r/POSITION</code> (include as per needed)</p>
 </div>
 <div class="paragraph">
 <p>EmployeeID is compulsory field to view by default.</p>
@@ -207,12 +242,12 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 <div class="ulist">
 <ul>
 <li>
-<p><code>filter Name PhoneNo Address</code></p>
+<p><code>filter d/Human Resource r/Manager</code></p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>Available fields: Name, Date of Birth, Phone number, Email, Department, Position, Address, Salary, Expenses/Claims, Leave Balance</p>
+<p>Available fields: Department, Position</p>
 </div>
 </div>
 <div class="sect2">
@@ -221,7 +256,7 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 <p>Adds employee&#8217;s data to the database</p>
 </div>
 <div class="paragraph">
-<p>Format: <code>add n/NAME dob/DATE_OF_BIRTH p/PHONE_NUMBER e/EMAIL d/DEPARTMENT r/POSITION a/ADDRESS s/SALARY</code></p>
+<p>Format: <code>add id/EMPLOYEEID n/NAME dob/DATE_OF_BIRTH p/PHONE_NUMBER e/EMAIL d/DEPARTMENT r/POSITION a/ADDRESS s/SALARY</code></p>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -229,15 +264,15 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 <div class="ulist">
 <ul>
 <li>
-<p><code>add n/John Doe dob/13 Mar 2000 p/98765432 e/johnd@example.com d/IT r/Assistant a/John street, block 123, #01-01 s/3000</code></p>
+<p><code>add id/000001 n/John Doe dob/13 Mar 2000 p/98765432 e/johnd@example.com d/IT r/Assistant a/John street, block 123, #01-01 s/3000.00</code></p>
 </li>
 <li>
-<p><code>add n/Betsy dob/23 May 1987 p/95544332 e/betsy@example.com d/Account r/Manager a/Betsy street, block 3, #11-01 s/5000</code></p>
+<p><code>add id/888888 n/Betsy dob/23 May 1987 p/95544332 e/betsy@example.com d/Account r/Manager a/Betsy street, block 3, #11-01 s/5000.00</code></p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>Mandatory fields: Name, Date of Birth, Phone number, Email, Department, Position, Address, Salary</p>
+<p>Mandatory fields: EmployeeId, Name, Date of Birth, Phone number, Email, Department, Position, Address, Salary</p>
 </div>
 </div>
 <div class="sect2">
@@ -258,7 +293,7 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 <p>Edit an existing employee’s data in CHRS.</p>
 </div>
 <div class="paragraph">
-<p>Format: <code>edit EMPLOYEE_ID [n/NAME] [p/PHONE_NUMBER] [a/ADDRESS] [dob/DATE_OF_BIRTH] [e/EMAIL] [d/DEPARTMENT] [r/POSITION] [s/SALARY] [b/BONUS]</code></p>
+<p>Format: <code>edit EMPLOYEE_ID [n/NAME] [p/PHONE_NUMBER] [a/ADDRESS] [e/EMAIL] [d/DEPARTMENT] [r/POSITION]</code></p>
 </div>
 <div class="paragraph">
 <p>Existing values will be updated to the input values.</p>
@@ -269,12 +304,12 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 <div class="ulist">
 <ul>
 <li>
-<p><code>edit id/4 dob/14 Mar 2000 p/98765432 d/HR r/Manager s/3500</code></p>
+<p><code>edit 1 p/98765432 d/HR r/Manager</code></p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>Available fields: Name, Date of Birth, Phone number, Email, Department, Position, Address, Salary</p>
+<p>Available fields: Name, Phone number, Email, Department, Position, Address</p>
 </div>
 </div>
 <div class="sect2">
@@ -766,4 +801,4 @@ There is no need to save manually.</p>
 </tbody>
 </table>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-16 11:27:49 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-16 15:10:36 UTC</div></div></div></body></html>
