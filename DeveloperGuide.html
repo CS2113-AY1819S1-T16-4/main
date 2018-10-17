@@ -969,6 +969,55 @@ The sequence diagram below illustrates the operation of <code>modifypay</code> c
 <div class="paragraph">
 <p>The command addRecruitmentPost allows HR staffs to add recruitment Posts based on open Job positions.</p>
 </div>
+<div class="sect3">
+<h4 id="current-implementation-3"><a class="link" href="#current-implementation-3">3.3.1. Current Implementation</a></h4>
+<div class="paragraph">
+<p>The implementation of addRecruitmentPost command is supported by addRecruitmentPostCommandParser
+that implements the parser interface. The interface parse the arguments parameter entered by
+users to form the addRecruitmentPost object.</p>
+</div>
+<div class="paragraph">
+<p>Code snippet of addRecruitmentPostCommandParser:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">AddRecruitmentPostCommandParser</span> <span class="directive">implements</span> <span class="predefined-type">Parser</span>&lt;AddRecruitmentPostCommand&gt; {
+
+    <span class="comment">/**
+     * Parses the given {@code String} of arguments in the context of the AddCommand
+     * and returns an AddCommand object for execution.
+     * @throws ParseException if the user input does not conform the expected format
+     */</span>
+    <span class="directive">public</span> AddRecruitmentPostCommand parse(<span class="predefined-type">String</span> args) <span class="directive">throws</span> <span class="exception">ParseException</span> {
+
+        Post post = ParserUtil.parsePost(args);
+
+        Recruitment recruitment = <span class="keyword">new</span> Recruitment(post);
+
+        <span class="keyword">return</span> <span class="keyword">new</span> AddRecruitmentPostCommand(recruitment);
+    }
+
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Coming soon</strong></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">3.3.2. Design Considerations</a></h4>
+<div class="paragraph">
+<p>Additional consideration of addRecruitmentPost command:
+* Check the validity input</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Usage of prefix to have more fields of input onto the posts.</p>
+</li>
+</ul>
+</div>
+</div>
 </div>
 <div class="sect2">
 <h3 id="schedule-feature"><a class="link" href="#schedule-feature">3.4. Schedule Feature</a></h3>
@@ -1159,7 +1208,7 @@ If the input Index isn&#8217;t found in the list, an error message will be shown
 <p>The command <code>filter</code> allows the user to filter employees based on their respective department and/or position within the company.</p>
 </div>
 <div class="sect3">
-<h4 id="current-implementation-3"><a class="link" href="#current-implementation-3">3.6.1. Current Implementation</a></h4>
+<h4 id="current-implementation-4"><a class="link" href="#current-implementation-4">3.6.1. Current Implementation</a></h4>
 <div class="paragraph">
 <p>The implementation of this command is separated into two phases.</p>
 </div>
@@ -1305,7 +1354,7 @@ Upon the update of <code>filteredPersonList</code>, the program will display onl
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">3.6.2. Design Considerations</a></h4>
+<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">3.6.2. Design Considerations</a></h4>
 <div class="paragraph">
 <p>Aspect: Implementation of <code>filter</code> command</p>
 </div>
@@ -3779,4 +3828,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-17 19:30:23 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-17 19:56:32 UTC</div></div></div></body></html>
