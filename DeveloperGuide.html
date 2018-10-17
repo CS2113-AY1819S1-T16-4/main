@@ -33,7 +33,7 @@
 <li><a href="#modify-pay-feature">3.2. Modify Pay Feature</a></li>
 <li><a href="#add-recruitment-post-feature">3.3. Add Recruitment Post Feature</a></li>
 <li><a href="#schedule-feature">3.4. Schedule Feature</a></li>
-<li><a href="#add-expenses-feature">3.5. Add Expenses Feature</a></li>
+<li><a href="#expenses-feature">3.5. Expenses Feature</a></li>
 <li><a href="#filter-feature">3.6. Filter Feature</a></li>
 <li><a href="#logging">3.7. Logging</a></li>
 <li><a href="#Implementation-Configuration">3.8. Configuration</a></li>
@@ -823,8 +823,115 @@ Below is the schedule class diagram.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="add-expenses-feature"><a class="link" href="#add-expenses-feature">3.5. Add Expenses Feature</a></h3>
+<h3 id="expenses-feature"><a class="link" href="#expenses-feature">3.5. Expenses Feature</a></h3>
+<div class="paragraph">
+<p>The expenses feature contains to two commands.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The command <code>addex</code> allows the user to add expenses for each employee.</p>
+</li>
+<li>
+<p>The command <code>removeex</code> allows the user to remove expenses for each employee.</p>
+</li>
+</ul>
+</div>
+<div class="sect3">
+<h4 id="current-implementation-for-code-addex-code-command"><a class="link" href="#current-implementation-for-code-addex-code-command">3.5.1. Current Implementation for <code>addex</code> command</a></h4>
+<div class="paragraph">
+<p>The <code>addex</code> mechanism is facilitated by <code>AddExpensesCommandParser</code>.
+The <code>AddExpensesCommandParser</code> implements the <code>Parser</code> interface, parses the arguments parameter, which is the input from the user, and creates a new <code>AddExpensesCommand</code> object.
+Checks on whether the input complies with the required format is handled by other classes.
+This checking of input compliance is facilitated by two helper methods, namely <code>isValidEmployeeExpensesId</code> from <code>EmployeeExpensesId</code> class and <code>isValidExpensesAmount</code> from <code>ExpensesAmount</code> class.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If the input does not comply with the required format, an error message will be shown to the user.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Code snippet of <code>isValidEmployeeExpensesId</code> that shows the checking of the input compliance:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="directive">static</span> <span class="directive">final</span> <span class="predefined-type">String</span> EMPLOYE_EXPENSES_ID_VALIDATION_REGEX = <span class="string"><span class="delimiter">&quot;</span><span class="char">\\</span><span class="content">d{3,}</span><span class="delimiter">&quot;</span></span>;
 
+<span class="comment">/**
+     * Returns true if a given string is a valid Employee Expenses Id.
+     */</span>
+    <span class="directive">public</span> <span class="directive">static</span> <span class="type">boolean</span> isValidEmployeeExpensesId(<span class="predefined-type">String</span> test) {
+        <span class="keyword">return</span> test.matches(EMPLOYE_EXPENSES_ID_VALIDATION_REGEX);
+    }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Code snippet of <code>isValidExpensesAmount</code> that shows the checking of the input compliance:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="directive">static</span> <span class="directive">final</span> <span class="predefined-type">String</span> EMPLOYE_EXPENSES_AMOUNT_VALIDATION_REGEX = <span class="string"><span class="delimiter">&quot;</span><span class="char">\\</span><span class="content">d{1,}</span><span class="delimiter">&quot;</span></span>;
+
+<span class="comment">/**
+     * Returns true if a given string is a valid Expenses Amount.
+     */</span>
+    <span class="directive">public</span> <span class="directive">static</span> <span class="type">boolean</span> isValidExpensesAmount(<span class="predefined-type">String</span> test) {
+        <span class="keyword">return</span> test.matches(EMPLOYE_EXPENSES_AMOUNT_VALIDATION_REGEX);
+    }</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="current-implementation-for-code-removeex-code-command"><a class="link" href="#current-implementation-for-code-removeex-code-command">3.5.2. Current Implementation for <code>removeex</code> command</a></h4>
+<div class="paragraph">
+<p>The <code>removeex</code> mechanism is facilitated by <code>RemoveExpensesCommandParser</code>.
+The <code>RemoveExpensesCommandParser</code> implements the <code>Parser</code> interface, parses the arguments parameter, which is the input from the user, and creates a new <code>RemoveExpensesCommand</code> object.
+Only Index will be required as input.
+Removing of expenses is to delete selected expenses from the list based on the input Index.
+Checking of whether Index is within list is facilitated by a method, <code>CommandResult</code> of the <code>RemoveExpensesCommand</code> class.
+The <code>CommandResult</code> method also calls the <code>deleteExpenses</code> method and <code>commitExpenses</code> method from <code>model</code> interface to delete the expenses and commit the changes into the xml storage.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If the input Index isn&#8217;t found in the list, an error message will be shown to the user.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Code snippet of <code>CommandResult</code> from <code>RemoveExpensesCommand</code> class that checks the input Index and calling the <code>deleteExpenses</code> method and <code>commitExpenses</code> to delete the expenses and commit the changes:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@Override</span>
+    <span class="directive">public</span> CommandResult execute(Model model, CommandHistory history) <span class="directive">throws</span> CommandException {
+        requireNonNull(model);
+        <span class="predefined-type">List</span>&lt;Expenses&gt; lastShownList = model.getFilteredExpensesList();
+
+        <span class="keyword">if</span> (targetIndex.getZeroBased() &gt;= lastShownList.size()) {
+            <span class="keyword">throw</span> <span class="keyword">new</span> CommandException(Messages.MESSAGE_INVALID_EXPENSES_DISPLAYED_INDEX);
+        }
+
+        Expenses expensesToRemove = lastShownList.get(targetIndex.getZeroBased());
+        model.deleteExpenses(expensesToRemove);
+        model.commitExpensesList();
+        <span class="keyword">return</span> <span class="keyword">new</span> CommandResult(<span class="predefined-type">String</span>.format(MESSAGE_REMOVE_EXPENSES_SUCCESS, expensesToRemove));
+    }</code></pre>
+</div>
+</div>
+</div>
 </div>
 <div class="sect2">
 <h3 id="filter-feature"><a class="link" href="#filter-feature">3.6. Filter Feature</a></h3>
@@ -3452,4 +3559,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-17 16:50:34 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-17 17:03:00 UTC</div></div></div></body></html>
