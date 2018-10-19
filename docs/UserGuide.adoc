@@ -115,13 +115,13 @@ Available fields: Full name, Date of Birth, Phone number, Email, Department, Pos
 
 Edit an existing employee’s data in CHRS.
 
-Format: `edit EMPLOYEE_ID [n/NAME] [p/PHONE_NUMBER] [a/ADDRESS] [dob/DATE_OF_BIRTH] [e/EMAIL] [d/DEPARTMENT] [r/POSITION] [s/SALARY] [b/BONUS]`
+Format: `edit [INDEX] [n/NAME] [p/PHONE_NUMBER] [a/ADDRESS] [dob/DATE_OF_BIRTH] [e/EMAIL] [d/DEPARTMENT] [r/POSITION] [s/SALARY] [b/BONUS]`
 
 Existing values will be updated to the input values.
 
 Examples:
 
-* `edit id/4 dob/14 Mar 2000 p/98765432 d/HR r/Manager s/3500`
+* `edit 4 dob/14 Mar 2000 p/98765432 d/HR r/Manager s/3500`
 
 Available fields: Name, Date of Birth, Phone number, Email, Department, Position, Address, Salary
 
@@ -129,29 +129,29 @@ Available fields: Name, Date of Birth, Phone number, Email, Department, Position
 
 Deletes the specified employee from the CHRS.
 
-Format: `delete id/EMPLOYEE_ID`
+Format: `delete [INDEX]`
 
 Examples:
 
-* `delete id/4` +
-Deletes the employee with the employee id '4'
+* `delete 4` +
+Deletes the employee at index '4'
 
 === Modify Employee’s Salary/Bonus: `modifypay`
 
 Modify the salary/bonus of the employee identified by the employee id.
 
-Format: `modifypay id/EMPLOYEE_ID [s/SALARY] [b/BONUS]`
+Format: `modifypay [INDEX] [s/SALARY] [b/BONUS]`
 
 Only one and at least one of either Salary or Bonus must be included.
 
 Examples:
 
-* `modifypay id/456 s/+5` +
-Increase the salary of employee with employee id '456' by 5%
-* `modifypay id/789 s/-5` +
-Decrease the salary of employee with employee id '789' by 5%
-* `modifypay id/120 b/1.5` +
-Increase the bonus of employee with employee id '120' by 1.5 months
+* `modifypay 1 s/3000` +
+Modify the salary of employee with index 1 to 3000
+* `modifypay 2 b/4000` +
+Modify the bonus of employee with index 2 to 4000
+* `modifypay 3 s/2000 b/5000` +
+Modify the salary and bonus of employee with index 3 to 2000 and 5000 respectively
 
 === View expenses: `viewex`
 
