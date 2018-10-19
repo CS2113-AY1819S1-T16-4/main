@@ -293,7 +293,7 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 <p>Edit an existing employee’s data in CHRS.</p>
 </div>
 <div class="paragraph">
-<p>Format: <code>edit EMPLOYEE_ID [n/NAME] [p/PHONE_NUMBER] [a/ADDRESS] [e/EMAIL] [d/DEPARTMENT] [r/POSITION]</code></p>
+<p>Format: <code>edit [INDEX] [n/NAME] [p/PHONE_NUMBER] [a/ADDRESS] [e/EMAIL] [d/DEPARTMENT] [r/POSITION]</code></p>
 </div>
 <div class="paragraph">
 <p>Existing values will be updated to the input values.</p>
@@ -318,7 +318,7 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 <p>Deletes the specified employee from the CHRS.</p>
 </div>
 <div class="paragraph">
-<p>Format: <code>delete id/EMPLOYEE_ID</code></p>
+<p>Format: <code>delete [INDEX]</code></p>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -326,8 +326,8 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 <div class="ulist">
 <ul>
 <li>
-<p><code>delete id/4</code><br>
-Deletes the employee with the employee id '4'</p>
+<p><code>delete 4</code><br>
+Deletes the employee with the index of '4'</p>
 </li>
 </ul>
 </div>
@@ -338,7 +338,7 @@ Deletes the employee with the employee id '4'</p>
 <p>Modify the salary/bonus of the employee identified by the employee id.</p>
 </div>
 <div class="paragraph">
-<p>Format: <code>modifypay id/EMPLOYEE_ID [s/SALARY] [b/BONUS]</code></p>
+<p>Format: <code>modifypay [INDEX] [s/SALARY] [b/BONUS]</code></p>
 </div>
 <div class="paragraph">
 <p>Only one and at least one of either Salary or Bonus must be included.</p>
@@ -349,16 +349,16 @@ Deletes the employee with the employee id '4'</p>
 <div class="ulist">
 <ul>
 <li>
-<p><code>modifypay id/456 s/+5</code><br>
-Increase the salary of employee with employee id '456' by 5%</p>
+<p><code>modifypay 1 s/3000</code><br>
+Modify the salary of employee with index '1' to 3000</p>
 </li>
 <li>
-<p><code>modifypay id/789 s/-5</code><br>
-Decrease the salary of employee with employee id '789' by 5%</p>
+<p><code>modifypay 2 b/5000</code><br>
+Modify the bonus of employee with index '2' to 5000</p>
 </li>
 <li>
-<p><code>modifypay id/120 b/1.5</code><br>
-Increase the bonus of employee with employee id '120' by 1.5 months</p>
+<p><code>modifypay 3 s/3000 b/6000</code><br>
+Increase the salary and bonus of employee with index '3' to 3000 and 6000 respectively</p>
 </li>
 </ul>
 </div>
@@ -801,4 +801,4 @@ There is no need to save manually.</p>
 </tbody>
 </table>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-19 01:59:51 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-19 06:33:41 UTC</div></div></div></body></html>
