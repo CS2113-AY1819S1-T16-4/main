@@ -977,6 +977,10 @@ that implements the parser interface. The interface parse the arguments paramete
 users to form the addRecruitmentPost object.</p>
 </div>
 <div class="paragraph">
+<p>The implementation of addRecruitmentPost command checks that command without job position will be flagged
+as invalid post.</p>
+</div>
+<div class="paragraph">
 <p>Code snippet of addRecruitmentPostCommandParser:</p>
 </div>
 <div class="listingblock">
@@ -984,8 +988,8 @@ users to form the addRecruitmentPost object.</p>
 <pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">AddRecruitmentPostCommandParser</span> <span class="directive">implements</span> <span class="predefined-type">Parser</span>&lt;AddRecruitmentPostCommand&gt; {
 
     <span class="comment">/**
-     * Parses the given {@code String} of arguments in the context of the AddCommand
-     * and returns an AddCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the AddRecruitmentPostCommand
+     * and returns an AddRecruitmentPostCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */</span>
     <span class="directive">public</span> AddRecruitmentPostCommand parse(<span class="predefined-type">String</span> args) <span class="directive">throws</span> <span class="exception">ParseException</span> {
@@ -3818,4 +3822,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-19 06:33:41 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-19 07:09:44 UTC</div></div></div></body></html>
