@@ -1233,29 +1233,17 @@ If the input does not comply with the required format, an error message will be 
 </table>
 </div>
 <div class="paragraph">
-<p>Code snippet of <code>FilterCommandParser</code> that shows the parsing of input and the checking of the input compliance:</p>
+<p>Code snippet of <code>FilterCommandParser</code> that shows the checking of the input compliance:</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> FilterCommand parse(<span class="predefined-type">String</span> args) <span class="directive">throws</span> <span class="exception">ParseException</span> {
-    requireNonNull(args);
-    ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_DEPARTMENT, PREFIX_POSITION);
 
-    <span class="keyword">if</span> (!argMultimap.getValue(PREFIX_DEPARTMENT).isPresent()
-            &amp;&amp; !argMultimap.getValue(PREFIX_POSITION).isPresent()) {
-        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="exception">ParseException</span>(<span class="predefined-type">String</span>.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
-    }
+    ...
+    ...
 
-    <span class="predefined-type">String</span> trimmedDepartment;
-    <span class="predefined-type">String</span> trimmedPosition;
-    <span class="predefined-type">String</span><span class="type">[]</span> departmentKeywords = <span class="keyword">new</span> <span class="predefined-type">String</span><span class="type">[]</span>{<span class="string"><span class="delimiter">&quot;</span><span class="delimiter">&quot;</span></span>};
-    <span class="predefined-type">String</span><span class="type">[]</span> positionKeywords = <span class="keyword">new</span> <span class="predefined-type">String</span><span class="type">[]</span>{<span class="string"><span class="delimiter">&quot;</span><span class="delimiter">&quot;</span></span>};
-
-    FilterCommand filterCommand = <span class="keyword">new</span> FilterCommand(<span class="keyword">new</span> DepartmentContainsKeywordsPredicate(<span class="predefined-type">Arrays</span>
-    .asList(departmentKeywords)), <span class="keyword">new</span> PositionContainsKeywordsPredicate(<span class="predefined-type">Arrays</span>.asList(positionKeywords)));
-
-    <span class="keyword">if</span> (argMultimap.getValue(PREFIX_DEPARTMENT).isPresent()) {
-        trimmedDepartment = (argMultimap.getValue(PREFIX_DEPARTMENT).get()).trim().toUpperCase();
+    if (argMultimap.getValue(PREFIX_DEPARTMENT).isPresent()) {
+        trimmedDepartment = (argMultimap.getValue(PREFIX_DEPARTMENT).get()).trim();
         departmentKeywords = trimmedDepartment.split(<span class="string"><span class="delimiter">&quot;</span><span class="char">\\</span><span class="content">s+</span><span class="delimiter">&quot;</span></span>);
         <span class="keyword">if</span> (areDepartmentKeywordsValid(departmentKeywords)) {
             filterCommand.setIsDepartmentPrefixPresent(<span class="predefined-constant">true</span>);
@@ -1269,7 +1257,7 @@ If the input does not comply with the required format, an error message will be 
     }
 
     <span class="keyword">if</span> (argMultimap.getValue(PREFIX_POSITION).isPresent()) {
-        trimmedPosition = (argMultimap.getValue(PREFIX_POSITION).get()).trim().toUpperCase();
+        trimmedPosition = (argMultimap.getValue(PREFIX_POSITION).get()).trim();
         positionKeywords = trimmedPosition.split(<span class="string"><span class="delimiter">&quot;</span><span class="char">\\</span><span class="content">s+</span><span class="delimiter">&quot;</span></span>);
         <span class="keyword">if</span> (arePositionKeywordsValid(positionKeywords)) {
             filterCommand.setIsPositionPrefixPresent(<span class="predefined-constant">true</span>);
@@ -1282,7 +1270,9 @@ If the input does not comply with the required format, an error message will be 
         filterCommand.setIsPositionPrefixPresent(<span class="predefined-constant">false</span>);
     }
 
-    <span class="keyword">return</span> filterCommand;
+    ...
+    ...
+
 }</code></pre>
 </div>
 </div>
@@ -1348,7 +1338,7 @@ Upon the update of <code>filteredPersonList</code>, the program will display onl
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/filterCommandSequenceDiagram.png" alt="filterCommandSequenceDiagram" width="300">
+<img src="images/filterCommandSequenceDiagram.png" alt="filterCommandSequenceDiagram" width="850">
 </div>
 </div>
 </div>
@@ -3828,4 +3818,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-17 19:56:32 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-19 01:59:51 UTC</div></div></div></body></html>
