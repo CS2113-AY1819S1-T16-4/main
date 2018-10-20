@@ -1116,7 +1116,7 @@ Shown below is the sequence diagram for adding a new schedule.</p>
 <p>The <code>addex</code> mechanism is facilitated by <code>AddExpensesCommandParser</code>.
 The <code>AddExpensesCommandParser</code> implements the <code>Parser</code> interface, parses the arguments parameter, which is the input from the user, and creates a new <code>AddExpensesCommand</code> object.
 Checks on whether the input complies with the required format is handled by other classes.
-This checking of input compliance is facilitated by two helper methods, namely <code>isValidEmployeeExpensesId</code> from <code>EmployeeExpensesId</code> class and <code>isValidExpensesAmount</code> from <code>ExpensesAmount</code> class.</p>
+This checking of input compliance is facilitated by two helper methods, namely <code>isValidEmployeeId</code> from <code>EmployeeId</code> class and <code>isValidExpensesAmount</code> from <code>ExpensesAmount</code> class.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -1131,7 +1131,7 @@ If the input does not comply with the required format, an error message will be 
 </table>
 </div>
 <div class="paragraph">
-<p>Code snippet of <code>isValidEmployeeExpensesId</code> that shows the checking of the input compliance:</p>
+<p>Code snippet of <code>isValidEmployeeId</code> that shows the checking of the input compliance:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1140,7 +1140,7 @@ If the input does not comply with the required format, an error message will be 
 <span class="comment">/**
      * Returns true if a given string is a valid Employee Expenses Id.
      */</span>
-    <span class="directive">public</span> <span class="directive">static</span> <span class="type">boolean</span> isValidEmployeeExpensesId(<span class="predefined-type">String</span> test) {
+    <span class="directive">public</span> <span class="directive">static</span> <span class="type">boolean</span> isValidEmployeeId(<span class="predefined-type">String</span> test) {
         <span class="keyword">return</span> test.matches(EMPLOYE_EXPENSES_ID_VALIDATION_REGEX);
     }</code></pre>
 </div>
@@ -3822,4 +3822,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-20 09:36:23 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-20 10:32:19 UTC</div></div></div></body></html>

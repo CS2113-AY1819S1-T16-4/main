@@ -21,8 +21,8 @@
 <li><a href="#deleting-an-employee-s-data-code-delete-code">4.5. Deleting an Employee’s Data: <code>delete</code></a></li>
 <li><a href="#modify-employee-s-salary-bonus-code-modifypay-code">4.6. Modify Employee’s Salary/Bonus: <code>modifypay</code></a></li>
 <li><a href="#view-expenses-code-viewex-code">4.7. View expenses: <code>viewex</code></a></li>
-<li><a href="#add-expenses-code-addex-code">4.8. Add expenses: <code>addex</code></a></li>
-<li><a href="#remove-expenses-code-removeex-code">4.9. Remove expenses: <code>removeex</code></a></li>
+<li><a href="#add-expenses-code-addexpenses-code">4.8. Add expenses: <code>addExpenses</code></a></li>
+<li><a href="#remove-expenses-code-removeexpenses-code">4.9. Remove expenses: <code>removeExpenses</code></a></li>
 <li><a href="#add-schedule-code-addschedule-code">4.10. Add schedule: <code>addSchedule</code></a></li>
 <li><a href="#delete-schedule-code-deleteschedule-code">4.11. Delete schedule: <code>deleteSchedule</code></a></li>
 <li><a href="#add-recruitment-posts-code-recruitmentpost-code">4.12. Add recruitment posts: <code>recruitmentPost</code></a></li>
@@ -186,16 +186,12 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Medical Expenses</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Employee Expenses Id</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">id/</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Travel Expenses</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Miscellaneous Expenses</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Expenses Amount</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ex/</p></td>
 </tr>
 </tbody>
 </table>
@@ -389,35 +385,30 @@ List the total expenses that employee with employee id '120' wishes to claim for
 </div>
 </div>
 <div class="sect2">
-<h3 id="add-expenses-code-addex-code"><a class="link" href="#add-expenses-code-addex-code">4.8. Add expenses: <code>addex</code></a></h3>
+<h3 id="add-expenses-code-addexpenses-code"><a class="link" href="#add-expenses-code-addexpenses-code">4.8. Add expenses: <code>addExpenses</code></a></h3>
 <div class="paragraph">
 <p>Add the expenses that an employee wishes to claim from the company.</p>
 </div>
 <div class="paragraph">
-<p>Format: <code>addex id/EMPLOYEE_ID [med/MEDICAL_EXPENSES] [tra/TRAVEL_EXPENSES] [mis/MISCELLANEOUS]</code></p>
-</div>
-<div class="paragraph">
-<p>Examples:</p>
+<p>Format: <code>addExpenses</code> id/EMPLOYEE_EXPENSES_ID ex/EXPENSES_AMOUNT
+Examples:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><code>addex id/987 med/8888.88</code><br>
-Add $8888.88 to Medical for employee with employee id '987'.</p>
+<p><code>addExpenses</code> id/123987 ex/8888.88`<br>
+Add $8888.88 to expenses for employee with employee id '987'.</p>
 </li>
 </ul>
 </div>
-<div class="paragraph">
-<p>Available categories: Medical_Expenses, Transport_Expenses, Miscellaneous</p>
-</div>
 </div>
 <div class="sect2">
-<h3 id="remove-expenses-code-removeex-code"><a class="link" href="#remove-expenses-code-removeex-code">4.9. Remove expenses: <code>removeex</code></a></h3>
+<h3 id="remove-expenses-code-removeexpenses-code"><a class="link" href="#remove-expenses-code-removeexpenses-code">4.9. Remove expenses: <code>removeExpenses</code></a></h3>
 <div class="paragraph">
 <p>Remove expenses claim from an employee.</p>
 </div>
 <div class="paragraph">
-<p>Format: <code>removeex EMPLOYEE_ID [med/MEDICAL_EXPENSES] [tra/TRAVEL_EXPENSES] [mis/MISCELLANEOUS]</code></p>
+<p>Format: <code>removeExpenses</code> INDEX</p>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -425,8 +416,8 @@ Add $8888.88 to Medical for employee with employee id '987'.</p>
 <div class="ulist">
 <ul>
 <li>
-<p><code>removeex id/123 tra/8888.88</code><br>
-Remove $8888.88 travel expenses from employee with employee id '123'</p>
+<p><code>removeExpenses</code> 1<br>
+Remove expenses claim from employee with Index '1' in the list.</p>
 </li>
 </ul>
 </div>
@@ -793,4 +784,4 @@ There is no need to save manually.</p>
 </tbody>
 </table>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-20 09:36:23 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-20 10:32:19 UTC</div></div></div></body></html>
