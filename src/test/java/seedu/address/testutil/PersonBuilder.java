@@ -24,7 +24,7 @@ public class PersonBuilder {
 
     public static final String DEFAULT_EMPLOYEEID = "000001";
     public static final String DEFAULT_NAME = "Alice Pauline";
-    public static final String DEFAULT_DATEOFBIRTH = "26/10/1975";
+    public static final String DEFAULT_DATEOFBIRTH = "21/01/1970";
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "alice@gmail.com";
     public static final String DEFAULT_DEPARTMENT = "Human Resource";
