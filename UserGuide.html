@@ -26,15 +26,16 @@
 <li><a href="#add-schedule-code-addschedule-code">4.10. Add schedule: <code>addSchedule</code></a></li>
 <li><a href="#delete-schedule-code-deleteschedule-code">4.11. Delete schedule: <code>deleteSchedule</code></a></li>
 <li><a href="#add-recruitment-posts-code-recruitmentpost-code">4.12. Add recruitment posts: <code>recruitmentPost</code></a></li>
-<li><a href="#locating-persons-by-name-code-find-code">4.13. Locating persons by name: <code>find</code></a></li>
-<li><a href="#view-all-available-functions-or-commands-code-help-code">4.14. View all available functions or commands : <code>help</code></a></li>
-<li><a href="#listing-entered-commands-code-history-code">4.15. Listing entered commands : <code>history</code></a></li>
-<li><a href="#undoing-previous-command-code-undo-code">4.16. Undoing previous command : <code>undo</code></a></li>
-<li><a href="#redoing-the-previously-undone-command-code-redo-code">4.17. Redoing the previously undone command : <code>redo</code></a></li>
-<li><a href="#clearing-all-entries-code-clear-code">4.18. Clearing all entries : <code>clear</code></a></li>
-<li><a href="#exiting-the-program-code-exit-code">4.19. Exiting the program : <code>exit</code></a></li>
-<li><a href="#saving-the-data">4.20. Saving the data</a></li>
-<li><a href="#encrypting-data-files-code-coming-in-v2-0-code">4.21. Encrypting data files <code>[coming in v2.0]</code></a></li>
+<li><a href="#delete-recruitment-posts-code-deleterecruitmentpost-code">4.13. Delete recruitment posts: <code>deleteRecruitmentPost</code></a></li>
+<li><a href="#locating-persons-by-name-code-find-code">4.14. Locating persons by name: <code>find</code></a></li>
+<li><a href="#view-all-available-functions-or-commands-code-help-code">4.15. View all available functions or commands : <code>help</code></a></li>
+<li><a href="#listing-entered-commands-code-history-code">4.16. Listing entered commands : <code>history</code></a></li>
+<li><a href="#undoing-previous-command-code-undo-code">4.17. Undoing previous command : <code>undo</code></a></li>
+<li><a href="#redoing-the-previously-undone-command-code-redo-code">4.18. Redoing the previously undone command : <code>redo</code></a></li>
+<li><a href="#clearing-all-entries-code-clear-code">4.19. Clearing all entries : <code>clear</code></a></li>
+<li><a href="#exiting-the-program-code-exit-code">4.20. Exiting the program : <code>exit</code></a></li>
+<li><a href="#saving-the-data">4.21. Saving the data</a></li>
+<li><a href="#encrypting-data-files-code-coming-in-v2-0-code">4.22. Encrypting data files <code>[coming in v2.0]</code></a></li>
 </ul>
 </li>
 <li><a href="#faq">5. FAQ</a></li>
@@ -192,6 +193,35 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Expenses Amount</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">ex/</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><strong>A recruitment post should include things below</strong></p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 40%;">
+<colgroup>
+<col style="width: 62.5%;">
+<col style="width: 37.5%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Field Name</th>
+<th class="tableblock halign-left valign-top">Prefix</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Opening job position</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">jp/</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Minimal years of working experience required</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">me/</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Job description</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">jd/</p></td>
 </tr>
 </tbody>
 </table>
@@ -483,10 +513,11 @@ Deletes the schedule with the index of '1'</p>
 <div class="sect2">
 <h3 id="add-recruitment-posts-code-recruitmentpost-code"><a class="link" href="#add-recruitment-posts-code-recruitmentpost-code">4.12. Add recruitment posts: <code>recruitmentPost</code></a></h3>
 <div class="paragraph">
-<p>Add an recruitment post based on open job position.</p>
+<p>Add an recruitment post based on open job position, minimal working experience required and job description
+of the open position.</p>
 </div>
 <div class="paragraph">
-<p>Format: <code>recruitmentPost JobPosition</code></p>
+<p>Format: <code>recruitmentPost jp/JOB POSITION me/MINIMAL YEARS OF WORKING EXPERIENCE jd/JOB DESCRIPTION</code></p>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -494,14 +525,36 @@ Deletes the schedule with the index of '1'</p>
 <div class="ulist">
 <ul>
 <li>
-<p><code>recruitmentPost IT Manager</code><br>
-Add an recruitment post with the available position called IT Manager</p>
+<p><code>recruitmentPost jp/IT Manager me/3 jd/maintain the functionality of company server</code><br>
+Add an recruitment post with the available position called IT Manager, and the job requires minimal 3 years of
+working experience in similar field. The job position requires the candidates' ability to maintain the
+functionality of company server</p>
 </li>
 </ul>
 </div>
 </div>
 <div class="sect2">
-<h3 id="locating-persons-by-name-code-find-code"><a class="link" href="#locating-persons-by-name-code-find-code">4.13. Locating persons by name: <code>find</code></a></h3>
+<h3 id="delete-recruitment-posts-code-deleterecruitmentpost-code"><a class="link" href="#delete-recruitment-posts-code-deleterecruitmentpost-code">4.13. Delete recruitment posts: <code>deleteRecruitmentPost</code></a></h3>
+<div class="paragraph">
+<p>Delete a recruitment post based on post index ID.</p>
+</div>
+<div class="paragraph">
+<p>Format: <code>deleteRecruitmentPost [INDEX]</code></p>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>deleteRecruitmentPost 1</code><br>
+Deletes the recruitment post with the index of '1'</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="locating-persons-by-name-code-find-code"><a class="link" href="#locating-persons-by-name-code-find-code">4.14. Locating persons by name: <code>find</code></a></h3>
 <div class="paragraph">
 <p>Find the employee name whose name contain any of the given keywords.</p>
 </div>
@@ -521,7 +574,7 @@ Find all instances of John</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="view-all-available-functions-or-commands-code-help-code"><a class="link" href="#view-all-available-functions-or-commands-code-help-code">4.14. View all available functions or commands : <code>help</code></a></h3>
+<h3 id="view-all-available-functions-or-commands-code-help-code"><a class="link" href="#view-all-available-functions-or-commands-code-help-code">4.15. View all available functions or commands : <code>help</code></a></h3>
 <div class="paragraph">
 <p>Views all the fucntions and commands that the CHRS have.</p>
 </div>
@@ -537,7 +590,7 @@ Find all instances of John</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="listing-entered-commands-code-history-code"><a class="link" href="#listing-entered-commands-code-history-code">4.15. Listing entered commands : <code>history</code></a></h3>
+<h3 id="listing-entered-commands-code-history-code"><a class="link" href="#listing-entered-commands-code-history-code">4.16. Listing entered commands : <code>history</code></a></h3>
 <div class="paragraph">
 <p>Lists all the commands that you have entered in reverse chronological order.</p>
 </div>
@@ -560,7 +613,7 @@ Find all instances of John</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="undoing-previous-command-code-undo-code"><a class="link" href="#undoing-previous-command-code-undo-code">4.16. Undoing previous command : <code>undo</code></a></h3>
+<h3 id="undoing-previous-command-code-undo-code"><a class="link" href="#undoing-previous-command-code-undo-code">4.17. Undoing previous command : <code>undo</code></a></h3>
 <div class="paragraph">
 <p>Restores CHRS to the state before the previous <em>undoable</em> command was executed.</p>
 </div>
@@ -607,7 +660,7 @@ The <code>undo</code> command fails as there are no undoable commands executed p
 </div>
 </div>
 <div class="sect2">
-<h3 id="redoing-the-previously-undone-command-code-redo-code"><a class="link" href="#redoing-the-previously-undone-command-code-redo-code">4.17. Redoing the previously undone command : <code>redo</code></a></h3>
+<h3 id="redoing-the-previously-undone-command-code-redo-code"><a class="link" href="#redoing-the-previously-undone-command-code-redo-code">4.18. Redoing the previously undone command : <code>redo</code></a></h3>
 <div class="paragraph">
 <p>Reverses the most recent <code>undo</code> command.</p>
 </div>
@@ -641,7 +694,7 @@ The <code>redo</code> command fails as there are no <code>undo</code> commands e
 </div>
 </div>
 <div class="sect2">
-<h3 id="clearing-all-entries-code-clear-code"><a class="link" href="#clearing-all-entries-code-clear-code">4.18. Clearing all entries : <code>clear</code></a></h3>
+<h3 id="clearing-all-entries-code-clear-code"><a class="link" href="#clearing-all-entries-code-clear-code">4.19. Clearing all entries : <code>clear</code></a></h3>
 <div class="paragraph">
 <p>Clears all entries from CHRS.</p>
 </div>
@@ -650,7 +703,7 @@ The <code>redo</code> command fails as there are no <code>undo</code> commands e
 </div>
 </div>
 <div class="sect2">
-<h3 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">4.19. Exiting the program : <code>exit</code></a></h3>
+<h3 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">4.20. Exiting the program : <code>exit</code></a></h3>
 <div class="paragraph">
 <p>Exits the program.</p>
 </div>
@@ -659,14 +712,14 @@ The <code>redo</code> command fails as there are no <code>undo</code> commands e
 </div>
 </div>
 <div class="sect2">
-<h3 id="saving-the-data"><a class="link" href="#saving-the-data">4.20. Saving the data</a></h3>
+<h3 id="saving-the-data"><a class="link" href="#saving-the-data">4.21. Saving the data</a></h3>
 <div class="paragraph">
 <p>Address book data are saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="encrypting-data-files-code-coming-in-v2-0-code"><a class="link" href="#encrypting-data-files-code-coming-in-v2-0-code">4.21. Encrypting data files <code>[coming in v2.0]</code></a></h3>
+<h3 id="encrypting-data-files-code-coming-in-v2-0-code"><a class="link" href="#encrypting-data-files-code-coming-in-v2-0-code">4.22. Encrypting data files <code>[coming in v2.0]</code></a></h3>
 <div class="paragraph">
 <p><em>{explain how the user can enable/disable data encryption}</em></p>
 </div>
@@ -750,6 +803,14 @@ There is no need to save manually.</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">removeex</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Add recruitmentPost Command</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">recruitmentPost</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Delete recruitmentPost Command</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">deleteRecruitmentPost</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">View all available functions or commands</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">help</p></td>
 </tr>
@@ -784,4 +845,4 @@ There is no need to save manually.</p>
 </tbody>
 </table>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-27 02:56:28 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-27 06:38:31 UTC</div></div></div></body></html>
