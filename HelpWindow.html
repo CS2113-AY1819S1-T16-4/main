@@ -304,17 +304,26 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 <div class="paragraph">
 <p>Mandatory fields: EmployeeId, Name, Date of Birth, Phone number, Email, Department, Position, Address, Salary</p>
 </div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Any usage of <code>add</code> command that will result in duplicated employeeId or phone number or email will be rejected. Additionally, duplicated name alongside date of birth will also be rejected.
+</td>
+</tr>
+</table>
+</div>
 </div>
 <div class="sect2">
 <h3 id="listing-all-persons-code-list-code"><a class="link" href="#listing-all-persons-code-list-code">4.3. Listing all persons : <code>list</code></a></h3>
 <div class="paragraph">
-<p>Shows a list of all employees in CHRS.</p>
+<p>Shows a list of all employees, schedules, recruitment posts and expenses in CHRS.</p>
 </div>
 <div class="paragraph">
 <p>Format: <code>list</code></p>
-</div>
-<div class="paragraph">
-<p>Available fields: Full name, Date of Birth, Phone number, Email, Department, Position, Address,  Salary, Bonus, Expenses/Claims, Leave Balance</p>
 </div>
 </div>
 <div class="sect2">
@@ -340,6 +349,18 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 </div>
 <div class="paragraph">
 <p>Available fields: Name, Phone number, Email, Department, Position, Address</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Any usage of <code>edit</code> command that will result in duplicated phone number or email will be rejected. Additionally, usage of this command to edit a person&#8217;s name to be the same as another person who has the same date of birth will be rejected.
+</td>
+</tr>
+</table>
 </div>
 </div>
 <div class="sect2">
@@ -905,4 +926,4 @@ There is no need to save manually.</p>
 </tbody>
 </table>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-31 16:13:50 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-31 16:28:19 UTC</div></div></div></body></html>
