@@ -28,15 +28,16 @@
 <li><a href="#add-recruitment-posts-code-addrecruitmentpost-code">4.12. Add recruitment posts: <code>addRecruitmentPost</code></a></li>
 <li><a href="#delete-recruitment-posts-code-deleterecruitmentpost-code">4.13. Delete recruitment posts: <code>deleteRecruitmentPost</code></a></li>
 <li><a href="#select-recruitment-posts-code-selectrecruitmentpost-code">4.14. Select recruitment posts: <code>selectRecruitmentPost</code></a></li>
-<li><a href="#locating-persons-by-name-code-find-code">4.15. Locating persons by name: <code>find</code></a></li>
-<li><a href="#view-all-available-functions-or-commands-code-help-code">4.16. View all available functions or commands : <code>help</code></a></li>
-<li><a href="#listing-entered-commands-code-history-code">4.17. Listing entered commands : <code>history</code></a></li>
-<li><a href="#undoing-previous-command-code-undo-code">4.18. Undoing previous command : <code>undo</code></a></li>
-<li><a href="#redoing-the-previously-undone-command-code-redo-code">4.19. Redoing the previously undone command : <code>redo</code></a></li>
-<li><a href="#clearing-all-entries-code-clear-code">4.20. Clearing all entries : <code>clear</code></a></li>
-<li><a href="#exiting-the-program-code-exit-code">4.21. Exiting the program : <code>exit</code></a></li>
-<li><a href="#saving-the-data">4.22. Saving the data</a></li>
-<li><a href="#encrypting-data-files-code-coming-in-v2-0-code">4.23. Encrypting data files <code>[coming in v2.0]</code></a></li>
+<li><a href="#clear-recruitment-posts-code-clearrecruitmentpost-code">4.15. Clear recruitment posts: <code>clearRecruitmentPost</code></a></li>
+<li><a href="#locating-persons-by-name-code-find-code">4.16. Locating persons by name: <code>find</code></a></li>
+<li><a href="#view-all-available-functions-or-commands-code-help-code">4.17. View all available functions or commands : <code>help</code></a></li>
+<li><a href="#listing-entered-commands-code-history-code">4.18. Listing entered commands : <code>history</code></a></li>
+<li><a href="#undoing-previous-command-code-undo-code">4.19. Undoing previous command : <code>undo</code></a></li>
+<li><a href="#redoing-the-previously-undone-command-code-redo-code">4.20. Redoing the previously undone command : <code>redo</code></a></li>
+<li><a href="#clearing-all-entries-code-clear-code">4.21. Clearing all entries : <code>clear</code></a></li>
+<li><a href="#exiting-the-program-code-exit-code">4.22. Exiting the program : <code>exit</code></a></li>
+<li><a href="#saving-the-data">4.23. Saving the data</a></li>
+<li><a href="#encrypting-data-files-code-coming-in-v2-0-code">4.24. Encrypting data files <code>[coming in v2.0]</code></a></li>
 </ul>
 </li>
 <li><a href="#faq">5. FAQ</a></li>
@@ -518,7 +519,8 @@ Deletes the schedule with the index of '1'</p>
 of the open position. Meanwhile, job position does not accept numbers and blank input. In addition, it has
 words limits from 1 to 10. As for minimal working experience accepts only numbers with range from 0 to 30.
 As for job description, it does not accept numbers and blank input. Furthermore, it has word limits from 1 to 200.
-User could use command_alias: 'arp'.</p>
+User could use command_alias: 'arp'.[Note: duplicate recruitment posts are allowed for the need of
+multiple posts with same position information.]</p>
 </div>
 <div class="paragraph">
 <p>Format: <code>addRecruitmentPost jp/JOB POSITION me/MINIMAL YEARS OF WORKING EXPERIENCE jd/JOB DESCRIPTION</code> or
@@ -579,7 +581,27 @@ Select the recruitment post with the index of '1'</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="locating-persons-by-name-code-find-code"><a class="link" href="#locating-persons-by-name-code-find-code">4.15. Locating persons by name: <code>find</code></a></h3>
+<h3 id="clear-recruitment-posts-code-clearrecruitmentpost-code"><a class="link" href="#clear-recruitment-posts-code-clearrecruitmentpost-code">4.15. Clear recruitment posts: <code>clearRecruitmentPost</code></a></h3>
+<div class="paragraph">
+<p>Clear all recruitment posts at one go. User could use command_alias: 'crp'.</p>
+</div>
+<div class="paragraph">
+<p>Format: <code>clearRecruitmentPost</code> or <code>crp</code></p>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>clearRecruitmentPost</code><br>
+Clear all recruitment posts at one go.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="locating-persons-by-name-code-find-code"><a class="link" href="#locating-persons-by-name-code-find-code">4.16. Locating persons by name: <code>find</code></a></h3>
 <div class="paragraph">
 <p>Find the employee name whose name contain any of the given keywords.</p>
 </div>
@@ -599,7 +621,7 @@ Find all instances of John</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="view-all-available-functions-or-commands-code-help-code"><a class="link" href="#view-all-available-functions-or-commands-code-help-code">4.16. View all available functions or commands : <code>help</code></a></h3>
+<h3 id="view-all-available-functions-or-commands-code-help-code"><a class="link" href="#view-all-available-functions-or-commands-code-help-code">4.17. View all available functions or commands : <code>help</code></a></h3>
 <div class="paragraph">
 <p>Views all the fucntions and commands that the CHRS have.</p>
 </div>
@@ -615,7 +637,7 @@ Find all instances of John</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="listing-entered-commands-code-history-code"><a class="link" href="#listing-entered-commands-code-history-code">4.17. Listing entered commands : <code>history</code></a></h3>
+<h3 id="listing-entered-commands-code-history-code"><a class="link" href="#listing-entered-commands-code-history-code">4.18. Listing entered commands : <code>history</code></a></h3>
 <div class="paragraph">
 <p>Lists all the commands that you have entered in reverse chronological order.</p>
 </div>
@@ -638,7 +660,7 @@ Find all instances of John</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="undoing-previous-command-code-undo-code"><a class="link" href="#undoing-previous-command-code-undo-code">4.18. Undoing previous command : <code>undo</code></a></h3>
+<h3 id="undoing-previous-command-code-undo-code"><a class="link" href="#undoing-previous-command-code-undo-code">4.19. Undoing previous command : <code>undo</code></a></h3>
 <div class="paragraph">
 <p>Restores CHRS to the state before the previous <em>undoable</em> command was executed.</p>
 </div>
@@ -685,7 +707,7 @@ The <code>undo</code> command fails as there are no undoable commands executed p
 </div>
 </div>
 <div class="sect2">
-<h3 id="redoing-the-previously-undone-command-code-redo-code"><a class="link" href="#redoing-the-previously-undone-command-code-redo-code">4.19. Redoing the previously undone command : <code>redo</code></a></h3>
+<h3 id="redoing-the-previously-undone-command-code-redo-code"><a class="link" href="#redoing-the-previously-undone-command-code-redo-code">4.20. Redoing the previously undone command : <code>redo</code></a></h3>
 <div class="paragraph">
 <p>Reverses the most recent <code>undo</code> command.</p>
 </div>
@@ -719,7 +741,7 @@ The <code>redo</code> command fails as there are no <code>undo</code> commands e
 </div>
 </div>
 <div class="sect2">
-<h3 id="clearing-all-entries-code-clear-code"><a class="link" href="#clearing-all-entries-code-clear-code">4.20. Clearing all entries : <code>clear</code></a></h3>
+<h3 id="clearing-all-entries-code-clear-code"><a class="link" href="#clearing-all-entries-code-clear-code">4.21. Clearing all entries : <code>clear</code></a></h3>
 <div class="paragraph">
 <p>Clears all entries from CHRS.</p>
 </div>
@@ -728,7 +750,7 @@ The <code>redo</code> command fails as there are no <code>undo</code> commands e
 </div>
 </div>
 <div class="sect2">
-<h3 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">4.21. Exiting the program : <code>exit</code></a></h3>
+<h3 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">4.22. Exiting the program : <code>exit</code></a></h3>
 <div class="paragraph">
 <p>Exits the program.</p>
 </div>
@@ -737,14 +759,14 @@ The <code>redo</code> command fails as there are no <code>undo</code> commands e
 </div>
 </div>
 <div class="sect2">
-<h3 id="saving-the-data"><a class="link" href="#saving-the-data">4.22. Saving the data</a></h3>
+<h3 id="saving-the-data"><a class="link" href="#saving-the-data">4.23. Saving the data</a></h3>
 <div class="paragraph">
 <p>Address book data are saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="encrypting-data-files-code-coming-in-v2-0-code"><a class="link" href="#encrypting-data-files-code-coming-in-v2-0-code">4.23. Encrypting data files <code>[coming in v2.0]</code></a></h3>
+<h3 id="encrypting-data-files-code-coming-in-v2-0-code"><a class="link" href="#encrypting-data-files-code-coming-in-v2-0-code">4.24. Encrypting data files <code>[coming in v2.0]</code></a></h3>
 <div class="paragraph">
 <p><em>{explain how the user can enable/disable data encryption}</em></p>
 </div>
@@ -840,6 +862,10 @@ There is no need to save manually.</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">selectRecruitmentPost</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Clear recruitmentPost Command</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">clearRecruitmentPost</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">View all available functions or commands</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">help</p></td>
 </tr>
@@ -874,4 +900,4 @@ There is no need to save manually.</p>
 </tbody>
 </table>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-31 11:33:16 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-31 12:54:06 UTC</div></div></div></body></html>
