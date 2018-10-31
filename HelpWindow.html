@@ -24,20 +24,27 @@
 <li><a href="#remove-expenses-code-deleteexpenses-code">4.8. Remove expenses: <code>deleteExpenses</code></a></li>
 <li><a href="#add-schedule-code-addschedule-code">4.9. Add schedule: <code>addSchedule</code></a></li>
 <li><a href="#delete-schedule-code-deleteschedule-code">4.10. Delete schedule: <code>deleteSchedule</code></a></li>
-<li><a href="#add-recruitment-posts-code-addrecruitmentpost-code">4.11. Add recruitment posts: <code>addRecruitmentPost</code></a></li>
-<li><a href="#delete-recruitment-posts-code-deleterecruitmentpost-code">4.12. Delete recruitment posts: <code>deleteRecruitmentPost</code></a></li>
-<li><a href="#select-recruitment-posts-code-selectrecruitmentpost-code">4.13. Select recruitment posts: <code>selectRecruitmentPost</code></a></li>
-<li><a href="#clear-recruitment-posts-code-clearrecruitmentpost-code">4.14. Clear recruitment posts: <code>clearRecruitmentPost</code></a></li>
-<li><a href="#edit-recruitment-posts-code-editrecruitmentpost-code">4.15. Edit recruitment posts: <code>editRecruitmentPost</code></a></li>
-<li><a href="#locating-persons-by-name-code-find-code">4.16. Locating persons by name: <code>find</code></a></li>
-<li><a href="#view-all-available-functions-or-commands-code-help-code">4.17. View all available functions or commands : <code>help</code></a></li>
-<li><a href="#listing-entered-commands-code-history-code">4.18. Listing entered commands : <code>history</code></a></li>
-<li><a href="#undoing-previous-command-code-undo-code">4.19. Undoing previous command : <code>undo</code></a></li>
-<li><a href="#redoing-the-previously-undone-command-code-redo-code">4.20. Redoing the previously undone command : <code>redo</code></a></li>
-<li><a href="#clearing-all-entries-code-clear-code">4.21. Clearing all entries : <code>clear</code></a></li>
-<li><a href="#exiting-the-program-code-exit-code">4.22. Exiting the program : <code>exit</code></a></li>
-<li><a href="#saving-the-data">4.23. Saving the data</a></li>
-<li><a href="#encrypting-data-files-code-coming-in-v2-0-code">4.24. Encrypting data files <code>[coming in v2.0]</code></a></li>
+<li><a href="#add-works-code-addworks-code">4.11. Add Works: <code>addWorks</code></a></li>
+<li><a href="#delete-works-code-deleteworks-code">4.12. Delete Works: <code>deleteWorks</code></a></li>
+<li><a href="#add-leaves-code-addleaves-code">4.13. Add Leaves: <code>addLeaves</code></a></li>
+<li><a href="#delete-leaves-code-deleteleaves-code">4.14. Delete Leaves: <code>deleteLeaves</code></a></li>
+<li><a href="#calculate-leaves-code-calculateleaves-code">4.15. Calculate Leaves: <code>calculateLeaves</code></a></li>
+<li><a href="#select-schedule-code-selectschedule-code">4.16. Select schedule: <code>selectSchedule</code></a></li>
+<li><a href="#clear-schedule-code-clearschedule-code">4.17. Clear Schedule: <code>clearSchedule</code></a></li>
+<li><a href="#add-recruitment-posts-code-addrecruitmentpost-code">4.18. Add recruitment posts: <code>addRecruitmentPost</code></a></li>
+<li><a href="#delete-recruitment-posts-code-deleterecruitmentpost-code">4.19. Delete recruitment posts: <code>deleteRecruitmentPost</code></a></li>
+<li><a href="#select-recruitment-posts-code-selectrecruitmentpost-code">4.20. Select recruitment posts: <code>selectRecruitmentPost</code></a></li>
+<li><a href="#clear-recruitment-posts-code-clearrecruitmentpost-code">4.21. Clear recruitment posts: <code>clearRecruitmentPost</code></a></li>
+<li><a href="#edit-recruitment-posts-code-editrecruitmentpost-code">4.22. Edit recruitment posts: <code>editRecruitmentPost</code></a></li>
+<li><a href="#locating-persons-by-name-code-find-code">4.23. Locating persons by name: <code>find</code></a></li>
+<li><a href="#view-all-available-functions-or-commands-code-help-code">4.24. View all available functions or commands : <code>help</code></a></li>
+<li><a href="#listing-entered-commands-code-history-code">4.25. Listing entered commands : <code>history</code></a></li>
+<li><a href="#undoing-previous-command-code-undo-code">4.26. Undoing previous command : <code>undo</code></a></li>
+<li><a href="#redoing-the-previously-undone-command-code-redo-code">4.27. Redoing the previously undone command : <code>redo</code></a></li>
+<li><a href="#clearing-all-entries-code-clear-code">4.28. Clearing all entries : <code>clear</code></a></li>
+<li><a href="#exiting-the-program-code-exit-code">4.29. Exiting the program : <code>exit</code></a></li>
+<li><a href="#saving-the-data">4.30. Saving the data</a></li>
+<li><a href="#encrypting-data-files-code-coming-in-v2-0-code">4.31. Encrypting data files <code>[coming in v2.0]</code></a></li>
 </ul>
 </li>
 <li><a href="#faq">5. FAQ</a></li>
@@ -456,7 +463,11 @@ Remove expenses claim from employee with Index '1' in the list.</p>
 <div class="sect2">
 <h3 id="add-schedule-code-addschedule-code"><a class="link" href="#add-schedule-code-addschedule-code">4.9. Add schedule: <code>addSchedule</code></a></h3>
 <div class="paragraph">
-<p>Add a new schedule for a employee in the addressbook. It has 3 compulsory fields.</p>
+<p>User could use command_alias: 'as'.</p>
+</div>
+<div class="paragraph">
+<p>Add a new schedule for a employee in the addressbook.
+You are to specify only 3 compulsory fields below.</p>
 </div>
 <div class="ulist">
 <ul>
@@ -464,7 +475,9 @@ Remove expenses claim from employee with Index '1' in the list.</p>
 <p><strong>EmployeeId</strong> must be a valid employee id found in the address book.</p>
 </li>
 <li>
-<p><strong>Date</strong> must be a valid date in the calendar [DD/MM/YYYY]</p>
+<p><strong>Date</strong> must be a valid date in the calendar [DD/MM/YYYY]. You are not allowed to
+schedule for dates that have past today&#8217;s date. Year must also fall into the range
+of 2000-2099.</p>
 </li>
 <li>
 <p><strong>Type</strong> can be either a work or leave only, case not sensitive.
@@ -473,26 +486,29 @@ Each schedule is assumed to be scheduling the employee for the entire day of [WO
 </ul>
 </div>
 <div class="paragraph">
-<p>Format: <code>addSchedule id/EMPLOYEE_ID date/[DD/MM/YYYY] type/[WORK/LEAVE]</code></p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>addSchedule id/000001 date/02/02/2018 type/WORK</code><br>
-Adds a new schedule for employee id 000001, date 02/02/2018, to work on that day.</p>
-</li>
-<li>
-<p><code>addSchedule id/000001 date/03/03/2018 type/LEAVE</code>
-Adds a new schedule for employee id 000001, date 03/03/2018, to be on leave for that day.</p>
-</li>
-</ul>
+<p>Format: <code>addSchedule id/EMPLOYEE_ID d/[DD/MM/YYYY] t/[WORK/LEAVE]</code></p>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
 </div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>addSchedule id/000001 date/02/02/2019 type/WORK</code><br>
+Adds a new schedule for employee id 000001, date 02/02/2019, to work on that day.</p>
+</li>
+<li>
+<p><code>addSchedule id/000001 date/03/03/2019 type/LEAVE</code>
+Adds a new schedule for employee id 000001, date 03/03/2019, to be on leave for that day.</p>
+</li>
+</ul>
+</div>
 </div>
 <div class="sect2">
 <h3 id="delete-schedule-code-deleteschedule-code"><a class="link" href="#delete-schedule-code-deleteschedule-code">4.10. Delete schedule: <code>deleteSchedule</code></a></h3>
+<div class="paragraph">
+<p>User could use command_alias: 'ds'.</p>
+</div>
 <div class="paragraph">
 <p>Deletes the specified schedule from the observable schedule list.</p>
 </div>
@@ -512,7 +528,304 @@ Deletes the schedule with the index of '1'</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="add-recruitment-posts-code-addrecruitmentpost-code"><a class="link" href="#add-recruitment-posts-code-addrecruitmentpost-code">4.11. Add recruitment posts: <code>addRecruitmentPost</code></a></h3>
+<h3 id="add-works-code-addworks-code"><a class="link" href="#add-works-code-addworks-code">4.11. Add Works: <code>addWorks</code></a></h3>
+<div class="paragraph">
+<p>User could use command_alias: 'aw'.</p>
+</div>
+<div class="paragraph">
+<p>Add a new work schedule for the observable employees in the employees list pane.
+Use <code>find</code> / <code>filter</code> / <code>list</code> to get the desired employees you wish to schedule.
+All observable employees in the employees list pane will be scheduled
+with work and date specified by the user.</p>
+</div>
+<div class="paragraph">
+<p>You are to specify 1 compulsory fields below.
+You can have as many number of date prefix to schedule many dates.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Date</strong> must be a valid date in the calendar [DD/MM/YYYY]. You are not allowed to
+schedule for dates that have past today&#8217;s date. Year must also fall into the range
+of 2000-2099.
+Each schedule is assumed to be scheduling the employee for the entire day of [WORK].</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>For those employees are not scheduled with the date, the command will
+create a new schedule. When all employees are scheduled with the date,
+the command will tell the user that Every observable employees in the list
+have been scheduled with the specified date.</p>
+</div>
+<div class="paragraph">
+<p>Format: <code>addWorks d/[DD/MM/YYYY]</code></p>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>addWorks d/02/02/2019</code><br>
+Adds a new schedule for all observable employees in the employees list panel with.
+date 02/02/2019, to work on that day.</p>
+</li>
+<li>
+<p><code>addWorks d/02/02/2019 d/03/03/2019</code><br>
+Adds new schedules for all observable employees in the employees list panel with.
+date 02/02/2019 and 03/03/2019, to work on that day.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="delete-works-code-deleteworks-code"><a class="link" href="#delete-works-code-deleteworks-code">4.12. Delete Works: <code>deleteWorks</code></a></h3>
+<div class="paragraph">
+<p>User could use command_alias: 'dw'.</p>
+</div>
+<div class="paragraph">
+<p>Delete a new work schedule for the observable employees in the employees list pane.
+Use <code>find</code> / <code>filter</code> / <code>list</code> to get the desired employees you wish to schedule.
+All observable employees in the employees list pane will be deleted schedules
+with work and date specified by the user.</p>
+</div>
+<div class="paragraph">
+<p>You are to specify 1 compulsory fields below.
+You can have as many number of date prefix to schedule many dates.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Date</strong> must be a valid date in the calendar [DD/MM/YYYY]. You are not allowed to
+schedule for dates that have past today&#8217;s date. Year must also fall into the range
+of 2000-2099.
+Each schedule is assumed to be scheduling the employee for the entire day of [WORK].</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>For those employees are scheduled with the date, the command will
+delete the schedule. When all employees are deleted with the scheduled date,
+the command will tell the user Every observable employees in the list does not have working schedule
+on the specified date.</p>
+</div>
+<div class="paragraph">
+<p>Format: <code>deleteWorks d/[DD/MM/YYYY]</code></p>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>deleteWorks d/02/02/2019</code><br>
+Deletes a schedule for all observable employees in the employees list panel with.
+date 02/02/2019, with work on that day.</p>
+</li>
+<li>
+<p><code>addWorks d/02/02/2019 d/03/03/2019</code><br>
+Deletes schedules for all observable employees in the employees list panel with.
+date 02/02/2019 and 03/03/2019, with work on that day.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="add-leaves-code-addleaves-code"><a class="link" href="#add-leaves-code-addleaves-code">4.13. Add Leaves: <code>addLeaves</code></a></h3>
+<div class="paragraph">
+<p>User could use command_alias: 'al'.</p>
+</div>
+<div class="paragraph">
+<p>Add a new leave schedule for the observable employees in the employees list pane.
+Use <code>find</code> / <code>filter</code> / <code>list</code> to get the desired employees you wish to schedule.
+All observable employees in the employees list pane will be scheduled
+with leave and date specified by the user.</p>
+</div>
+<div class="paragraph">
+<p>You are to specify 1 compulsory fields below.
+You can have as many number of date prefix to schedule many dates.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Date</strong> must be a valid date in the calendar [DD/MM/YYYY]. You are not allowed to
+schedule for dates that have past today&#8217;s date. Year must also fall into the range
+of 2000-2099.
+Each schedule is assumed to be scheduling the employee for the entire day of [LEAVE].</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>For those employees are not scheduled with the date, the command will
+create a new schedule. When all employees are scheduled with the date,
+the command will tell the user that Every observable employees in the list
+have been scheduled with the specified date.</p>
+</div>
+<div class="paragraph">
+<p>Format: <code>addLeaves d/[DD/MM/YYYY]</code></p>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>addLeaves d/02/02/2019</code><br>
+Adds a new schedule for all observable employees in the employees list panel with.
+date 02/02/2019, to be on leave on that day.</p>
+</li>
+<li>
+<p><code>addLeaves d/02/02/2019 d/03/03/2019</code><br>
+Adds new schedules for all observable employees in the employees list panel with.
+date 02/02/2019 and 03/03/2019, to be on leave on that day.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="delete-leaves-code-deleteleaves-code"><a class="link" href="#delete-leaves-code-deleteleaves-code">4.14. Delete Leaves: <code>deleteLeaves</code></a></h3>
+<div class="paragraph">
+<p>User could use command_alias: 'dl'.</p>
+</div>
+<div class="paragraph">
+<p>Delete a new leave schedule for the observable employees in the employees list pane.
+Use <code>find</code> / <code>filter</code> / <code>list</code> to get the desired employees you wish to schedule.
+All observable employees in the employees list pane will be deleted schedules
+with work and date specified by the user.</p>
+</div>
+<div class="paragraph">
+<p>You are to specify 1 compulsory fields below.
+You can have as many number of date prefix to schedule many dates.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Date</strong> must be a valid date in the calendar [DD/MM/YYYY]. You are not allowed to
+schedule for dates that have past today&#8217;s date. Year must also fall into the range
+of 2000-2099.
+Each schedule is assumed to be scheduling the employee for the entire day of [LEAVE].</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>For those employees are scheduled with the date, the command will
+delete the schedule. When all employees are deleted with the scheduled date,
+the command will tell the user Every observable employees in the list does not have leave schedule
+on the specified date.</p>
+</div>
+<div class="paragraph">
+<p>Format: <code>deleteLeaves d/[DD/MM/YYYY]</code></p>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>deleteLeaves d/02/02/2019</code><br>
+Deletes a schedule for all observable employees in the employees list panel with.
+date 02/02/2019, with leave on that day.</p>
+</li>
+<li>
+<p><code>addWorks d/02/02/2019 d/03/03/2019</code><br>
+Deletes schedules for all observable employees in the employees list panel with.
+date 02/02/2019 and 03/03/2019, with leave on that day.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="calculate-leaves-code-calculateleaves-code"><a class="link" href="#calculate-leaves-code-calculateleaves-code">4.15. Calculate Leaves: <code>calculateLeaves</code></a></h3>
+<div class="paragraph">
+<p>User could use command_alias: 'cl'.</p>
+</div>
+<div class="paragraph">
+<p>Calculates total number of leaves scheduled for an employee for the entire specified year
+in the schedule list.
+You are to specify only 2 compulsory fields below.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>EmployeeId</strong> must be a valid employee id found in the address book.</p>
+</li>
+<li>
+<p><strong>Year</strong> must be a valid year in the calendar [YYYY].
+Year is restricted to 2000-2099.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Format: <code>calculateLeaves id/EMPLOYEE_ID y/YYYY</code></p>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>calculateLeaves id/000001 date/2019</code><br>
+Calculates total number of leave scheduled for an employee id 000001, year 2019.
+, date 02/02/2019, to work on that day.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="select-schedule-code-selectschedule-code"><a class="link" href="#select-schedule-code-selectschedule-code">4.16. Select schedule: <code>selectSchedule</code></a></h3>
+<div class="paragraph">
+<p>User could use command_alias: 'ss'.</p>
+</div>
+<div class="paragraph">
+<p>Select a schedule based on index ID.
+You are to specify 1 compulsory fields below.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Index</strong> must be a integer within the range of INT MAX</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Format: <code>selectSchedule [INDEX]</code>.</p>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>selectSchedule 1</code><br>
+Select the schedule with the index of '1'</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="clear-schedule-code-clearschedule-code"><a class="link" href="#clear-schedule-code-clearschedule-code">4.17. Clear Schedule: <code>clearSchedule</code></a></h3>
+<div class="paragraph">
+<p>User could use command_alias: 'cs'.</p>
+</div>
+<div class="paragraph">
+<p>Clear the entire schedule list.
+Format: <code>clearSchedule</code>.</p>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>clearSchedule</code><br>
+Select the entire Schedule List.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="add-recruitment-posts-code-addrecruitmentpost-code"><a class="link" href="#add-recruitment-posts-code-addrecruitmentpost-code">4.18. Add recruitment posts: <code>addRecruitmentPost</code></a></h3>
 <div class="paragraph">
 <p>Add an recruitment post based on open job position, minimal working experience required and job description
 of the open position. Meanwhile, job position does not accept numbers and blank input. In addition, it has
@@ -540,7 +853,7 @@ functionality of company server</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="delete-recruitment-posts-code-deleterecruitmentpost-code"><a class="link" href="#delete-recruitment-posts-code-deleterecruitmentpost-code">4.12. Delete recruitment posts: <code>deleteRecruitmentPost</code></a></h3>
+<h3 id="delete-recruitment-posts-code-deleterecruitmentpost-code"><a class="link" href="#delete-recruitment-posts-code-deleterecruitmentpost-code">4.19. Delete recruitment posts: <code>deleteRecruitmentPost</code></a></h3>
 <div class="paragraph">
 <p>Delete a recruitment post based on post index ID. User could use command_alias: 'drp'.</p>
 </div>
@@ -560,7 +873,7 @@ Deletes the recruitment post with the index of '1'</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="select-recruitment-posts-code-selectrecruitmentpost-code"><a class="link" href="#select-recruitment-posts-code-selectrecruitmentpost-code">4.13. Select recruitment posts: <code>selectRecruitmentPost</code></a></h3>
+<h3 id="select-recruitment-posts-code-selectrecruitmentpost-code"><a class="link" href="#select-recruitment-posts-code-selectrecruitmentpost-code">4.20. Select recruitment posts: <code>selectRecruitmentPost</code></a></h3>
 <div class="paragraph">
 <p>Select a recruitment post based on post index ID. User could use command_alias: 'srp'.</p>
 </div>
@@ -580,7 +893,7 @@ Select the recruitment post with the index of '1'</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="clear-recruitment-posts-code-clearrecruitmentpost-code"><a class="link" href="#clear-recruitment-posts-code-clearrecruitmentpost-code">4.14. Clear recruitment posts: <code>clearRecruitmentPost</code></a></h3>
+<h3 id="clear-recruitment-posts-code-clearrecruitmentpost-code"><a class="link" href="#clear-recruitment-posts-code-clearrecruitmentpost-code">4.21. Clear recruitment posts: <code>clearRecruitmentPost</code></a></h3>
 <div class="paragraph">
 <p>Clear all recruitment posts at one go. User could use command_alias: 'crp'.</p>
 </div>
@@ -600,7 +913,7 @@ Clear all recruitment posts at one go.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="edit-recruitment-posts-code-editrecruitmentpost-code"><a class="link" href="#edit-recruitment-posts-code-editrecruitmentpost-code">4.15. Edit recruitment posts: <code>editRecruitmentPost</code></a></h3>
+<h3 id="edit-recruitment-posts-code-editrecruitmentpost-code"><a class="link" href="#edit-recruitment-posts-code-editrecruitmentpost-code">4.22. Edit recruitment posts: <code>editRecruitmentPost</code></a></h3>
 <div class="paragraph">
 <p>Edit a recruitment post based on its index no. User could use command_alias: 'erp'.
 Same job title to the chosen post&#8217;s job position will be rejected when doing edit.</p>
@@ -624,7 +937,7 @@ server.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="locating-persons-by-name-code-find-code"><a class="link" href="#locating-persons-by-name-code-find-code">4.16. Locating persons by name: <code>find</code></a></h3>
+<h3 id="locating-persons-by-name-code-find-code"><a class="link" href="#locating-persons-by-name-code-find-code">4.23. Locating persons by name: <code>find</code></a></h3>
 <div class="paragraph">
 <p>Find the employee name whose name contain any of the given keywords.</p>
 </div>
@@ -644,7 +957,7 @@ Find all instances of John</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="view-all-available-functions-or-commands-code-help-code"><a class="link" href="#view-all-available-functions-or-commands-code-help-code">4.17. View all available functions or commands : <code>help</code></a></h3>
+<h3 id="view-all-available-functions-or-commands-code-help-code"><a class="link" href="#view-all-available-functions-or-commands-code-help-code">4.24. View all available functions or commands : <code>help</code></a></h3>
 <div class="paragraph">
 <p>Views all the fucntions and commands that the CHRS have.</p>
 </div>
@@ -660,7 +973,7 @@ Find all instances of John</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="listing-entered-commands-code-history-code"><a class="link" href="#listing-entered-commands-code-history-code">4.18. Listing entered commands : <code>history</code></a></h3>
+<h3 id="listing-entered-commands-code-history-code"><a class="link" href="#listing-entered-commands-code-history-code">4.25. Listing entered commands : <code>history</code></a></h3>
 <div class="paragraph">
 <p>Lists all the commands that you have entered in reverse chronological order.</p>
 </div>
@@ -683,7 +996,7 @@ Find all instances of John</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="undoing-previous-command-code-undo-code"><a class="link" href="#undoing-previous-command-code-undo-code">4.19. Undoing previous command : <code>undo</code></a></h3>
+<h3 id="undoing-previous-command-code-undo-code"><a class="link" href="#undoing-previous-command-code-undo-code">4.26. Undoing previous command : <code>undo</code></a></h3>
 <div class="paragraph">
 <p>Restores CHRS to the state before the previous <em>undoable</em> command was executed.</p>
 </div>
@@ -698,7 +1011,8 @@ Find all instances of John</p>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>Undoable commands: those commands that modify CHRS content (<code>add</code>, <code>delete</code>, <code>edit</code> and <code>clear</code>).</p>
+<p>Undoable commands: those commands that modify CHRS content.
+For commands similar functions to (list*, select*, calculate*, the command will not be able to undo or redo)</p>
 </div>
 </td>
 </tr>
@@ -715,7 +1029,7 @@ Find all instances of John</p>
 <code>undo</code> (reverses the <code>delete 1</code> command)<br></p>
 </li>
 <li>
-<p><code>select 1</code><br>
+<p><code>selectEmployee 1</code><br>
 <code>list</code><br>
 <code>undo</code><br>
 The <code>undo</code> command fails as there are no undoable commands executed previously</p>
@@ -730,12 +1044,27 @@ The <code>undo</code> command fails as there are no undoable commands executed p
 </div>
 </div>
 <div class="sect2">
-<h3 id="redoing-the-previously-undone-command-code-redo-code"><a class="link" href="#redoing-the-previously-undone-command-code-redo-code">4.20. Redoing the previously undone command : <code>redo</code></a></h3>
+<h3 id="redoing-the-previously-undone-command-code-redo-code"><a class="link" href="#redoing-the-previously-undone-command-code-redo-code">4.27. Redoing the previously undone command : <code>redo</code></a></h3>
 <div class="paragraph">
 <p>Reverses the most recent <code>undo</code> command.</p>
 </div>
 <div class="paragraph">
 <p>Format: <code>redo</code></p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Undoable commands: those commands that modify CHRS content.
+For commands similar functions to (list*, select*, calculate*, the command will not be able to undo or redo)</p>
+</div>
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -764,7 +1093,7 @@ The <code>redo</code> command fails as there are no <code>undo</code> commands e
 </div>
 </div>
 <div class="sect2">
-<h3 id="clearing-all-entries-code-clear-code"><a class="link" href="#clearing-all-entries-code-clear-code">4.21. Clearing all entries : <code>clear</code></a></h3>
+<h3 id="clearing-all-entries-code-clear-code"><a class="link" href="#clearing-all-entries-code-clear-code">4.28. Clearing all entries : <code>clear</code></a></h3>
 <div class="paragraph">
 <p>Clears all entries from CHRS.</p>
 </div>
@@ -773,7 +1102,7 @@ The <code>redo</code> command fails as there are no <code>undo</code> commands e
 </div>
 </div>
 <div class="sect2">
-<h3 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">4.22. Exiting the program : <code>exit</code></a></h3>
+<h3 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">4.29. Exiting the program : <code>exit</code></a></h3>
 <div class="paragraph">
 <p>Exits the program.</p>
 </div>
@@ -782,16 +1111,16 @@ The <code>redo</code> command fails as there are no <code>undo</code> commands e
 </div>
 </div>
 <div class="sect2">
-<h3 id="saving-the-data"><a class="link" href="#saving-the-data">4.23. Saving the data</a></h3>
+<h3 id="saving-the-data"><a class="link" href="#saving-the-data">4.30. Saving the data</a></h3>
 <div class="paragraph">
 <p>Address book data are saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="encrypting-data-files-code-coming-in-v2-0-code"><a class="link" href="#encrypting-data-files-code-coming-in-v2-0-code">4.24. Encrypting data files <code>[coming in v2.0]</code></a></h3>
+<h3 id="encrypting-data-files-code-coming-in-v2-0-code"><a class="link" href="#encrypting-data-files-code-coming-in-v2-0-code">4.31. Encrypting data files <code>[coming in v2.0]</code></a></h3>
 <div class="paragraph">
-<p><em>{explain how the user can enable/disable data encryption}</em></p>
+<p>Upcoming in 2.0! Stay Tune!</p>
 </div>
 </div>
 </div>
@@ -921,4 +1250,4 @@ There is no need to save manually.</p>
 </tbody>
 </table>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-31 16:58:49 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-31 17:27:55 UTC</div></div></div></body></html>
