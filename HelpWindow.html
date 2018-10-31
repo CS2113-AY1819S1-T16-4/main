@@ -311,26 +311,17 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 <div class="paragraph">
 <p>Mandatory fields: EmployeeId, Name, Date of Birth, Phone number, Email, Department, Position, Address, Salary</p>
 </div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-Any usage of <code>add</code> command that will result in duplicated employeeId or phone number or email will be rejected. Additionally, duplicated name alongside date of birth will also be rejected.
-</td>
-</tr>
-</table>
-</div>
 </div>
 <div class="sect2">
 <h3 id="listing-all-persons-code-list-code"><a class="link" href="#listing-all-persons-code-list-code">4.3. Listing all persons : <code>list</code></a></h3>
 <div class="paragraph">
-<p>Shows a list of all employees, schedules, recruitment posts and expenses in CHRS.</p>
+<p>Shows a list of all employees in CHRS.</p>
 </div>
 <div class="paragraph">
 <p>Format: <code>list</code></p>
+</div>
+<div class="paragraph">
+<p>Available fields: Full name, Date of Birth, Phone number, Email, Department, Position, Address,  Salary, Bonus, Expenses/Claims, Leave Balance</p>
 </div>
 </div>
 <div class="sect2">
@@ -356,18 +347,6 @@ Any usage of <code>add</code> command that will result in duplicated employeeId 
 </div>
 <div class="paragraph">
 <p>Available fields: Name, Phone number, Email, Department, Position, Address</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-Any usage of <code>edit</code> command that will result in duplicated phone number or email will be rejected. Additionally, usage of this command to edit a person&#8217;s name to be the same as another person who has the same date of birth will be rejected.
-</td>
-</tr>
-</table>
 </div>
 </div>
 <div class="sect2">
@@ -1163,91 +1142,161 @@ There is no need to save manually.</p>
 <tr>
 <th class="tableblock halign-left valign-top">Command Features</th>
 <th class="tableblock halign-left valign-top">Command Word</th>
-<th class="tableblock halign-left valign-top">Command alias</th>
+<th class="tableblock halign-left valign-top">Command Alias</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Filter the employee list and only display selected fields.</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">filter</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Adds an employee’s data</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Adds an employee’s data</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">add</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Listing all employees'</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">list</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Edit an existing employee&#8217;s data</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">edit</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Deleting an employee&#8217;s data</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Deleting an employee&#8217;s data</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">delete</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Modify Employee&#8217;s Salary/ Bonus</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">modifypay</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">modifyPay</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">mp</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">View expenses</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">viewex</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ve</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Add expenses</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">addex</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ae</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Remove Expenses</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">removeex</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Add recruitmentPost Command</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">removeex</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">re</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Add Schedule</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">addSchedule</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">as</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">delete Schedule</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">deleteSchedule</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ds</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Add Works</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">addWorks</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">aw</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Delete Works</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">deleteWorks</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">dw</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Add Leaves</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">addLeaves</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">al</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Delete Leaves</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">deleteLeaves</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">dl</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Calculate Leaves</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">calculateLeaves</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">cl</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Select Schedule</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">selectSchedule</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ss</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Clear Schedule</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">clearSchedule</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">cs</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Add RecruitmentPost Command</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">addRecruitmentPost</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">arp</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Delete RecruitmentPost Command</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Delete recruitmentPost Command</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">deleteRecruitmentPost</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">drp</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Select RecruitmentPost Command</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Select recruitmentPost Command</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">selectRecruitmentPost</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">srp</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Clear RecruitmentPost Command</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Clear recruitmentPost Command</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">clearRecruitmentPost</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">crp</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Edit RecruitmentPost Command</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Edit recruitmentPost Command</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">editRecruitmentPost</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">erp</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">View all available functions or commands</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">View all available functions or commands</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">help</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Locating an employee by name</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">find</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Approve of reject leave/off:</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">leaveRequest</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">leaveRequest</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Listing entered commands</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">history</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Undoing previous command</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">undo</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Redoing previous command</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">redo</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">redo</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Clearing all entries</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">clear</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Exiting the program</p></td>
 </tr>
 </tbody>
 </table>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-31 17:37:01 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-31 17:40:40 UTC</div></div></div></body></html>
