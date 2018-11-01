@@ -292,19 +292,22 @@ Minimum 1 digit</p></td>
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Opening job position</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Job Position</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">jp/</p></td>
-<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Job position must not be blank and should not include numbers and punctuation mark. And users are
+not allowed to exceed the character limit which is from 1 to 20.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Minimal years of working experience required</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Minimal Years of Working Experience</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">me/</p></td>
-<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Minimal years of working experience must be integers and should not be blank
+. And It is limited from 0 to 30.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Job description</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">jd/</p></td>
-<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Job description must not be blank and should not include numbers and punctuation mark. And users
+are not allowed to exceed the character limit which is from 1 to 200.</p></td>
 </tr>
 </tbody>
 </table>
@@ -1070,12 +1073,7 @@ Select the entire Schedule List.</p>
 <div class="sect2">
 <h3 id="add-recruitment-posts-code-addrecruitmentpost-code"><a class="link" href="#add-recruitment-posts-code-addrecruitmentpost-code">4.22. Add recruitment posts: <code>addRecruitmentPost</code></a></h3>
 <div class="paragraph">
-<p>Add an recruitment post based on open job position, minimal working experience required and job description
-of the open position. Meanwhile, job position does not accept numbers and blank input. In addition, it has
-words limits from 1 to 20. As for minimal working experience accepts only numbers with range from 0 to 30.
-As for job description, it does not accept numbers and blank input. Furthermore, it has word limits from 1 to 200.
-User could use command_alias: 'arp'.[Note: duplicate recruitment posts are allowed for the need of
-multiple posts with same position information.]</p>
+<p>Add a recruitment post based on job position, minimal years of working experience and job description.</p>
 </div>
 <div class="paragraph">
 <p>Format: <code>addRecruitmentPost jp/JOB POSITION me/MINIMAL YEARS OF WORKING EXPERIENCE jd/JOB DESCRIPTION</code> or
@@ -1092,13 +1090,31 @@ Add an recruitment post with the available position called IT Manager, and the j
 working experience in similar field. The job position requires the candidates' ability to maintain the
 functionality of company server</p>
 </li>
+<li>
+<p><code>arp jp/IT Manager me/3 jd/maintain the functionality of company server</code><br>
+Add an recruitment post with the available position called IT Manager, and the job requires minimal 3 years of
+working experience in similar field. The job position requires the candidates' ability to maintain the
+functionality of company server</p>
+</li>
 </ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Duplicate recruitment posts are allowed for the need of multiple posts with same information.
+</td>
+</tr>
+</table>
 </div>
 </div>
 <div class="sect2">
 <h3 id="delete-recruitment-posts-code-deleterecruitmentpost-code"><a class="link" href="#delete-recruitment-posts-code-deleterecruitmentpost-code">4.23. Delete recruitment posts: <code>deleteRecruitmentPost</code></a></h3>
 <div class="paragraph">
-<p>Delete a recruitment post based on post index ID. User could use command_alias: 'drp'.</p>
+<p>Delete a recruitment post based on post index ID.</p>
 </div>
 <div class="paragraph">
 <p>Format: <code>deleteRecruitmentPost [INDEX]</code> or <code>drp [INDEX]</code></p>
@@ -1112,13 +1128,17 @@ functionality of company server</p>
 <p><code>deleteRecruitmentPost 1</code><br>
 Deletes the recruitment post with the index of '1'</p>
 </li>
+<li>
+<p><code>drp 1</code><br>
+Deletes the recruitment post with the index of '1'</p>
+</li>
 </ul>
 </div>
 </div>
 <div class="sect2">
 <h3 id="select-recruitment-posts-code-selectrecruitmentpost-code"><a class="link" href="#select-recruitment-posts-code-selectrecruitmentpost-code">4.24. Select recruitment posts: <code>selectRecruitmentPost</code></a></h3>
 <div class="paragraph">
-<p>Select a recruitment post based on post index ID. User could use command_alias: 'srp'.</p>
+<p>Select a recruitment post based on post index ID.</p>
 </div>
 <div class="paragraph">
 <p>Format: <code>selectRecruitmentPost [INDEX]</code> or <code>srp [INDEX]</code></p>
@@ -1132,13 +1152,17 @@ Deletes the recruitment post with the index of '1'</p>
 <p><code>selectRecruitmentPost 1</code><br>
 Select the recruitment post with the index of '1'</p>
 </li>
+<li>
+<p><code>srp 1</code><br>
+Select the recruitment post with the index of '1'</p>
+</li>
 </ul>
 </div>
 </div>
 <div class="sect2">
 <h3 id="clear-recruitment-posts-code-clearrecruitmentpost-code"><a class="link" href="#clear-recruitment-posts-code-clearrecruitmentpost-code">4.25. Clear recruitment posts: <code>clearRecruitmentPost</code></a></h3>
 <div class="paragraph">
-<p>Clear all recruitment posts at one go. User could use command_alias: 'crp'.</p>
+<p>Clear all recruitment posts at one go.</p>
 </div>
 <div class="paragraph">
 <p>Format: <code>clearRecruitmentPost</code> or <code>crp</code></p>
@@ -1152,14 +1176,17 @@ Select the recruitment post with the index of '1'</p>
 <p><code>clearRecruitmentPost</code><br>
 Clear all recruitment posts at one go.</p>
 </li>
+<li>
+<p><code>crp</code><br>
+Clear all recruitment posts at one go.</p>
+</li>
 </ul>
 </div>
 </div>
 <div class="sect2">
 <h3 id="edit-recruitment-posts-code-editrecruitmentpost-code"><a class="link" href="#edit-recruitment-posts-code-editrecruitmentpost-code">4.26. Edit recruitment posts: <code>editRecruitmentPost</code></a></h3>
 <div class="paragraph">
-<p>Edit a recruitment post based on its index no. User could use command_alias: 'erp'.
-Same job title to the chosen post&#8217;s job position will be rejected when doing edit.</p>
+<p>Edit a recruitment post based on its index no.</p>
 </div>
 <div class="paragraph">
 <p>Format: <code>editRecruitmentPost [Index]</code> or <code>erp [Index]</code></p>
@@ -1176,7 +1203,40 @@ working experience to job description respectively changes to IT manager, minima
 experience of 3 years in relevant field and the job description is to maintain the company
 server.</p>
 </li>
+<li>
+<p><code>erp 1 jp/IT Manager me/3 jd/To maintain the company server</code><br>
+Edit the recruitment post with index 1. And the post information from job position, minimal
+working experience to job description respectively changes to IT manager, minimal working
+experience of 3 years in relevant field and the job description is to maintain the company
+server.</p>
+</li>
 </ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Duplicate edition detects only when user input 'erp [index] jp/Job Position'. For this case, the duplicate job position
+will be checked.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Duplicate edition won&#8217;t be detected when user input full command 'erp 1 jp/IT Manager me/3 jd/To maintain the
+company server' or 'editRecruitmentPost 1 jp/IT Manager me/3 jd/To maintain the company server'
+</td>
+</tr>
+</table>
 </div>
 </div>
 <div class="sect2">
@@ -1620,4 +1680,4 @@ There is no need to save manually.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-01 11:11:55 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-01 11:19:46 UTC</div></div></div></body></html>
