@@ -179,12 +179,14 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Salary</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">s/</p></td>
-<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Takes in a maximum of 6 whole numbers and 2 decimal place.<br>
+A "%" is allowed to be place before value for modification of Salary using percentage.<br>
+Value can be in negative, and should not be blank.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Bonus</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">b/</p></td>
-<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Only take in positive numbers between 0 to 24.</p></td>
 </tr>
 </tbody>
 </table>
@@ -526,7 +528,8 @@ Select the person with the index of '1' in th list.</p>
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-At least one of either Salary or Bonus must be included.
+At least one of either Salary or Bonus must be included<br>
+Bonus will be replaced by new values with every modification
 </td>
 </tr>
 </table>
@@ -546,9 +549,21 @@ Modify the Bonus of employee with index '2' to 2 months of the salary</p>
 </li>
 <li>
 <p><code>modifyPay 3 s/%5 b/1</code><br>
-Increase the Salary of employee with index '3' by 5% and Bonus to 1 month of salary</p>
+Modify the Salary of employee with index '3' by 5% increment and Bonus to 1 month of salary</p>
 </li>
 </ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Any modification to Salary and Bonus that causes negative values will be rejected
+</td>
+</tr>
+</table>
 </div>
 </div>
 <div class="sect2">
@@ -566,7 +581,8 @@ Increase the Salary of employee with index '3' by 5% and Bonus to 1 month of sal
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-At least one of either Salary or Bonus must be included.
+At least one of either Salary or Bonus must be included<br>
+Bonus will be replaced by new values with every modification
 </td>
 </tr>
 </table>
@@ -589,6 +605,18 @@ Modify the Bonus of all the listed employee(s) to 1 month of their salary</p>
 Modify the Salary of all the listed employee(s) by 5% increment and Bonus to 1 month of salary</p>
 </li>
 </ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Any modification to Salary and Bonus that causes negative values will be rejected
+</td>
+</tr>
+</table>
 </div>
 </div>
 <div class="sect2">
@@ -1597,4 +1625,4 @@ There is no need to save manually.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-01 10:44:26 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-01 11:09:00 UTC</div></div></div></body></html>
