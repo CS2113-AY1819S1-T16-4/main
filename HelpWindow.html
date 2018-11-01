@@ -171,15 +171,7 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Bonus</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Expenses/Claims</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Leave Balance</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">b/</p></td>
 </tr>
 </tbody>
 </table>
@@ -199,7 +191,7 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Employee Expenses Id</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Employee Id</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">id/</p></td>
 </tr>
 <tr>
@@ -246,6 +238,35 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Job description</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">jd/</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><strong>A schedule post should include things below</strong></p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 40%;">
+<colgroup>
+<col style="width: 62.5%;">
+<col style="width: 37.5%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Field Name</th>
+<th class="tableblock halign-left valign-top">Prefix</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Employee Id</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">id/</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Date of schedule</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">d/</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Type of schedule</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">t/</p></td>
 </tr>
 </tbody>
 </table>
@@ -382,7 +403,7 @@ Any usage of <code>filter</code> command that results in the same prefix appeari
 <p>Deletes the specified employee from the CHRS.</p>
 </div>
 <div class="paragraph">
-<p>Format: <code>delete [INDEX]</code></p>
+<p>Format: <code>delete INDEX</code></p>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -542,11 +563,11 @@ Select the expenses with the index of '1'</p>
 <div class="sect2">
 <h3 id="add-schedule-code-addschedule-code"><a class="link" href="#add-schedule-code-addschedule-code">4.12. Add schedule: <code>addSchedule</code></a></h3>
 <div class="paragraph">
-<p>User could use command_alias: 'as'.</p>
+<p>User could use command_alias: 'as'.
+Add a new schedule for a employee in the addressbook.</p>
 </div>
 <div class="paragraph">
-<p>Add a new schedule for a employee in the addressbook.
-You are to specify only 3 compulsory fields below.</p>
+<p>Format: <code>addSchedule id/EMPLOYEE_ID d/DATE t/TYPE</code></p>
 </div>
 <div class="ulist">
 <ul>
@@ -560,12 +581,9 @@ of 2000-2099.</p>
 </li>
 <li>
 <p><strong>Type</strong> can be either a work or leave only, case not sensitive.
-Each schedule is assumed to be scheduling the employee for the entire day of [WORK or LEAVE].</p>
+Each schedule is assumed to be scheduling the employee for the entire day of <code>WORK</code> or <code>LEAVE</code>.</p>
 </li>
 </ul>
-</div>
-<div class="paragraph">
-<p>Format: <code>addSchedule id/EMPLOYEE_ID d/[DD/MM/YYYY] t/[WORK/LEAVE]</code></p>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -586,13 +604,18 @@ Adds a new schedule for employee id 000001, date 03/03/2019, to be on leave for 
 <div class="sect2">
 <h3 id="delete-schedule-code-deleteschedule-code"><a class="link" href="#delete-schedule-code-deleteschedule-code">4.13. Delete schedule: <code>deleteSchedule</code></a></h3>
 <div class="paragraph">
-<p>User could use command_alias: 'ds'.</p>
+<p>User could use command_alias: 'ds'.<br>
+Deletes the specified schedule from the schedule list.</p>
 </div>
 <div class="paragraph">
-<p>Deletes the specified schedule from the observable schedule list.</p>
+<p>Format: <code>deleteSchedule INDEX</code></p>
 </div>
-<div class="paragraph">
-<p>Format: <code>deleteSchedule [INDEX]</code></p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Index</strong> must be a postive integer within the range of INT MAX.</p>
+</li>
+</ul>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -618,27 +641,22 @@ All observable employees in the employees list pane will be scheduled
 with work and date specified by the user.</p>
 </div>
 <div class="paragraph">
-<p>You are to specify 1 compulsory fields below.
-You can have as many number of date prefix to schedule many dates.</p>
+<p>For those employees whom are not scheduled with the date, the command will
+create a new schedule. When all employees are scheduled with the date,
+the command will tell the user that every observable employees in the list
+have been scheduled with the specified date.</p>
+</div>
+<div class="paragraph">
+<p>Format: <code>addWorks d/DATE [d/DATE]&#8230;&#8203;</code></p>
 </div>
 <div class="ulist">
 <ul>
 <li>
 <p><strong>Date</strong> must be a valid date in the calendar [DD/MM/YYYY]. You are not allowed to
 schedule for dates that have past today&#8217;s date. Year must also fall into the range
-of 2000-2099.
-Each schedule is assumed to be scheduling the employee for the entire day of [WORK].</p>
+of 2000-2099.</p>
 </li>
 </ul>
-</div>
-<div class="paragraph">
-<p>For those employees are not scheduled with the date, the command will
-create a new schedule. When all employees are scheduled with the date,
-the command will tell the user that Every observable employees in the list
-have been scheduled with the specified date.</p>
-</div>
-<div class="paragraph">
-<p>Format: <code>addWorks d/[DD/MM/YYYY]</code></p>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -647,12 +665,12 @@ have been scheduled with the specified date.</p>
 <ul>
 <li>
 <p><code>addWorks d/02/02/2019</code><br>
-Adds a new schedule for all observable employees in the employees list panel with.
+Adds a new schedule for all observable employees in the employees list panel with
 date 02/02/2019, to work on that day.</p>
 </li>
 <li>
 <p><code>addWorks d/02/02/2019 d/03/03/2019</code><br>
-Adds new schedules for all observable employees in the employees list panel with.
+Adds new schedules for all observable employees in the employees list panel with
 date 02/02/2019 and 03/03/2019, to work on that day.</p>
 </li>
 </ul>
@@ -664,33 +682,28 @@ date 02/02/2019 and 03/03/2019, to work on that day.</p>
 <p>User could use command_alias: 'dw'.</p>
 </div>
 <div class="paragraph">
-<p>Delete a new work schedule for the observable employees in the employees list pane.
+<p>Delete a work schedule for the observable employees in the employees list pane.
 Use <code>find</code> / <code>filter</code> / <code>list</code> to get the desired employees you wish to schedule.
-All observable employees in the employees list pane will be deleted schedules
-with work and date specified by the user.</p>
+All observable employees in the employees list pane will be deleted work schedules
+with date specified by the user.</p>
 </div>
 <div class="paragraph">
-<p>You are to specify 1 compulsory fields below.
-You can have as many number of date prefix to schedule many dates.</p>
+<p>For those employees are scheduled with the date, the command will
+delete the work schedule. When all employees are deleted with the scheduled date,
+the command will tell the user every observable employees in the list does not have work schedule
+on the specified date.</p>
+</div>
+<div class="paragraph">
+<p>Format: <code>deleteWorks d/DATE [d/DATE]&#8230;&#8203;</code></p>
 </div>
 <div class="ulist">
 <ul>
 <li>
 <p><strong>Date</strong> must be a valid date in the calendar [DD/MM/YYYY]. You are not allowed to
 schedule for dates that have past today&#8217;s date. Year must also fall into the range
-of 2000-2099.
-Each schedule is assumed to be scheduling the employee for the entire day of [WORK].</p>
+of 2000-2099.</p>
 </li>
 </ul>
-</div>
-<div class="paragraph">
-<p>For those employees are scheduled with the date, the command will
-delete the schedule. When all employees are deleted with the scheduled date,
-the command will tell the user Every observable employees in the list does not have working schedule
-on the specified date.</p>
-</div>
-<div class="paragraph">
-<p>Format: <code>deleteWorks d/[DD/MM/YYYY]</code></p>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -722,27 +735,22 @@ All observable employees in the employees list pane will be scheduled
 with leave and date specified by the user.</p>
 </div>
 <div class="paragraph">
-<p>You are to specify 1 compulsory fields below.
-You can have as many number of date prefix to schedule many dates.</p>
+<p>For those employees whom are not scheduled with the date, the command will
+create a new leave schedule. When all employees are scheduled with the date,
+the command will tell the user that every observable employees in the list
+have been scheduled with the specified date.</p>
+</div>
+<div class="paragraph">
+<p>Format: <code>addLeaves d/DATE [d/DATE]&#8230;&#8203;</code></p>
 </div>
 <div class="ulist">
 <ul>
 <li>
 <p><strong>Date</strong> must be a valid date in the calendar [DD/MM/YYYY]. You are not allowed to
 schedule for dates that have past today&#8217;s date. Year must also fall into the range
-of 2000-2099.
-Each schedule is assumed to be scheduling the employee for the entire day of [LEAVE].</p>
+of 2000-2099.</p>
 </li>
 </ul>
-</div>
-<div class="paragraph">
-<p>For those employees are not scheduled with the date, the command will
-create a new schedule. When all employees are scheduled with the date,
-the command will tell the user that Every observable employees in the list
-have been scheduled with the specified date.</p>
-</div>
-<div class="paragraph">
-<p>Format: <code>addLeaves d/[DD/MM/YYYY]</code></p>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -768,33 +776,28 @@ date 02/02/2019 and 03/03/2019, to be on leave on that day.</p>
 <p>User could use command_alias: 'dl'.</p>
 </div>
 <div class="paragraph">
-<p>Delete a new leave schedule for the observable employees in the employees list pane.
+<p>Delete a leave schedule for the observable employees in the employees list pane.
 Use <code>find</code> / <code>filter</code> / <code>list</code> to get the desired employees you wish to schedule.
-All observable employees in the employees list pane will be deleted schedules
-with work and date specified by the user.</p>
+All observable employees in the employees list pane will be deleted leave schedules
+with date specified by the user.</p>
 </div>
 <div class="paragraph">
-<p>You are to specify 1 compulsory fields below.
-You can have as many number of date prefix to schedule many dates.</p>
+<p>For those employees whom are scheduled with the date, the command will
+delete the schedule. When all employees are deleted with the scheduled date,
+the command will tell the user every observable employees in the list does not have leave schedule
+on the specified date.</p>
+</div>
+<div class="paragraph">
+<p>Format: <code>deleteLeaves d/DATE [d/DATE]&#8230;&#8203;</code></p>
 </div>
 <div class="ulist">
 <ul>
 <li>
 <p><strong>Date</strong> must be a valid date in the calendar [DD/MM/YYYY]. You are not allowed to
 schedule for dates that have past today&#8217;s date. Year must also fall into the range
-of 2000-2099.
-Each schedule is assumed to be scheduling the employee for the entire day of [LEAVE].</p>
+of 2000-2099.</p>
 </li>
 </ul>
-</div>
-<div class="paragraph">
-<p>For those employees are scheduled with the date, the command will
-delete the schedule. When all employees are deleted with the scheduled date,
-the command will tell the user Every observable employees in the list does not have leave schedule
-on the specified date.</p>
-</div>
-<div class="paragraph">
-<p>Format: <code>deleteLeaves d/[DD/MM/YYYY]</code></p>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -807,7 +810,7 @@ Deletes a schedule for all observable employees in the employees list panel with
 date 02/02/2019, with leave on that day.</p>
 </li>
 <li>
-<p><code>addWorks d/02/02/2019 d/03/03/2019</code><br>
+<p><code>addLeaves d/02/02/2019 d/03/03/2019</code><br>
 Deletes schedules for all observable employees in the employees list panel with.
 date 02/02/2019 and 03/03/2019, with leave on that day.</p>
 </li>
@@ -821,8 +824,10 @@ date 02/02/2019 and 03/03/2019, with leave on that day.</p>
 </div>
 <div class="paragraph">
 <p>Calculates total number of leaves scheduled for an employee for the entire specified year
-in the schedule list.
-You are to specify only 2 compulsory fields below.</p>
+in the schedule list.</p>
+</div>
+<div class="paragraph">
+<p>Format: <code>calculateLeaves id/EMPLOYEE_ID y/YYYY</code></p>
 </div>
 <div class="ulist">
 <ul>
@@ -830,13 +835,10 @@ You are to specify only 2 compulsory fields below.</p>
 <p><strong>EmployeeId</strong> must be a valid employee id found in the address book.</p>
 </li>
 <li>
-<p><strong>Year</strong> must be a valid year in the calendar [YYYY].
+<p><strong>Year</strong> must be a valid year in the calendar in the format YYYY.
 Year is restricted to 2000-2099.</p>
 </li>
 </ul>
-</div>
-<div class="paragraph">
-<p>Format: <code>calculateLeaves id/EMPLOYEE_ID y/YYYY</code></p>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -845,8 +847,7 @@ Year is restricted to 2000-2099.</p>
 <ul>
 <li>
 <p><code>calculateLeaves id/000001 date/2019</code><br>
-Calculates total number of leave scheduled for an employee id 000001, year 2019.
-, date 02/02/2019, to work on that day.</p>
+Calculates total number of leave scheduled for an employee id 000001 in whole of year 2019.</p>
 </li>
 </ul>
 </div>
@@ -857,8 +858,10 @@ Calculates total number of leave scheduled for an employee id 000001, year 2019.
 <p>User could use command_alias: 'ss'.</p>
 </div>
 <div class="paragraph">
-<p>Select a schedule based on index ID.
-You are to specify 1 compulsory fields below.</p>
+<p>Select a schedule based on schedule index ID.</p>
+</div>
+<div class="paragraph">
+<p>Format: <code>selectSchedule INDEX</code>.</p>
 </div>
 <div class="ulist">
 <ul>
@@ -866,9 +869,6 @@ You are to specify 1 compulsory fields below.</p>
 <p><strong>Index</strong> must be a integer within the range of INT MAX</p>
 </li>
 </ul>
-</div>
-<div class="paragraph">
-<p>Format: <code>selectSchedule [INDEX]</code>.</p>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -1107,7 +1107,9 @@ Usage of <code>find</code> command only allows you to find by either name or emp
 <td class="content">
 <div class="paragraph">
 <p>Undoable commands: those commands that modify CHRS content.
-For commands similar functions to (list*, select*, calculate*, the command will not be able to undo or redo)</p>
+For commands similar functions to<br>
+(list*, find*, filter*, select*, calculate*)
+the command will not be able to undo or redo).</p>
 </div>
 </td>
 </tr>
@@ -1154,8 +1156,10 @@ The <code>undo</code> command fails as there are no undoable commands executed p
 </td>
 <td class="content">
 <div class="paragraph">
-<p>Undoable commands: those commands that modify CHRS content.
-For commands similar functions to (list*, select*, calculate*, the command will not be able to undo or redo)</p>
+<p>Redoable commands: those commands that modify CHRS content.
+For commands similar functions to<br>
+(list*, find*, filter*, select*, calculate*)
+the command will not be able to undo or redo.</p>
 </div>
 </td>
 </tr>
@@ -1338,6 +1342,51 @@ There is no need to save manually.</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">erp</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">add Schedule Command</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">addSchedule</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">as</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">delete Schedule Command</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">deleteSchedule</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ds</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Add Works Schedule Command</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">addWorks</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">aw</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Delete Works Schedule Command</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">deleteWorks</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">dw</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Add Leaves Schedule Command</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">addLeaves</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">al</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Delete Leaves Schedule Command</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">deleteLeaves</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">dl</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Calculate Leaves Command</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">calculateLeaves</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">cl</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Clear Schedules Command</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">clearSchedules</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">cs</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Select Schedule Command</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">selectSchedule</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ss</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">View all available functions or commands</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">help</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
@@ -1345,11 +1394,6 @@ There is no need to save manually.</p>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Locating an employee by name</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">find</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Approve of reject leave/off:</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">leaveRequest</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
 </tr>
 <tr>
@@ -1385,4 +1429,4 @@ There is no need to save manually.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-01 02:26:01 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-01 02:37:35 UTC</div></div></div></body></html>
