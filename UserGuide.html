@@ -388,6 +388,9 @@ Any usage of <code>add</code> command that will result in duplicated employeeId 
 <div class="paragraph">
 <p>Edit an existing employee’s data in CHRS.</p>
 </div>
+<div class="paragraph">
+<p>Format: <code>edit INDEX [n/NAME] [p/PHONE_NUMBER] [a/ADDRESS] [e/EMAIL] [d/DEPARTMENT] [r/POSITION]</code></p>
+</div>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -395,13 +398,10 @@ Any usage of <code>add</code> command that will result in duplicated employeeId 
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-Format: <code>edit INDEX [n/NAME] [p/PHONE_NUMBER] [a/ADDRESS] [e/EMAIL] [d/DEPARTMENT] [r/POSITION]</code>
+Include at least one field alongside the INDEX. The existing values of the employee will be updated to the input values.
 </td>
 </tr>
 </table>
-</div>
-<div class="paragraph">
-<p>Include at least one field alongside the INDEX. The existing values of the employee will be updated to the input values.</p>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -529,7 +529,9 @@ Any usage of <code>filter</code> command that results in the same prefix appeari
 <div class="sect2">
 <h3 id="delete-an-employee-s-data-code-delete-code"><a class="link" href="#delete-an-employee-s-data-code-delete-code">4.5. Delete an employee’s data : <code>delete</code></a></h3>
 <div class="paragraph">
-<p>Deletes the specified employee from the CHRS.</p>
+<p>Deletes the specified employee from the CHRS.
+All existing schedules or expenses with the same employee id will be
+deleted as well.</p>
 </div>
 <div class="paragraph">
 <p>Format: <code>delete INDEX</code></p>
@@ -794,6 +796,30 @@ Adds a new schedule for employee id 000001, date 03/03/2019, to be on leave for 
 </li>
 </ul>
 </div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Scheduling with a employee id that doesn&#8217;t exist in the address book will be rejected.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Exact duplicate schedules will be rejected.
+</td>
+</tr>
+</table>
+</div>
 </div>
 <div class="sect2">
 <h3 id="delete-an-existing-schedule-code-deleteschedule-code"><a class="link" href="#delete-an-existing-schedule-code-deleteschedule-code">4.14. Delete an existing schedule : <code>deleteSchedule</code></a></h3>
@@ -828,12 +854,6 @@ All observable employees in the employees list pane will be scheduled work sched
 with date specified by the user.</p>
 </div>
 <div class="paragraph">
-<p>For those employees whom are not scheduled with the date, the command will
-create a new schedule. When all employees are scheduled with the date,
-the command will tell the user that every observable employees in the list
-have been scheduled with the specified date.</p>
-</div>
-<div class="paragraph">
 <p>Format: <code>addWorks d/DATE [d/DATE]&#8230;&#8203;</code> or <code>aw d/DATE [d/DATE]&#8230;&#8203;</code></p>
 </div>
 <div class="paragraph">
@@ -853,6 +873,21 @@ date 02/02/2019 and 03/03/2019, to work on that day.</p>
 </li>
 </ul>
 </div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+For those employees whom are not scheduled with the date, the command will
+create a new schedule. When all employees are scheduled with the date,
+the command will tell the user that every observable employees in the list
+have been scheduled with the specified date.
+</td>
+</tr>
+</table>
+</div>
 </div>
 <div class="sect2">
 <h3 id="delete-multiple-work-schedules-code-deleteworks-code"><a class="link" href="#delete-multiple-work-schedules-code-deleteworks-code">4.16. Delete multiple work schedules : <code>deleteWorks</code></a></h3>
@@ -861,12 +896,6 @@ date 02/02/2019 and 03/03/2019, to work on that day.</p>
 Use <code>find</code> / <code>filter</code> / <code>list</code> to get the desired employees you wish to schedule.
 All observable employees in the employees list pane will be deleted work schedules
 with date specified by the user.</p>
-</div>
-<div class="paragraph">
-<p>For those employees are scheduled with the date, the command will
-delete the work schedule. When all employees are deleted with the scheduled date,
-the command will tell the user every observable employees in the list does not have work schedule
-on the specified date.</p>
 </div>
 <div class="paragraph">
 <p>Format: <code>deleteWorks d/DATE [d/DATE]&#8230;&#8203;</code> or <code>dw d/DATE [d/DATE]&#8230;&#8203;</code></p>
@@ -888,6 +917,21 @@ date 02/02/2019 and 03/03/2019, with work on that day.</p>
 </li>
 </ul>
 </div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+For those employees are scheduled with the date, the command will
+delete the work schedule. When all employees are deleted with the scheduled date,
+the command will tell the user every observable employees in the list does not have work schedule
+on the specified date.
+</td>
+</tr>
+</table>
+</div>
 </div>
 <div class="sect2">
 <h3 id="add-multiple-leave-schedules-code-addleaves-code"><a class="link" href="#add-multiple-leave-schedules-code-addleaves-code">4.17. Add multiple leave schedules : <code>addLeaves</code></a></h3>
@@ -896,12 +940,6 @@ date 02/02/2019 and 03/03/2019, with work on that day.</p>
 Use <code>find</code> / <code>filter</code> / <code>list</code> to get the desired employees you wish to schedule.
 All observable employees in the employees list pane will be scheduled
 with leave and date specified by the user.</p>
-</div>
-<div class="paragraph">
-<p>For those employees whom are not scheduled with the date, the command will
-create a new leave schedule. When all employees are scheduled with the date,
-the command will tell the user that every observable employees in the list
-have been scheduled with the specified date.</p>
 </div>
 <div class="paragraph">
 <p>Format: <code>addLeaves d/DATE [d/DATE]&#8230;&#8203;</code> or <code>al d/DATE [d/DATE]&#8230;&#8203;</code></p>
@@ -923,6 +961,21 @@ date 02/02/2019 and 03/03/2019, to be on leave on that day.</p>
 </li>
 </ul>
 </div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+For those employees whom are not scheduled with the date, the command will
+create a new leave schedule. When all employees are scheduled with the date,
+the command will tell the user that every observable employees in the list
+have been scheduled with the specified date.
+</td>
+</tr>
+</table>
+</div>
 </div>
 <div class="sect2">
 <h3 id="delete-multiple-leave-schedules-code-deleteleaves-code"><a class="link" href="#delete-multiple-leave-schedules-code-deleteleaves-code">4.18. Delete multiple leave schedules : <code>deleteLeaves</code></a></h3>
@@ -931,12 +984,6 @@ date 02/02/2019 and 03/03/2019, to be on leave on that day.</p>
 Use <code>find</code> / <code>filter</code> / <code>list</code> to get the desired employees you wish to schedule.
 All observable employees in the employees list pane will be deleted leave schedules
 with date specified by the user.</p>
-</div>
-<div class="paragraph">
-<p>For those employees whom are scheduled with the date, the command will
-delete the schedule. When all employees are deleted with the scheduled date,
-the command will tell the user every observable employees in the list does not have leave schedule
-on the specified date.</p>
 </div>
 <div class="paragraph">
 <p>Format: <code>deleteLeaves d/DATE [d/DATE]&#8230;&#8203;</code> or <code>dl d/DATE [d/DATE]&#8230;&#8203;</code></p>
@@ -957,6 +1004,21 @@ Deletes schedules for all observable employees in the employees list panel with.
 date 02/02/2019 and 03/03/2019, with leave on that day.</p>
 </li>
 </ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+For those employees whom are scheduled with the date, the command will
+delete the schedule. When all employees are deleted with the scheduled date,
+the command will tell the user every observable employees in the list does not have leave schedule
+on the specified date.
+</td>
+</tr>
+</table>
 </div>
 </div>
 <div class="sect2">
@@ -1023,7 +1085,7 @@ Select the schedule with the index of '1'</p>
 <ul>
 <li>
 <p><code>clearSchedule</code><br>
-Select the entire Schedule List.</p>
+Clear the entire Schedule List.</p>
 </li>
 </ul>
 </div>
@@ -1238,23 +1300,6 @@ A UserGuide popup window will appear for the user.
 <div class="paragraph">
 <p>Format: <code>undo</code></p>
 </div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-<div class="paragraph">
-<p>Undoable commands: those commands that modify CHRS content.
-For commands similar functions to<br>
-(list*, find*, filter*, select*, calculate*)
-the command will not be able to undo or redo).</p>
-</div>
-</td>
-</tr>
-</table>
-</div>
 <div class="paragraph">
 <p>Examples:</p>
 </div>
@@ -1279,15 +1324,6 @@ The <code>undo</code> command fails as there are no undoable commands executed p
 </li>
 </ul>
 </div>
-</div>
-<div class="sect2">
-<h3 id="redoing-the-previously-undone-command-code-redo-code"><a class="link" href="#redoing-the-previously-undone-command-code-redo-code">4.31. Redoing the previously undone command : <code>redo</code></a></h3>
-<div class="paragraph">
-<p>Reverses the most recent <code>undo</code> command.</p>
-</div>
-<div class="paragraph">
-<p>Format: <code>redo</code></p>
-</div>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -1296,14 +1332,23 @@ The <code>undo</code> command fails as there are no undoable commands executed p
 </td>
 <td class="content">
 <div class="paragraph">
-<p>Redoable commands: those commands that modify CHRS content.
+<p>Undoable commands: those commands that modify CHRS content.
 For commands similar functions to<br>
 (list*, find*, filter*, select*, calculate*)
-the command will not be able to undo or redo.</p>
+the command will not be able to undo or redo).</p>
 </div>
 </td>
 </tr>
 </table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="redoing-the-previously-undone-command-code-redo-code"><a class="link" href="#redoing-the-previously-undone-command-code-redo-code">4.31. Redoing the previously undone command : <code>redo</code></a></h3>
+<div class="paragraph">
+<p>Reverses the most recent <code>undo</code> command.</p>
+</div>
+<div class="paragraph">
+<p>Format: <code>redo</code></p>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -1329,6 +1374,23 @@ The <code>redo</code> command fails as there are no <code>undo</code> commands e
 <code>redo</code> (reapplies the <code>clear</code> command)<br></p>
 </li>
 </ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Redoable commands: those commands that modify CHRS content.
+For commands similar functions to<br>
+(list*, find*, filter*, select*, calculate*)
+the command will not be able to undo or redo.</p>
+</div>
+</td>
+</tr>
+</table>
 </div>
 </div>
 <div class="sect2">
@@ -1579,4 +1641,4 @@ There is no need to save manually.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-01 16:08:46 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-01 16:10:23 UTC</div></div></div></body></html>

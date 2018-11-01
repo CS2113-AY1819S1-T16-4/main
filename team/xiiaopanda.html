@@ -146,23 +146,6 @@ CHRS is capable of checking work schedule, creating recruitment posts, checking 
 <div class="paragraph">
 <p>Format: <code>undo</code></p>
 </div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-<div class="paragraph">
-<p>Undoable commands: those commands that modify CHRS content.
-For commands similar functions to<br>
-(list*, find*, filter*, select*, calculate*)
-the command will not be able to undo or redo).</p>
-</div>
-</td>
-</tr>
-</table>
-</div>
 <div class="paragraph">
 <p>Examples:</p>
 </div>
@@ -187,15 +170,6 @@ The <code>undo</code> command fails as there are no undoable commands executed p
 </li>
 </ul>
 </div>
-</div>
-<div class="sect2">
-<h3 id="redoing-the-previously-undone-command-code-redo-code"><a class="link" href="#redoing-the-previously-undone-command-code-redo-code">Redoing the previously undone command : <code>redo</code></a></h3>
-<div class="paragraph">
-<p>Reverses the most recent <code>undo</code> command.</p>
-</div>
-<div class="paragraph">
-<p>Format: <code>redo</code></p>
-</div>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -204,14 +178,23 @@ The <code>undo</code> command fails as there are no undoable commands executed p
 </td>
 <td class="content">
 <div class="paragraph">
-<p>Redoable commands: those commands that modify CHRS content.
+<p>Undoable commands: those commands that modify CHRS content.
 For commands similar functions to<br>
 (list*, find*, filter*, select*, calculate*)
-the command will not be able to undo or redo.</p>
+the command will not be able to undo or redo).</p>
 </div>
 </td>
 </tr>
 </table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="redoing-the-previously-undone-command-code-redo-code"><a class="link" href="#redoing-the-previously-undone-command-code-redo-code">Redoing the previously undone command : <code>redo</code></a></h3>
+<div class="paragraph">
+<p>Reverses the most recent <code>undo</code> command.</p>
+</div>
+<div class="paragraph">
+<p>Format: <code>redo</code></p>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -237,6 +220,23 @@ The <code>redo</code> command fails as there are no <code>undo</code> commands e
 <code>redo</code> (reapplies the <code>clear</code> command)<br></p>
 </li>
 </ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Redoable commands: those commands that modify CHRS content.
+For commands similar functions to<br>
+(list*, find*, filter*, select*, calculate*)
+the command will not be able to undo or redo.</p>
+</div>
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
@@ -465,4 +465,4 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-01 16:08:46 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-01 16:10:23 UTC</div></div></div></body></html>
