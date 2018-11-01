@@ -20,8 +20,8 @@
 <li><a href="#editing-an-employee-s-data-code-edit-code">4.4. Editing an employee’s data: <code>edit</code></a></li>
 <li><a href="#deleting-an-employee-s-data-code-delete-code">4.5. Deleting an Employee’s Data: <code>delete</code></a></li>
 <li><a href="#select-recruitment-posts-code-selectperson-code">4.6. Select recruitment posts: <code>selectPerson</code></a></li>
-<li><a href="#modify-employee-s-salary-bonus-code-modifypay-code">4.7. Modify Employee’s Salary/Bonus: <code>modifyPay</code></a></li>
-<li><a href="#modify-employee-s-salary-bonus-code-modifyallpay-code">4.8. Modify Employee’s Salary/Bonus: <code>modifyAllPay</code></a></li>
+<li><a href="#modify-the-salary-and-or-bonus-of-an-employee-code-modifypay-code">4.7. Modify the Salary and/or Bonus of an employee: <code>modifyPay</code></a></li>
+<li><a href="#modify-the-salary-and-or-bonus-all-listed-employee-s-code-modifyallpay-code">4.8. Modify the Salary and/or Bonus all listed employee(s): <code>modifyAllPay</code></a></li>
 <li><a href="#add-expenses-code-addexpenses-code">4.9. Add expenses: <code>addExpenses</code></a></li>
 <li><a href="#remove-expenses-code-deleteexpenses-code">4.10. Remove expenses: <code>deleteExpenses</code></a></li>
 <li><a href="#clear-recruitment-posts-code-clearexpenses-code">4.11. Clear recruitment posts: <code>clearExpenses</code></a></li>
@@ -512,15 +512,24 @@ Select the person with the index of '1' in th list.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="modify-employee-s-salary-bonus-code-modifypay-code"><a class="link" href="#modify-employee-s-salary-bonus-code-modifypay-code">4.7. Modify Employee’s Salary/Bonus: <code>modifyPay</code></a></h3>
+<h3 id="modify-the-salary-and-or-bonus-of-an-employee-code-modifypay-code"><a class="link" href="#modify-the-salary-and-or-bonus-of-an-employee-code-modifypay-code">4.7. Modify the Salary and/or Bonus of an employee: <code>modifyPay</code></a></h3>
 <div class="paragraph">
-<p>Modify the salary/bonus of the employee identified by the index.</p>
+<p>Modify the Salary and/or Bonus of the employee identified by the index.</p>
 </div>
 <div class="paragraph">
 <p>Format: <code>modifyPay INDEX [s/SALARY] [b/BONUS]</code></p>
 </div>
-<div class="paragraph">
-<p>At least one of either Salary or Bonus must be included.</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+At least one of either Salary or Bonus must be included.
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -529,29 +538,38 @@ Select the person with the index of '1' in th list.</p>
 <ul>
 <li>
 <p><code>modifyPay 1 s/300</code><br>
-Modify the salary of employee with index '1' with 300 increment</p>
+Modify the Salary of employee with index '1' with 300 increment</p>
 </li>
 <li>
 <p><code>modifyPay 2 b/2</code><br>
-Modify the bonus of employee with index '2' to 2 months of the salary</p>
+Modify the Bonus of employee with index '2' to 2 months of the salary</p>
 </li>
 <li>
 <p><code>modifyPay 3 s/%5 b/1</code><br>
-Increase the salary of employee with index '3' by 5% and bonus to 1 month of salary</p>
+Increase the Salary of employee with index '3' by 5% and Bonus to 1 month of salary</p>
 </li>
 </ul>
 </div>
 </div>
 <div class="sect2">
-<h3 id="modify-employee-s-salary-bonus-code-modifyallpay-code"><a class="link" href="#modify-employee-s-salary-bonus-code-modifyallpay-code">4.8. Modify Employee’s Salary/Bonus: <code>modifyAllPay</code></a></h3>
+<h3 id="modify-the-salary-and-or-bonus-all-listed-employee-s-code-modifyallpay-code"><a class="link" href="#modify-the-salary-and-or-bonus-all-listed-employee-s-code-modifyallpay-code">4.8. Modify the Salary and/or Bonus all listed employee(s): <code>modifyAllPay</code></a></h3>
 <div class="paragraph">
-<p>Modify the salary/bonus of all the employee(s) shown on the display list.</p>
+<p>Modify the Salary and/or Bonus of all the employee(s) shown on the display list.</p>
 </div>
 <div class="paragraph">
 <p>Format: <code>modifyAllPay [s/SALARY] [b/BONUS]</code></p>
 </div>
-<div class="paragraph">
-<p>At least one of either Salary or Bonus must be included.</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+At least one of either Salary or Bonus must be included.
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -560,15 +578,15 @@ Increase the salary of employee with index '3' by 5% and bonus to 1 month of sal
 <ul>
 <li>
 <p><code>modifyAllPay s/300</code><br>
-Modify the salary of all the employee(s) shown on display list by increment of 300</p>
+Modify the Salary of all the listed employee(s) by increment of 300</p>
 </li>
 <li>
 <p><code>modifyAllPay  b/2</code><br>
-Modify the bonus of all the employee(s) shown on display list to 1 month of their salary</p>
+Modify the Bonus of all the listed employee(s) to 1 month of their salary</p>
 </li>
 <li>
 <p><code>modifyAllPay s/%5 b/1</code><br>
-Modify the salary of all employee(s) shown on display list by 5% increment and bonus to 1 month of salary</p>
+Modify the Salary of all the listed employee(s) by 5% increment and Bonus to 1 month of salary</p>
 </li>
 </ul>
 </div>
@@ -1437,12 +1455,12 @@ There is no need to save manually.</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">sp</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Modify an employee&#8217;s salary and/or bonus</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Modify the Salary and/or Bonus of an employee</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">modifyPay</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">mp</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Modify either the salary and/or bonus of all listed employees</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Modify the Salary and/or Bonus all listed employee(s)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">modifyAllPay</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">map</p></td>
 </tr>
@@ -1579,4 +1597,4 @@ There is no need to save manually.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-01 10:24:38 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-01 10:44:26 UTC</div></div></div></body></html>
