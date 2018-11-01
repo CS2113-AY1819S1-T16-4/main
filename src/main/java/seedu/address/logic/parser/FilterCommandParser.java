@@ -24,9 +24,7 @@ public class FilterCommandParser {
 
     public static final List<String> ACCEPTED_ORDERS = new ArrayList<>(Arrays.asList(FilterCommand.ASCENDING,
             FilterCommand.DESCENDING));
-
-    private char firstPrefix;
-    private char secondPrefix;
+    private final int INDEX_ONE = 0;
 
     /**
      * Parses the given {@code String} of arguments in the context of the FilterCommand
@@ -37,18 +35,9 @@ public class FilterCommandParser {
         requireNonNull(args);
 
         String trimmedArgs = args.trim().toLowerCase();
-        String[] trimmedArgsSplit = trimmedArgs.split("\\s");
-        String sortOrder = trimmedArgsSplit[0];
+        String sortOrder = trimmedArgs.split("\\s")[INDEX_ONE];
 
-        if (trimmedArgsSplit.length >= 3) {
-            String firstArg = trimmedArgsSplit[1];
-            firstPrefix = firstArg.charAt(0);
-            String secondArg = trimmedArgsSplit[2];
-            secondPrefix = secondArg.charAt(0);
-        }
-
-        if (!ACCEPTED_ORDERS.contains(sortOrder) || trimmedArgsSplit.length > 3
-                || (trimmedArgsSplit.length == 3 && (firstPrefix == secondPrefix))) {
+        if (!ACCEPTED_ORDERS.contains(sortOrder)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
         }
 
@@ -71,12 +60,14 @@ public class FilterCommandParser {
         if (argMultimap.getValue(PREFIX_DEPARTMENT).isPresent()) {
             trimmedDepartment = (argMultimap.getValue(PREFIX_DEPARTMENT).get()).trim();
             departmentKeywords = trimmedDepartment.split("\\s+");
-            if (areDepartmentKeywordsValid(departmentKeywords)) {
+            if (!didPrefixAppearOnlyOnce(trimmedArgs, PREFIX_DEPARTMENT.toString())) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
+            } else if (!areDepartmentKeywordsValid(departmentKeywords)) {
+                throw new ParseException(Department.MESSAGE_DEPARTMENT_KEYWORD_CONSTRAINTS);
+            }else if (areDepartmentKeywordsValid(departmentKeywords)) {
                 filterCommand.setIsDepartmentPrefixPresent(true);
                 filterCommand.setDepartmentPredicate(new DepartmentContainsKeywordsPredicate(Arrays
                         .asList(departmentKeywords)));
-            } else if (!areDepartmentKeywordsValid(departmentKeywords)) {
-                throw new ParseException(Department.MESSAGE_DEPARTMENT_KEYWORD_CONSTRAINTS);
             }
         } else if (!argMultimap.getValue(PREFIX_DEPARTMENT).isPresent()) {
             filterCommand.setIsDepartmentPrefixPresent(false);
@@ -85,12 +76,14 @@ public class FilterCommandParser {
         if (argMultimap.getValue(PREFIX_POSITION).isPresent()) {
             trimmedPosition = (argMultimap.getValue(PREFIX_POSITION).get()).trim();
             positionKeywords = trimmedPosition.split("\\s+");
-            if (arePositionKeywordsValid(positionKeywords)) {
+            if (!didPrefixAppearOnlyOnce(trimmedArgs, PREFIX_POSITION.toString())) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
+            } else if (!arePositionKeywordsValid(positionKeywords)) {
+                throw new ParseException(Position.MESSAGE_POSITION_KEYWORD_CONSTRAINTS);
+            } else if (arePositionKeywordsValid(positionKeywords)) {
                 filterCommand.setIsPositionPrefixPresent(true);
                 filterCommand.setPositionPredicate(new PositionContainsKeywordsPredicate(Arrays
                         .asList(positionKeywords)));
-            } else if (!arePositionKeywordsValid(positionKeywords)) {
-                throw new ParseException(Position.MESSAGE_POSITION_KEYWORD_CONSTRAINTS);
             }
         } else if (!argMultimap.getValue(PREFIX_POSITION).isPresent()) {
             filterCommand.setIsPositionPrefixPresent(false);
@@ -124,6 +117,9 @@ public class FilterCommandParser {
     }
 
     /**
-     *
+     * Checks whether prefixes appeared more than once within the argument
      */
+    public boolean didPrefixAppearOnlyOnce(String argument, String prefix) {
+        return argument.indexOf(prefix) == argument.lastIndexOf(prefix);
+    }
 }
