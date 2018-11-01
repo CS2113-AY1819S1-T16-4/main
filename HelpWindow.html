@@ -14,12 +14,12 @@
 <li><a href="#Fields">3. Fields</a></li>
 <li><a href="#Features">4. Features</a>
 <ul class="sectlevel2">
-<li><a href="#filtering-employee-s-data-code-filter-code">4.1. Filtering employee&#8217;s data: <code>filter</code></a></li>
+<li><a href="#filtering-and-listing-of-specific-employee-s-data-code-filter-code">4.1. Filtering and listing of specific employee&#8217;s data: <code>filter</code></a></li>
 <li><a href="#adding-employee-s-data-code-add-code">4.2. Adding employee&#8217;s data: <code>add</code></a></li>
-<li><a href="#listing-all-persons-code-list-code">4.3. Listing all persons : <code>list</code></a></li>
+<li><a href="#listing-all-employees-code-list-code">4.3. Listing all employees : <code>list</code></a></li>
 <li><a href="#editing-an-employee-s-data-code-edit-code">4.4. Editing an employee’s data: <code>edit</code></a></li>
-<li><a href="#deleting-an-employee-s-data-code-delete-code">4.5. Deleting an Employee’s Data: <code>delete</code></a></li>
-<li><a href="#select-recruitment-posts-code-selectperson-code">4.6. Select recruitment posts: <code>selectPerson</code></a></li>
+<li><a href="#deleting-an-employee-s-data-code-delete-code">4.5. Deleting an employee’s data: <code>delete</code></a></li>
+<li><a href="#selecting-an-employee-code-selectperson-code">4.6. Selecting an employee : <code>selectPerson</code></a></li>
 <li><a href="#modify-the-salary-and-or-bonus-of-an-employee-code-modifypay-code">4.7. Modify the Salary and/or Bonus of an employee: <code>modifyPay</code></a></li>
 <li><a href="#modify-the-salary-and-or-bonus-all-listed-employee-s-code-modifyallpay-code">4.8. Modify the Salary and/or Bonus all listed employee(s): <code>modifyAllPay</code></a></li>
 <li><a href="#add-expenses-claims-under-a-specific-employee-code-addexpenses-code">4.9. Add expenses claims under a specific employee: <code>addExpenses</code></a></li>
@@ -139,42 +139,44 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Employee Id</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">id/</p></td>
-<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Employee Id should only contain exactly 6 numbers</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Name</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">n/</p></td>
-<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Name should only contain alphabets and spaces and it should be at least 3 characters long</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Date of Birth</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">dob/</p></td>
-<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Date Of Birth should be in the format of DD/MM/YYYY and it only allows dates from 01/01/1900 to 31/12/2002</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Phone Number</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">p/</p></td>
-<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Phone numbers should only contain numbers and it should be at least 3 digits long</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Email</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">e/</p></td>
-<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Email should be in the format of local-part@domain.<br>
+The local-part should only contain alphanumeric characters and these special characters except the quotations("): "!#$%&amp;'*+/=?`{|}~^.-".<br>
+The domain name part must start and end with alphanumeric characters, be at least 2 characters long and it should only contain alphanumeric characters and these special characters except the quotations("): ".-"</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Department</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">d/</p></td>
-<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Department should only contain alphabets and spaces and it should be within 2 to 30 characters long</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Position/Rank</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">r/</p></td>
-<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Position/Rank should only contain alphabets and spaces and it should be within 2 to 30 characters long</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Address</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">a/</p></td>
-<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Address can take in any values without limitations</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Salary</p></td>
@@ -343,15 +345,24 @@ are not allowed to exceed the character limit which is from 1 to 200.</p></td>
 </div>
 </div>
 <div class="sect2">
-<h3 id="filtering-employee-s-data-code-filter-code"><a class="link" href="#filtering-employee-s-data-code-filter-code">4.1. Filtering employee&#8217;s data: <code>filter</code></a></h3>
+<h3 id="filtering-and-listing-of-specific-employee-s-data-code-filter-code"><a class="link" href="#filtering-and-listing-of-specific-employee-s-data-code-filter-code">4.1. Filtering and listing of specific employee&#8217;s data: <code>filter</code></a></h3>
 <div class="paragraph">
-<p>Filters the employee list by their department and/or position in ascending or descending name order.</p>
+<p>Filters the employee list by their department and/or position and list the employees that is part of the specified department and/or position in ascending or descending name order.</p>
 </div>
 <div class="paragraph">
-<p>Format: <code>filter ORDER d/DEPARTMENT r/POSITION</code></p>
+<p>Format: <code>filter ORDER [d/DEPARTMENT] [r/POSITION]</code></p>
 </div>
-<div class="paragraph">
-<p>Include either department or position or both, at least one of the field must be included alongside the sort order.</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Include either department or position or both, at least one of the field must be included alongside the sort order.
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -360,11 +371,11 @@ are not allowed to exceed the character limit which is from 1 to 200.</p></td>
 <ul>
 <li>
 <p><code>filter asc d/Human Resource r/Manager</code><br>
-Search for and show all instances whereby employee are from the Human Resource department and have the position of Manager</p>
+List all employees from the Human Resource department and have the position of Manager</p>
 </li>
 <li>
-<p><code>filter dsc d/Finance</code>
-Search for and show all instances whereby employee are from the Finance department</p>
+<p><code>filter dsc d/Finance</code><br>
+List all employees from the Finance department</p>
 </li>
 </ul>
 </div>
@@ -390,7 +401,7 @@ Any usage of <code>filter</code> command that results in the same prefix appeari
 <p>Adds employee&#8217;s data to the database</p>
 </div>
 <div class="paragraph">
-<p>Format: <code>add id/EMPLOYEEID n/NAME dob/DATE_OF_BIRTH p/PHONE_NUMBER e/EMAIL d/DEPARTMENT r/POSITION a/ADDRESS s/SALARY t/TAGS</code></p>
+<p>Format: <code>add id/EMPLOYEEID n/NAME dob/DATE_OF_BIRTH p/PHONE_NUMBER e/EMAIL d/DEPARTMENT r/POSITION a/ADDRESS s/SALARY t/[TAGS]&#8230;&#8203;</code></p>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -407,21 +418,6 @@ Adds an employee with the fields listed above</p>
 </li>
 </ul>
 </div>
-<div class="paragraph">
-<p>Mandatory fields: EmployeeId, Name, Date of Birth, Phone number, Email, Department, Position, Address, Salary</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-DATE_OF_BIRTH must be a valid date in the calendar [DD/MM/YY]. You are only allowed to input dates from 01/01/1990 till 31/12/2002.
-</td>
-</tr>
-</table>
-</div>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -436,7 +432,7 @@ Any usage of <code>add</code> command that will result in duplicated employeeId 
 </div>
 </div>
 <div class="sect2">
-<h3 id="listing-all-persons-code-list-code"><a class="link" href="#listing-all-persons-code-list-code">4.3. Listing all persons : <code>list</code></a></h3>
+<h3 id="listing-all-employees-code-list-code"><a class="link" href="#listing-all-employees-code-list-code">4.3. Listing all employees : <code>list</code></a></h3>
 <div class="paragraph">
 <p>Shows a list of all employees, schedules, recruitment posts and expenses claims in CHRS.</p>
 </div>
@@ -453,7 +449,7 @@ Any usage of <code>add</code> command that will result in duplicated employeeId 
 <p>Format: <code>edit INDEX [n/NAME] [p/PHONE_NUMBER] [a/ADDRESS] [e/EMAIL] [d/DEPARTMENT] [r/POSITION]</code></p>
 </div>
 <div class="paragraph">
-<p>Existing values will be updated to the input values.</p>
+<p>Include at least one field alongside the INDEX. The existing values of the employee will be updated to the input values.</p>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -462,12 +458,9 @@ Any usage of <code>add</code> command that will result in duplicated employeeId 
 <ul>
 <li>
 <p><code>edit 1 p/98765432 d/HR r/Manager</code><br>
-Edits person at index 1 to have the new input of phone, department and position</p>
+Edits employee at index 1 to have the new input of phone, department and position</p>
 </li>
 </ul>
-</div>
-<div class="paragraph">
-<p>Available fields: Name, Phone number, Email, Department, Position, Address</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -476,14 +469,14 @@ Edits person at index 1 to have the new input of phone, department and position<
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-Any usage of <code>edit</code> command that will result in duplicated phone number or email will be rejected. Additionally, usage of this command to edit a person&#8217;s name to be the same as another person who has the same date of birth will be rejected.
+Any usage of <code>edit</code> command that will result in duplicated phone number or email will be rejected. Additionally, usage of this command to edit an employee&#8217;s name to be the same as another employee who has the same date of birth will be rejected.
 </td>
 </tr>
 </table>
 </div>
 </div>
 <div class="sect2">
-<h3 id="deleting-an-employee-s-data-code-delete-code"><a class="link" href="#deleting-an-employee-s-data-code-delete-code">4.5. Deleting an Employee’s Data: <code>delete</code></a></h3>
+<h3 id="deleting-an-employee-s-data-code-delete-code"><a class="link" href="#deleting-an-employee-s-data-code-delete-code">4.5. Deleting an employee’s data: <code>delete</code></a></h3>
 <div class="paragraph">
 <p>Deletes the specified employee from the CHRS.</p>
 </div>
@@ -503,9 +496,9 @@ Deletes the employee with the index of '4' in the list.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="select-recruitment-posts-code-selectperson-code"><a class="link" href="#select-recruitment-posts-code-selectperson-code">4.6. Select recruitment posts: <code>selectPerson</code></a></h3>
+<h3 id="selecting-an-employee-code-selectperson-code"><a class="link" href="#selecting-an-employee-code-selectperson-code">4.6. Selecting an employee : <code>selectPerson</code></a></h3>
 <div class="paragraph">
-<p>Select a person on person list index ID. User could use command_alias: 'sp'.</p>
+<p>Select an employee based on employee list&#8217;s index ID.</p>
 </div>
 <div class="paragraph">
 <p>Format: <code>selectPerson INDEX</code> or <code>sp INDEX</code></p>
@@ -517,7 +510,7 @@ Deletes the employee with the index of '4' in the list.</p>
 <ul>
 <li>
 <p><code>selectPerson 1</code><br>
-Select the person with the index of '1' in th list.</p>
+Select the employee with the index of '1' in the list.</p>
 </li>
 </ul>
 </div>
@@ -1242,7 +1235,7 @@ company server' or 'editRecruitmentPost 1 jp/IT Manager me/3 jd/To maintain the 
 <div class="sect2">
 <h3 id="locating-persons-by-name-or-employee-id-code-find-code"><a class="link" href="#locating-persons-by-name-or-employee-id-code-find-code">4.27. Locating persons by name or employee ID: <code>find</code></a></h3>
 <div class="paragraph">
-<p>Find the employee name whose name contains the input or find the employee ID that matches the input.</p>
+<p>Find the employee&#8217;s Name whose name contains the input or find the Employee Id that matches the input.</p>
 </div>
 <div class="paragraph">
 <p>Format: <code>find [NAME] [EMPLOYEEID]</code></p>
@@ -1254,7 +1247,7 @@ company server' or 'editRecruitmentPost 1 jp/IT Manager me/3 jd/To maintain the 
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-Include only one of the fields, either name or employee ID.
+Include only one of the fields, either Name or Employee Id.
 </td>
 </tr>
 </table>
@@ -1508,12 +1501,12 @@ There is no need to save manually.</p>
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Filter the employee list and only display selected fields.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Filtering and listing of specific employee&#8217;s data.</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">filter</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Adds a new employee’s data</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Adding employee’s data</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">add</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
 </tr>
@@ -1523,7 +1516,7 @@ There is no need to save manually.</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Edit an existing employee&#8217;s data</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Editing an existing employee&#8217;s data</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">edit</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
 </tr>
@@ -1533,7 +1526,7 @@ There is no need to save manually.</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Select an employee within the listing</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Selecting an employee</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">selectPerson</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">sp</p></td>
 </tr>
@@ -1643,7 +1636,7 @@ There is no need to save manually.</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Locating an employee by name or by employee ID</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Locating employee(s) by name or employee ID</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">find</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
 </tr>
@@ -1658,7 +1651,7 @@ There is no need to save manually.</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Redoing previous command</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Redoing the previously undone command</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">redo</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
 </tr>
@@ -1680,4 +1673,4 @@ There is no need to save manually.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-01 11:19:46 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-01 11:28:00 UTC</div></div></div></body></html>
