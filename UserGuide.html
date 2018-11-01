@@ -298,8 +298,8 @@ Minimum 1 digit</p></td>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Job Position</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">jp/</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Job position must not be blank and should not include numbers and punctuation mark. And users are
-not allowed to exceed the character limit which is from 1 to 20.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Job position accepts only characters. It must not be blank and should not include numbers and
+punctuation mark. And users are not allowed to exceed the character limit which is from 1 to 20.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Minimal Years of Working Experience</p></td>
@@ -310,8 +310,9 @@ not allowed to exceed the character limit which is from 1 to 20.</p></td>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Job description</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">jd/</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Job description must not be blank and should not include numbers and punctuation mark. And users
-are not allowed to exceed the character limit which is from 1 to 200.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Job description accepts only characters. It must not be blank and should not include numbers.
+Punctuation mark only allows comma, full stop, and single right quote. And users are not allowed to exceed the character
+limit which is from 1 to 200.</p></td>
 </tr>
 </tbody>
 </table>
@@ -1074,7 +1075,8 @@ Duplicate recruitment posts are allowed for the need of multiple posts with same
 <p>Edit a recruitment post based on its index no.</p>
 </div>
 <div class="paragraph">
-<p>Format: <code>editRecruitmentPost [Index]</code> or <code>erp [Index]</code></p>
+<p>Format: <code>editRecruitmentPost [Index] jp/JOB POSITION me/MINIMAL YEARS OF WORKING EXPERIENCE jd/JOB DESCRIPTION</code>
+or <code>erp [Index] jp/JOB POSITION me/MINIMAL YEARS OF WORKING EXPERIENCE jd/JOB DESCRIPTION</code></p>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -1104,8 +1106,9 @@ server.</p>
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-Duplicate edition detects only when user input 'erp [index] jp/Job Position'. For this case, the duplicate job position
-will be checked.
+Duplicate edited recruitment posts will be detected only when user edit job position only.
+E.g.'erp [index] jp/Job Position'. For this case, the duplicate job position will be checked to not duplicate the
+job title with selected post&#8217;s existing job position.
 </td>
 </tr>
 </table>
@@ -1117,7 +1120,8 @@ will be checked.
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-Duplicate edition won&#8217;t be detected when user input full command 'erp 1 jp/IT Manager me/3 jd/To maintain the
+Duplicate edited recruitment posts won&#8217;t be detected when user input full command.
+E.g. 'erp 1 jp/IT Manager me/3 jd/To maintain the
 company server' or 'editRecruitmentPost 1 jp/IT Manager me/3 jd/To maintain the company server'
 </td>
 </tr>
@@ -1185,7 +1189,7 @@ Deletes the recruitment post with the index of '1'</p>
 <div class="sect2">
 <h3 id="view-all-available-functions-or-commands-code-help-code"><a class="link" href="#view-all-available-functions-or-commands-code-help-code">4.28. View all available functions or commands : <code>help</code></a></h3>
 <div class="paragraph">
-<p>Views all the fucntions and commands that the CHRS have.</p>
+<p>Views all the functions and commands that the CHRS have.</p>
 </div>
 <div class="paragraph">
 <p>Format: 'help'</p>
@@ -1575,4 +1579,4 @@ There is no need to save manually.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-01 15:32:56 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-01 16:08:46 UTC</div></div></div></body></html>
