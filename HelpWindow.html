@@ -181,9 +181,10 @@ The domain name part must start and end with alphanumeric characters, be at leas
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">SALARY</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">s/</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Takes in a maximum of 6 whole numbers and 2 decimal place.<br>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Takes in a maximum of 6 whole numbers and 2 decimal place. (Max. value in total = 999999.99)<br>
 A "%" is allowed to be place before value for modification of Salary using percentage.<br>
-Value can be in negative, and should not be blank</p></td>
+Input value can be in negative to deduct salary, but the Salary should not be 0 or below<br>
+Input value should not be blank</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">BONUS</p></td>
@@ -616,7 +617,9 @@ Modify the Salary of employee with index '3' by 5% increment and Bonus to 1 mont
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-Any modification to Salary and Bonus that causes negative values will be rejected
+Modification to Salary and/or Bonus that causes negative values will be rejected<br>
+Modification to Salary that goes higher than 999999.99 will be rejected since Salary can only hold a maximum
+of 6 whole numbers and 2 decimal places.
 </td>
 </tr>
 </table>
@@ -669,7 +672,9 @@ Modify the Salary of all the listed employee(s) by 5% increment and Bonus to 1 m
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-Any modification to Salary and Bonus that causes negative values will be rejected
+Modification to Salary and/or Bonus that causes negative values to any employee(s) on the list will be rejected<br>
+Modification to Salary that goes higher than 999999.99 will be rejected since Salary can only hold a maximum
+of 6 whole numbers and 2 decimal places.
 </td>
 </tr>
 </table>
@@ -1647,4 +1652,4 @@ There is no need to save manually.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-02 06:39:19 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-02 06:56:05 UTC</div></div></div></body></html>
