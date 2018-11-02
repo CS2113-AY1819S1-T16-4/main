@@ -169,9 +169,9 @@ The domain name part must start and end with alphanumeric characters, be at leas
 <td class="tableblock halign-left valign-top"><p class="tableblock">Department should only contain alphabets and spaces and it should be within 2 to 30 characters long</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">POSITION /Rank</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">POSITION</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">r/</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Position/Rank should only contain alphabets and spaces and it should be within 2 to 30 characters long</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Position should only contain alphabets and spaces and it should be within 2 to 30 characters long</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">ADDRESS</p></td>
@@ -218,7 +218,8 @@ Value can be in negative, and should not be blank</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">DATE</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">d/</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Date must be a valid date in the calendar DD/MM/YYYY]. Year must also fall into the range
- of 2000-2099. Leading 0s can be omitted in day and month field.</p></td>
+ of 2000-2099. Leading 0s can be omitted in day and month field.
+ You are not allowed to schedule for dates that have past today&#8217;s date.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">TYPE</p></td>
@@ -574,7 +575,7 @@ Select the employee with the index of '1' in the list.</p>
 <p>Modify the Salary and/or Bonus of the employee identified by the index.</p>
 </div>
 <div class="paragraph">
-<p>Format: <code>modifyPay INDEX [s/SALARY] [b/BONUS]</code></p>
+<p>Format: <code>modifyPay INDEX [s/SALARY] [b/BONUS]</code> or <code>mp INDEX [s/SALARY] [b/BONUS]</code></p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -627,7 +628,7 @@ Any modification to Salary and Bonus that causes negative values will be rejecte
 <p>Modify the Salary and/or Bonus of all the employee(s) shown on the display list.</p>
 </div>
 <div class="paragraph">
-<p>Format: <code>modifyAllPay [s/SALARY] [b/BONUS]</code></p>
+<p>Format: <code>modifyAllPay [s/SALARY] [b/BONUS]</code> or <code>map [s/SALARY] [b/BONUS]</code></p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -730,7 +731,7 @@ Any usage of <code>addExpenses</code> Command that will result in negative value
 <p>Deletes expenses claim from an employee.</p>
 </div>
 <div class="paragraph">
-<p>Format: <code>deleteExpenses</code> INDEX</p>
+<p>Format: <code>deleteExpenses INDEX</code>  or <code>de INDEX</code></p>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -1646,4 +1647,4 @@ There is no need to save manually.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-02 04:44:41 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-02 05:21:58 UTC</div></div></div></body></html>
