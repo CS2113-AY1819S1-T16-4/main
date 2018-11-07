@@ -169,9 +169,9 @@ The domain name part must start and end with alphanumeric characters, be at leas
 <td class="tableblock halign-left valign-top"><p class="tableblock">Department should only contain alphabets and spaces and it should be within 2 to 30 characters long</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">POSITION</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">RANK_POSITION</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">r/</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Position should only contain alphabets and spaces and it should be within 2 to 30 characters long</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Rank/Position should only contain alphabets and spaces and it should be within 2 to 30 characters long</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">ADDRESS</p></td>
@@ -357,7 +357,7 @@ limit which is from 1 to 200</p></td>
 <p>Adds employee&#8217;s data to the database</p>
 </div>
 <div class="paragraph">
-<p>Format: <code>add id/EMPLOYEEID n/NAME dob/DATE_OF_BIRTH p/PHONE_NUMBER e/EMAIL d/DEPARTMENT r/POSITION a/ADDRESS s/SALARY t/[TAGS]&#8230;&#8203;</code></p>
+<p>Format: <code>add id/EMPLOYEEID n/NAME dob/DATE_OF_BIRTH p/PHONE_NUMBER e/EMAIL d/DEPARTMENT r/RANK_POSITION a/ADDRESS s/SALARY t/[TAGS]&#8230;&#8203;</code></p>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -393,7 +393,7 @@ Any usage of <code>add</code> command that will result in duplicated employeeId 
 <p>Edit an existing employee’s data in CHRS.</p>
 </div>
 <div class="paragraph">
-<p>Format: <code>edit INDEX [n/NAME] [p/PHONE_NUMBER] [a/ADDRESS] [e/EMAIL] [d/DEPARTMENT] [r/POSITION]</code></p>
+<p>Format: <code>edit INDEX [n/NAME] [p/PHONE_NUMBER] [a/ADDRESS] [e/EMAIL] [d/DEPARTMENT] [r/RANK_POSITION]</code></p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -414,7 +414,7 @@ Include at least one field alongside the INDEX. The existing values of the emplo
 <ul>
 <li>
 <p><code>edit 1 p/98765432 d/HR r/Manager</code><br>
-Edits employee at index 1 to have the new input of phone, department and position</p>
+Edits employee at index 1 to have the new input of phone, department and rank/position</p>
 </li>
 </ul>
 </div>
@@ -482,7 +482,7 @@ Any usage of <code>find</code> command will be rejected if it contains special c
 <div class="sect2">
 <h3 id="filter-and-list-of-specific-employee-s-data-code-filter-code"><a class="link" href="#filter-and-list-of-specific-employee-s-data-code-filter-code">4.4. Filter and list of specific employee&#8217;s data : <code>filter</code></a></h3>
 <div class="paragraph">
-<p>Filters the employee list by their department and/or position and list the employees whose department and/or position contains the keyword(s) input from the user in ascending or descending name order.</p>
+<p>Filters the employee list by their department and/or rank/position and list the employees whose department and/or rank/position contains the keyword(s) input from the user in ascending or descending name order.</p>
 </div>
 <div class="paragraph">
 <p>Format: <code>filter ORDER [d/DEPARTMENT] [r/POSITION]</code></p>
@@ -494,8 +494,8 @@ Any usage of <code>find</code> command will be rejected if it contains special c
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-Include either department or position or both, at least one of the field must be included alongside the sort order.<br>
-The keywords are delimited by a spaece, i.e filter asc d/human resource would mean the keywords are "human" and "resource".
+Include either department or rank/position or both, at least one of the field must be included alongside the sort order.<br>
+The keywords are delimited by a space, i.e filter asc d/human resource would mean the keywords are "human" and "resource".
 </td>
 </tr>
 </table>
@@ -507,16 +507,13 @@ The keywords are delimited by a spaece, i.e filter asc d/human resource would me
 <ul>
 <li>
 <p><code>filter asc d/Human Resource r/Manager</code><br>
-List all employees whose department contains the keyword of either human or resource and position containing the keyword of manager</p>
+List all employees whose department contains the keyword of either human or resource and rank/position containing the keyword of manager</p>
 </li>
 <li>
 <p><code>filter dsc d/Finance</code><br>
 List all employees whose department contains the keyword of finance</p>
 </li>
 </ul>
-</div>
-<div class="paragraph">
-<p>Available fields: Department, Position</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -1651,4 +1648,4 @@ There is no need to save manually.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-07 16:28:37 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-07 16:59:26 UTC</div></div></div></body></html>

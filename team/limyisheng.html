@@ -22,29 +22,23 @@ CHRS is capable of checking work schedule, creating recruitment posts, checking 
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Major enhancement</strong>: added <strong>the ability to undo/redo previous commands</strong></p>
+<p><strong>Major enhancement</strong>: Added <code>filter</code> and enhanced <code>find</code> command</p>
 <div class="ulist">
 <ul>
 <li>
-<p>What it does: allows the user to undo all previous commands one at a time. Preceding undo commands can be reversed by using the redo command.</p>
+<p>What it does: It provides the end user with search functions whereby they can choose to filter employees by their department or rank/position or both. Additionally, the find command has been enhanced to be capable of searching by either the employee&#8217;s name or his/her employee ID.</p>
 </li>
 <li>
-<p>Justification: This feature improves the product significantly because a user can make mistakes in commands and the app should provide a convenient way to rectify them.</p>
+<p>Justification: This feature allow users the capability of searching for either a specific employee or all employees of a certain rank/position or employees within a certain department.</p>
 </li>
 <li>
-<p>Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.</p>
-</li>
-<li>
-<p>Credits: <em>{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}</em></p>
+<p>Highlights: This enhancement enhances the user experience when searching for certain employee(s) within CHRS, users will no longer need to scroll through the whole list to search for employee(s) data. It required an in-depth understanding of the human resource department needs. The implementation was challenging as it required understanding of how predicate and regular expressions work to allow the commands to show the right employee the user is searching for.</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p><strong>Minor enhancement</strong>: added a history command that allows the user to navigate to previous commands using up/down keys.</p>
-</li>
-<li>
-<p><strong>Code contributed</strong>: [<a href="https://github.com">Functional code</a>] [<a href="https://github.com">Test code</a>] <em>{give links to collated code files}</em></p>
+<p><strong>Code contributed</strong>: [<a href="https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&amp;search=limyisheng&amp;sort=displayName&amp;since=2018-09-12&amp;until=2018-11-04&amp;timeframe=day&amp;reverse=false&amp;repoSort=true">Reposense Dashboard</a>]</p>
 </li>
 <li>
 <p><strong>Other contributions</strong>:</p>
@@ -55,7 +49,29 @@ CHRS is capable of checking work schedule, creating recruitment posts, checking 
 <div class="ulist">
 <ul>
 <li>
-<p>Managed releases <code>v1.3</code> - <code>v1.5rc</code> (3 releases) on GitHub</p>
+<p>Managed releases <code>v1.1</code> - <code>v1.4</code> (5 releases) on GitHub.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Managed the release of .jar file.</p>
+</li>
+<li>
+<p>Managed the description of each release.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Managed the approval of pull requests.</p>
+</li>
+<li>
+<p>Setting up issue tracker, milestones and tags.</p>
+</li>
+<li>
+<p>Setting up Travis-CI and AppVeyor.</p>
+</li>
+<li>
+<p>Ensures that the team is on track and is able to complete the requirements of each milestone.</p>
 </li>
 </ul>
 </div>
@@ -65,10 +81,13 @@ CHRS is capable of checking work schedule, creating recruitment posts, checking 
 <div class="ulist">
 <ul>
 <li>
-<p>Updated the GUI color scheme (Pull requests <a href="https://github.com">#33</a>, <a href="https://github.com">#34</a>)</p>
+<p>Added <code>EmployeeId</code>, <code>DateOfBirth</code>, <code>Department</code>, <code>Rank/Position</code>, <code>Salary</code> and <code>Bonus</code> fields (Pull request: <a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/18">#18</a>)</p>
 </li>
 <li>
-<p>Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests <a href="https://github.com">#36</a>, <a href="https://github.com">#38</a>)</p>
+<p>Added  sorting to PersonList, ExpensesList and ScheduleList to ensure that the lists stay sorted (Pull request: <a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/219">#219</a>)</p>
+</li>
+<li>
+<p>Updated <code>add</code> and <code>edit</code> commands to reject commands that will lead to duplication in these fields: <code>EmployeeId</code> OR <code>Email</code> OR <code>Phone</code> OR <code>Name</code> alongside <code>DateOfBirth</code>. Additionally, the GUI will output the employee you are trying to duplicate. (Pull requests: <a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/18">#18</a>, <a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/124">#124</a>, <a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/134">#134</a>, <a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/136">#136</a>, <a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/219">#219</a>)</p>
 </li>
 </ul>
 </div>
@@ -78,7 +97,16 @@ CHRS is capable of checking work schedule, creating recruitment posts, checking 
 <div class="ulist">
 <ul>
 <li>
-<p>Did cosmetic tweaks to existing contents of the User Guide: <a href="https://github.com">#14</a></p>
+<p>Updated Read Me page and Contact Us page. (Pull requests: <a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/3/">#3</a>, <a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/109">#109</a>)</p>
+</li>
+<li>
+<p>Updated About Us page to include team members' images, roles and responsibilities alongside GitHub and Portfolio links. (Pull requests:  <a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/1">#1</a>, <a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/3">#3</a>, <a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/8">#8</a>, <a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/11">#11</a>, <a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/41">#41</a>, <a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/127">#127</a>)</p>
+</li>
+<li>
+<p>Updated Developer Guide on <code>filter</code> feature alongside the user stories and use cases. (Pull requests:  <a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/11">#11</a>, <a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/13">#13</a>, <a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/14">#14</a>, <a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/15">#15</a>, <a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/97">#97</a>, <a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/109">#109</a>)</p>
+</li>
+<li>
+<p>Updated User Guide to ensure all listed commands are up to date. (Pull requests:  <a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/95">#95</a>, <a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/156">#156</a>, <a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/167">#167</a>, <a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/169">#169</a>, <a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/172">#172</a>, <a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/176">#176</a>, <a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/181">#181</a>, <a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/183">#183</a>)</p>
 </li>
 </ul>
 </div>
@@ -88,29 +116,13 @@ CHRS is capable of checking work schedule, creating recruitment posts, checking 
 <div class="ulist">
 <ul>
 <li>
-<p>PRs reviewed (with non-trivial review comments): <a href="https://github.com">#12</a>, <a href="https://github.com">#32</a>, <a href="https://github.com">#19</a>, <a href="https://github.com">#42</a></p>
+<p>PRs reviewed (with non-trivial review comments). (Pull requests: <a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/36">#36</a>, <a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/69">#69</a>, <a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/70">#70</a>, <a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/73">#73</a>, <a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/99">#99</a> <a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/123">#123</a>, <a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/125">#125</a>, <a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/130">#130</a>, <a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/140">#140</a>, <a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/182">#182</a>, <a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/218">#218</a>)</p>
 </li>
 <li>
-<p>Contributed to forum discussions (examples:  <a href="https://github.com">1</a>, <a href="https://github.com">2</a>, <a href="https://github.com">3</a>, <a href="https://github.com">4</a>)</p>
+<p>Contributed to forum discussions (examples: <a href="https://github.com/nusCS2113-AY1819S1/forum/issues/40">1</a>, <a href="https://github.com/nusCS2113-AY1819S1/forum/issues/62">2</a>)</p>
 </li>
 <li>
-<p>Reported bugs and suggestions for other teams in the class (examples:  <a href="https://github.com">1</a>, <a href="https://github.com">2</a>, <a href="https://github.com">3</a>)</p>
-</li>
-<li>
-<p>Some parts of the history feature I added was adopted by several other class mates (<a href="https://github.com">1</a>, <a href="https://github.com">2</a>)</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>Tools:</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Integrated a third party library (Natty) to the project (<a href="https://github.com">#42</a>)</p>
-</li>
-<li>
-<p>Integrated a new Github plugin (CircleCI) to the team repo</p>
+<p>Reported bugs and suggestions for other teams in the class (examples: <a href="https://github.com/CS2113-AY1819S1-W13-4/main/issues/106">1</a>, <a href="https://github.com/CS2113-AY1819S1-W13-4/main/issues/104">2</a>, <a href="https://github.com/CS2113-AY1819S1-W13-4/main/issues/99">3</a>, <a href="https://github.com/CS2113-AY1819S1-W13-4/main/issues/109">4</a>, <a href="https://github.com/CS2113-AY1819S1-W13-4/main/issues/122">5</a>)</p>
 </li>
 </ul>
 </div>
@@ -119,9 +131,6 @@ CHRS is capable of checking work schedule, creating recruitment posts, checking 
 </div>
 </li>
 </ul>
-</div>
-<div class="paragraph">
-<p><em>{you can add/remove categories in the list above}</em></p>
 </div>
 </div>
 </div>
@@ -139,14 +148,12 @@ CHRS is capable of checking work schedule, creating recruitment posts, checking 
 </tbody>
 </table>
 <div class="sect2">
-<h3 id="undoing-previous-command-code-undo-code"><a class="link" href="#undoing-previous-command-code-undo-code">Undoing previous command : <code>undo</code></a></h3>
+<h3 id="add-employee-s-data-code-add-code"><a class="link" href="#add-employee-s-data-code-add-code">Add employee&#8217;s data : <code>add</code></a></h3>
 <div class="paragraph">
-<p>Restores CHRS to the state before the previous <em>undoable</em> command was executed.
-If a <em>undoable</em> command is executed after undo, then the command that was undone
-will not be undoable anymore as it is already undone.</p>
+<p>Adds employee&#8217;s data to the database</p>
 </div>
 <div class="paragraph">
-<p>Format: <code>undo</code></p>
+<p>Format: <code>add id/EMPLOYEEID n/NAME dob/DATE_OF_BIRTH p/PHONE_NUMBER e/EMAIL d/DEPARTMENT r/RANK_POSITION a/ADDRESS s/SALARY t/[TAGS]&#8230;&#8203;</code></p>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -154,28 +161,12 @@ will not be undoable anymore as it is already undone.</p>
 <div class="ulist">
 <ul>
 <li>
-<p><code>delete 1</code><br>
-<code>list</code><br>
-<code>undo</code> (reverses the <code>delete 1</code> command)<br></p>
+<p><code>add id/000001 n/John Doe dob/13/12/2000 p/98765432 e/johnd@example.com d/IT r/Assistant a/John street, block 123, #01-01 s/3000.00 t/FlyKite</code><br>
+Adds an employee with the fields listed above</p>
 </li>
 <li>
-<p><code>selectEmployee 1</code><br>
-<code>list</code><br>
-<code>undo</code><br>
-The <code>undo</code> command fails as there are no undoable commands executed previously</p>
-</li>
-<li>
-<p><code>delete 1</code><br>
-<code>clear</code><br>
-<code>undo</code> (reverses the <code>clear</code> command)<br>
-<code>undo</code> (reverses the <code>delete 1</code> command)<br></p>
-</li>
-<li>
-<p><code>delete 1</code><br>
-<code>undo</code> (reverses the <code>delete 1</code> command)<br>
-<code>clear</code>(<code>delete 1</code> commmand will no longer be undoable as it is already undone)<br>
-<code>undo</code> (reverses the <code>clear</code> command)<br>
-<code>undo</code> (no more commands to undo)<br></p>
+<p><code>add id/888888 n/Betsy dob/23/05/1987 p/95544332 e/betsy@example.com d/Account r/Manager a/Betsy street, block 3, #11-01 s/5000.00</code><br>
+Adds an employee with the fields listed above</p>
 </li>
 </ul>
 </div>
@@ -186,24 +177,31 @@ The <code>undo</code> command fails as there are no undoable commands executed p
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-<div class="paragraph">
-<p>Undoable commands: those commands that modify CHRS content.
-For commands similar functions to<br>
-(list*, find*, filter*, select*, calculate*)
-the command will not be able to undo or redo).</p>
-</div>
+Any usage of <code>add</code> command that will result in duplicated employeeId or phone number or email will be rejected. Additionally, duplicated name alongside date of birth will also be rejected.
 </td>
 </tr>
 </table>
 </div>
 </div>
 <div class="sect2">
-<h3 id="redoing-the-previously-undone-command-code-redo-code"><a class="link" href="#redoing-the-previously-undone-command-code-redo-code">Redoing the previously undone command : <code>redo</code></a></h3>
+<h3 id="edit-an-existing-employee-s-data-code-edit-code"><a class="link" href="#edit-an-existing-employee-s-data-code-edit-code">Edit an existing employee’s data : <code>edit</code></a></h3>
 <div class="paragraph">
-<p>Reverses the most recent <code>undo</code> command.</p>
+<p>Edit an existing employee’s data in CHRS.</p>
 </div>
 <div class="paragraph">
-<p>Format: <code>redo</code></p>
+<p>Format: <code>edit INDEX [n/NAME] [p/PHONE_NUMBER] [a/ADDRESS] [e/EMAIL] [d/DEPARTMENT] [r/RANK_POSITION]</code></p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Include at least one field alongside the INDEX. The existing values of the employee will be updated to the input values.
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -211,22 +209,8 @@ the command will not be able to undo or redo).</p>
 <div class="ulist">
 <ul>
 <li>
-<p><code>delete 1</code><br>
-<code>undo</code> (reverses the <code>delete 1</code> command)<br>
-<code>redo</code> (reapplies the <code>delete 1</code> command)<br></p>
-</li>
-<li>
-<p><code>delete 1</code><br>
-<code>redo</code><br>
-The <code>redo</code> command fails as there are no <code>undo</code> commands executed previously</p>
-</li>
-<li>
-<p><code>delete 1</code><br>
-<code>clear</code><br>
-<code>undo</code> (reverses the <code>clear</code> command)<br>
-<code>undo</code> (reverses the <code>delete 1</code> command)<br>
-<code>redo</code> (reapplies the <code>delete 1</code> command)<br>
-<code>redo</code> (reapplies the <code>clear</code> command)<br></p>
+<p><code>edit 1 p/98765432 d/HR r/Manager</code><br>
+Edits employee at index 1 to have the new input of phone, department and rank/position</p>
 </li>
 </ul>
 </div>
@@ -237,12 +221,104 @@ The <code>redo</code> command fails as there are no <code>undo</code> commands e
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-<div class="paragraph">
-<p>Redoable commands: those commands that modify CHRS content.
-For commands similar functions to<br>
-(list*, find*, filter*, select*, calculate*)
-the command will not be able to undo or redo.</p>
+Any usage of <code>edit</code> command that will result in duplicated phone number or email will be rejected. Additionally, usage of this command to edit an employee&#8217;s name to be the same as another employee who has the same date of birth will be rejected.
+</td>
+</tr>
+</table>
 </div>
+</div>
+<div class="sect2">
+<h3 id="locating-persons-by-name-or-employee-id-code-find-code"><a class="link" href="#locating-persons-by-name-or-employee-id-code-find-code">Locating persons by name or employee ID : <code>find</code></a></h3>
+<div class="paragraph">
+<p>Find the employee&#8217;s Name whose name contains the input or find the Employee Id that matches the input.</p>
+</div>
+<div class="paragraph">
+<p>Format: <code>find [NAME] [EMPLOYEEID]</code></p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Include only one of the fields, either Name or Employee Id.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>find John</code><br>
+Find all instances of John</p>
+</li>
+<li>
+<p><code>find 000001</code><br>
+Find the employee with employee ID <code>000001</code></p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Any usage of <code>find</code> command will be rejected if it contains special characters or alphanumeric input. It only accepts either alphabets or numbers in a single input, not both.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="filter-and-list-of-specific-employee-s-data-code-filter-code"><a class="link" href="#filter-and-list-of-specific-employee-s-data-code-filter-code">Filter and list of specific employee&#8217;s data : <code>filter</code></a></h3>
+<div class="paragraph">
+<p>Filters the employee list by their department and/or rank/position and list the employees whose department and/or rank/position contains the keyword(s) input from the user in ascending or descending name order.</p>
+</div>
+<div class="paragraph">
+<p>Format: <code>filter ORDER [d/DEPARTMENT] [r/POSITION]</code></p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Include either department or rank/position or both, at least one of the field must be included alongside the sort order.<br>
+The keywords are delimited by a space, i.e filter asc d/human resource would mean the keywords are "human" and "resource".
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>filter asc d/Human Resource r/Manager</code><br>
+List all employees whose department contains the keyword of either human or resource and rank/position containing the keyword of manager</p>
+</li>
+<li>
+<p><code>filter dsc d/Finance</code><br>
+List all employees whose department contains the keyword of finance</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Any usage of <code>filter</code> command that results in the same prefix appearing more than once will be rejected. Example: filter asc d/Human d/Finance will be rejected.
 </td>
 </tr>
 </table>
@@ -264,56 +340,22 @@ the command will not be able to undo or redo.</p>
 </tbody>
 </table>
 <div class="sect2">
-<h3 id="undo-redo-feature"><a class="link" href="#undo-redo-feature">Undo/Redo feature</a></h3>
+<h3 id="filter-feature"><a class="link" href="#filter-feature">Filter Feature</a></h3>
+<div class="paragraph">
+<p>The command <code>filter</code> allows the user to filter employees based on their respective department and/or position within the company.</p>
+</div>
 <div class="sect3">
 <h4 id="current-implementation"><a class="link" href="#current-implementation">Current Implementation</a></h4>
 <div class="paragraph">
-<p>The undo/redo mechanism is facilitated by <code>VersionedAddressBook</code>.
-It extends <code>AddressBook</code> with an undo/redo history, stored internally as an <code>addressBookStateList</code> and <code>currentStatePointer</code>.
-Additionally, it implements the following operations:</p>
+<p>The implementation of this command is separated into two phases.</p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>VersionedAddressBook#commit()</code>&#8201;&#8212;&#8201;Saves the current address book state in its history.</p>
-</li>
-<li>
-<p><code>VersionedAddressBook#undo()</code>&#8201;&#8212;&#8201;Restores the previous address book state from its history.</p>
-</li>
-<li>
-<p><code>VersionedAddressBook#redo()</code>&#8201;&#8212;&#8201;Restores a previously undone address book state from its history.</p>
-</li>
-</ul>
-</div>
+<div class="sect4">
+<h5 id="phase-1"><a class="link" href="#phase-1">Phase 1</a></h5>
 <div class="paragraph">
-<p>These operations are exposed in the <code>Model</code> interface as <code>Model#commitAddressBook()</code>, <code>Model#undoAddressBook()</code> and <code>Model#redoAddressBook()</code> respectively.</p>
-</div>
-<div class="paragraph">
-<p>Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.</p>
-</div>
-<div class="paragraph">
-<p>Step 1. The user launches the application for the first time. The <code>VersionedAddressBook</code> will be initialized with the initial address book state, and the <code>currentStatePointer</code> pointing to that single address book state.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/UndoRedoStartingStateListDiagram.png" alt="UndoRedoStartingStateListDiagram" width="800">
-</div>
-</div>
-<div class="paragraph">
-<p>Step 2. The user executes <code>delete 5</code> command to delete the 5th person in the address book. The <code>delete</code> command calls <code>Model#commitAddressBook()</code>, causing the modified state of the address book after the <code>delete 5</code> command executes to be saved in the <code>addressBookStateList</code>, and the <code>currentStatePointer</code> is shifted to the newly inserted address book state.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/UndoRedoNewCommand1StateListDiagram.png" alt="UndoRedoNewCommand1StateListDiagram" width="800">
-</div>
-</div>
-<div class="paragraph">
-<p>Step 3. The user executes <code>add n/David &#8230;&#8203;</code> to add a new person. The <code>add</code> command also calls <code>Model#commitAddressBook()</code>, causing another modified address book state to be saved into the <code>addressBookStateList</code>.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/UndoRedoNewCommand2StateListDiagram.png" alt="UndoRedoNewCommand2StateListDiagram" width="800">
-</div>
+<p>The <code>filter</code> mechanism is facilitated by <code>FilterCommandParser</code>.
+The <code>FilterCommandParser</code> implements the <code>Parser</code> interface, parses the arguments parameter, which is the input from the user, and creates a new <code>FilterCommand</code> object.
+Apart from parsing the input, the <code>FilterCommandParser</code> checks whether the input complies with the required format.
+This checking of input compliance is facilitated by two helper methods, namely <code>areDepartmentKeywordsValid</code> and <code>arePositionKeywordsValid</code>, that is within the class.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -322,157 +364,158 @@ Additionally, it implements the following operations:</p>
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-If a command fails its execution, it will not call <code>Model#commitAddressBook()</code>, so the address book state will not be saved into the <code>addressBookStateList</code>.
+If the input does not comply with the required format, an error message will be shown to the user.
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the <code>undo</code> command. The <code>undo</code> command will call <code>Model#undoAddressBook()</code>, which will shift the <code>currentStatePointer</code> once to the left, pointing it to the previous address book state, and restores the address book to that state.</p>
+<p>Code snippet of <code>FilterCommandParser</code> that shows the checking of the input compliance:</p>
 </div>
-<div class="imageblock">
+<div class="listingblock">
 <div class="content">
-<img src="../images/UndoRedoExecuteUndoStateListDiagram.png" alt="UndoRedoExecuteUndoStateListDiagram" width="800">
-</div>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-If the <code>currentStatePointer</code> is at index 0, pointing to the initial address book state, then there are no previous address book states to restore. The <code>undo</code> command uses <code>Model#canUndoAddressBook()</code> to check if this is the case. If so, it will return an error to the user rather than attempting to perform the undo.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>The following sequence diagram shows how the undo operation works:</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/UndoRedoSequenceDiagram.png" alt="UndoRedoSequenceDiagram" width="800">
-</div>
-</div>
-<div class="paragraph">
-<p>The <code>redo</code> command does the opposite&#8201;&#8212;&#8201;it calls <code>Model#redoAddressBook()</code>, which shifts the <code>currentStatePointer</code> once to the right, pointing to the previously undone state, and restores the address book to that state.</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-If the <code>currentStatePointer</code> is at index <code>addressBookStateList.size() - 1</code>, pointing to the latest address book state, then there are no undone address book states to restore. The <code>redo</code> command uses <code>Model#canRedoAddressBook()</code> to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>Step 5. The user then decides to execute the command <code>list</code>. Commands that do not modify the address book, such as <code>list</code>, will usually not call <code>Model#commitAddressBook()</code>, <code>Model#undoAddressBook()</code> or <code>Model#redoAddressBook()</code>. Thus, the <code>addressBookStateList</code> remains unchanged.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/UndoRedoNewCommand3StateListDiagram.png" alt="UndoRedoNewCommand3StateListDiagram" width="800">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> FilterCommand parse(<span class="predefined-type">String</span> args) <span class="directive">throws</span> <span class="exception">ParseException</span> {
+
+    ...
+    ...
+
+    if (argMultimap.getValue(PREFIX_DEPARTMENT).isPresent()) {
+        trimmedDepartment = (argMultimap.getValue(PREFIX_DEPARTMENT).get()).trim();
+        departmentKeywords = trimmedDepartment.split(<span class="string"><span class="delimiter">&quot;</span><span class="char">\\</span><span class="content">s+</span><span class="delimiter">&quot;</span></span>);
+        <span class="keyword">if</span> (areDepartmentKeywordsValid(departmentKeywords)) {
+            filterCommand.setIsDepartmentPrefixPresent(<span class="predefined-constant">true</span>);
+            filterCommand.setDepartmentPredicate(<span class="keyword">new</span> DepartmentContainsKeywordsPredicate(<span class="predefined-type">Arrays</span>
+            .asList(departmentKeywords)));
+        } <span class="keyword">else</span> <span class="keyword">if</span> (!areDepartmentKeywordsValid(departmentKeywords)) {
+            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="exception">ParseException</span>(Department.MESSAGE_DEPARTMENT_KEYWORD_CONSTRAINTS);
+        }
+    } <span class="keyword">else</span> <span class="keyword">if</span> (!argMultimap.getValue(PREFIX_DEPARTMENT).isPresent()) {
+        filterCommand.setIsDepartmentPrefixPresent(<span class="predefined-constant">false</span>);
+    }
+
+    <span class="keyword">if</span> (argMultimap.getValue(PREFIX_POSITION).isPresent()) {
+        trimmedPosition = (argMultimap.getValue(PREFIX_POSITION).get()).trim();
+        positionKeywords = trimmedPosition.split(<span class="string"><span class="delimiter">&quot;</span><span class="char">\\</span><span class="content">s+</span><span class="delimiter">&quot;</span></span>);
+        <span class="keyword">if</span> (arePositionKeywordsValid(positionKeywords)) {
+            filterCommand.setIsPositionPrefixPresent(<span class="predefined-constant">true</span>);
+            filterCommand.setPositionPredicate(<span class="keyword">new</span> PositionContainsKeywordsPredicate(<span class="predefined-type">Arrays</span>
+            .asList(positionKeywords)));
+        } <span class="keyword">else</span> <span class="keyword">if</span> (!arePositionKeywordsValid(positionKeywords)) {
+            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="exception">ParseException</span>(<span class="predefined-type">Position</span>.MESSAGE_POSITION_KEYWORD_CONSTRAINTS);
+        }
+    } <span class="keyword">else</span> <span class="keyword">if</span> (!argMultimap.getValue(PREFIX_POSITION).isPresent()) {
+        filterCommand.setIsPositionPrefixPresent(<span class="predefined-constant">false</span>);
+    }
+
+    ...
+    ...
+
+}</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Step 6. The user executes <code>clear</code>, which calls <code>Model#commitAddressBook()</code>. Since the <code>currentStatePointer</code> is not pointing at the end of the <code>addressBookStateList</code>, all address book states after the <code>currentStatePointer</code> will be purged. We designed it this way because it no longer makes sense to redo the <code>add n/David &#8230;&#8203;</code> command. This is the behavior that most modern desktop applications follow.</p>
+<p>Code snippet of <code>areDepartmentKeywordsValid</code> and <code>arePositionKeywordsValid</code> helper method:</p>
 </div>
-<div class="imageblock">
+<div class="listingblock">
 <div class="content">
-<img src="../images/UndoRedoNewCommand4StateListDiagram.png" alt="UndoRedoNewCommand4StateListDiagram" width="800">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">boolean</span> areDepartmentKeywordsValid(<span class="predefined-type">String</span><span class="type">[]</span> keywords) {
+    <span class="keyword">for</span> (<span class="predefined-type">String</span> keyword: keywords) {
+        <span class="keyword">if</span> (!Department.isValidDepartment(keyword)) {
+            <span class="keyword">return</span> <span class="predefined-constant">false</span>;
+        }
+    }
+    <span class="keyword">return</span> <span class="predefined-constant">true</span>;
+}
+
+<span class="directive">public</span> <span class="type">boolean</span> arePositionKeywordsValid(<span class="predefined-type">String</span><span class="type">[]</span> keywords) {
+    <span class="keyword">for</span> (<span class="predefined-type">String</span> keyword: keywords) {
+        <span class="keyword">if</span> (!<span class="predefined-type">Position</span>.isValidPosition(keyword)) {
+            <span class="keyword">return</span> <span class="predefined-constant">false</span>;
+        }
+    }
+    <span class="keyword">return</span> <span class="predefined-constant">true</span>;
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="phase-2"><a class="link" href="#phase-2">Phase 2</a></h5>
+<div class="paragraph">
+<p>The <code>FilterCommand</code> is being executed in this phase.
+<code>FilterCommand</code> first checks which prefix(es) is(are) present prior to calling the <code>updateFilteredPersonList</code> method, which updates <code>filteredPersonList</code>
+ with the relevant department(s) and/or position(s) that matches the keyword(s) input from the user.</p>
+</div>
+<div class="paragraph">
+<p>Code snippet of <code>FilterCommand</code> that checks which prefix is present prior to updating <code>filteredPersonList</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@Override</span>
+<span class="directive">public</span> CommandResult execute(Model model, CommandHistory history) {
+    requireNonNull(model);
+    <span class="keyword">if</span> (isDepartmentPrefixPresent &amp;&amp; !isPositionPrefixPresent) {
+        model.updateFilteredPersonList(departmentPredicate);
+    } <span class="keyword">else</span> <span class="keyword">if</span> (isPositionPrefixPresent &amp;&amp; !isDepartmentPrefixPresent) {
+        model.updateFilteredPersonList(positionPredicate);
+    } <span class="keyword">else</span> <span class="keyword">if</span> (isDepartmentPrefixPresent &amp;&amp; isPositionPrefixPresent) {
+        model.updateFilteredPersonList(departmentPredicate.and(positionPredicate));
+    }
+    <span class="keyword">return</span> <span class="keyword">new</span> CommandResult(
+            <span class="predefined-type">String</span>.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
+}</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>The following activity diagram summarizes what happens when a user executes a new command:</p>
+<p>The result of the execution of <code>FilterCommand</code> is encapsulated as a <code>CommandResult</code> object which is returned to the <code>LogicManager</code>.
+Upon the update of <code>filteredPersonList</code>, the program will display only employees that are of the specific department(s)
+ and/or position(s) as specified by the input from the user.</p>
+</div>
+<div class="paragraph">
+<p>The sequence diagram below illustrates the operation of <code>filter</code> command:</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="../images/UndoRedoActivityDiagram.png" alt="UndoRedoActivityDiagram" width="650">
+<img src="../images/filterCommandSequenceDiagram.png" alt="filterCommandSequenceDiagram" width="850">
+</div>
 </div>
 </div>
 </div>
 <div class="sect3">
 <h4 id="design-considerations"><a class="link" href="#design-considerations">Design Considerations</a></h4>
-<div class="sect4">
-<h5 id="aspect-how-undo-redo-executes"><a class="link" href="#aspect-how-undo-redo-executes">Aspect: How undo &amp; redo executes</a></h5>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Alternative 1 (current choice):</strong> Saves the entire address book.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: Easy to implement.</p>
-</li>
-<li>
-<p>Cons: May have performance issues in terms of memory usage.</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p><strong>Alternative 2:</strong> Individual command knows how to undo/redo by itself.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: Will use less memory (e.g. for <code>delete</code>, just save the person being deleted).</p>
-</li>
-<li>
-<p>Cons: We must ensure that the implementation of each individual command are correct.</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect4">
-<h5 id="aspect-data-structure-to-support-the-undo-redo-commands"><a class="link" href="#aspect-data-structure-to-support-the-undo-redo-commands">Aspect: Data structure to support the undo/redo commands</a></h5>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Alternative 1 (current choice):</strong> Use a list to store the history of address book states.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: Easy for new Computer Science student undergraduates to understand, who are likely to be the new incoming developers of our project.</p>
-</li>
-<li>
-<p>Cons: Logic is duplicated twice. For example, when a new command is executed, we must remember to update both <code>HistoryManager</code> and <code>VersionedAddressBook</code>.</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p><strong>Alternative 2:</strong> Use <code>HistoryManager</code> for undo/redo</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: We do not need to maintain a separate list, and just reuse what is already in the codebase.</p>
-</li>
-<li>
-<p>Cons: Requires dealing with commands that have already been undone: We must remember to skip these commands. Violates Single Responsibility Principle and Separation of Concerns as <code>HistoryManager</code> now needs to do two different things.</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="project-powerpointlabs"><a class="link" href="#project-powerpointlabs">PROJECT: PowerPointLabs</a></h2>
-<div class="sectionbody">
-<hr>
 <div class="paragraph">
-<p><em>{Optionally, you may include other projects in your portfolio.}</em></p>
+<p>Aspect: Implementation of <code>filter</code> command</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice)</strong>: One command to handle filtering by department(s) and/or position(s)</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Does not require several command and parser files to handle filtering of different fields</p>
+</li>
+<li>
+<p>Cons: Additional methods required to check prefix and validity of input</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2</strong>: Separate commands for filter, one for department and one for position</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easy to implement as it follows the existing <code>find</code> command</p>
+</li>
+<li>
+<p>Cons: More commands to create and implementation can get quite complicated when filter includes both fields</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-07 16:28:37 UTC</div></div></div></body></html>
+</div>
+</div>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-07 16:59:26 UTC</div></div></div></body></html>
