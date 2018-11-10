@@ -86,8 +86,10 @@
 <li><a href="#filtering-employees-of-a-certain-department-and-position">H.4. Filtering employees of a certain department and position</a></li>
 <li><a href="#finding-a-specific-employee">H.5. Finding a specific employee</a></li>
 <li><a href="#selecting-an-employee">H.6. Selecting an employee</a></li>
-<li><a href="#deleting-an-employee">H.7. Deleting an employee</a></li>
-<li><a href="#saving-data">H.8. Saving data</a></li>
+<li><a href="#modifying-an-employee-s-pay">H.7. Modifying an employee&#8217;s pay</a></li>
+<li><a href="#modifying-the-pay-of-all-the-employees-in-the-list">H.8. Modifying the pay of all the employees in the list</a></li>
+<li><a href="#deleting-an-employee">H.9. Deleting an employee</a></li>
+<li><a href="#saving-data">H.10. Saving data</a></li>
 </ul>
 </li>
 </ul>
@@ -808,7 +810,7 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 <div class="sect2">
 <h3 id="modify-pay-feature"><a class="link" href="#modify-pay-feature">3.2. Modify Pay Feature</a></h3>
 <div class="paragraph">
-<p>The command <code>modifypay</code> allows the user to modify the salary and bonus of the employee based on the input.</p>
+<p>The command <code>modifyPay</code> allows the user to modify the salary and bonus of the employee based on the input.</p>
 </div>
 <div class="sect3">
 <h4 id="current-implementation-2"><a class="link" href="#current-implementation-2">3.2.1. Current Implementation</a></h4>
@@ -818,40 +820,64 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 <div class="sect4">
 <h5 id="phase-1"><a class="link" href="#phase-1">Phase 1</a></h5>
 <div class="paragraph">
-<p>The <code>modifypay</code> function is first supported by <code>ModifyPayCommandParser</code> which implements the <code>Parser</code> interface. The interface parse the arguments parameter, which was inputted by the users to form the <code>ModifyPayCommand</code> object. The arguments will also have their validity checked by the method, <code>isValidSalary</code> and <code>isValidBonus</code>, within respective Classes before being parse into the salary and bonus column which will return an error message when the arguments did not meet the requirements.</p>
+<p>The <code>modifyPay</code> function is first supported by <code>ModifyPayCommandParser</code> which implements the <code>Parser</code> interface. The interface parse the arguments parameter, which was inputted by the users to form the <code>ModifyPayCommand</code> object. The arguments will also have their validity checked by the method, <code>isValidSalary</code> and <code>isValidBonus</code>, within respective Classes before being parse into the salary and bonus column which will return an error message when the arguments did not meet the requirements.</p>
 </div>
 <div class="paragraph">
 <p>Code Snippet of <code>ModifyPayCommandParser</code> that show the parsing of input and the checking validity of the inputs:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java">    <span class="directive">public</span> ModifyPayCommand parse(<span class="predefined-type">String</span> args) <span class="directive">throws</span> <span class="exception">ParseException</span> {
-        requireNonNull(args);
-        ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_SALARY, PREFIX_BONUS);
+<pre class="CodeRay highlight"><code data-lang="java">    <span class="directive">public</span> <span class="type">class</span> <span class="class">ModifyPayCommandParser</span> <span class="directive">implements</span> <span class="predefined-type">Parser</span>&lt;ModifyPayCommand&gt; {
+        <span class="directive">private</span> <span class="directive">static</span> <span class="directive">final</span> <span class="type">double</span> BONUS_UPPER_LIMIT = <span class="float">24.0</span>;
 
-        Index index;
+        <span class="directive">public</span> ModifyPayCommand parse(<span class="predefined-type">String</span> args) <span class="directive">throws</span> <span class="exception">ParseException</span> {
+            requireNonNull(args);
 
-        <span class="keyword">try</span> {
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
-        } <span class="keyword">catch</span> (<span class="exception">ParseException</span> pe) {
-            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="exception">ParseException</span>(<span class="predefined-type">String</span>.format(MESSAGE_INVALID_COMMAND_FORMAT, ModifyPayCommand.MESSAGE_USAGE), pe);
-        }
+            ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_SALARY, PREFIX_BONUS);
 
-        ModSalaryDescriptor modSalaryDescriptor = <span class="keyword">new</span> ModSalaryDescriptor();
-        <span class="keyword">if</span> (argMultimap.getValue(PREFIX_BONUS).isPresent()) {
-            modSalaryDescriptor.setBonus(ParserUtil.parseBonus(
-            argMultimap.getValue(PREFIX_BONUS).get()));
-        }
-        <span class="keyword">if</span> (argMultimap.getValue(PREFIX_SALARY).isPresent()) {
-            modSalaryDescriptor.setSalary(ParserUtil.parseSalary(
-            argMultimap.getValue(PREFIX_SALARY).get()));
-        }
-        <span class="keyword">if</span> (!modSalaryDescriptor.isAnyFieldEdited()) {
-            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="exception">ParseException</span>(ModifyPayCommand.MESSAGE_NOT_MODIFIED);
-        }
+            Index index;
 
-        <span class="keyword">return</span> <span class="keyword">new</span> ModifyPayCommand(index, modSalaryDescriptor);
+            <span class="keyword">try</span> {
+                index = ParserUtil.parseIndex(argMultimap.getPreamble());
+            } <span class="keyword">catch</span> (<span class="exception">ParseException</span> pe) {
+                <span class="keyword">throw</span> <span class="keyword">new</span> <span class="exception">ParseException</span>(<span class="predefined-type">String</span>.format(MESSAGE_INVALID_COMMAND_FORMAT, ModifyPayCommand.MESSAGE_USAGE), pe);
+            }
+
+            <span class="keyword">if</span> (!didPrefixAppearOnlyOnce(args)) {
+                <span class="keyword">throw</span> <span class="keyword">new</span> <span class="exception">ParseException</span>(<span class="predefined-type">String</span>.format(MESSAGE_INVALID_COMMAND_FORMAT, ModifyPayCommand.MESSAGE_USAGE));
+            }
+
+            ModSalaryDescriptor modSalaryDescriptor = <span class="keyword">new</span> ModSalaryDescriptor();
+
+            <span class="keyword">if</span> (argMultimap.getValue(PREFIX_SALARY).isPresent()) {
+                modSalaryDescriptor.setSalary(ParserUtil.parseSalary(argMultimap.getValue(PREFIX_SALARY).get()));
+            }
+
+            <span class="keyword">if</span> (argMultimap.getValue(PREFIX_BONUS).isPresent()) {
+                Bonus bonusInput = ParserUtil.parseBonus(argMultimap.getValue(PREFIX_BONUS).get());
+
+                <span class="type">double</span> bonus = <span class="predefined-type">Double</span>.parseDouble(argMultimap.getValue(PREFIX_BONUS).get());
+
+                <span class="keyword">if</span> (bonus &gt; BONUS_UPPER_LIMIT) {
+                    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="exception">ParseException</span>(Bonus.MESSAGE_BONUS_CONSTRAINTS);
+                }
+
+                modSalaryDescriptor.setBonus(bonusInput);
+            }
+
+            <span class="keyword">if</span> (!modSalaryDescriptor.isAnyFieldEdited()) {
+                <span class="keyword">throw</span> <span class="keyword">new</span> <span class="exception">ParseException</span>(ModifyPayCommand.MESSAGE_NOT_MODIFIED);
+            }
+
+            <span class="keyword">return</span> <span class="keyword">new</span> ModifyPayCommand(index, modSalaryDescriptor);
+        }
+        <span class="directive">private</span> <span class="type">boolean</span> didPrefixAppearOnlyOnce(<span class="predefined-type">String</span> argument) {
+            <span class="predefined-type">String</span> salaryPrefix = <span class="string"><span class="delimiter">&quot;</span><span class="content"> </span><span class="delimiter">&quot;</span></span> + PREFIX_SALARY.toString();
+            <span class="predefined-type">String</span> bonusPrefix = <span class="string"><span class="delimiter">&quot;</span><span class="content"> </span><span class="delimiter">&quot;</span></span> + PREFIX_BONUS.toString();
+
+            <span class="keyword">return</span> argument.indexOf(salaryPrefix) == argument.lastIndexOf(salaryPrefix)
+                    &amp;&amp; argument.indexOf(bonusPrefix) == argument.lastIndexOf(bonusPrefix);
+        }
     }</code></pre>
 </div>
 </div>
@@ -861,9 +887,17 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java">    <span class="directive">public</span> <span class="directive">static</span> <span class="directive">final</span> <span class="predefined-type">String</span> MESSAGE_SALARY_CONSTRAINTS =
-            <span class="string"><span class="delimiter">&quot;</span><span class="content">Salary should only contain numbers, and it should not be blank</span><span class="delimiter">&quot;</span></span>;
-    <span class="directive">public</span> <span class="directive">static</span> <span class="directive">final</span> <span class="predefined-type">String</span> SALARY_VALIDATION_REGEX = <span class="string"><span class="delimiter">&quot;</span><span class="content">[0-9.]+</span><span class="delimiter">&quot;</span></span>;
+            <span class="string"><span class="delimiter">&quot;</span><span class="content">Salary should only contain numbers, and it should not be blank. Only a maximum of 6 whole numbers and </span><span class="delimiter">&quot;</span></span>
+            + <span class="string"><span class="delimiter">&quot;</span><span class="content">2 decimal place are allowed. (Max Salary store value is 999999.99)</span><span class="char">\n</span><span class="delimiter">&quot;</span></span>;
+    <span class="directive">public</span> <span class="directive">static</span> <span class="directive">final</span> <span class="predefined-type">String</span> SALARY_VALIDATION_REGEX = <span class="string"><span class="delimiter">&quot;</span><span class="content">[%]?[-]?[0-9]{1,6}([.][0-9]{1,2})?</span><span class="delimiter">&quot;</span></span>;
     <span class="directive">public</span> <span class="directive">final</span> <span class="predefined-type">String</span> value;
+
+    <span class="comment">/**
+     * Constructs a {@code salary}.
+     *
+     * @param salary A valid salary.
+     */</span>
+
     <span class="directive">public</span> Salary(<span class="predefined-type">String</span> salary) {
         requireNonNull(salary);
         checkArgument(isValidSalary(salary), MESSAGE_SALARY_CONSTRAINTS);
@@ -871,7 +905,7 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
     }
 
     <span class="comment">/**
-     * Returns true if a given string is a valid employee Id.
+     * Returns true if a given string is a valid salary.
      */</span>
     <span class="directive">public</span> <span class="directive">static</span> <span class="type">boolean</span> isValidSalary(<span class="predefined-type">String</span> test) {
         <span class="keyword">return</span> test.matches(SALARY_VALIDATION_REGEX);
@@ -883,9 +917,11 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="directive">static</span> <span class="directive">final</span> <span class="predefined-type">String</span> MESSAGE_BONUS_CONSTRAINTS =
-            <span class="string"><span class="delimiter">&quot;</span><span class="content">Bonus should only contain numbers, and it should not be blank</span><span class="delimiter">&quot;</span></span>;
-    <span class="directive">public</span> <span class="directive">static</span> <span class="directive">final</span> <span class="predefined-type">String</span> BONUS_VALIDATION_REGEX = <span class="string"><span class="delimiter">&quot;</span><span class="content">[0-9.]+</span><span class="delimiter">&quot;</span></span>;
+<pre class="CodeRay highlight"><code data-lang="java">    <span class="directive">public</span> <span class="directive">static</span> <span class="directive">final</span> <span class="predefined-type">String</span> MESSAGE_BONUS_CONSTRAINTS =
+            <span class="string"><span class="delimiter">&quot;</span><span class="content">Bonus should only contain positive numbers and maximum of 2 decimal places from 0 to 24,</span><span class="delimiter">&quot;</span></span>
+            + <span class="string"><span class="delimiter">&quot;</span><span class="content"> and it should not be blank</span><span class="delimiter">&quot;</span></span>;
+    <span class="directive">public</span> <span class="directive">static</span> <span class="directive">final</span> <span class="predefined-type">String</span> BONUS_VALIDATION_REGEX = <span class="string"><span class="delimiter">&quot;</span><span class="content">(([0-9]{1,7}([.][0-9]{1,2})?)|(1[0-9]{7}([.][0-9]{1,2})?)</span><span class="delimiter">&quot;</span></span>
+            + <span class="string"><span class="delimiter">&quot;</span><span class="content">|(2[0-3]([0-9]{1,6})([.][0-9]{1,2})?))</span><span class="delimiter">&quot;</span></span>;
     <span class="directive">public</span> <span class="directive">final</span> <span class="predefined-type">String</span> value;
 
     <span class="directive">public</span> Bonus(<span class="predefined-type">String</span> bonus) {
@@ -913,7 +949,8 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java">    <span class="directive">private</span> <span class="directive">static</span> Person createModifiedPerson(Person personToEdit, ModSalaryDescriptor modSalaryDescriptor) {
+<pre class="CodeRay highlight"><code data-lang="java">    <span class="directive">private</span> <span class="directive">static</span> Person createModifiedPerson(Person personToEdit,
+                   ModSalaryDescriptor modSalaryDescriptor) <span class="directive">throws</span> <span class="exception">ParseException</span> {
         <span class="keyword">assert</span> personToEdit != <span class="predefined-constant">null</span>;
 
         EmployeeId updatedEmployeeId = personToEdit.getEmployeeId();
@@ -924,27 +961,32 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
         Department updatedDepartment = personToEdit.getDepartment();
         <span class="predefined-type">Position</span> updatedPosition = personToEdit.getPosition();
         Address updatedAddress = personToEdit.getAddress();
-        Salary updatedSalary = modSalaryDescriptor.getSalary().orElse(personToEdit.getSalary());
-        Bonus updatedBonus = modSalaryDescriptor.getBonus().orElse(personToEdit.getBonus());
+        Salary updatedSalary = ParserUtil.parseSalary(typeOfSalaryMod(personToEdit, modSalaryDescriptor));
+        Bonus updatedBonus = ParserUtil.parseBonus(modifyBonusMonth(personToEdit, modSalaryDescriptor, updatedSalary));
+
         <span class="predefined-type">Set</span>&lt;Tag&gt; updatedTags = personToEdit.getTags();
 
-        <span class="keyword">return</span> <span class="keyword">new</span> Person(updatedEmployeeId, updatedName, updatedDateOfBirth, updatedPhone, updatedEmail, updatedDepartment, updatedPosition, updatedAddress, updatedSalary, updatedBonus, updatedTags);
+        <span class="keyword">return</span> <span class="keyword">new</span> Person(updatedEmployeeId, updatedName, updatedDateOfBirth, updatedPhone, updatedEmail,
+                updatedDepartment, updatedPosition, updatedAddress, updatedSalary, updatedBonus, updatedTags);
     }</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>The result of <code>ModifyPayCommand</code> is encapsulated as a <code>CommandResult</code> object which is passed back into the UI to reflect the newly modified Salary/Bonus.
-The sequence diagram below illustrates the operation of <code>modifypay</code> command:</p>
+<p>The result of <code>ModifyPayCommand</code> is encapsulated as a <code>CommandResult</code> object which is
+passed back into the UI to reflect the newly modified Salary/Bonus.
+The sequence diagram below illustrates the operation of <code>modifyPay</code> command:</p>
 </div>
-<div class="paragraph">
-<p><strong>Coming soon</strong></p>
+<div class="imageblock">
+<div class="content">
+<img src="images/ModifyPayCommandSequenceDiagram.png" alt="ModifyPayCommandSequenceDiagram" width="850">
+</div>
 </div>
 </div>
 </div>
 <div class="sect3">
 <h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">3.2.2. Design Considerations</a></h4>
 <div class="paragraph">
-<p>Aspect implementation of <code>modifypay</code> command:</p>
+<p>Aspect implementation of <code>modifyPay</code> command:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -969,7 +1011,7 @@ The sequence diagram below illustrates the operation of <code>modifypay</code> c
 <p>Pros: Lesser Class to handle different fields</p>
 </li>
 <li>
-<p>Cons: User may accidentally touched on sensitive data and ended up editting them</p>
+<p>Cons: User may accidentally touched on sensitive data and ended up editing them</p>
 </li>
 </ul>
 </div>
@@ -3965,7 +4007,112 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="deleting-an-employee"><a class="link" href="#deleting-an-employee">H.7. Deleting an employee</a></h3>
+<h3 id="modifying-an-employee-s-pay"><a class="link" href="#modifying-an-employee-s-pay">H.7. Modifying an employee&#8217;s pay</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Modifying an employee&#8217;s pay</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: Salary are not allowed to exceed 999999.99(max value) or goes below 0.01(min value).<br>
+Allocated Bonus should not be more than 24 months of Salary.</p>
+</li>
+<li>
+<p>Test case: modifyPay 1 s/1000<br>
+Expected: First employee&#8217;s salary will be increased by 1000 if max salary value are not exceeded after modification. Timestamp in the status bar is updated.
+Else, error details shown in the status message. Status bar remains the same.</p>
+</li>
+<li>
+<p>Test case: modifyPay 1 s/-1000<br>
+Expected: First employee&#8217;s salary will be decreased by 1000 if salary does not goes below min value after modification. Timestamp in the status bar is updated.
+Else, error details shown in the status message. Status bar remains the same.</p>
+</li>
+<li>
+<p>Test case: modifyPay 1 s/%100<br>
+Expected: First employee&#8217;s salary will be doubled if the salary does not exceed the max value after modification. Timestamp in the status bar is updated.
+Else, error details shown in the status message. Status bar remains the same.</p>
+</li>
+<li>
+<p>Test case: modifyPay 1 s/%-5<br>
+Expected: First employee&#8217;s salary will be decreased by 5%. Timestamp in the status bar is updated.</p>
+</li>
+<li>
+<p>Test case: modifyPay 1 b/2<br>
+Expected: First employee&#8217;s bonus will be changed to 2 months of current bonus. Timestamp in the status bar is updated.</p>
+</li>
+<li>
+<p>Test case: modifyPay 1 b/25<br>
+Expected: Error details shown in the status message. Status bar remains the same.</p>
+</li>
+<li>
+<p>Test case: modifyPay 1 s/1000 b/2<br>
+Expected: If max salary value are not exceeded after modification,
+first employee&#8217;s salary increased by 1000 and bonus value changed to 2 months of new salary. Timestamp in the status bar is updated.
+Else, error details shown in the status message. Status bar remains the same.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="modifying-the-pay-of-all-the-employees-in-the-list"><a class="link" href="#modifying-the-pay-of-all-the-employees-in-the-list">H.8. Modifying the pay of all the employees in the list</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Modifying an employee&#8217;s pay</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: Salary are not allowed to exceed 999999.99(max value) or goes below 0.01(min value).<br>
+Allocated Bonus should not be more than 24 months of Salary.</p>
+</li>
+<li>
+<p>Test case: modifyAllPay s/1000<br>
+Expected: All the employees' salary shown in the list will be increased by 1000 if none of
+the employee salary in the list exceed max salary value after modification. Timestamp in the status bar is updated.
+Else, error details shown in the status message. Status bar remains the same.</p>
+</li>
+<li>
+<p>Test case: modifyAllPay s/-1000<br>
+Expected: All the employees' salary shown in the list will be decreased by 1000
+if none of the employee salary goes below min value after modification. Timestamp in the status bar is updated.
+Else, error details shown in the status message. Status bar remains the same.</p>
+</li>
+<li>
+<p>Test case: modifyAllPay s/%100<br>
+Expected: All the employees' salary shown in the list will be doubled
+if none of the employee salary exceed the max value after modification. Timestamp in the status bar is updated.
+Else, error details shown in the status message. Status bar remains the same.</p>
+</li>
+<li>
+<p>Test case: modifyAllPay s/%-5<br>
+Expected: All the employees' salary shown in the list will be decreased by 5%. Timestamp in the status bar is updated.</p>
+</li>
+<li>
+<p>Test case: modifyAllPay b/2<br>
+Expected: All the employees' bonus shown in the list will be changed to 2 months of current bonus. Timestamp in the status bar is updated.</p>
+</li>
+<li>
+<p>Test case: modifyAllPay b/25<br>
+Expected: Error details shown in the status message. Status bar remains the same.</p>
+</li>
+<li>
+<p>Test case: modifyAllPay s/1000 b/2<br>
+Expected: If max salary value are not exceeded for any employee shown in the list,
+All the employees' salary shown in the list will be increased by 1000 and bonus value changed to 2 months of new salary. Timestamp in the status bar is updated.
+Else, error details shown in the status message. Status bar remains the same.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="deleting-an-employee"><a class="link" href="#deleting-an-employee">H.9. Deleting an employee</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -3994,7 +4141,7 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="saving-data"><a class="link" href="#saving-data">H.8. Saving data</a></h3>
+<h3 id="saving-data"><a class="link" href="#saving-data">H.10. Saving data</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -4014,4 +4161,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-10 04:57:16 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-10 14:37:57 UTC</div></div></div></body></html>
