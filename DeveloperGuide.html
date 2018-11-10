@@ -81,8 +81,13 @@
 <li><a href="#instructions-for-manual-testing">Appendix H: Instructions for Manual Testing</a>
 <ul class="sectlevel2">
 <li><a href="#launch-and-shutdown">H.1. Launch and Shutdown</a></li>
-<li><a href="#deleting-a-person">H.2. Deleting a person</a></li>
-<li><a href="#saving-data">H.3. Saving data</a></li>
+<li><a href="#adding-an-employee">H.2. Adding an employee</a></li>
+<li><a href="#editing-an-employee">H.3. Editing an employee</a></li>
+<li><a href="#filtering-employees-of-a-certain-department-and-position">H.4. Filtering employees of a certain department and position</a></li>
+<li><a href="#finding-a-specific-employee">H.5. Finding a specific employee</a></li>
+<li><a href="#selecting-an-employee">H.6. Selecting an employee</a></li>
+<li><a href="#deleting-an-employee">H.7. Deleting an employee</a></li>
+<li><a href="#saving-data">H.8. Saving data</a></li>
 </ul>
 </li>
 </ul>
@@ -525,10 +530,10 @@ Note how the event is propagated through the <code>EventsCenter</code> to the <c
 <p>stores a <code>UserPref</code> object that represents the user&#8217;s preferences.</p>
 </li>
 <li>
-<p>stores the Address Book data.</p>
+<p>stores the Address Book, Schedule List, Expenses List and Recruitment List data.</p>
 </li>
 <li>
-<p>exposes an unmodifiable <code>ObservableList&lt;Person&gt;</code> that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.</p>
+<p>exposes unmodifiable <code>ObservableList&lt;Person&gt;</code>, <code>ObservableList&lt;Schedule&gt;</code>, <code>ObservableList&lt;Expenses&gt;</code> and <code>ObservableList&lt;Recruitment&gt;</code> that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.</p>
 </li>
 <li>
 <p>does not depend on any of the other three components.</p>
@@ -1231,7 +1236,19 @@ If the input Index isn&#8217;t found in the list, an error message will be shown
 <p>The <code>filter</code> mechanism is facilitated by <code>FilterCommandParser</code>.
 The <code>FilterCommandParser</code> implements the <code>Parser</code> interface, parses the arguments parameter, which is the input from the user, and creates a new <code>FilterCommand</code> object.
 Apart from parsing the input, the <code>FilterCommandParser</code> checks whether the input complies with the required format.
-This checking of input compliance is facilitated by two helper methods, namely <code>areDepartmentKeywordsValid</code> and <code>arePositionKeywordsValid</code>, that is within the class.</p>
+This checking of input compliance is facilitated by two helper methods, namely <code>processDepartmentKeywords</code> and <code>processPositionKeywords</code>, that is within the class.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The <code>processDepartmentKeywords</code> and <code>processPositionKeywords</code> methods are quite similar. Therefore, the code snippets will include only <code>processDepartmentKeywords</code> rather than both.
+</td>
+</tr>
+</table>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -1251,61 +1268,60 @@ If the input does not comply with the required format, an error message will be 
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> FilterCommand parse(<span class="predefined-type">String</span> args) <span class="directive">throws</span> <span class="exception">ParseException</span> {
-
     ...
     ...
 
-    if (argMultimap.getValue(PREFIX_DEPARTMENT).isPresent()) {
-        trimmedDepartment = (argMultimap.getValue(PREFIX_DEPARTMENT).get()).trim();
-        departmentKeywords = trimmedDepartment.split(<span class="string"><span class="delimiter">&quot;</span><span class="char">\\</span><span class="content">s+</span><span class="delimiter">&quot;</span></span>);
-        <span class="keyword">if</span> (areDepartmentKeywordsValid(departmentKeywords)) {
-            filterCommand.setIsDepartmentPrefixPresent(<span class="predefined-constant">true</span>);
-            filterCommand.setDepartmentPredicate(<span class="keyword">new</span> DepartmentContainsKeywordsPredicate(<span class="predefined-type">Arrays</span>
-            .asList(departmentKeywords)));
-        } <span class="keyword">else</span> <span class="keyword">if</span> (!areDepartmentKeywordsValid(departmentKeywords)) {
-            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="exception">ParseException</span>(Department.MESSAGE_DEPARTMENT_KEYWORD_CONSTRAINTS);
-        }
-    } <span class="keyword">else</span> <span class="keyword">if</span> (!argMultimap.getValue(PREFIX_DEPARTMENT).isPresent()) {
+    ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_DEPARTMENT, PREFIX_POSITION);
+
+    <span class="keyword">if</span> (trimmedArgs.isEmpty() || (!argMultimap.getValue(PREFIX_DEPARTMENT).isPresent()
+            &amp;&amp; !argMultimap.getValue(PREFIX_POSITION).isPresent()) || !didPrefixesAppearOnlyOnce(trimmedArgs)
+            || !ACCEPTED_ORDERS.contains(sortOrder)) {
+        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="exception">ParseException</span>(<span class="predefined-type">String</span>.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
+    }
+
+    <span class="keyword">if</span> (!argMultimap.getValue(PREFIX_DEPARTMENT).isPresent()) {
         filterCommand.setIsDepartmentPrefixPresent(<span class="predefined-constant">false</span>);
-    }
-
-    <span class="keyword">if</span> (argMultimap.getValue(PREFIX_POSITION).isPresent()) {
-        trimmedPosition = (argMultimap.getValue(PREFIX_POSITION).get()).trim();
-        positionKeywords = trimmedPosition.split(<span class="string"><span class="delimiter">&quot;</span><span class="char">\\</span><span class="content">s+</span><span class="delimiter">&quot;</span></span>);
-        <span class="keyword">if</span> (arePositionKeywordsValid(positionKeywords)) {
-            filterCommand.setIsPositionPrefixPresent(<span class="predefined-constant">true</span>);
-            filterCommand.setPositionPredicate(<span class="keyword">new</span> PositionContainsKeywordsPredicate(<span class="predefined-type">Arrays</span>
-            .asList(positionKeywords)));
-        } <span class="keyword">else</span> <span class="keyword">if</span> (!arePositionKeywordsValid(positionKeywords)) {
-            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="exception">ParseException</span>(<span class="predefined-type">Position</span>.MESSAGE_POSITION_KEYWORD_CONSTRAINTS);
-        }
-    } <span class="keyword">else</span> <span class="keyword">if</span> (!argMultimap.getValue(PREFIX_POSITION).isPresent()) {
-        filterCommand.setIsPositionPrefixPresent(<span class="predefined-constant">false</span>);
+    } <span class="keyword">else</span> <span class="keyword">if</span> (argMultimap.getValue(PREFIX_DEPARTMENT).isPresent()
+            &amp;&amp; !processDepartmentKeywords(argMultimap, filterCommand)) {
+        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="exception">ParseException</span>(Department.MESSAGE_DEPARTMENT_KEYWORD_CONSTRAINTS);
     }
 
     ...
     ...
-
 }</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Code snippet of <code>areDepartmentKeywordsValid</code> and <code>arePositionKeywordsValid</code> helper method:</p>
+<p>Code snippet of <code>processDepartmentKeywords</code> helper method:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">boolean</span> areDepartmentKeywordsValid(<span class="predefined-type">String</span><span class="type">[]</span> keywords) {
-    <span class="keyword">for</span> (<span class="predefined-type">String</span> keyword: keywords) {
-        <span class="keyword">if</span> (!Department.isValidDepartment(keyword)) {
-            <span class="keyword">return</span> <span class="predefined-constant">false</span>;
-        }
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">boolean</span> processDepartmentKeywords(ArgumentMultimap argMultimap, FilterCommand command) {
+    <span class="predefined-type">String</span> trimmedDepartment = (argMultimap.getValue(PREFIX_DEPARTMENT).get().trim());
+    <span class="predefined-type">String</span><span class="type">[]</span> departmentKeywords = trimmedDepartment.split(<span class="string"><span class="delimiter">&quot;</span><span class="char">\\</span><span class="content">s+</span><span class="delimiter">&quot;</span></span>);
+
+    <span class="keyword">return</span> validityCheckForDepartments(command, departmentKeywords);
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>processDepartmentKeywords</code> is further assisted by two other helper methods, namely, <code>validityCheckForDepartments</code> and <code>areDepartmentKeywordsValid</code> which are also within the <code>FilterCommandParser</code> class. The code snippet of the two mentioned methods are as follow:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">boolean</span> validityCheckForDepartments(FilterCommand command, <span class="predefined-type">String</span><span class="type">[]</span> keywords) {
+    <span class="keyword">if</span> (!areDepartmentKeywordsValid(keywords)) {
+        <span class="keyword">return</span> <span class="predefined-constant">false</span>;
     }
+
+    command.setIsDepartmentPrefixPresent(<span class="predefined-constant">true</span>);
+    command.setDepartmentPredicate(<span class="keyword">new</span> DepartmentContainsKeywordsPredicate(<span class="predefined-type">Arrays</span>.asList(keywords)));
     <span class="keyword">return</span> <span class="predefined-constant">true</span>;
 }
 
-<span class="directive">public</span> <span class="type">boolean</span> arePositionKeywordsValid(<span class="predefined-type">String</span><span class="type">[]</span> keywords) {
+<span class="directive">public</span> <span class="type">boolean</span> areDepartmentKeywordsValid(<span class="predefined-type">String</span><span class="type">[]</span> keywords) {
     <span class="keyword">for</span> (<span class="predefined-type">String</span> keyword: keywords) {
-        <span class="keyword">if</span> (!<span class="predefined-type">Position</span>.isValidPosition(keyword)) {
+        <span class="keyword">if</span> (!keyword.matches(DEPARTMENT_KEYWORD_VALIDATION_REGEX)) {
             <span class="keyword">return</span> <span class="predefined-constant">false</span>;
         }
     }
@@ -1319,31 +1335,62 @@ If the input does not comply with the required format, an error message will be 
 <div class="paragraph">
 <p>The <code>FilterCommand</code> is being executed in this phase.
 <code>FilterCommand</code> first checks which prefix(es) is(are) present prior to calling the <code>updateFilteredPersonList</code> method, which updates <code>filteredPersonList</code>
- with the relevant department(s) and/or position(s) that matches the keyword(s) input from the user.</p>
+ with the relevant department(s) and/or position(s) that matches the keyword(s) input from the user.
+ Additionally, the method <code>updateFilteredExpensesList</code> and <code>updateFilteredScheduleList</code> will be called to update the <code>filteredExpensesList</code> and <code>filteredScheduleList</code> respectively to show only the matched employees' expenses and schedules.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If the keywords input from the user results in 0 person found. The CLI will show the user a list of currently available department(s) and/or position(s) in the PersonList.
+The listing of available department(s) and/or position(s) depends on the presence of the prefix.<br>
+Example: If <code>filter asc d/hello</code> results in 0 person found, the CLI will list the currently available department(s) in CHRS.
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
-<p>Code snippet of <code>FilterCommand</code> that checks which prefix is present prior to updating <code>filteredPersonList</code>:</p>
+<p>Code snippet of <code>FilterCommand</code> that checks which prefix is present prior to updating <code>filteredPersonList</code>, <code>filteredExpensesList</code> and <code>filteredScheduleList</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@Override</span>
-<span class="directive">public</span> CommandResult execute(Model model, CommandHistory history) {
-    requireNonNull(model);
-    <span class="keyword">if</span> (isDepartmentPrefixPresent &amp;&amp; !isPositionPrefixPresent) {
-        model.updateFilteredPersonList(departmentPredicate);
-    } <span class="keyword">else</span> <span class="keyword">if</span> (isPositionPrefixPresent &amp;&amp; !isDepartmentPrefixPresent) {
-        model.updateFilteredPersonList(positionPredicate);
-    } <span class="keyword">else</span> <span class="keyword">if</span> (isDepartmentPrefixPresent &amp;&amp; isPositionPrefixPresent) {
-        model.updateFilteredPersonList(departmentPredicate.and(positionPredicate));
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">FilterCommand</span> <span class="directive">extends</span> Command {
+    ...
+    ...
+
+    <span class="annotation">@Override</span>
+    <span class="directive">public</span> CommandResult execute(Model model, CommandHistory history) {
+        requireNonNull(model);
+        <span class="predefined-type">String</span> allAvailableDepartments = listAvailableDepartments(model);
+        <span class="predefined-type">String</span> allAvailablePositions = listAvailablePositions(model);
+
+        <span class="keyword">if</span> (isDepartmentPrefixPresent &amp;&amp; !isPositionPrefixPresent) {
+            model.updateFilteredPersonList(departmentPredicate, sortOrder);
+        } <span class="keyword">else</span> <span class="keyword">if</span> (isPositionPrefixPresent &amp;&amp; !isDepartmentPrefixPresent) {
+            model.updateFilteredPersonList(positionPredicate, sortOrder);
+        } <span class="keyword">else</span> <span class="keyword">if</span> (isDepartmentPrefixPresent &amp;&amp; isPositionPrefixPresent) {
+            model.updateFilteredPersonList(departmentPredicate.and(positionPredicate), sortOrder);
+        }
+
+        EmployeeIdExpensesContainsKeywordsPredicate expensesPredicate = generateEmployeeIdExpensesPredicate(model);
+        EmployeeIdScheduleContainsKeywordsPredicate schedulePredicate = generateEmployeeIdSchedulePredicate(model);
+        model.updateFilteredExpensesList(expensesPredicate);
+        model.updateFilteredScheduleList(schedulePredicate);
+
+        <span class="keyword">return</span> <span class="keyword">new</span> CommandResult(feedbackToUser(model, allAvailableDepartments, allAvailablePositions));
     }
-    <span class="keyword">return</span> <span class="keyword">new</span> CommandResult(
-            <span class="predefined-type">String</span>.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
+
+    ...
+    ...
 }</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>The result of the execution of <code>FilterCommand</code> is encapsulated as a <code>CommandResult</code> object which is returned to the <code>LogicManager</code>.
-Upon the update of <code>filteredPersonList</code>, the program will display only employees that are of the specific department(s)
+<p>The result of the execution of <code>FilterCommand</code> is then encapsulated as a <code>CommandResult</code> object which is returned to the <code>LogicManager</code>.
+Upon the update of <code>filteredPersonList</code>, <code>filteredExpensesList</code> and <code>filteredScheduleList</code>, the program will display only employees alongside their respective expenses and schedule that are of the specific department(s)
  and/or position(s) as specified by the input from the user.</p>
 </div>
 <div class="paragraph">
@@ -2807,10 +2854,10 @@ for <code>RemarkCommandParser</code>.</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>User requests to filter employees’ data</p>
+<p>User requests to filter employees based on department(s) and/or rank/position(s)</p>
 </li>
 <li>
-<p>CHRS output the employees’ data of the specific filter</p>
+<p>CHRS output the date of the employees of the specified department(s) and/or rank(s)/position(s)</p>
 <div class="paragraph">
 <p>Use case ends.</p>
 </div>
@@ -2823,11 +2870,24 @@ for <code>RemarkCommandParser</code>.</p>
 <div class="ulist none">
 <ul class="none">
 <li>
-<p>1a. CHRS detects an invalid field input</p>
+<p>1a. CHRS detects an invalid department or position keyword(s).</p>
 <div class="ulist none">
 <ul class="none">
 <li>
-<p>1a1. CHRS inform user that the field does not exist</p>
+<p>1a1. CHRS informs the user that the keyword is invalid.</p>
+<div class="paragraph">
+<p>Use case resumes at step 1.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>1b. CHRS detects that the system holds no data of any employee.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1b1. CHRS informs user that the system has no records of any employee data and shows the currently available department(s) and/or rank(s)/position(s) to filter by.</p>
 <div class="paragraph">
 <p>Use case ends.</p>
 </div>
@@ -2836,13 +2896,13 @@ for <code>RemarkCommandParser</code>.</p>
 </div>
 </li>
 <li>
-<p>1b. CHRS detects that the system holds no data of any employee</p>
+<p>1c. CHRS detects an invalid input format or missing details.</p>
 <div class="ulist none">
 <ul class="none">
 <li>
-<p>1b1. CHRS informs user that the system has no records of any employee data</p>
+<p>1c1. CHRS shows a message containing details of the command usage.</p>
 <div class="paragraph">
-<p>Use case ends.</p>
+<p>Use case resumes at step 1.</p>
 </div>
 </li>
 </ul>
@@ -2857,7 +2917,13 @@ for <code>RemarkCommandParser</code>.</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>User requests to edit employee’s data</p>
+<p>User requests to list employees</p>
+</li>
+<li>
+<p>CHRS shows a list of employees</p>
+</li>
+<li>
+<p>User requests to edit a specific employee’s data in the list</p>
 </li>
 <li>
 <p>CHRS updates relevant data of the employee</p>
@@ -2873,45 +2939,32 @@ for <code>RemarkCommandParser</code>.</p>
 <div class="ulist none">
 <ul class="none">
 <li>
-<p>1a. CHRS detects that requested employee’s data does not exist</p>
+<p>2a. The list is empty.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+<li>
+<p>3a. The given index is invalid.</p>
 <div class="ulist none">
 <ul class="none">
 <li>
-<p>1a1. CHRS informs user that the data does not exist</p>
+<p>3a1. CHRS shows an error message.</p>
 <div class="paragraph">
-<p>Use case ends.</p>
+<p>Use case resumes at step 2.</p>
 </div>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p>1b. CHRS detects invalid input format or missing details</p>
+<p>3b. CHRS detects invalid input format or missing details.</p>
 <div class="ulist none">
 <ul class="none">
 <li>
-<p>1b1. CHRS prompts user for correct input</p>
-</li>
-<li>
-<p>1b2. User enters new input</p>
-</li>
-<li>
-<p>Step 1b1 – 1b2 are repeated until the correct input is entered</p>
+<p>3b1. CHRS shows an error message containing either the details of the command usage or parameters constraints.</p>
 <div class="paragraph">
-<p>Use case resumes from step 2.</p>
-</div>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>1c. CHRS detects that the system holds no data of any employee</p>
-<div class="ulist none">
-<ul class="none">
-<li>
-<p>1c1. CHRS informs user that the system has no records of any employee data</p>
-<div class="paragraph">
-<p>Use case ends.</p>
+<p>Use case resumes at step 2.</p>
 </div>
 </li>
 </ul>
@@ -2942,32 +2995,26 @@ for <code>RemarkCommandParser</code>.</p>
 <div class="ulist none">
 <ul class="none">
 <li>
-<p>1a. CHRS detects that the employee’s data already exists</p>
+<p>1a. CHRS detects that the employee’s data already exists.</p>
 <div class="ulist none">
 <ul class="none">
 <li>
-<p>1a1. CHRS informs user that the data already exists</p>
+<p>1a1. CHRS informs user that the data already exists.</p>
 <div class="paragraph">
-<p>Use case ends.</p>
+<p>Use case resumes at step 1.</p>
 </div>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p>1b. CHRS detects invalid input format or missing details</p>
+<p>1b. CHRS detects invalid input format or missing details.</p>
 <div class="ulist none">
 <ul class="none">
 <li>
-<p>1b1. CHRS prompts user for correct input</p>
-</li>
-<li>
-<p>1b2. User enters new input</p>
-</li>
-<li>
-<p>Step 1b1 – 1b2 are repeated until the correct input is entered</p>
+<p>1b1. CHRS shows an error message containing either the details of the command usage or parameters constraints.</p>
 <div class="paragraph">
-<p>Use case resumes from step 2.</p>
+<p>Use case resumes at step 1.</p>
 </div>
 </li>
 </ul>
@@ -2981,6 +3028,12 @@ for <code>RemarkCommandParser</code>.</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
+<li>
+<p>User requests to list employees</p>
+</li>
+<li>
+<p>CHRS shows a list of employees</p>
+</li>
 <li>
 <p>User requests to delete employee’s data</p>
 </li>
@@ -2998,26 +3051,19 @@ for <code>RemarkCommandParser</code>.</p>
 <div class="ulist none">
 <ul class="none">
 <li>
-<p>1a. CHRS detects that requested employee’s data does not exist</p>
-<div class="ulist none">
-<ul class="none">
-<li>
-<p>1a1. CHRS informs user that the data does not exist</p>
+<p>2a. The list is empty.</p>
 <div class="paragraph">
 <p>Use case ends.</p>
 </div>
 </li>
-</ul>
-</div>
-</li>
 <li>
-<p>1b. CHRS detects that the system holds no data of any employee</p>
+<p>3a. The given index is invalid.</p>
 <div class="ulist none">
 <ul class="none">
 <li>
-<p>1b1. CHRS informs user that the system has no records of any employee data</p>
+<p>3a1. CHRS shows an error message.</p>
 <div class="paragraph">
-<p>Use case ends.</p>
+<p>Use case resumes at step 2.</p>
 </div>
 </li>
 </ul>
@@ -3033,10 +3079,16 @@ for <code>RemarkCommandParser</code>.</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>User requests to modify employee’s pay/bonus</p>
+<p>User requests to list employees</p>
 </li>
 <li>
-<p>CHRS updates the pay or bonus of the specified employee</p>
+<p>CHRS shows a list of employees</p>
+</li>
+<li>
+<p>User requests to modify employee(s) pay/bonus</p>
+</li>
+<li>
+<p>CHRS updates the pay and/or bonus of the specified employee(s)</p>
 <div class="paragraph">
 <p>Use case ends.</p>
 </div>
@@ -3049,45 +3101,32 @@ for <code>RemarkCommandParser</code>.</p>
 <div class="ulist none">
 <ul class="none">
 <li>
-<p>1a. CHRS detects that requested employee does not exist</p>
+<p>2a. The list is empty.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+<li>
+<p>3a. The given index is invalid.</p>
 <div class="ulist none">
 <ul class="none">
 <li>
-<p>1a1. CHRS informs user that the employee does not exist</p>
+<p>3a1. CHRS shows an error message.</p>
 <div class="paragraph">
-<p>Use case ends.</p>
+<p>Use case resumes at step 2.</p>
 </div>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p>1b. CHRS detects invalid input format or missing details</p>
+<p>3b. CHRS detects invalid input format or missing details.</p>
 <div class="ulist none">
 <ul class="none">
 <li>
-<p>1b1. CHRS prompts user for correct input</p>
-</li>
-<li>
-<p>1b2. User enters new input</p>
-</li>
-<li>
-<p>Step 1b1 – 1b2 are repeated until the correct input is entered</p>
+<p>3b1. CHRS shows an error message containing either the details of the command usage or parameters constraints.</p>
 <div class="paragraph">
-<p>Use case resumes from step 2.</p>
-</div>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>1c. CHRS detects that the system holds no data of any employee</p>
-<div class="ulist none">
-<ul class="none">
-<li>
-<p>1c1. CHRS informs user that the system has no records of any employee data</p>
-<div class="paragraph">
-<p>Use case ends.</p>
+<p>Use case resumes at step 2.</p>
 </div>
 </li>
 </ul>
@@ -3112,56 +3151,23 @@ for <code>RemarkCommandParser</code>.</p>
 </li>
 </ol>
 </div>
-<h3 id="actor-hr-staff-handling-financial-matters" class="discrete">Actor: HR Staff (Handling financial matters)</h3>
-<h3 id="use-case-uc07-view-expenses" class="discrete">Use case: UC07 - View expenses</h3>
+<h3 id="actor-hr-staff" class="discrete">Actor: HR Staff</h3>
+<h3 id="use-case-uc07-list-all-chrs-data" class="discrete">Use case: UC07 - List all CHRS data</h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>User requests to view expenses claim by an employee</p>
+<p>User requests to list all CHRS data</p>
 </li>
 <li>
-<p>CHRS shows the list of expenses claim by the employee</p>
+<p>CHRS shows all CHRS data</p>
 <div class="paragraph">
 <p>Use case ends.</p>
 </div>
 </li>
 </ol>
-</div>
-<div class="paragraph">
-<p><strong>Extensions</strong></p>
-</div>
-<div class="ulist none">
-<ul class="none">
-<li>
-<p>1a. CHRS detects that requested employee does not exist</p>
-<div class="ulist none">
-<ul class="none">
-<li>
-<p>1a1. CHRS informs user that the employee does not exist</p>
-<div class="paragraph">
-<p>Use case ends.</p>
-</div>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>1b. CHRS detects that there are no expenses claim by any employee recorded in the system</p>
-<div class="ulist none">
-<ul class="none">
-<li>
-<p>1b1. CHRS informs user that there are no records of any expenses claim</p>
-<div class="paragraph">
-<p>Use case ends.</p>
-</div>
-</li>
-</ul>
-</div>
-</li>
-</ul>
 </div>
 <h3 id="use-case-uc08-search-function" class="discrete">Use case: UC08 - Search function</h3>
 <div class="paragraph">
@@ -3170,10 +3176,10 @@ for <code>RemarkCommandParser</code>.</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>User requests to search for a certain employee’s data</p>
+<p>User requests to search for a certain employee’s data by either the name or employee ID</p>
 </li>
 <li>
-<p>CHRS shows the data associated with the employee’s name</p>
+<p>CHRS shows the data associated with the employee’s name or employee ID</p>
 <div class="paragraph">
 <p>Use case ends.</p>
 </div>
@@ -3186,11 +3192,11 @@ for <code>RemarkCommandParser</code>.</p>
 <div class="ulist none">
 <ul class="none">
 <li>
-<p>1a. CHRS detects that requested employee’s data does not exist</p>
+<p>1a. CHRS detects that requested employee’s data does not exist.</p>
 <div class="ulist none">
 <ul class="none">
 <li>
-<p>1a1. CHRS informs user that the data does not exist</p>
+<p>1a1. CHRS informs user that the data does not exist.</p>
 <div class="paragraph">
 <p>Use case ends.</p>
 </div>
@@ -3199,13 +3205,13 @@ for <code>RemarkCommandParser</code>.</p>
 </div>
 </li>
 <li>
-<p>1b. CHRS detects that the system holds no data of any employee</p>
+<p>1b. CHRS detects invalid input format or missing details.</p>
 <div class="ulist none">
 <ul class="none">
 <li>
-<p>1b1. CHRS informs user that the system has no records of any employee data</p>
+<p>1b1. CHRS shows an error message containing either the details of the command usage or parameters constraints.</p>
 <div class="paragraph">
-<p>Use case ends.</p>
+<p>Use case resumes at step 1.</p>
 </div>
 </li>
 </ul>
@@ -3213,7 +3219,7 @@ for <code>RemarkCommandParser</code>.</p>
 </li>
 </ul>
 </div>
-<h3 id="actor-hr-staff-handling-financial-matters-2" class="discrete">Actor: HR Staff (Handling financial matters)</h3>
+<h3 id="actor-hr-staff-handling-financial-matters" class="discrete">Actor: HR Staff (Handling financial matters)</h3>
 <h3 id="use-case-uc09-add-expenses" class="discrete">Use case: UC09 – Add expenses</h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
@@ -3237,32 +3243,26 @@ for <code>RemarkCommandParser</code>.</p>
 <div class="ulist none">
 <ul class="none">
 <li>
-<p>1a. CHRS detects that requested employee does not exist</p>
+<p>1a. CHRS detects that requested employee does not exist.</p>
 <div class="ulist none">
 <ul class="none">
 <li>
-<p>1a1. CHRS informs user that the employee does not exist</p>
+<p>1a1. CHRS informs user that the employee does not exist.</p>
 <div class="paragraph">
-<p>Use case ends.</p>
+<p>Use case resumes at step 1.</p>
 </div>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p>1b. CHRS detects invalid input format or missing details</p>
+<p>1b. CHRS detects invalid input format or missing details.</p>
 <div class="ulist none">
 <ul class="none">
 <li>
-<p>1b1. CHRS prompts user for correct input</p>
-</li>
-<li>
-<p>1b2. User enters new input</p>
-</li>
-<li>
-<p>Step 1b1 – 1b2 are repeated until the correct input is entered</p>
+<p>1b1. CHRS shows an error message containing either the details of the command usage or parameters constraints.</p>
 <div class="paragraph">
-<p>Use case resumes from step 2.</p>
+<p>Use case resumes at step 1.</p>
 </div>
 </li>
 </ul>
@@ -3270,30 +3270,24 @@ for <code>RemarkCommandParser</code>.</p>
 </li>
 </ul>
 </div>
-<h3 id="actor-hr-manager" class="discrete">Actor: HR Manager</h3>
-<h3 id="use-case-uc10-approve-or-reject-leave-off-function" class="discrete">Use case: UC10 – Approve or reject leave/off function</h3>
+<h3 id="actor-hr-staff-handling-financial-matters-2" class="discrete">Actor: HR Staff (Handling financial matters)</h3>
+<h3 id="use-case-uc10-delete-expenses" class="discrete">Use case: UC10 - Delete expenses</h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>User requests for approve or reject leave/off function</p>
+<p>User requests to list expenses claims</p>
 </li>
 <li>
-<p>CHRS displays the list of employees’ names who applied for leave and request for employee’s ID</p>
+<p>CHRS shows a list of expenses claims</p>
 </li>
 <li>
-<p>User input the employee’s ID that has applied for leave(s)</p>
+<p>User requests to delete expenses claim by a certain employee</p>
 </li>
 <li>
-<p>CHRS requests for approval or rejection of the leave(s)</p>
-</li>
-<li>
-<p>User input whether the leave(s) is to be approved or rejected</p>
-</li>
-<li>
-<p>CHRS updates the employee’s leave(s) request status</p>
+<p>CHRS deletes the expenses claim by that employee in the system</p>
 <div class="paragraph">
 <p>Use case ends.</p>
 </div>
@@ -3306,115 +3300,19 @@ for <code>RemarkCommandParser</code>.</p>
 <div class="ulist none">
 <ul class="none">
 <li>
-<p>1a. CHRS detects that the leave/off application portal is empty</p>
-<div class="ulist none">
-<ul class="none">
-<li>
-<p>1a1. CHRS inform the user that there is no application of leave/off</p>
+<p>2a. The list is empty.</p>
 <div class="paragraph">
 <p>Use case ends.</p>
 </div>
 </li>
-</ul>
-</div>
-</li>
 <li>
-<p>3a. CHRS detects that the employee’s ID does not exist</p>
+<p>3a. The given index is invalid.</p>
 <div class="ulist none">
 <ul class="none">
 <li>
-<p>3a1. CHRS informs user that the employee’s ID does not exist</p>
+<p>3a1. CHRS shows an error message.</p>
 <div class="paragraph">
-<p>Use case ends.</p>
-</div>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>5a. CHRS detects an invalid data input</p>
-<div class="ulist none">
-<ul class="none">
-<li>
-<p>5a1. CHRS requests for correct data input</p>
-</li>
-<li>
-<p>5a2. User input new input</p>
-</li>
-<li>
-<p>Step 5a1 - 5a2 are repeated until the correct input is entered</p>
-<div class="paragraph">
-<p>Use case resumes from step 6.</p>
-</div>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-<h3 id="actor-hr-staff-handling-financial-matters-3" class="discrete">Actor: HR Staff (Handling financial matters)</h3>
-<h3 id="use-case-uc11-remove-expenses" class="discrete">Use case: UC11 - Remove expenses</h3>
-<div class="paragraph">
-<p><strong>MSS</strong></p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>User requests to remove expenses claim by a certain employee</p>
-</li>
-<li>
-<p>CHRS updates the expenses claim by that employee in the system</p>
-<div class="paragraph">
-<p>Use case ends.</p>
-</div>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p><strong>Extensions</strong></p>
-</div>
-<div class="ulist none">
-<ul class="none">
-<li>
-<p>1a. CHRS detects that requested employee does not exist</p>
-<div class="ulist none">
-<ul class="none">
-<li>
-<p>1a1. CHRS informs user that the employee does not exist</p>
-<div class="paragraph">
-<p>Use case ends.</p>
-</div>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>1b. CHRS detects invalid input format or missing details</p>
-<div class="ulist none">
-<ul class="none">
-<li>
-<p>1b1. CHRS prompts user for correct input</p>
-</li>
-<li>
-<p>1b2. User enters new input</p>
-</li>
-<li>
-<p>Step 1b1 – 1b2 are repeated until the correct input is entered</p>
-<div class="paragraph">
-<p>Use case resumes from step 2.</p>
-</div>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>1c. CHRS detects that the system holds no data of any employee</p>
-<div class="ulist none">
-<ul class="none">
-<li>
-<p>1c1. CHRS informs user that the system has no records of any employee data</p>
-<div class="paragraph">
-<p>Use case ends.</p>
+<p>Use case resumes at step 2.</p>
 </div>
 </li>
 </ul>
@@ -3423,45 +3321,7 @@ for <code>RemarkCommandParser</code>.</p>
 </ul>
 </div>
 <h3 id="actor-hr-staff-handling-recruitment" class="discrete">Actor: HR Staff (Handling recruitment)</h3>
-<h3 id="use-case-uc12-list-recruitment-post-s" class="discrete">Use case: UC12 – List recruitment post(s)</h3>
-<div class="paragraph">
-<p><strong>MSS</strong></p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>User requests to view currently available recruitment post(s)</p>
-</li>
-<li>
-<p>CHRS shows the list of currently available recruitment post(s)</p>
-<div class="paragraph">
-<p>Use case ends.</p>
-</div>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p><strong>Extensions</strong></p>
-</div>
-<div class="ulist none">
-<ul class="none">
-<li>
-<p>1a. CHRS detects that there is no recruitment post in the system</p>
-<div class="ulist none">
-<ul class="none">
-<li>
-<p>1a1. CHRS informs user that the system has no recruitment post.</p>
-<div class="paragraph">
-<p>Use case ends.</p>
-</div>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-<h3 id="actor-hr-staff-handling-recruitment-2" class="discrete">Actor: HR Staff (Handling recruitment)</h3>
-<h3 id="use-case-uc13-add-recruitment-post-s" class="discrete">Use case: UC13 – Add recruitment post(s)</h3>
+<h3 id="use-case-uc11-add-recruitment-post" class="discrete">Use case: UC11 – Add recruitment post</h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
@@ -3484,32 +3344,76 @@ for <code>RemarkCommandParser</code>.</p>
 <div class="ulist none">
 <ul class="none">
 <li>
-<p>1a. CHRS detects that the recruitment post already exists</p>
+<p>1a. CHRS detects that the recruitment post already exists.</p>
 <div class="ulist none">
 <ul class="none">
 <li>
-<p>1a1. CHRS informs user that the post already exists</p>
+<p>1a1. CHRS informs user that the recruitment post already exists.</p>
 <div class="paragraph">
-<p>Use case ends.</p>
+<p>Use case resumes at step 1.</p>
 </div>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p>1b. CHRS detects invalid input format or missing details</p>
+<p>1b. CHRS detects invalid input format or missing details.</p>
 <div class="ulist none">
 <ul class="none">
 <li>
-<p>1b1. CHRS prompts user for correct input</p>
-</li>
-<li>
-<p>1b2. User enters new input</p>
-</li>
-<li>
-<p>Steps 1b1 – 1b2 are repeated until the correct input is entered</p>
+<p>1b1. CHRS shows an error message containing either the details of the command usage or parameters constraints.</p>
 <div class="paragraph">
-<p>Use case resumes from step 2.</p>
+<p>Use case resumes at step 1.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<h3 id="actor-hr-staff-handling-recruitment-2" class="discrete">Actor: HR Staff (Handling recruitment)</h3>
+<h3 id="use-case-uc12-delete-recruitment-post" class="discrete">Use case: UC12 – Delete recruitment post</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests to list recruitment posts</p>
+</li>
+<li>
+<p>CHRS shows a list of recruitment posts</p>
+</li>
+<li>
+<p>User requests to delete a recruitment post</p>
+</li>
+<li>
+<p>CHRS deletes all details of the recruitment post</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>2a. The list is empty.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+<li>
+<p>3a. The given index is invalid.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>3a1. CHRS shows an error message.</p>
+<div class="paragraph">
+<p>Use case resumes at step 2.</p>
 </div>
 </li>
 </ul>
@@ -3518,17 +3422,23 @@ for <code>RemarkCommandParser</code>.</p>
 </ul>
 </div>
 <h3 id="actor-hr-staff-handling-recruitment-3" class="discrete">Actor: HR Staff (Handling recruitment)</h3>
-<h3 id="use-case-uc14-remove-recruitment-post" class="discrete">Use case: UC14 – Remove recruitment post</h3>
+<h3 id="use-case-uc13-edit-recruitment-post" class="discrete">Use case: UC13 - Edit recruitment post</h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>User requests to remove a recruitment post</p>
+<p>User requests to list recruitment posts</p>
 </li>
 <li>
-<p>CHRS removes all details of the recruitment post</p>
+<p>CHRS shows a list of recruitment posts</p>
+</li>
+<li>
+<p>User requests to edit a specific recruitment post in the list</p>
+</li>
+<li>
+<p>CHRS updates relevant data of the recruitment post</p>
 <div class="paragraph">
 <p>Use case ends.</p>
 </div>
@@ -3541,26 +3451,32 @@ for <code>RemarkCommandParser</code>.</p>
 <div class="ulist none">
 <ul class="none">
 <li>
-<p>1a. CHRS detects that the requested recruitment post does not exist</p>
-<div class="ulist none">
-<ul class="none">
-<li>
-<p>1a1. CHRS informs user that the recruitment post does not exist</p>
+<p>2a. The list is empty.</p>
 <div class="paragraph">
 <p>Use case ends.</p>
 </div>
 </li>
-</ul>
-</div>
-</li>
 <li>
-<p>1b. CHRS detects that the system holds no recruitment post</p>
+<p>3a. The given index is invalid.</p>
 <div class="ulist none">
 <ul class="none">
 <li>
-<p>1b1. CHRS informs user that the system has no records of any recruitment post</p>
+<p>3a1. CHRS shows an error message.</p>
 <div class="paragraph">
-<p>Use case ends.</p>
+<p>Use case resumes at step 2.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>3b. CHRS detects invalid input format or missing details.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>3b1. CHRS shows an error message containing either the details of the command usage or parameters constraints.</p>
+<div class="paragraph">
+<p>Use case resumes at step 2.</p>
 </div>
 </li>
 </ul>
@@ -3568,18 +3484,17 @@ for <code>RemarkCommandParser</code>.</p>
 </li>
 </ul>
 </div>
-<h3 id="actor-hr-staff-handling-recruitment-4" class="discrete">Actor: HR Staff (Handling recruitment)</h3>
-<h3 id="use-case-uc15-edit-recruitment-post" class="discrete">Use case: UC15 - Edit recruitment post</h3>
+<h3 id="use-case-uc14-add-schedules" class="discrete">Use case: UC14 - Add schedules</h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>User requests to edit a recruitment post</p>
+<p>User requests to add schedule for a certain employee</p>
 </li>
 <li>
-<p>CHRS updates the relevant details of the recruitment post</p>
+<p>CHRS stores the schedule for that employee</p>
 <div class="paragraph">
 <p>Use case ends.</p>
 </div>
@@ -3592,45 +3507,125 @@ for <code>RemarkCommandParser</code>.</p>
 <div class="ulist none">
 <ul class="none">
 <li>
-<p>1a. CHRS detects that the requested recruitment post does not exist</p>
+<p>1a. CHRS detects that requested employee does not exist.</p>
 <div class="ulist none">
 <ul class="none">
 <li>
-<p>1a1. CHRS informs user that the recruitment post does not exist</p>
+<p>1a1. CHRS informs user that the employee does not exist.</p>
 <div class="paragraph">
-<p>Use case ends.</p>
+<p>Use case resumes at step 1.</p>
 </div>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p>1b. CHRS detects invalid input format or missing details</p>
+<p>1b. CHRS detects invalid input format or missing details.</p>
 <div class="ulist none">
 <ul class="none">
 <li>
-<p>1b1. CHRS prompts user for correct input</p>
-</li>
-<li>
-<p>1b2. User enters new input</p>
-</li>
-<li>
-<p>Steps 1b1 – 1b2 are repeated until the correct input is entered</p>
+<p>1b1. CHRS shows an error message containing either the details of the command usage or parameters constraints.</p>
 <div class="paragraph">
-<p>Use case resumes from step 2.</p>
+<p>Use case resumes at step 1.</p>
 </div>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p>1b. CHRS detects that the system holds no recruitment post</p>
+<p>1c. CHRS detects that the schedule already exists.</p>
 <div class="ulist none">
 <ul class="none">
 <li>
-<p>1b1. CHRS informs user that the system has no records of any recruitment post</p>
+<p>1c1. CHRS informs user that the schedule already exists.</p>
+<div class="paragraph">
+<p>Use case resumes at step 1.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<h3 id="use-case-uc15-delete-schedules" class="discrete">Use case: UC15 - Delete schedules</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests to list schedules</p>
+</li>
+<li>
+<p>CHRS shows a list of schedules</p>
+</li>
+<li>
+<p>User requests to delete schedule of a certain employee</p>
+</li>
+<li>
+<p>CHRS deletes the schedule of that employee in the system</p>
 <div class="paragraph">
 <p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>2a. The list is empty.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+<li>
+<p>3a. The given index is invalid.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>3a1. CHRS shows an error message.</p>
+<div class="paragraph">
+<p>Use case resumes at step 2.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<h3 id="use-case-uc16-calculate-leaves-taken-by-employee" class="discrete">Use case; UC16 - Calculate leaves taken by employee</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests to calculate the amount of leaves taken by a specific employee in a certain year</p>
+</li>
+<li>
+<p>CHRS shows the amount of leaves taken by that employee within that year</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a. CHRS detects that requested employee does not exist.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a1. CHRS informs user that the employee does not exist.</p>
+<div class="paragraph">
+<p>Use case resumes at step 1.</p>
 </div>
 </li>
 </ul>
@@ -3779,26 +3774,188 @@ Expected: The most recent window size and location is retained.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="deleting-a-person"><a class="link" href="#deleting-a-person">H.2. Deleting a person</a></h3>
+<h3 id="adding-an-employee"><a class="link" href="#adding-an-employee">H.2. Adding an employee</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Deleting a person while all persons are listed</p>
+<p>Adding an employee while the storage is empty</p>
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
-<p>Prerequisites: List all persons using the <code>list</code> command. Multiple persons in the list.</p>
+<p>Prerequisites: There must be no existing data in the system and the following <code>add</code> command must be executed first prior to all test cases.</p>
+<div class="olist lowerroman">
+<ol class="lowerroman" type="i">
+<li>
+<p><code>add id/999999 n/Amanda Chan dob/16/06/1995 d/Finance r/Intern p/92346666 a/21 Lower Kent Ridge Rd e/amandachan@gmail.com s/1000.00</code></p>
+</li>
+</ol>
+</div>
 </li>
 <li>
-<p>Test case: <code>delete 1</code><br>
-Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.</p>
+<p>Test case: <code>add id/999999 n/Amanda dob/31/07/1995 d/Finance r/Intern p/92346668 a/21 Lower Kent Ridge Rd e/amanda@gmail.com s/1000.00</code><br>
+Expected: No employee is added. Error details shown in the status message. The details of the employee with name "Amanda Chan" added during the prerequisite shown on Employees column. Status bar remains the same.</p>
 </li>
 <li>
-<p>Test case: <code>delete 0</code><br>
-Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.</p>
+<p>Test case: <code>add id/999998 n/Amanda dob/31/07/1995 d/Finance r/Intern p/92346668 a/21 Lower Kent Ridge Rd e/amandachan@gmail.com s/1000.00</code><br>
+Expected: No employee is added. Error details shown in the status message. The details of the employee with name "Amanda Chan" added during the prerequisite shown on Employees column. Status bar remains the same.</p>
 </li>
 <li>
-<p>Other incorrect delete commands to try: <code>delete</code>, <code>delete x</code> (where x is larger than the list size) <em>{give more}</em><br>
+<p>Test case: <code>add id/888888 n/Belinda Chan dob/30/06/1995 d/Finance r/Intern p/91234555 a/21 Lower Kent Ridge Rd e/belinda@gmail.com s/1000.00</code><br>
+Expected: Employee is added to the list. Details of the added employee shown in the status message. The details of all employees shown on Employees column. Timestamp in the status bar is updated.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="editing-an-employee"><a class="link" href="#editing-an-employee">H.3. Editing an employee</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Editing an employee while the storage is empty</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: There must be no existing data in the system and the following commands must be executed first prior to all test cases.</p>
+<div class="olist lowerroman">
+<ol class="lowerroman" type="i">
+<li>
+<p><code>add id/999999 n/Amanda Chan dob/16/06/1995 d/Finance r/Intern p/92346666 a/21 Lower Kent Ridge Rd e/amandachan@gmail.com s/1000.00</code></p>
+</li>
+<li>
+<p><code>add id/888888 n/Belinda Chan dob/30/06/1995 d/Finance r/Intern p/91234555 a/21 Lower Kent Ridge Rd e/belinda@gmail.com s/1000.00</code><br></p>
+</li>
+<li>
+<p><code>list</code></p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Test case: <code>edit 1 d/Human Resource r/Manager</code><br>
+Expected: First employee&#8217;s details is updated on the list. Details of the edited employee shown in the status message. The details of all employees shown on Employees column. Timestamp in the status bar is updated.</p>
+</li>
+<li>
+<p>Test case: <code>list</code> followed by <code>edit 1 e/belinda@gmail.com</code><br>
+Expected: No employee is edited. Error details shown in the status message. The details of the employee with name "Belinda Chan" added during the prerequisite shown on Employees column. Status bar remains the same.</p>
+</li>
+<li>
+<p>Test case: <code>edit 0</code><br>
+Expected: No changes on Employees column. No employee is edited. Error details shown in status message. Status bar remains the same.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="filtering-employees-of-a-certain-department-and-position"><a class="link" href="#filtering-employees-of-a-certain-department-and-position">H.4. Filtering employees of a certain department and position</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Filtering employees while storage is empty</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: There must be no existing data in the system and the following commands must be executed first prior to all test cases.</p>
+<div class="olist lowerroman">
+<ol class="lowerroman" type="i">
+<li>
+<p><code>add id/999999 n/Amanda Chan dob/16/06/1995 d/Finance r/Intern p/92346666 a/21 Lower Kent Ridge Rd e/amandachan@gmail.com s/1000.00</code></p>
+</li>
+<li>
+<p><code>add id/888888 n/Belinda Chan dob/30/06/1995 d/Finance r/Manager p/91234555 a/21 Lower Kent Ridge Rd e/belinda@gmail.com s/1000.00</code><br></p>
+</li>
+<li>
+<p><code>list</code></p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Test case: <code>filter asc d/finance r/intern</code><br>
+Expected: The details of the employee with name "Amanda Chan" added during the prerequisite shown on Employees column. Number of employees listed shown in the status message. Status bar remains the same.</p>
+</li>
+<li>
+<p>Test case: <code>filter asc d/Human Resource</code><br>
+Expected: No employees will be listed under Employees column. Number of employees listed and available departments in CHRS shown in the status message. Status bar remains the same.</p>
+</li>
+<li>
+<p>Test case: <code>filter dsc d/finance d/human</code><br>
+Expected: No changes on Employees column. Error details shown in the status message. Status bar remains the same.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="finding-a-specific-employee"><a class="link" href="#finding-a-specific-employee">H.5. Finding a specific employee</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Filtering employees while storage is empty</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: There must be no existing data in the system and the following commands must be executed first prior to all test cases.</p>
+<div class="olist lowerroman">
+<ol class="lowerroman" type="i">
+<li>
+<p><code>add id/999999 n/Amanda Chan dob/16/06/1995 d/Finance r/Intern p/92346666 a/21 Lower Kent Ridge Rd e/amandachan@gmail.com s/1000.00</code></p>
+</li>
+<li>
+<p><code>add id/888888 n/Belinda Chan dob/30/06/1995 d/Finance r/Manager p/91234555 a/21 Lower Kent Ridge Rd e/belinda@gmail.com s/1000.00</code><br></p>
+</li>
+<li>
+<p><code>list</code></p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Test case: <code>find amanda chan</code><br>
+Expected: The details of the employee with name "Amanda Chan" added during the prerequisite shown in Employees column. Number of employees listed shown in the status message. Status bar remains the same.</p>
+</li>
+<li>
+<p>Test case: <code>find 888888</code><br>
+Expected: The details of the employee with name "Belinda Chan" added during the prerequisite shown in Employees column. Number of employees listed shown in the status message. Status bar remains the same.</p>
+</li>
+<li>
+<p>Test case: <code>find 12345678</code><br>
+Expected: No changes on Employees column. Error details shown in the status message. Status bar remains the same.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="selecting-an-employee"><a class="link" href="#selecting-an-employee">H.6. Selecting an employee</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Selecting an employee while all employees are listed</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: List all employees using the <code>list</code> command. Multiple employees in the list.</p>
+</li>
+<li>
+<p>Test case: selectPerson 1<br>
+Expected: First employee is selected from the list. Selected employee index shown in the status message. Status bar remains the same.</p>
+</li>
+<li>
+<p>Test case: selectPerson 0<br>
+Expected: If there are no employees selected previously, no employees will be selected. Else, the previously selected employee will remain selected. Error details shown in the status message. Status bar remains the same.</p>
+</li>
+<li>
+<p>Other incorrect <code>selectPerson</code> commands to try: <code>selectPerson</code>, <code>selectPerson x</code> (where x is larger than the list size)<br>
 Expected: Similar to previous.</p>
 </li>
 </ol>
@@ -3806,12 +3963,38 @@ Expected: Similar to previous.</p>
 </li>
 </ol>
 </div>
-<div class="paragraph">
-<p><em>{ more test cases &#8230;&#8203; }</em></p>
+</div>
+<div class="sect2">
+<h3 id="deleting-an-employee"><a class="link" href="#deleting-an-employee">H.7. Deleting an employee</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Deleting an employee while all employees are listed</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: List all employees using the <code>list</code> command. Multiple employees in the list.</p>
+</li>
+<li>
+<p>Test case: <code>delete 1</code><br>
+Expected: First employee is deleted from the list. Details of the deleted contact shown in the status message. Expenses and schedule related to the employee are also deleted from the ExpensesList and ScheduleList respectively. Timestamp in the status bar is updated.</p>
+</li>
+<li>
+<p>Test case: <code>delete 0</code><br>
+Expected: No employee is deleted. Error details shown in the status message. Status bar remains the same.</p>
+</li>
+<li>
+<p>Other incorrect delete commands to try: <code>delete</code>, <code>delete x</code> (where x is larger than the list size)<br>
+Expected: Similar to previous.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
 </div>
 </div>
 <div class="sect2">
-<h3 id="saving-data"><a class="link" href="#saving-data">H.3. Saving data</a></h3>
+<h3 id="saving-data"><a class="link" href="#saving-data">H.8. Saving data</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -3831,4 +4014,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-09 12:19:04 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-10 04:57:16 UTC</div></div></div></body></html>
