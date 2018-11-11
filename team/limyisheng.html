@@ -26,13 +26,13 @@ CHRS is capable of checking work schedule, creating recruitment posts, checking 
 <div class="ulist">
 <ul>
 <li>
-<p>What it does: It provides the end user with search functions whereby they can choose to filter employees by their department or rank/position or both. Additionally, the find command has been enhanced to be capable of searching by either the employee&#8217;s name or his/her employee ID.</p>
+<p>What it does: The <code>filter</code> command allows user to filter out employees of a certain department, rank/position or both and the <code>find</code> command allows user to  search for a specific employee via their name or employee ID.</p>
 </li>
 <li>
-<p>Justification: This feature gives the users the capability of searching for either a specific employee or all employees of a certain rank/position or employees within a certain department.</p>
+<p>Justification: This feature improves the product significantly as the user is able to search for the required employee&#8217;s details quickly.</p>
 </li>
 <li>
-<p>Highlights: This enhancement enhances the user experience when searching for certain employee(s) within CHRS, users will no longer need to scroll through the whole list to search for a specific employee(s) data. This enhancement required an in-depth understanding of the human resource department needs. Additionally, the implementation was challenging as it requires a great understanding of how predicates work in java to allow the commands to show the right employee(s) that the user is searching for.</p>
+<p>Highlights: This enhancement enhances the user experience as the user can now search for an employee&#8217;s details without having the need to go through the whole list of employees. This feature required in-depth analysis of possible design alternatives and in-depth understanding of the HR needs when searching. The implementation of this feature was challenging as it required enhancement to existing commands and understanding of predicates.</p>
 </li>
 </ul>
 </div>
@@ -45,7 +45,7 @@ CHRS is capable of checking work schedule, creating recruitment posts, checking 
 <p>Added  sorting to PersonList, ExpensesList and ScheduleList to ensure that the lists stay sorted in ascending order. (Pull request: <a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/219">#219</a>)</p>
 </li>
 <li>
-<p>Updated <code>add</code> and <code>edit</code> commands to reject commands that will lead to duplication in these fields: <code>EmployeeId</code> OR <code>Email</code> OR <code>Phone</code> OR <code>Name</code> and <code>DateOfBirth</code>. Additionally, the GUI will display the employee that the user is trying to duplicate. (Pull requests: <a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/18">#18</a>, <a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/124">#124</a>, <a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/134">#134</a>, <a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/136">#136</a>, <a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/219">#219</a>)</p>
+<p>Enhanced <code>add</code> and <code>edit</code> commands to reject having employees with duplication in these fields: <code>EmployeeId</code> OR <code>Email</code> OR <code>Phone</code> OR <code>Name</code> and <code>DateOfBirth</code>. Should any attempt of duplication occur, the application will display the employee being duplicated and reject the command. (Pull requests: <a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/124">#124</a>, <a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/134">#134</a>, <a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/136">#136</a>, <a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/219">#219</a>)</p>
 </li>
 </ul>
 </div>
@@ -98,7 +98,7 @@ CHRS is capable of checking work schedule, creating recruitment posts, checking 
 <div class="ulist">
 <ul>
 <li>
-<p>Wrote additional tests for existing features to increase coverage from 84.9% to 86.1% (<a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/240">#240</a>), 61.2% to 63.7% (<a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/223">#223</a>), 53.7% to 61.2% (<a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/221">#221</a>) and 72.9% to 74.1% (<a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/104">#104</a>)</p>
+<p>Wrote additional tests for existing features to increase coverage from 88.7% to 92.6% (<a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/240">#240</a>), 61.2% to 63.7% (<a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/223">#223</a>), 53.7% to 61.2% (<a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/221">#221</a>) and 72.9% to 74.1% (<a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/104">#104</a>)</p>
 </li>
 </ul>
 </div>
@@ -111,13 +111,13 @@ CHRS is capable of checking work schedule, creating recruitment posts, checking 
 <p>Updated Read Me (Pull requests: <a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/3/">#3</a>, <a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/235">#235</a>)</p>
 </li>
 <li>
-<p>Updated About Us to include team members' images, roles and responsibilities alongside GitHub and Portfolio links (Pull requests:  <a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/1">#1</a>, <a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/3">#3</a>, <a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/8">#8</a>, <a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/11">#11</a>, <a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/41">#41</a>, <a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/127">#127</a>)</p>
+<p>Updated About Us to include team members' images, roles and responsibilities alongside GitHub and Portfolio links (Pull requests:  <a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/1">#1</a>, <a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/3">#3</a>, <a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/8">#8</a>, <a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/41">#41</a>, <a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/127">#127</a>)</p>
 </li>
 <li>
 <p>Updated Developer Guide on <code>filter</code> feature alongside model component, user stories, use cases and instructions for manual testing (Pull requests:  <a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/11">#11</a>, <a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/13">#13</a>, <a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/14">#14</a>, <a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/15">#15</a>, <a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/97">#97</a>, <a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/109">#109</a>, <a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/235">#235</a>, <a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/240">#240</a>)</p>
 </li>
 <li>
-<p>Updated User Guide to ensure <code>add</code>, <code>edit</code>, <code>find</code> and <code>filter</code> commands alongside the fields added by me are up to date (Pull requests:  <a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/95">#95</a>, <a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/156">#156</a>, <a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/167">#167</a>, <a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/169">#169</a>, <a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/172">#172</a>, <a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/176">#176</a>, <a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/181">#181</a>, <a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/183">#183</a>)</p>
+<p>Updated User Guide to ensure <code>add</code>, <code>edit</code>, <code>find</code> and <code>filter</code> commands alongside the fields added by me are up to date (Pull requests:  <a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/95">#95</a>, <a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/156">#156</a>, <a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/167">#167</a>, <a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/172">#172</a>, <a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/183">#183</a>)</p>
 </li>
 </ul>
 </div>
@@ -127,7 +127,7 @@ CHRS is capable of checking work schedule, creating recruitment posts, checking 
 <div class="ulist">
 <ul>
 <li>
-<p>PRs reviewed (with non-trivial review comments): <a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/70">#70</a>, <a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/73">#73</a>, <a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/123">#123</a>, <a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/125">#125</a>, <a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/130">#130</a>, <a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/140">#140</a>, <a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/182">#182</a>, <a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/218">#218</a></p>
+<p>PRs reviewed (with non-trivial review comments): <a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/73">#73</a>, <a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/123">#123</a>, <a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/125">#125</a>, <a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/130">#130</a>, <a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/140">#140</a>, <a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/182">#182</a>, <a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/218">#218</a></p>
 </li>
 <li>
 <p>Contributed to forum discussions (examples: <a href="https://github.com/nusCS2113-AY1819S1/forum/issues/40">1</a>, <a href="https://github.com/nusCS2113-AY1819S1/forum/issues/62">2</a>)</p>
@@ -291,7 +291,7 @@ Find the employee with employee ID <code>000001</code></p>
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-Any usage of <code>find</code> command will be rejected if it contains special characters or alphanumeric input. It only accepts either alphabets or numbers in a single input, not both.
+Any usage of <code>find</code> command will be rejected if it contains special characters or alphanumeric input. It accepts only either alphabets or numbers in a single input, not both.
 </td>
 </tr>
 </table>
@@ -303,7 +303,7 @@ Any usage of <code>find</code> command will be rejected if it contains special c
 <p>Filters the employee list by their department and/or rank/position and list the employees whose department and/or rank/position contains the keyword(s) input from the user in ascending or descending name order.</p>
 </div>
 <div class="paragraph">
-<p>Format: <code>filter ORDER [d/DEPARTMENT] [r/POSITION]</code></p>
+<p>Format: <code>filter SORT_ORDER [d/DEPARTMENT] [r/POSITION]</code></p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -312,9 +312,8 @@ Any usage of <code>find</code> command will be rejected if it contains special c
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-Include either department or rank/position or both, at least one of the field must be included alongside the sort order.<br>
-The keywords are delimited by a space, i.e filter asc d/human resource would mean the keywords are "human" and "resource". The keywords matching is case-insensitive.<br>
-The ORDER parameter should either be asc for ascending or dsc for descending. The ORDER parameter is case-insensitive.
+The SORT_ORDER parameter should either be asc for ascending or dsc for descending. The SORT_ORDER parameter is case-insensitive.<br>
+Include either department or rank/position or both, at least one of the field must be included alongside the sort order. The keywords are delimited by a space, i.e filter asc d/human resource would mean the keywords are "human" and "resource". The keywords matching is case-insensitive.
 </td>
 </tr>
 </table>
@@ -326,7 +325,7 @@ The ORDER parameter should either be asc for ascending or dsc for descending. Th
 <ul>
 <li>
 <p><code>filter asc d/Human Resource r/Manager</code><br>
-List all employees whose department contains the keyword of either human or resource and rank/position containing the keyword of manager</p>
+List all employees whose department contains the keyword of either human or resource and rank/position contains the keyword of manager</p>
 </li>
 <li>
 <p><code>filter dsc d/Finance</code><br>
@@ -345,6 +344,12 @@ Any usage of <code>filter</code> command that results in the same prefix appeari
 </td>
 </tr>
 </table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="keyword-suggestion-and-auto-complete-feature-em-upcoming-in-2-0-em"><a class="link" href="#keyword-suggestion-and-auto-complete-feature-em-upcoming-in-2-0-em">Keyword suggestion and auto complete feature <em>[Upcoming in 2.0]</em></a></h3>
+<div class="paragraph">
+<p>This feature will suggest keywords when filtering or finding employee and the keyword will be auto-completed by pressing <code>TAB</code> key. <em>[Upcoming in 2.0]</em></p>
 </div>
 </div>
 </div>
@@ -377,8 +382,8 @@ Any usage of <code>filter</code> command that results in the same prefix appeari
 <div class="paragraph">
 <p>The <code>filter</code> command&#8217;s mechanism is facilitated by <code>FilterCommandParser</code>.
 The <code>FilterCommandParser</code> implements the <code>Parser</code> interface, parses the arguments parameter, which is the input from the user, and creates a new <code>FilterCommand</code> object.
-Apart from parsing the input, the <code>FilterCommandParser</code> checks whether the input complies with the required format.
-This checking of input compliance is facilitated by two helper methods, namely <code>processDepartmentKeywords</code> and <code>processPositionKeywords</code>, that is within the class.
+Apart from parsing the input, the <code>FilterCommandParser</code> also checks whether the input complies with the required format.
+The checking of input compliance is facilitated by two helper methods, namely <code>processDepartmentKeywords</code> and <code>processPositionKeywords</code>, that is within the class.
 This guide will focus on explaining how <code>processDepartmentKeywords</code> work instead of both as the methods <code>processDepartmentKeywords</code> and <code>processPositionKeywords</code> are quite similar.</p>
 </div>
 <div class="admonitionblock note">
@@ -394,7 +399,7 @@ If the input does not comply with the required format, an error message will be 
 </table>
 </div>
 <div class="paragraph">
-<p>Code snippet of <code>FilterCommandParser</code> that shows the checking of the input compliance:</p>
+<p>Code snippet of <code>FilterCommandParser</code> showing the input compliance checks:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -436,7 +441,8 @@ If the input does not comply with the required format, an error message will be 
 </div>
 </div>
 <div class="paragraph">
-<p>The <code>processDepartmentKeywords</code> is further assisted by two other helper methods, namely, <code>validityCheckForDepartments</code> and <code>areDepartmentKeywordsValid</code> which are also within the <code>FilterCommandParser</code> class. The code snippet of the two mentioned methods are as follow:</p>
+<p>The <code>processDepartmentKeywords</code> is further assisted by two other helper methods, namely, <code>validityCheckForDepartments</code> and <code>areDepartmentKeywordsValid</code> which are also within the <code>FilterCommandParser</code> class.
+The code snippet of the two helper methods are as follow:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -521,11 +527,11 @@ Example: If <code>filter asc d/hello</code> results in 0 person found, the CLI w
 </div>
 <div class="paragraph">
 <p>The result of the execution of <code>FilterCommand</code> is then encapsulated as a <code>CommandResult</code> object which is returned to the <code>LogicManager</code>.
-Upon the update of <code>filteredPersonList</code>, <code>filteredExpensesList</code> and <code>filteredScheduleList</code>, the program will display only employees alongside their respective expenses and schedule that are of the specific department(s)
+After the execution of <code>FilterCommand</code>, the <code>filteredPersonList</code>, <code>filteredExpensesList</code> and <code>filteredScheduleList</code> will be updated accordingly and the program will display only employees alongside their respective expenses and schedule that are of the specific department(s)
  and/or position(s) as specified by the input from the user.</p>
 </div>
 <div class="paragraph">
-<p>The sequence diagram below illustrates the operation of <code>filter</code> command:</p>
+<p>The sequence diagram below illustrates the operation of the <code>filter</code> command:</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -549,7 +555,7 @@ Upon the update of <code>filteredPersonList</code>, <code>filteredExpensesList</
 <p>Pros: Does not require several command and parser files to handle filtering of different fields</p>
 </li>
 <li>
-<p>Cons: Additional methods required to check prefix and input validity</p>
+<p>Cons: Additional methods required to check for presence of prefix and input validity</p>
 </li>
 </ul>
 </div>
@@ -570,6 +576,12 @@ Upon the update of <code>filteredPersonList</code>, <code>filteredExpensesList</
 </ul>
 </div>
 </div>
+<div class="sect3">
+<h4 id="future-improvements-keyword-suggestion-and-auto-complete-feature-em-upcoming-in-2-0-em"><a class="link" href="#future-improvements-keyword-suggestion-and-auto-complete-feature-em-upcoming-in-2-0-em">Future improvements: Keyword suggestion and auto complete feature <em>[Upcoming in 2.0]</em></a></h4>
+<div class="paragraph">
+<p>This feature will suggest keywords when filtering or finding employee and the keyword will be auto-completed by pressing <code>TAB</code> key. <em>[Upcoming in 2.0]</em></p>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-11 14:24:32 UTC</div></div></div></body></html>
+</div>
+</div>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-11 17:33:33 UTC</div></div></div></body></html>

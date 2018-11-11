@@ -1557,8 +1557,8 @@ If the input Index isn&#8217;t found in the list, an error message will be shown
 <div class="paragraph">
 <p>The <code>filter</code> command&#8217;s mechanism is facilitated by <code>FilterCommandParser</code>.
 The <code>FilterCommandParser</code> implements the <code>Parser</code> interface, parses the arguments parameter, which is the input from the user, and creates a new <code>FilterCommand</code> object.
-Apart from parsing the input, the <code>FilterCommandParser</code> checks whether the input complies with the required format.
-This checking of input compliance is facilitated by two helper methods, namely <code>processDepartmentKeywords</code> and <code>processPositionKeywords</code>, that is within the class.
+Apart from parsing the input, the <code>FilterCommandParser</code> also checks whether the input complies with the required format.
+The checking of input compliance is facilitated by two helper methods, namely <code>processDepartmentKeywords</code> and <code>processPositionKeywords</code>, that is within the class.
 This guide will focus on explaining how <code>processDepartmentKeywords</code> work instead of both as the methods <code>processDepartmentKeywords</code> and <code>processPositionKeywords</code> are quite similar.</p>
 </div>
 <div class="admonitionblock note">
@@ -1574,7 +1574,7 @@ If the input does not comply with the required format, an error message will be 
 </table>
 </div>
 <div class="paragraph">
-<p>Code snippet of <code>FilterCommandParser</code> that shows the checking of the input compliance:</p>
+<p>Code snippet of <code>FilterCommandParser</code> showing the input compliance checks:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1616,7 +1616,8 @@ If the input does not comply with the required format, an error message will be 
 </div>
 </div>
 <div class="paragraph">
-<p>The <code>processDepartmentKeywords</code> is further assisted by two other helper methods, namely, <code>validityCheckForDepartments</code> and <code>areDepartmentKeywordsValid</code> which are also within the <code>FilterCommandParser</code> class. The code snippet of the two mentioned methods are as follow:</p>
+<p>The <code>processDepartmentKeywords</code> is further assisted by two other helper methods, namely, <code>validityCheckForDepartments</code> and <code>areDepartmentKeywordsValid</code> which are also within the <code>FilterCommandParser</code> class.
+The code snippet of the two helper methods are as follow:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1701,11 +1702,11 @@ Example: If <code>filter asc d/hello</code> results in 0 person found, the CLI w
 </div>
 <div class="paragraph">
 <p>The result of the execution of <code>FilterCommand</code> is then encapsulated as a <code>CommandResult</code> object which is returned to the <code>LogicManager</code>.
-Upon the update of <code>filteredPersonList</code>, <code>filteredExpensesList</code> and <code>filteredScheduleList</code>, the program will display only employees alongside their respective expenses and schedule that are of the specific department(s)
+After the execution of <code>FilterCommand</code>, the <code>filteredPersonList</code>, <code>filteredExpensesList</code> and <code>filteredScheduleList</code> will be updated accordingly and the program will display only employees alongside their respective expenses and schedule that are of the specific department(s)
  and/or position(s) as specified by the input from the user.</p>
 </div>
 <div class="paragraph">
-<p>The sequence diagram below illustrates the operation of <code>filter</code> command:</p>
+<p>The sequence diagram below illustrates the operation of the <code>filter</code> command:</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -1729,7 +1730,7 @@ Upon the update of <code>filteredPersonList</code>, <code>filteredExpensesList</
 <p>Pros: Does not require several command and parser files to handle filtering of different fields</p>
 </li>
 <li>
-<p>Cons: Additional methods required to check prefix and input validity</p>
+<p>Cons: Additional methods required to check for presence of prefix and input validity</p>
 </li>
 </ul>
 </div>
@@ -1748,6 +1749,12 @@ Upon the update of <code>filteredPersonList</code>, <code>filteredExpensesList</
 </div>
 </li>
 </ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="future-improvements-keyword-suggestion-and-auto-complete-feature-em-upcoming-in-2-0-em"><a class="link" href="#future-improvements-keyword-suggestion-and-auto-complete-feature-em-upcoming-in-2-0-em">3.6.3. Future improvements: Keyword suggestion and auto complete feature <em>[Upcoming in 2.0]</em></a></h4>
+<div class="paragraph">
+<p>This feature will suggest keywords when filtering or finding employee and the keyword will be auto-completed by pressing <code>TAB</code> key. <em>[Upcoming in 2.0]</em></p>
 </div>
 </div>
 </div>
@@ -4597,4 +4604,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-11 14:24:32 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-11 17:33:33 UTC</div></div></div></body></html>
