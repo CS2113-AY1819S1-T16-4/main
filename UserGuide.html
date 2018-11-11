@@ -35,20 +35,21 @@
 <li><a href="#calculate-total-leaves-in-a-year-code-calculateleaves-code">4.19. Calculate total leaves in a year : <code>calculateLeaves</code></a></li>
 <li><a href="#select-schedule-in-the-schedule-list-code-selectschedule-code">4.20. Select schedule in the schedule list : <code>selectSchedule</code></a></li>
 <li><a href="#clear-the-entire-schedule-list-code-clearschedules-code">4.21. Clear the entire schedule list : <code>clearSchedules</code></a></li>
-<li><a href="#add-new-recruitment-post-code-addrecruitmentpost-code">4.22. Add new recruitment post : <code>addRecruitmentPost</code></a></li>
-<li><a href="#edit-an-existing-recruitment-post-code-editrecruitmentpost-code">4.23. Edit an existing recruitment post : <code>editRecruitmentPost</code></a></li>
-<li><a href="#select-recruitment-post-code-selectrecruitmentpost-code">4.24. Select recruitment post : <code>selectRecruitmentPost</code></a></li>
-<li><a href="#delete-recruitment-post-code-deleterecruitmentpost-code">4.25. Delete recruitment post : <code>deleteRecruitmentPost</code></a></li>
-<li><a href="#clear-recruitment-posts-code-clearrecruitmentpost-code">4.26. Clear recruitment posts : <code>clearRecruitmentPost</code></a></li>
-<li><a href="#listing-all-employees-code-list-code">4.27. Listing all employees : <code>list</code></a></li>
-<li><a href="#view-all-available-functions-or-commands-code-help-code">4.28. View all available functions or commands : <code>help</code></a></li>
-<li><a href="#listing-entered-commands-code-history-code">4.29. Listing entered commands : <code>history</code></a></li>
-<li><a href="#undoing-previous-command-code-undo-code">4.30. Undoing previous command : <code>undo</code></a></li>
-<li><a href="#redoing-the-previously-undone-command-code-redo-code">4.31. Redoing the previously undone command : <code>redo</code></a></li>
-<li><a href="#clearing-all-entries-code-clear-code">4.32. Clearing all entries : <code>clear</code></a></li>
-<li><a href="#exiting-the-program-code-exit-code">4.33. Exiting the program : <code>exit</code></a></li>
-<li><a href="#saving-the-data">4.34. Saving the data</a></li>
-<li><a href="#encrypting-data-files-code-coming-in-v2-0-code">4.35. Encrypting data files <code>[coming in v2.0]</code></a></li>
+<li><a href="#send-calendar-code-sendcalendar-code-em-upcoming-in-2-0-em">4.22. Send Calendar: <code>sendCalendar</code> <em>[Upcoming in 2.0]</em></a></li>
+<li><a href="#add-new-recruitment-post-code-addrecruitmentpost-code">4.23. Add new recruitment post : <code>addRecruitmentPost</code></a></li>
+<li><a href="#edit-an-existing-recruitment-post-code-editrecruitmentpost-code">4.24. Edit an existing recruitment post : <code>editRecruitmentPost</code></a></li>
+<li><a href="#select-recruitment-post-code-selectrecruitmentpost-code">4.25. Select recruitment post : <code>selectRecruitmentPost</code></a></li>
+<li><a href="#delete-recruitment-post-code-deleterecruitmentpost-code">4.26. Delete recruitment post : <code>deleteRecruitmentPost</code></a></li>
+<li><a href="#clear-recruitment-posts-code-clearrecruitmentpost-code">4.27. Clear recruitment posts : <code>clearRecruitmentPost</code></a></li>
+<li><a href="#listing-all-employees-code-list-code">4.28. Listing all employees : <code>list</code></a></li>
+<li><a href="#view-all-available-functions-or-commands-code-help-code">4.29. View all available functions or commands : <code>help</code></a></li>
+<li><a href="#listing-entered-commands-code-history-code">4.30. Listing entered commands : <code>history</code></a></li>
+<li><a href="#undoing-previous-command-code-undo-code">4.31. Undoing previous command : <code>undo</code></a></li>
+<li><a href="#redoing-the-previously-undone-command-code-redo-code">4.32. Redoing the previously undone command : <code>redo</code></a></li>
+<li><a href="#clearing-all-entries-code-clear-code">4.33. Clearing all entries : <code>clear</code></a></li>
+<li><a href="#exiting-the-program-code-exit-code">4.34. Exiting the program : <code>exit</code></a></li>
+<li><a href="#saving-the-data">4.35. Saving the data</a></li>
+<li><a href="#encrypting-data-files-code-coming-in-v2-0-code">4.36. Encrypting data files <code>[coming in v2.0]</code></a></li>
 </ul>
 </li>
 <li><a href="#faq">5. FAQ</a></li>
@@ -784,7 +785,7 @@ Select the expenses with the index of '1' in the list</p>
 <div class="sect2">
 <h3 id="add-a-new-schedule-code-addschedule-code"><a class="link" href="#add-a-new-schedule-code-addschedule-code">4.13. Add a new schedule : <code>addSchedule</code></a></h3>
 <div class="paragraph">
-<p>Add a new schedule for a employee.</p>
+<p>Add a new schedule for an employee.</p>
 </div>
 <div class="paragraph">
 <p>Format: <code>addSchedule id/EMPLOYEEID d/DATE t/TYPE</code> or <code>as id/EMPLOYEEID d/DATE t/TYPE</code></p>
@@ -811,7 +812,7 @@ Adds a new schedule for employee id 000001, date 03/03/2019, to be on leave for 
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-Scheduling with a employee id that doesn&#8217;t exist in the address book will be rejected.<br>
+Scheduling with an employee id that doesn&#8217;t exist in the address book will be rejected.<br>
 You are not allowed to schedule for dates that have past today&#8217;s date.<br>
 Exact duplicate schedules will be rejected.
 </td>
@@ -881,7 +882,7 @@ date 02/02/2019 and 03/03/2019, to work on that day.</p>
 For those employees whom are not scheduled with the date, the command will
 create a new schedule.<br>
 When all employees are scheduled with the date,
-the command will tell the user that every observable employees in the list
+the command will tell the user that every observable employee in the list
 have been scheduled with the specified date.<br>
 You are not allowed to schedule for dates that have past today&#8217;s date.
 </td>
@@ -1018,7 +1019,7 @@ date 02/02/2019 and 03/03/2019, with leave on that day.</p>
 For those employees whom are scheduled with the date, the command will
 delete the schedule.<br>
 When all employees are deleted with the scheduled date,
-the command will tell the user every observable employees in the list does not have leave schedule
+the command will tell the user every observable employee in the list does not have leave schedule
 on the specified date.
 </td>
 </tr>
@@ -1095,7 +1096,13 @@ Clear the entire Schedule List.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="add-new-recruitment-post-code-addrecruitmentpost-code"><a class="link" href="#add-new-recruitment-post-code-addrecruitmentpost-code">4.22. Add new recruitment post : <code>addRecruitmentPost</code></a></h3>
+<h3 id="send-calendar-code-sendcalendar-code-em-upcoming-in-2-0-em"><a class="link" href="#send-calendar-code-sendcalendar-code-em-upcoming-in-2-0-em">4.22. Send Calendar: <code>sendCalendar</code> <em>[Upcoming in 2.0]</em></a></h3>
+<div class="paragraph">
+<p>Send calendar to the employee for employee to import schedule, sent using the Employee&#8217;s email address. <em>[Upcoming in 2.0]</em></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="add-new-recruitment-post-code-addrecruitmentpost-code"><a class="link" href="#add-new-recruitment-post-code-addrecruitmentpost-code">4.23. Add new recruitment post : <code>addRecruitmentPost</code></a></h3>
 <div class="paragraph">
 <p>Add a recruitment post based on job position, minimal years of working experience and job description.</p>
 </div>
@@ -1136,7 +1143,7 @@ Duplicate recruitment posts are not allowed. Minimal one field should be differe
 </div>
 </div>
 <div class="sect2">
-<h3 id="edit-an-existing-recruitment-post-code-editrecruitmentpost-code"><a class="link" href="#edit-an-existing-recruitment-post-code-editrecruitmentpost-code">4.23. Edit an existing recruitment post : <code>editRecruitmentPost</code></a></h3>
+<h3 id="edit-an-existing-recruitment-post-code-editrecruitmentpost-code"><a class="link" href="#edit-an-existing-recruitment-post-code-editrecruitmentpost-code">4.24. Edit an existing recruitment post : <code>editRecruitmentPost</code></a></h3>
 <div class="paragraph">
 <p>Edit a recruitment post based on its index no.</p>
 </div>
@@ -1179,7 +1186,7 @@ Minimal one field should be changed in order to make the editing recruitment pos
 </div>
 </div>
 <div class="sect2">
-<h3 id="select-recruitment-post-code-selectrecruitmentpost-code"><a class="link" href="#select-recruitment-post-code-selectrecruitmentpost-code">4.24. Select recruitment post : <code>selectRecruitmentPost</code></a></h3>
+<h3 id="select-recruitment-post-code-selectrecruitmentpost-code"><a class="link" href="#select-recruitment-post-code-selectrecruitmentpost-code">4.25. Select recruitment post : <code>selectRecruitmentPost</code></a></h3>
 <div class="paragraph">
 <p>Select a recruitment post based on post index ID.</p>
 </div>
@@ -1199,7 +1206,7 @@ Select the recruitment post with the index of '1'</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="delete-recruitment-post-code-deleterecruitmentpost-code"><a class="link" href="#delete-recruitment-post-code-deleterecruitmentpost-code">4.25. Delete recruitment post : <code>deleteRecruitmentPost</code></a></h3>
+<h3 id="delete-recruitment-post-code-deleterecruitmentpost-code"><a class="link" href="#delete-recruitment-post-code-deleterecruitmentpost-code">4.26. Delete recruitment post : <code>deleteRecruitmentPost</code></a></h3>
 <div class="paragraph">
 <p>Delete a recruitment post based on post index ID.</p>
 </div>
@@ -1219,7 +1226,7 @@ Deletes the recruitment post with the index of '1'</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="clear-recruitment-posts-code-clearrecruitmentpost-code"><a class="link" href="#clear-recruitment-posts-code-clearrecruitmentpost-code">4.26. Clear recruitment posts : <code>clearRecruitmentPost</code></a></h3>
+<h3 id="clear-recruitment-posts-code-clearrecruitmentpost-code"><a class="link" href="#clear-recruitment-posts-code-clearrecruitmentpost-code">4.27. Clear recruitment posts : <code>clearRecruitmentPost</code></a></h3>
 <div class="paragraph">
 <p>Clear all recruitment posts at one go.</p>
 </div>
@@ -1228,7 +1235,7 @@ Deletes the recruitment post with the index of '1'</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="listing-all-employees-code-list-code"><a class="link" href="#listing-all-employees-code-list-code">4.27. Listing all employees : <code>list</code></a></h3>
+<h3 id="listing-all-employees-code-list-code"><a class="link" href="#listing-all-employees-code-list-code">4.28. Listing all employees : <code>list</code></a></h3>
 <div class="paragraph">
 <p>Shows a list of all employees, schedules, recruitment posts and expenses claims in CHRS.</p>
 </div>
@@ -1237,7 +1244,7 @@ Deletes the recruitment post with the index of '1'</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="view-all-available-functions-or-commands-code-help-code"><a class="link" href="#view-all-available-functions-or-commands-code-help-code">4.28. View all available functions or commands : <code>help</code></a></h3>
+<h3 id="view-all-available-functions-or-commands-code-help-code"><a class="link" href="#view-all-available-functions-or-commands-code-help-code">4.29. View all available functions or commands : <code>help</code></a></h3>
 <div class="paragraph">
 <p>Views all the functions and commands that the CHRS have.</p>
 </div>
@@ -1258,7 +1265,7 @@ A UserGuide popup window will appear for the user.
 </div>
 </div>
 <div class="sect2">
-<h3 id="listing-entered-commands-code-history-code"><a class="link" href="#listing-entered-commands-code-history-code">4.29. Listing entered commands : <code>history</code></a></h3>
+<h3 id="listing-entered-commands-code-history-code"><a class="link" href="#listing-entered-commands-code-history-code">4.30. Listing entered commands : <code>history</code></a></h3>
 <div class="paragraph">
 <p>Lists all the commands that you have entered in reverse chronological order.</p>
 </div>
@@ -1281,7 +1288,7 @@ A UserGuide popup window will appear for the user.
 </div>
 </div>
 <div class="sect2">
-<h3 id="undoing-previous-command-code-undo-code"><a class="link" href="#undoing-previous-command-code-undo-code">4.30. Undoing previous command : <code>undo</code></a></h3>
+<h3 id="undoing-previous-command-code-undo-code"><a class="link" href="#undoing-previous-command-code-undo-code">4.31. Undoing previous command : <code>undo</code></a></h3>
 <div class="paragraph">
 <p>Restores CHRS to the state before the previous <em>undoable</em> command was executed.
 If a <em>undoable</em> command is executed after undo, then the command that was undone
@@ -1340,7 +1347,7 @@ the command will not be able to undo or redo).</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="redoing-the-previously-undone-command-code-redo-code"><a class="link" href="#redoing-the-previously-undone-command-code-redo-code">4.31. Redoing the previously undone command : <code>redo</code></a></h3>
+<h3 id="redoing-the-previously-undone-command-code-redo-code"><a class="link" href="#redoing-the-previously-undone-command-code-redo-code">4.32. Redoing the previously undone command : <code>redo</code></a></h3>
 <div class="paragraph">
 <p>Reverses the most recent <code>undo</code> command.</p>
 </div>
@@ -1391,7 +1398,7 @@ the command will not be able to undo or redo.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="clearing-all-entries-code-clear-code"><a class="link" href="#clearing-all-entries-code-clear-code">4.32. Clearing all entries : <code>clear</code></a></h3>
+<h3 id="clearing-all-entries-code-clear-code"><a class="link" href="#clearing-all-entries-code-clear-code">4.33. Clearing all entries : <code>clear</code></a></h3>
 <div class="paragraph">
 <p>Clears all entries from CHRS.</p>
 </div>
@@ -1400,7 +1407,7 @@ the command will not be able to undo or redo.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">4.33. Exiting the program : <code>exit</code></a></h3>
+<h3 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">4.34. Exiting the program : <code>exit</code></a></h3>
 <div class="paragraph">
 <p>Exits the program.</p>
 </div>
@@ -1409,14 +1416,14 @@ the command will not be able to undo or redo.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="saving-the-data"><a class="link" href="#saving-the-data">4.34. Saving the data</a></h3>
+<h3 id="saving-the-data"><a class="link" href="#saving-the-data">4.35. Saving the data</a></h3>
 <div class="paragraph">
 <p>Address book data are saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="encrypting-data-files-code-coming-in-v2-0-code"><a class="link" href="#encrypting-data-files-code-coming-in-v2-0-code">4.35. Encrypting data files <code>[coming in v2.0]</code></a></h3>
+<h3 id="encrypting-data-files-code-coming-in-v2-0-code"><a class="link" href="#encrypting-data-files-code-coming-in-v2-0-code">4.36. Encrypting data files <code>[coming in v2.0]</code></a></h3>
 <div class="paragraph">
 <p>Upcoming in 2.0! Stay Tune!</p>
 </div>
@@ -1634,4 +1641,4 @@ There is no need to save manually.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-11 05:28:38 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-11 08:50:31 UTC</div></div></div></body></html>
