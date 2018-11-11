@@ -22,53 +22,63 @@ CHRS is capable of checking work schedule, creating recruitment posts, checking 
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Major enhancement</strong>: added <strong>the ability to undo/redo previous commands</strong></p>
+<p><strong>Major enhancement</strong>: Implements Schedule feature with the following commands:
+<code>addSchedule</code>, <code>deleteSchedule</code>, <code>addWorks</code>, <code>deleteWorks</code>, <code>addLeaves</code>,  <code>deleteLeaves</code>, <code>calculateWorks</code>,
+ <code>clearSchedules</code>,  <code>selectSchedule</code>.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>What it does: allows the user to undo all previous commands one at a time. Preceding undo commands can be reversed by using the redo command.</p>
+<p>What it does: Allows the user to perform scheduling for the company.</p>
 </li>
 <li>
-<p>Justification: This feature improves the product significantly because a user can make mistakes in commands and the app should provide a convenient way to rectify them.</p>
+<p>Justification: This feature improves the product significantly because HR admin requires to schedule employees very often.</p>
 </li>
 <li>
-<p>Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.</p>
-</li>
-<li>
-<p>Credits: <em>{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}</em></p>
+<p>Highlights: User is able to schedule work/leave for multiple employees and multiple dates within a single command.</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p><strong>Minor enhancement</strong>: added a history command that allows the user to navigate to previous commands using up/down keys.</p>
+<p><strong>Minor enhancement</strong>: Enhanced <code>undo/redo</code> by implementing VersionedModelList
+to save and keep track of which storage has been committed changes, which is essential for undo/redo
+to work properly with multiple storages.
+(<a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/123">#123</a>). Enhanced <code>list</code> command to lists schedules as well
+(<a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/73">#73</a>).
+Enhanced <code>delete</code> command such that when a employee is deleted and all schedules linked to the person.
+(<a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/73">#73</a>)</p>
 </li>
 <li>
-<p><strong>Code contributed</strong>: [<a href="https://github.com">Functional code</a>] [<a href="https://github.com">Test code</a>] <em>{give links to collated code files}</em></p>
+<p><strong>Code contributed</strong>: [<a href="https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&amp;search=zhihong8888&amp;sort=displayName&amp;since=2018-09-12&amp;until=2018-11-04&amp;timeframe=day&amp;reverse=false&amp;repoSort=true">Reposense Dashboard</a>]</p>
 </li>
 <li>
 <p><strong>Other contributions</strong>:</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Project management:</p>
+<p>GUI:</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Managed releases <code>v1.3</code> - <code>v1.5rc</code> (3 releases) on GitHub</p>
+<p>Updated the GUI color scheme, background, Menu Bar, Status bar, App icon and greeting when
+program is lunched. (<a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/145">#145</a>,
+ <a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/168">#168</a>,
+ <a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/182">#182</a>)</p>
+</li>
+<li>
+<p>Upgraded the Menu bar, when menu items clicked, edit text sets the command word, cursor points to the end of the word. Command ready to be entered.
+(<a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/168">#168</a>)</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p>Enhancements to existing features:</p>
+<p>Test cases:</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Updated the GUI color scheme (Pull requests <a href="https://github.com">#33</a>, <a href="https://github.com">#34</a>)</p>
-</li>
-<li>
-<p>Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests <a href="https://github.com">#36</a>, <a href="https://github.com">#38</a>)</p>
+<p>Wrote additional tests for existing features to increase coverage from 70.2% to 80.6% (<a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/222">#222</a>),
+73.7% to 78.7% (<a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/73">#73</a>), 68.8% to 74.4% (<a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/70">#70</a>).</p>
 </li>
 </ul>
 </div>
@@ -78,7 +88,13 @@ CHRS is capable of checking work schedule, creating recruitment posts, checking 
 <div class="ulist">
 <ul>
 <li>
-<p>Did cosmetic tweaks to existing contents of the User Guide: <a href="https://github.com">#14</a></p>
+<p>Update user guide
+(<a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/182">#182</a>,
+<a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/164">#164</a>,
+<a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/159">#159</a>,
+<a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/115">#115</a>)
+and developer guide
+(<a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/242">#242</a>) for schedule feature.</p>
 </li>
 </ul>
 </div>
@@ -88,16 +104,12 @@ CHRS is capable of checking work schedule, creating recruitment posts, checking 
 <div class="ulist">
 <ul>
 <li>
-<p>PRs reviewed (with non-trivial review comments): <a href="https://github.com">#12</a>, <a href="https://github.com">#32</a>, <a href="https://github.com">#19</a>, <a href="https://github.com">#42</a></p>
-</li>
-<li>
-<p>Contributed to forum discussions (examples:  <a href="https://github.com">1</a>, <a href="https://github.com">2</a>, <a href="https://github.com">3</a>, <a href="https://github.com">4</a>)</p>
-</li>
-<li>
-<p>Reported bugs and suggestions for other teams in the class (examples:  <a href="https://github.com">1</a>, <a href="https://github.com">2</a>, <a href="https://github.com">3</a>)</p>
-</li>
-<li>
-<p>Some parts of the history feature I added was adopted by several other class mates (<a href="https://github.com">1</a>, <a href="https://github.com">2</a>)</p>
+<p>PRs reviewed (with non-trivial review comments): (
+<a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/134">#134</a>,
+<a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/130">#130</a>,
+<a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/139">#139</a>,
+<a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/108">108</a>,
+<a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/101">#101</a>)</p>
 </li>
 </ul>
 </div>
@@ -107,10 +119,7 @@ CHRS is capable of checking work schedule, creating recruitment posts, checking 
 <div class="ulist">
 <ul>
 <li>
-<p>Integrated a third party library (Natty) to the project (<a href="https://github.com">#42</a>)</p>
-</li>
-<li>
-<p>Integrated a new Github plugin (CircleCI) to the team repo</p>
+<p>Coveralls (<a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/45">#45</a>) and Codacy (<a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/46">#46</a>)</p>
 </li>
 </ul>
 </div>
@@ -119,9 +128,6 @@ CHRS is capable of checking work schedule, creating recruitment posts, checking 
 </div>
 </li>
 </ul>
-</div>
-<div class="paragraph">
-<p><em>{you can add/remove categories in the list above}</em></p>
 </div>
 </div>
 </div>
@@ -139,14 +145,12 @@ CHRS is capable of checking work schedule, creating recruitment posts, checking 
 </tbody>
 </table>
 <div class="sect2">
-<h3 id="undoing-previous-command-code-undo-code"><a class="link" href="#undoing-previous-command-code-undo-code">Undoing previous command : <code>undo</code></a></h3>
+<h3 id="add-a-new-schedule-code-addschedule-code"><a class="link" href="#add-a-new-schedule-code-addschedule-code">Add a new schedule : <code>addSchedule</code></a></h3>
 <div class="paragraph">
-<p>Restores CHRS to the state before the previous <em>undoable</em> command was executed.
-If a <em>undoable</em> command is executed after undo, then the command that was undone
-will not be undoable anymore as it is already undone.</p>
+<p>Add a new schedule for a employee.</p>
 </div>
 <div class="paragraph">
-<p>Format: <code>undo</code></p>
+<p>Format: <code>addSchedule id/EMPLOYEEID d/DATE t/TYPE</code> or <code>as id/EMPLOYEEID d/DATE t/TYPE</code></p>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -154,28 +158,12 @@ will not be undoable anymore as it is already undone.</p>
 <div class="ulist">
 <ul>
 <li>
-<p><code>delete 1</code><br>
-<code>list</code><br>
-<code>undo</code> (reverses the <code>delete 1</code> command)<br></p>
+<p><code>addSchedule id/000001 d/02/02/2019 t/WORK</code><br>
+Adds a new schedule for employee id 000001, date 02/02/2019, to work on that day.</p>
 </li>
 <li>
-<p><code>selectEmployee 1</code><br>
-<code>list</code><br>
-<code>undo</code><br>
-The <code>undo</code> command fails as there are no undoable commands executed previously</p>
-</li>
-<li>
-<p><code>delete 1</code><br>
-<code>clear</code><br>
-<code>undo</code> (reverses the <code>clear</code> command)<br>
-<code>undo</code> (reverses the <code>delete 1</code> command)<br></p>
-</li>
-<li>
-<p><code>delete 1</code><br>
-<code>undo</code> (reverses the <code>delete 1</code> command)<br>
-<code>clear</code>(<code>delete 1</code> commmand will no longer be undoable as it is already undone)<br>
-<code>undo</code> (reverses the <code>clear</code> command)<br>
-<code>undo</code> (no more commands to undo)<br></p>
+<p><code>as id/000001 d/03/03/2019 t/LEAVE</code>
+Adds a new schedule for employee id 000001, date 03/03/2019, to be on leave for that day.</p>
 </li>
 </ul>
 </div>
@@ -186,24 +174,21 @@ The <code>undo</code> command fails as there are no undoable commands executed p
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-<div class="paragraph">
-<p>Undoable commands: those commands that modify CHRS content.
-For commands similar functions to<br>
-(list*, find*, filter*, select*, calculate*)
-the command will not be able to undo or redo).</p>
-</div>
+Scheduling with a employee id that doesn&#8217;t exist in the address book will be rejected.<br>
+You are not allowed to schedule for dates that have past today&#8217;s date.<br>
+Exact duplicate schedules will be rejected.
 </td>
 </tr>
 </table>
 </div>
 </div>
 <div class="sect2">
-<h3 id="redoing-the-previously-undone-command-code-redo-code"><a class="link" href="#redoing-the-previously-undone-command-code-redo-code">Redoing the previously undone command : <code>redo</code></a></h3>
+<h3 id="delete-an-existing-schedule-code-deleteschedule-code"><a class="link" href="#delete-an-existing-schedule-code-deleteschedule-code">Delete an existing schedule : <code>deleteSchedule</code></a></h3>
 <div class="paragraph">
-<p>Reverses the most recent <code>undo</code> command.</p>
+<p>Deletes the specified schedule from the schedule list panel.</p>
 </div>
 <div class="paragraph">
-<p>Format: <code>redo</code></p>
+<p>Format: <code>deleteSchedule INDEX</code> or <code>ds INDEX</code></p>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -211,22 +196,41 @@ the command will not be able to undo or redo).</p>
 <div class="ulist">
 <ul>
 <li>
-<p><code>delete 1</code><br>
-<code>undo</code> (reverses the <code>delete 1</code> command)<br>
-<code>redo</code> (reapplies the <code>delete 1</code> command)<br></p>
+<p><code>deleteSchedule 1</code><br>
+Deletes the schedule with the index of '1' in the list.</p>
 </li>
 <li>
-<p><code>delete 1</code><br>
-<code>redo</code><br>
-The <code>redo</code> command fails as there are no <code>undo</code> commands executed previously</p>
+<p><code>ds 2</code><br>
+Deletes the schedule with the index of '2' in the list.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="add-multiple-work-schedules-code-addworks-code"><a class="link" href="#add-multiple-work-schedules-code-addworks-code">Add multiple work schedules : <code>addWorks</code></a></h3>
+<div class="paragraph">
+<p>Add work schedules for all the observable employees in the employees list pane.<br>
+Use <code>find</code> / <code>filter</code> / <code>list</code> to get the desired employees you wish to schedule.<br>
+All observable employees in the employees list pane will be scheduled work schedule
+with the date specified by the user.</p>
+</div>
+<div class="paragraph">
+<p>Format: <code>addWorks d/DATE [d/DATE]&#8230;&#8203;</code> or <code>aw d/DATE [d/DATE]&#8230;&#8203;</code></p>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>addWorks d/02/02/2019</code><br>
+Adds a new schedule for all observable employees in the employees list panel with
+date 02/02/2019, to work on that day.</p>
 </li>
 <li>
-<p><code>delete 1</code><br>
-<code>clear</code><br>
-<code>undo</code> (reverses the <code>clear</code> command)<br>
-<code>undo</code> (reverses the <code>delete 1</code> command)<br>
-<code>redo</code> (reapplies the <code>delete 1</code> command)<br>
-<code>redo</code> (reapplies the <code>clear</code> command)<br></p>
+<p><code>aw d/02/02/2019 d/03/03/2019</code><br>
+Adds new schedules for all observable employees in the employees list panel with
+date 02/02/2019 and 03/03/2019, to work on that day.</p>
 </li>
 </ul>
 </div>
@@ -237,15 +241,220 @@ The <code>redo</code> command fails as there are no <code>undo</code> commands e
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-<div class="paragraph">
-<p>Redoable commands: those commands that modify CHRS content.
-For commands similar functions to<br>
-(list*, find*, filter*, select*, calculate*)
-the command will not be able to undo or redo.</p>
-</div>
+For those employees whom are not scheduled with the date, the command will
+create a new schedule.<br>
+When all employees are scheduled with the date,
+the command will tell the user that every observable employees in the list
+have been scheduled with the specified date.<br>
+You are not allowed to schedule for dates that have past today&#8217;s date.
 </td>
 </tr>
 </table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="delete-multiple-work-schedules-code-deleteworks-code"><a class="link" href="#delete-multiple-work-schedules-code-deleteworks-code">Delete multiple work schedules : <code>deleteWorks</code></a></h3>
+<div class="paragraph">
+<p>Delete work schedules for all the observable employees in the employees list pane.<br>
+Use <code>find</code> / <code>filter</code> / <code>list</code> to get the desired employees you wish to schedule.<br>
+All observable employees in the employees list pane will be deleted work schedules
+with date specified by the user.</p>
+</div>
+<div class="paragraph">
+<p>Format: <code>deleteWorks d/DATE [d/DATE]&#8230;&#8203;</code> or <code>dw d/DATE [d/DATE]&#8230;&#8203;</code></p>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>deleteWorks d/02/02/2019</code><br>
+Deletes a schedule for all observable employees in the employees list panel with
+date 02/02/2019, with work on that day.</p>
+</li>
+<li>
+<p><code>dw d/02/02/2019 d/03/03/2019</code><br>
+Deletes schedules for all observable employees in the employees list panel with
+date 02/02/2019 and 03/03/2019, with work on that day.</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+For those employees whom are scheduled with the date, the command will
+delete the work schedule.<br>
+When all employees are deleted with the scheduled date,
+the command will tell the user every observable employees in the list does not have work schedule
+on the specified date.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="add-multiple-leave-schedules-code-addleaves-code"><a class="link" href="#add-multiple-leave-schedules-code-addleaves-code">Add multiple leave schedules : <code>addLeaves</code></a></h3>
+<div class="paragraph">
+<p>Add leave schedules for all the observable employees in the employees list pane.<br>
+Use <code>find</code> / <code>filter</code> / <code>list</code> to get the desired employees you wish to schedule.<br>
+All observable employees in the employees list pane will be scheduled
+with leave and date specified by the user.</p>
+</div>
+<div class="paragraph">
+<p>Format: <code>addLeaves d/DATE [d/DATE]&#8230;&#8203;</code> or <code>al d/DATE [d/DATE]&#8230;&#8203;</code></p>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>addLeaves d/02/02/2019</code><br>
+Adds a new schedule for all observable employees in the employees list panel with
+date 02/02/2019, to be on leave on that day.</p>
+</li>
+<li>
+<p><code>al d/02/02/2019 d/03/03/2019</code><br>
+Adds new schedules for all observable employees in the employees list panel with
+date 02/02/2019 and 03/03/2019, to be on leave on that day.</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+For those employees whom are not scheduled with the date, the command will
+create a new leave schedule.<br>
+When all employees are scheduled with the date,
+the command will tell the user that every observable employees in the list
+have been scheduled with the specified date.<br>
+You are not allowed to schedule for dates that have past today&#8217;s date.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="delete-multiple-leave-schedules-code-deleteleaves-code"><a class="link" href="#delete-multiple-leave-schedules-code-deleteleaves-code">Delete multiple leave schedules : <code>deleteLeaves</code></a></h3>
+<div class="paragraph">
+<p>Delete leave schedules for all the observable employees in the employees list pane.
+Use <code>find</code> / <code>filter</code> / <code>list</code> to get the desired employees you wish to schedule.
+All observable employees in the employees list pane will be deleted leave schedules
+with date specified by the user.</p>
+</div>
+<div class="paragraph">
+<p>Format: <code>deleteLeaves d/DATE [d/DATE]&#8230;&#8203;</code> or <code>dl d/DATE [d/DATE]&#8230;&#8203;</code></p>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>deleteLeaves d/02/02/2019</code><br>
+Deletes a schedule for all observable employees in the employees list panel with.
+date 02/02/2019, with leave on that day.</p>
+</li>
+<li>
+<p><code>dl d/02/02/2019 d/03/03/2019</code><br>
+Deletes schedules for all observable employees in the employees list panel with.
+date 02/02/2019 and 03/03/2019, with leave on that day.</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+For those employees whom are scheduled with the date, the command will
+delete the schedule.<br>
+When all employees are deleted with the scheduled date,
+the command will tell the user every observable employees in the list does not have leave schedule
+on the specified date.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="calculate-total-leaves-in-a-year-code-calculateleaves-code"><a class="link" href="#calculate-total-leaves-in-a-year-code-calculateleaves-code">Calculate total leaves in a year : <code>calculateLeaves</code></a></h3>
+<div class="paragraph">
+<p>Calculates total number of leaves scheduled for an employee for the entire specified year
+in the schedule list.</p>
+</div>
+<div class="paragraph">
+<p>Format: <code>calculateLeaves id/EMPLOYEEID y/YYYY</code> or <code>cl id/EMPLOYEEID y/YYYY</code></p>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>calculateLeaves id/000001 date/2019</code><br>
+Calculates total number of leave scheduled for an employee id 000001 in whole of year 2019.</p>
+</li>
+<li>
+<p><code>cl id/000002 date/2020</code><br>
+Calculates total number of leave scheduled for an employee id 000002 in whole of year 2020.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="select-schedule-in-the-schedule-list-code-selectschedule-code"><a class="link" href="#select-schedule-in-the-schedule-list-code-selectschedule-code">Select schedule in the schedule list : <code>selectSchedule</code></a></h3>
+<div class="paragraph">
+<p>Select a schedule based on schedule index ID.</p>
+</div>
+<div class="paragraph">
+<p>Format: <code>selectSchedule INDEX</code> or <code>ss INDEX</code>.</p>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>selectSchedule 1</code><br>
+Select the schedule with the index of '1'</p>
+</li>
+<li>
+<p><code>ss 1</code><br>
+Select the schedule with the index of '1'</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="clear-the-entire-schedule-list-code-clearschedules-code"><a class="link" href="#clear-the-entire-schedule-list-code-clearschedules-code">Clear the entire schedule list : <code>clearSchedules</code></a></h3>
+<div class="paragraph">
+<p>Clear the entire schedule list.</p>
+</div>
+<div class="paragraph">
+<p>Format: <code>clearSchedules</code>. or <code>cs</code>.</p>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>clearSchedules</code><br>
+Clear the entire Schedule List.</p>
+</li>
+</ul>
 </div>
 </div>
 </div>
@@ -264,215 +473,273 @@ the command will not be able to undo or redo.</p>
 </tbody>
 </table>
 <div class="sect2">
-<h3 id="undo-redo-feature"><a class="link" href="#undo-redo-feature">Undo/Redo feature</a></h3>
+<h3 id="schedule-feature"><a class="link" href="#schedule-feature">Schedule Feature</a></h3>
+<div class="paragraph">
+<p><code>Schedule</code> command helps the HR admins to schedule employee&#8217;s work and leave schedules in the company.
+A person can have multiple schedules. Type field describes whether the schedule is a work or a leave.
+Below is the schedule class diagram.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/Schedule/schedule_class.png" alt="schedule class" width="400">
+</div>
+</div>
+<div class="paragraph">
+<p>All logic commands comes with a dedicated parser. These parsers ensures that the input conforms to the following
+field restrictions before in phase 1 before parsing to the actual command for execution in phase 2:</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 27.7777%;">
+<col style="width: 16.6666%;">
+<col style="width: 55.5557%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Field Name</th>
+<th class="tableblock halign-left valign-top">Prefix</th>
+<th class="tableblock halign-left valign-top">Limitations</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">EMPLOYEEID</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">id/</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Employee Id should only contain exactly 6 numbers.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DATE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">d/</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Date must be a valid date in the calendar DD/MM/YYYY]. Year must also fall into the range
+ of 2000-2099. Leading 0s can be omitted in day and month field.
+ You are not allowed to schedule for dates that have past today&#8217;s date.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TYPE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">t/</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Type can be either WORK or LEAVE only, case not sensitive.</p></td>
+</tr>
+</tbody>
+</table>
 <div class="sect3">
-<h4 id="current-implementation"><a class="link" href="#current-implementation">Current Implementation</a></h4>
+<h4 id="add-schedule"><a class="link" href="#add-schedule">Add Schedule</a></h4>
 <div class="paragraph">
-<p>The undo/redo mechanism is facilitated by <code>VersionedAddressBook</code>.
-It extends <code>AddressBook</code> with an undo/redo history, stored internally as an <code>addressBookStateList</code> and <code>currentStatePointer</code>.
-Additionally, it implements the following operations:</p>
+<p><code>addSchedule</code> command allows a new work or leave schedule to be added.
+Shown below is the normal flow of the sequence diagram for adding a new schedule.</p>
 </div>
-<div class="ulist">
-<ul>
+<div class="imageblock">
+<div class="content">
+<img src="../images/Schedule/addSchedule_seq.png" alt="addSchedule seq" width="650">
+</div>
+</div>
+<div class="paragraph">
+<p>In addtion, Command Exception will be thrown due to the following:</p>
+</div>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
 <li>
-<p><code>VersionedAddressBook#commit()</code>&#8201;&#8212;&#8201;Saves the current address book state in its history.</p>
+<p>Employee Id of the schedule to be added is not found in address book.</p>
 </li>
 <li>
-<p><code>VersionedAddressBook#undo()</code>&#8201;&#8212;&#8201;Restores the previous address book state from its history.</p>
+<p>A duplicated schedule exists.</p>
 </li>
 <li>
-<p><code>VersionedAddressBook#redo()</code>&#8201;&#8212;&#8201;Restores a previously undone address book state from its history.</p>
+<p>User wants to add a work schedule, but a leave schedule exists on same date.</p>
 </li>
-</ul>
-</div>
-<div class="paragraph">
-<p>These operations are exposed in the <code>Model</code> interface as <code>Model#commitAddressBook()</code>, <code>Model#undoAddressBook()</code> and <code>Model#redoAddressBook()</code> respectively.</p>
-</div>
-<div class="paragraph">
-<p>Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.</p>
-</div>
-<div class="paragraph">
-<p>Step 1. The user launches the application for the first time. The <code>VersionedAddressBook</code> will be initialized with the initial address book state, and the <code>currentStatePointer</code> pointing to that single address book state.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/UndoRedoStartingStateListDiagram.png" alt="UndoRedoStartingStateListDiagram" width="800">
-</div>
-</div>
-<div class="paragraph">
-<p>Step 2. The user executes <code>delete 5</code> command to delete the 5th person in the address book. The <code>delete</code> command calls <code>Model#commitAddressBook()</code>, causing the modified state of the address book after the <code>delete 5</code> command executes to be saved in the <code>addressBookStateList</code>, and the <code>currentStatePointer</code> is shifted to the newly inserted address book state.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/UndoRedoNewCommand1StateListDiagram.png" alt="UndoRedoNewCommand1StateListDiagram" width="800">
-</div>
-</div>
-<div class="paragraph">
-<p>Step 3. The user executes <code>add n/David &#8230;&#8203;</code> to add a new person. The <code>add</code> command also calls <code>Model#commitAddressBook()</code>, causing another modified address book state to be saved into the <code>addressBookStateList</code>.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/UndoRedoNewCommand2StateListDiagram.png" alt="UndoRedoNewCommand2StateListDiagram" width="800">
-</div>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-If a command fails its execution, it will not call <code>Model#commitAddressBook()</code>, so the address book state will not be saved into the <code>addressBookStateList</code>.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the <code>undo</code> command. The <code>undo</code> command will call <code>Model#undoAddressBook()</code>, which will shift the <code>currentStatePointer</code> once to the left, pointing it to the previous address book state, and restores the address book to that state.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/UndoRedoExecuteUndoStateListDiagram.png" alt="UndoRedoExecuteUndoStateListDiagram" width="800">
-</div>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-If the <code>currentStatePointer</code> is at index 0, pointing to the initial address book state, then there are no previous address book states to restore. The <code>undo</code> command uses <code>Model#canUndoAddressBook()</code> to check if this is the case. If so, it will return an error to the user rather than attempting to perform the undo.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>The following sequence diagram shows how the undo operation works:</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/UndoRedoSequenceDiagram.png" alt="UndoRedoSequenceDiagram" width="800">
-</div>
-</div>
-<div class="paragraph">
-<p>The <code>redo</code> command does the opposite&#8201;&#8212;&#8201;it calls <code>Model#redoAddressBook()</code>, which shifts the <code>currentStatePointer</code> once to the right, pointing to the previously undone state, and restores the address book to that state.</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-If the <code>currentStatePointer</code> is at index <code>addressBookStateList.size() - 1</code>, pointing to the latest address book state, then there are no undone address book states to restore. The <code>redo</code> command uses <code>Model#canRedoAddressBook()</code> to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>Step 5. The user then decides to execute the command <code>list</code>. Commands that do not modify the address book, such as <code>list</code>, will usually not call <code>Model#commitAddressBook()</code>, <code>Model#undoAddressBook()</code> or <code>Model#redoAddressBook()</code>. Thus, the <code>addressBookStateList</code> remains unchanged.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/UndoRedoNewCommand3StateListDiagram.png" alt="UndoRedoNewCommand3StateListDiagram" width="800">
-</div>
-</div>
-<div class="paragraph">
-<p>Step 6. The user executes <code>clear</code>, which calls <code>Model#commitAddressBook()</code>. Since the <code>currentStatePointer</code> is not pointing at the end of the <code>addressBookStateList</code>, all address book states after the <code>currentStatePointer</code> will be purged. We designed it this way because it no longer makes sense to redo the <code>add n/David &#8230;&#8203;</code> command. This is the behavior that most modern desktop applications follow.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/UndoRedoNewCommand4StateListDiagram.png" alt="UndoRedoNewCommand4StateListDiagram" width="800">
-</div>
-</div>
-<div class="paragraph">
-<p>The following activity diagram summarizes what happens when a user executes a new command:</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/UndoRedoActivityDiagram.png" alt="UndoRedoActivityDiagram" width="650">
-</div>
+<li>
+<p>User wants to add leave schedule, but a work schedule exists on same date.</p>
+</li>
+</ol>
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations"><a class="link" href="#design-considerations">Design Considerations</a></h4>
-<div class="sect4">
-<h5 id="aspect-how-undo-redo-executes"><a class="link" href="#aspect-how-undo-redo-executes">Aspect: How undo &amp; redo executes</a></h5>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Alternative 1 (current choice):</strong> Saves the entire address book.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: Easy to implement.</p>
-</li>
-<li>
-<p>Cons: May have performance issues in terms of memory usage.</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p><strong>Alternative 2:</strong> Individual command knows how to undo/redo by itself.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: Will use less memory (e.g. for <code>delete</code>, just save the person being deleted).</p>
-</li>
-<li>
-<p>Cons: We must ensure that the implementation of each individual command are correct.</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect4">
-<h5 id="aspect-data-structure-to-support-the-undo-redo-commands"><a class="link" href="#aspect-data-structure-to-support-the-undo-redo-commands">Aspect: Data structure to support the undo/redo commands</a></h5>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Alternative 1 (current choice):</strong> Use a list to store the history of address book states.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: Easy for new Computer Science student undergraduates to understand, who are likely to be the new incoming developers of our project.</p>
-</li>
-<li>
-<p>Cons: Logic is duplicated twice. For example, when a new command is executed, we must remember to update both <code>HistoryManager</code> and <code>VersionedAddressBook</code>.</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p><strong>Alternative 2:</strong> Use <code>HistoryManager</code> for undo/redo</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: We do not need to maintain a separate list, and just reuse what is already in the codebase.</p>
-</li>
-<li>
-<p>Cons: Requires dealing with commands that have already been undone: We must remember to skip these commands. Violates Single Responsibility Principle and Separation of Concerns as <code>HistoryManager</code> now needs to do two different things.</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="project-powerpointlabs"><a class="link" href="#project-powerpointlabs">PROJECT: PowerPointLabs</a></h2>
-<div class="sectionbody">
-<hr>
+<h4 id="delete-schedule"><a class="link" href="#delete-schedule">Delete Schedule</a></h4>
 <div class="paragraph">
-<p><em>{Optionally, you may include other projects in your portfolio.}</em></p>
+<p><code>deleteSchedule</code> command allows a schedule to be deleted.
+Shown below is the normal flow of the sequence diagram for adding a new schedule.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/Schedule/deleteSchedule_seq.png" alt="deleteSchedule seq" width="650">
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-11 05:24:24 UTC</div></div></div></body></html>
+<div class="paragraph">
+<p>In addtion, Command Exception will be thrown due to the following:</p>
+</div>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Index parsed is a invalid index in the ScheduleList panel.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="add-works"><a class="link" href="#add-works">Add Works</a></h4>
+<div class="paragraph">
+<p><code>addWorks</code> command allows multiple work schedules to be added based on
+the employees shown in the employee&#8217;s panel.
+Shown below is the normal flow of the sequence diagram for adding a working schedules.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/Schedule/addWorks_seq.png" alt="addWorks seq" width="650">
+</div>
+</div>
+<div class="paragraph">
+<p>In addtion, Command Exception will be thrown due to the following:</p>
+</div>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Size of the filtered person list is 0. This happens when there is no
+employees shown.</p>
+</li>
+<li>
+<p>Commit is false. This happens either when all employees have been
+added work, or some had leave on the same day.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="delete-works"><a class="link" href="#delete-works">Delete Works</a></h4>
+<div class="paragraph">
+<p><code>deleteWorks</code> command allows multiple work schedules to be deleted based on
+the employees shown in the employee&#8217;s panel.
+Shown below is the normal flow of the sequence diagram for deleting multiple work schedules.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/Schedule/deleteWorks_seq.png" alt="deleteWorks seq" width="650">
+</div>
+</div>
+<div class="paragraph">
+<p>In addtion, Command Exception will be thrown due to the following:</p>
+</div>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Size of the filtered person list is 0. This happens when there is no
+employees shown.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="add-leaves"><a class="link" href="#add-leaves">Add Leaves</a></h4>
+<div class="paragraph">
+<p><code>addLeaves</code> command allows multiple leave schedules to be added based on
+the employees shown in the employee&#8217;s panel.
+Shown below is the normal flow of the sequence diagram for adding a leave schedules.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/Schedule/addLeaves_seq.png" alt="addLeaves seq" width="650">
+</div>
+</div>
+<div class="paragraph">
+<p>In addtion, Command Exception will be thrown due to the following:</p>
+</div>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Size of the filtered person list is 0. This happens when there is no
+employees shown.</p>
+</li>
+<li>
+<p>Commit is false. This happens either when all employees have been
+added work, or some had leave on the same day.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="delete-leaves"><a class="link" href="#delete-leaves">Delete Leaves</a></h4>
+<div class="paragraph">
+<p><code>deleteLeaves</code> command allows multiple leave schedules to be deleted based on
+the employees shown in the employee&#8217;s panel.
+Shown below is the normal flow of the sequence diagram for deleting multiple leave schedules.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/Schedule/deleteLeaves_seq.png" alt="deleteLeaves seq" width="650">
+</div>
+</div>
+<div class="paragraph">
+<p>In addtion, Command Exception will be thrown due to the following:</p>
+</div>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Size of the filtered person list is 0. This happens when there is no
+employees shown.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="calculate-leaves"><a class="link" href="#calculate-leaves">Calculate Leaves</a></h4>
+<div class="paragraph">
+<p><code>calculateLeaves</code> command allows user to calculate leaves taken for the specified employee id and year.
+Shown below is the normal flow of the sequence diagram for calculating leaves.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/Schedule/calculateLeaves_seq.png" alt="calculateLeaves seq" width="650">
+</div>
+</div>
+<div class="paragraph">
+<p>In addition, Command Exception will be thrown due to the following:</p>
+</div>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Employee Id to be calculated is not found in address book.</p>
+</li>
+<li>
+<p>Employee Id has not taken any leaves in the specified year.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-for-schedule-features"><a class="link" href="#design-considerations-for-schedule-features">Design considerations for Schedule Features</a></h4>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Have separate commands
+to add work/leave schedules.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easier for the user to use, without the need to specify
+the type of schedule.</p>
+</li>
+<li>
+<p>Cons: More codes needed, but easier for user to schedule
+for multiple employees with multiple dates.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong>Have a single command to add work/leave schedule.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easier to code.</p>
+</li>
+<li>
+<p>Cons: Requires user to specify type of schedule. Can only
+schedule 1 at a time.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-11 05:28:38 UTC</div></div></div></body></html>

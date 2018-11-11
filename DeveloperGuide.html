@@ -88,8 +88,15 @@
 <li><a href="#selecting-an-employee">H.6. Selecting an employee</a></li>
 <li><a href="#modifying-an-employee-s-pay">H.7. Modifying an employee&#8217;s pay</a></li>
 <li><a href="#modifying-the-pay-of-all-the-employees-in-the-list">H.8. Modifying the pay of all the employees in the list</a></li>
-<li><a href="#deleting-an-employee">H.9. Deleting an employee</a></li>
-<li><a href="#saving-data">H.10. Saving data</a></li>
+<li><a href="#add-schedule-2">H.9. Add Schedule</a></li>
+<li><a href="#add-works-2">H.10. Add Works</a></li>
+<li><a href="#add-leaves-2">H.11. Add Leaves</a></li>
+<li><a href="#calculate-leaves-2">H.12. Calculate Leaves</a></li>
+<li><a href="#select-schedule">H.13. Select Schedule</a></li>
+<li><a href="#delete-schedule-2">H.14. Delete Schedule</a></li>
+<li><a href="#delete-works-2">H.15. Delete Works</a></li>
+<li><a href="#delete-leaves-2">H.16. Delete Leaves</a></li>
+<li><a href="#deleting-an-employee">H.17. Deleting an employee</a></li>
 </ul>
 </li>
 </ul>
@@ -610,8 +617,38 @@ As a more OOP model, we can store a <code>Tag</code> list in <code>Address Book<
 <div class="sect3">
 <h4 id="current-implementation"><a class="link" href="#current-implementation">3.1.1. Current Implementation</a></h4>
 <div class="paragraph">
-<p>The undo/redo mechanism is facilitated by <code>VersionedAddressBook</code>.
-It extends <code>AddressBook</code> with an undo/redo history, stored internally as an <code>addressBookStateList</code> and <code>currentStatePointer</code>.
+<p>The undo/redo mechanism is facilitated by <code>VersionedModelList</code>, which oversees all the undo and redo for other
+storage, namely, <code>VersionedAddressBook</code>, <code>VersionedScheduleList</code>, <code>VersionedExpensesList</code>
+and <code>VersionedRecruitmentList</code>.</p>
+</div>
+<div class="paragraph">
+<p><code>VersionedModelList</code> stored internally as an <code>modelTypesStateList</code> and <code>currentStatePointer</code>.
+Additionally, it implements the following operations:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>VersionedAddressBook#add()</code>&#8201;&#8212;&#8201;Save the storage model type that has committed in its history.</p>
+</li>
+<li>
+<p><code>VersionedAddressBook#addMultiple()</code>&#8201;&#8212;&#8201;Saves the set of storage model types that has committed in its history.</p>
+</li>
+<li>
+<p><code>VersionedAddressBook#undo()</code>&#8201;&#8212;&#8201;Delegate <code>VersionedAddressBook</code>, <code>VersionedScheduleList</code>, <code>VersionedExpensesList</code>
+and <code>VersionedRecruitmentList</code> to restore the previous storage model state from its history.</p>
+</li>
+<li>
+<p><code>VersionedAddressBook#redo()</code>&#8201;&#8212;&#8201; Delegate <code>VersionedAddressBook</code>, <code>VersionedScheduleList</code>, <code>VersionedExpensesList</code>
+and <code>VersionedRecruitmentList</code> to restore a previously undone address book state from its history.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The following is an example of <code>VersionedAddressBook</code> implementation. The implementation will
+be similar to <code>VersionedScheduleList</code>, <code>VersionedExpensesList</code> and <code>VersionedRecruitmentList</code>.</p>
+</div>
+<div class="paragraph">
+<p><code>VersionedAddressBook</code> extends <code>AddressBook</code> with an undo/redo history, stored internally as an <code>addressBookStateList</code> and <code>currentStatePointer</code>.
 Additionally, it implements the following operations:</p>
 </div>
 <div class="ulist">
@@ -1088,61 +1125,258 @@ Below is the schedule class diagram.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/Schedule/schedule_class_diagram.png" alt="schedule class diagram" width="650">
+<img src="images/Schedule/schedule_class.png" alt="schedule class" width="400">
 </div>
 </div>
+<div class="paragraph">
+<p>All logic commands comes with a dedicated parser. These parsers ensures that the input conforms to the following
+field restrictions before in phase 1 before parsing to the actual command for execution in phase 2:</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 27.7777%;">
+<col style="width: 16.6666%;">
+<col style="width: 55.5557%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Field Name</th>
+<th class="tableblock halign-left valign-top">Prefix</th>
+<th class="tableblock halign-left valign-top">Limitations</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">EMPLOYEEID</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">id/</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Employee Id should only contain exactly 6 numbers.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DATE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">d/</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Date must be a valid date in the calendar DD/MM/YYYY]. Year must also fall into the range
+ of 2000-2099. Leading 0s can be omitted in day and month field.
+ You are not allowed to schedule for dates that have past today&#8217;s date.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TYPE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">t/</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Type can be either WORK or LEAVE only, case not sensitive.</p></td>
+</tr>
+</tbody>
+</table>
 <div class="sect3">
 <h4 id="add-schedule"><a class="link" href="#add-schedule">3.4.1. Add Schedule</a></h4>
 <div class="paragraph">
-<p><code>addSchedule</code> command allows a new schedule to be added.
-Shown below is the sequence diagram for adding a new schedule.</p>
+<p><code>addSchedule</code> command allows a new work or leave schedule to be added.
+Shown below is the normal flow of the sequence diagram for adding a new schedule.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/Schedule/Basic%20Sequence%20Diagram2.png" alt="Basic Sequence Diagram2" width="650">
+<img src="images/Schedule/addSchedule_seq.png" alt="addSchedule seq" width="650">
 </div>
 </div>
 <div class="paragraph">
-<p>In addition, the Model checks whether the employee id exists before allowing addtion of new schedules.</p>
+<p>In addtion, Command Exception will be thrown due to the following:</p>
 </div>
-<div class="paragraph">
-<p>Code snippet of <code>UniquePersonList.java</code> shows the checking of employee id:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="java">    <span class="directive">public</span> <span class="type">boolean</span> containsEmployeeId(Person toCheck) {
-        requireNonNull(toCheck);
-        <span class="keyword">return</span> internalList.stream().anyMatch(toCheck::isSameEmployeeId);
-    }</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p><strong>Design Considerations</strong></p>
-</div>
-<div class="ulist">
-<ul>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
 <li>
-<p><strong>Alternative 1 (current choice):</strong> Save to a new XML storage file.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: Easier to scale into large number of schedules.</p>
+<p>Employee Id of the schedule to be added is not found in address book.</p>
 </li>
 <li>
-<p>Cons: More difficult to implement</p>
+<p>A duplicated schedule exists.</p>
+</li>
+<li>
+<p>User wants to add a work schedule, but a leave schedule exists on same date.</p>
+</li>
+<li>
+<p>User wants to add leave schedule, but a work schedule exists on same date.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="delete-schedule"><a class="link" href="#delete-schedule">3.4.2. Delete Schedule</a></h4>
+<div class="paragraph">
+<p><code>deleteSchedule</code> command allows a schedule to be deleted.
+Shown below is the normal flow of the sequence diagram for adding a new schedule.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/Schedule/deleteSchedule_seq.png" alt="deleteSchedule seq" width="650">
+</div>
+</div>
+<div class="paragraph">
+<p>In addtion, Command Exception will be thrown due to the following:</p>
+</div>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Index parsed is a invalid index in the ScheduleList panel.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="add-works"><a class="link" href="#add-works">3.4.3. Add Works</a></h4>
+<div class="paragraph">
+<p><code>addWorks</code> command allows multiple work schedules to be added based on
+the employees shown in the employee&#8217;s panel.
+Shown below is the normal flow of the sequence diagram for adding a working schedules.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/Schedule/addWorks_seq.png" alt="addWorks seq" width="650">
+</div>
+</div>
+<div class="paragraph">
+<p>In addtion, Command Exception will be thrown due to the following:</p>
+</div>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Size of the filtered person list is 0. This happens when there is no
+employees shown.</p>
+</li>
+<li>
+<p>Commit is false. This happens either when all employees have been
+added work, or some had leave on the same day.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="delete-works"><a class="link" href="#delete-works">3.4.4. Delete Works</a></h4>
+<div class="paragraph">
+<p><code>deleteWorks</code> command allows multiple work schedules to be deleted based on
+the employees shown in the employee&#8217;s panel.
+Shown below is the normal flow of the sequence diagram for deleting multiple work schedules.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/Schedule/deleteWorks_seq.png" alt="deleteWorks seq" width="650">
+</div>
+</div>
+<div class="paragraph">
+<p>In addtion, Command Exception will be thrown due to the following:</p>
+</div>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Size of the filtered person list is 0. This happens when there is no
+employees shown.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="add-leaves"><a class="link" href="#add-leaves">3.4.5. Add Leaves</a></h4>
+<div class="paragraph">
+<p><code>addLeaves</code> command allows multiple leave schedules to be added based on
+the employees shown in the employee&#8217;s panel.
+Shown below is the normal flow of the sequence diagram for adding a leave schedules.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/Schedule/addLeaves_seq.png" alt="addLeaves seq" width="650">
+</div>
+</div>
+<div class="paragraph">
+<p>In addtion, Command Exception will be thrown due to the following:</p>
+</div>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Size of the filtered person list is 0. This happens when there is no
+employees shown.</p>
+</li>
+<li>
+<p>Commit is false. This happens either when all employees have been
+added work, or some had leave on the same day.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="delete-leaves"><a class="link" href="#delete-leaves">3.4.6. Delete Leaves</a></h4>
+<div class="paragraph">
+<p><code>deleteLeaves</code> command allows multiple leave schedules to be deleted based on
+the employees shown in the employee&#8217;s panel.
+Shown below is the normal flow of the sequence diagram for deleting multiple leave schedules.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/Schedule/deleteLeaves_seq.png" alt="deleteLeaves seq" width="650">
+</div>
+</div>
+<div class="paragraph">
+<p>In addtion, Command Exception will be thrown due to the following:</p>
+</div>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Size of the filtered person list is 0. This happens when there is no
+employees shown.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="calculate-leaves"><a class="link" href="#calculate-leaves">3.4.7. Calculate Leaves</a></h4>
+<div class="paragraph">
+<p><code>calculateLeaves</code> command allows user to calculate leaves taken for the specified employee id and year.
+Shown below is the normal flow of the sequence diagram for calculating leaves.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/Schedule/calculateLeaves_seq.png" alt="calculateLeaves seq" width="650">
+</div>
+</div>
+<div class="paragraph">
+<p>In addition, Command Exception will be thrown due to the following:</p>
+</div>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Employee Id to be calculated is not found in address book.</p>
+</li>
+<li>
+<p>Employee Id has not taken any leaves in the specified year.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-for-schedule-features"><a class="link" href="#design-considerations-for-schedule-features">3.4.8. Design considerations for Schedule Features</a></h4>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Have separate commands
+to add work/leave schedules.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easier for the user to use, without the need to specify
+the type of schedule.</p>
+</li>
+<li>
+<p>Cons: More codes needed, but easier for user to schedule
+for multiple employees with multiple dates.</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p><strong>Alternative 2:</strong>Save into addresbook.xml storage file</p>
+<p><strong>Alternative 2:</strong>Have a single command to add work/leave schedule.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: Easier to manage person and schedule dependencies.</p>
+<p>Pros: Easier to code.</p>
 </li>
 <li>
-<p>Cons: Scalability issues when schedule grows at a larger volume.</p>
+<p>Cons: Requires user to specify type of schedule. Can only
+schedule 1 at a time.</p>
 </li>
 </ul>
 </div>
@@ -4112,7 +4346,194 @@ Else, error details shown in the status message. Status bar remains the same.</p
 </div>
 </div>
 <div class="sect2">
-<h3 id="deleting-an-employee"><a class="link" href="#deleting-an-employee">H.9. Deleting an employee</a></h3>
+<h3 id="add-schedule-2"><a class="link" href="#add-schedule-2">H.9. Add Schedule</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Add a single leave schedule</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: There must be at least 3 employees in the observable employee list panel.</p>
+</li>
+<li>
+<p>Test case: addSchedule id/000001 d/02/02/2019 t/LEAVE<br>
+Expected: New schedule added: Employee Id:000001 Date: 02/02/2019 Type: LEAVE</p>
+</li>
+<li>
+<p>Test case: addSchedule id/000001 d/04/02/2019 t/WORK<br>
+Expected: New schedule added: Employee Id:000001 Date: 04/02/2019 Type: WORK</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="add-works-2"><a class="link" href="#add-works-2">H.10. Add Works</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Add multiple work schedules for multiple employees.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: There must be at least 3 employees in the observable employee list panel
+and completed <code>addSchedule</code> manual test above.</p>
+<div class="olist lowerroman">
+<ol class="lowerroman" type="i">
+<li>
+<p>Test case: addWorks d/02/02/2019 d/03/03/2019<br>
+Expected: New working schedules added for SOME of the observable employees whom are not yet added date: [02/02/2019, 03/03/2019]
+              Unable to schedule work for the following employees below whom are on leave:
+              Employee Id: 000001 Has leave on: [02/02/2019]</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="add-leaves-2"><a class="link" href="#add-leaves-2">H.11. Add Leaves</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Add multiple leave schedules for multiple employees.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: There must be at least 3 employees in the observable employee list panel
+and completed <code>addWorks</code> manual test above.</p>
+</li>
+<li>
+<p>Test case: addLeaves d/04/02/2019 d/05/02/2019<br>
+Expected: New leave schedules added for SOME of the observable employees whom are not yet added date: [04/02/2019, 05/02/2019]
+              Unable to schedule work for the following employees below whom are on work:
+              Employee Id: 000001 Has work on: [04/02/2019]</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="calculate-leaves-2"><a class="link" href="#calculate-leaves-2">H.12. Calculate Leaves</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Calculate leaves taken by an employee in a year.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: There must be at least 3 employees in the observable employee list panel
+and completed <code>addLeaves</code> manual test above.</p>
+</li>
+<li>
+<p>Test case: calculateLeaves id/000001 y/2019<br>
+Expected: Number of leaves scheduled for Employee 000001 year 2019 is: 2.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="select-schedule"><a class="link" href="#select-schedule">H.13. Select Schedule</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Select a schedule</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: There must be at least 3 employees in the observable employee list panel
+and completed <code>calculateLeaves</code> manual test above.</p>
+</li>
+<li>
+<p>Test case: selectSchedule 1<br>
+Expected: Selected Schedule: 1</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="delete-schedule-2"><a class="link" href="#delete-schedule-2">H.14. Delete Schedule</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Delete a schedule</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: There must be at least 3 employees in the observable employee list panel
+and completed <code>selectSchedule</code> manual test above.</p>
+<div class="olist lowerroman">
+<ol class="lowerroman" type="i">
+<li>
+<p>Test Case: deleteSchedule 1<br>
+Expected: Deleted Schedule: Date: 02/02/2019 Type: LEAVE</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="delete-works-2"><a class="link" href="#delete-works-2">H.15. Delete Works</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Delete multiple work schedules</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: There must be at least 3 employees in the observable employee list panel
+and completed <code>deleteSchedule</code> manual test above.</p>
+</li>
+<li>
+<p>Test Case: deleteWorks d/02/02/2019 d/03/03/2019<br>
+Expected: Working schedule deleted for all observable employees that contain date : [02/02/2019, 03/03/2019]</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="delete-leaves-2"><a class="link" href="#delete-leaves-2">H.16. Delete Leaves</a></h3>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Delete multiple leave schedules</p>
+</li>
+<li>
+<p>Prerequisites: There must be at least 3 employees in the observable employee list panel
+and completed <code>deleteWorks</code> manual test above.</p>
+</li>
+<li>
+<p>Test Case: deleteLeaves d/04/02/2019 d/05/02/2019<br>
+Expected: Leaves deleted for all observable employees that contain date : [04/02/2019, 05/02/2019]</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="deleting-an-employee"><a class="link" href="#deleting-an-employee">H.17. Deleting an employee</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -4140,25 +4561,5 @@ Expected: Similar to previous.</p>
 </ol>
 </div>
 </div>
-<div class="sect2">
-<h3 id="saving-data"><a class="link" href="#saving-data">H.10. Saving data</a></h3>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Dealing with missing/corrupted data files</p>
-<div class="olist loweralpha">
-<ol class="loweralpha" type="a">
-<li>
-<p><em>{explain how to simulate a missing/corrupted file and the expected behavior}</em></p>
-</li>
-</ol>
 </div>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p><em>{ more test cases &#8230;&#8203; }</em></p>
-</div>
-</div>
-</div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-11 05:24:24 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-11 05:28:38 UTC</div></div></div></body></html>
