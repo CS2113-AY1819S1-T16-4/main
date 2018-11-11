@@ -1555,22 +1555,11 @@ If the input Index isn&#8217;t found in the list, an error message will be shown
 <div class="sect4">
 <h5 id="phase-1-2"><a class="link" href="#phase-1-2">Phase 1</a></h5>
 <div class="paragraph">
-<p>The <code>filter</code> mechanism is facilitated by <code>FilterCommandParser</code>.
+<p>The <code>filter</code> command&#8217;s mechanism is facilitated by <code>FilterCommandParser</code>.
 The <code>FilterCommandParser</code> implements the <code>Parser</code> interface, parses the arguments parameter, which is the input from the user, and creates a new <code>FilterCommand</code> object.
 Apart from parsing the input, the <code>FilterCommandParser</code> checks whether the input complies with the required format.
-This checking of input compliance is facilitated by two helper methods, namely <code>processDepartmentKeywords</code> and <code>processPositionKeywords</code>, that is within the class.</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-The <code>processDepartmentKeywords</code> and <code>processPositionKeywords</code> methods are quite similar. Therefore, the code snippets will include only <code>processDepartmentKeywords</code> rather than both.
-</td>
-</tr>
-</table>
+This checking of input compliance is facilitated by two helper methods, namely <code>processDepartmentKeywords</code> and <code>processPositionKeywords</code>, that is within the class.
+This guide will focus on explaining how <code>processDepartmentKeywords</code> work instead of both as the methods <code>processDepartmentKeywords</code> and <code>processPositionKeywords</code> are quite similar.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -1658,7 +1647,7 @@ If the input does not comply with the required format, an error message will be 
 <p>The <code>FilterCommand</code> is being executed in this phase.
 <code>FilterCommand</code> first checks which prefix(es) is(are) present prior to calling the <code>updateFilteredPersonList</code> method, which updates <code>filteredPersonList</code>
  with the relevant department(s) and/or position(s) that matches the keyword(s) input from the user.
- Additionally, the method <code>updateFilteredExpensesList</code> and <code>updateFilteredScheduleList</code> will be called to update the <code>filteredExpensesList</code> and <code>filteredScheduleList</code> respectively to show only the matched employees' expenses and schedules.</p>
+ Additionally, the methods <code>updateFilteredExpensesList</code> and <code>updateFilteredScheduleList</code> will be called to update the <code>filteredExpensesList</code> and <code>filteredScheduleList</code> respectively to show only the matched employees' expenses and schedules.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -1669,7 +1658,7 @@ If the input does not comply with the required format, an error message will be 
 <td class="content">
 If the keywords input from the user results in 0 person found. The CLI will show the user a list of currently available department(s) and/or position(s) in the PersonList.
 The listing of available department(s) and/or position(s) depends on the presence of the prefix.<br>
-Example: If <code>filter asc d/hello</code> results in 0 person found, the CLI will list the currently available department(s) in CHRS.
+Example: If <code>filter asc d/hello</code> results in 0 person found, the CLI will list all the currently available department(s) in CHRS.
 </td>
 </tr>
 </table>
@@ -1720,7 +1709,7 @@ Upon the update of <code>filteredPersonList</code>, <code>filteredExpensesList</
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/filterCommandSequenceDiagram.png" alt="filterCommandSequenceDiagram" width="850">
+<img src="images/filterCommandSequenceDiagram.png" alt="filterCommandSequenceDiagram" width="900">
 </div>
 </div>
 </div>
@@ -1740,20 +1729,20 @@ Upon the update of <code>filteredPersonList</code>, <code>filteredExpensesList</
 <p>Pros: Does not require several command and parser files to handle filtering of different fields</p>
 </li>
 <li>
-<p>Cons: Additional methods required to check prefix and validity of input</p>
+<p>Cons: Additional methods required to check prefix and input validity</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p><strong>Alternative 2</strong>: Separate commands for filter, one for department and one for position</p>
+<p><strong>Alternative 2</strong>: Separate commands for filtering department and position, one for department and one for position</p>
 <div class="ulist">
 <ul>
 <li>
 <p>Pros: Easy to implement as it follows the existing <code>find</code> command</p>
 </li>
 <li>
-<p>Cons: More commands to create and implementation can get quite complicated when filter includes both fields</p>
+<p>Cons: More commands to create and implementation can get quite complicated when filter requires both fields</p>
 </li>
 </ul>
 </div>
@@ -4608,4 +4597,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-11 12:15:52 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-11 13:10:01 UTC</div></div></div></body></html>
