@@ -1280,8 +1280,29 @@ Below is the schedule class diagram.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>All logic commands come with a dedicated parser. These parsers ensure that the input conforms to the following
-field restrictions in phase 1 before parsing to the actual command for execution in phase 2:</p>
+<p>For each schedule commands, it comes with a dedicated schedule parser.
+First, the schedule parsers ensure that the prefix required are all present with <code>!arePrefixesPresent</code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">    <span class="directive">private</span> <span class="directive">static</span> <span class="type">boolean</span> arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+        <span class="keyword">return</span> Stream.of(prefixes).allMatch(prefix -&gt; argumentMultimap.getValue(prefix).isPresent());
+    }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The parsers validate field inputs by creating a new <code>Type</code>, <code>Date</code>, <code>EmployeeId</code> and <code>Schedule</code> object.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">        <span class="predefined-type">Type</span> type = ParserUtil.parseStatus(argMultimap.getValue(PREFIX_SCHEDULE_TYPE).get());
+        <span class="predefined-type">Date</span> date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_SCHEDULE_DATE).get());
+        EmployeeId id = ParserUtil.parseEmployeeId(argMultimap.getValue(PREFIX_EMPLOYEEID).get());
+        Schedule schedule = <span class="keyword">new</span> Schedule(id, type, date);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The objects will <code>throw exception</code> if it does not conform to the following field restrictions.</p>
 </div>
 <table class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
@@ -1346,6 +1367,42 @@ Shown below is the normal flow of the sequence diagram for adding a new schedule
 </li>
 </ol>
 </div>
+<div class="paragraph">
+<p>The <code>AddScheduleParser</code> parses a <code>Schedule</code> object to the <code>AddWorks</code> command.
+<code>AddWorks</code> command looks at the <code>Type</code> inside the <code>Schedule</code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="predefined-type">Type</span> type = toAddSchedule.getType();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If the <code>Type</code> is equals to leave and work is not scheduled on the same date <code>model.hasSchedule(toCheckWork)</code>,
+no exception will be thrown.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">...
+if (type.equals(leave)) {
+    Schedule toCheckWork = <span class="keyword">new</span> Schedule(toAddSchedule.getEmployeeId(), work,
+        toAddSchedule.getScheduleDate());
+    <span class="keyword">if</span> (model.hasSchedule(toCheckWork)) {
+        <span class="keyword">throw</span> <span class="keyword">new</span> CommandException(MESSAGE_HAS_WORK);
+}
+...</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>And it adds the schedule and commit to the storage.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">...
+model.addSchedule(toAddSchedule);
+model.commitScheduleList();
+...</code></pre>
+</div>
+</div>
 </div>
 <div class="sect3">
 <h4 id="delete-schedule"><a class="link" href="#delete-schedule">3.4.2. Delete Schedule</a></h4>
@@ -1382,7 +1439,7 @@ Shown below is the normal flow of the sequence diagram for adding a working sche
 </div>
 </div>
 <div class="paragraph">
-<p>In addtion, Command Exception will be thrown due to the following:</p>
+<p>In addition, Command Exception will be thrown due to the following:</p>
 </div>
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
@@ -1395,6 +1452,30 @@ employees shown.</p>
 added work, or some had leave on the same day.</p>
 </li>
 </ol>
+</div>
+<div class="paragraph">
+<p>The <code>AddWorksParser</code> parses a set of dates <code>Set&lt;Date&gt;</code> to be scheduled work to the <code>AddWorks</code> command.
+For each date specified by the user in the set of dates <code>for (Date date :setOfDates)</code>,
+it will be checked by for each observable employee in the employee list <code>for (Person person : model.getFilteredPersonList())</code>
+for the possibility of scheduling work.
+No schedules will be created if a duplicate schedule <code>model.hasSchedule(toAddSchedule)</code>
+or existing work schedule <code>model.hasSchedule(hasLeaveSchedule)</code> is found on that date.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">for</span> (<span class="predefined-type">Date</span> date :setOfDates) {
+    <span class="keyword">for</span> (Person person : model.getFilteredPersonList()) {
+        Schedule toAddSchedule = <span class="keyword">new</span> Schedule(person.getEmployeeId(), work , date);
+        Schedule hasLeaveSchedule = <span class="keyword">new</span> Schedule(person.getEmployeeId(), leave , date);
+        <span class="keyword">if</span> (model.hasSchedule(hasLeaveSchedule)) {
+            employeeIdMapToLeaves.put(person.getEmployeeId(), date);
+        } <span class="keyword">else</span> <span class="keyword">if</span> (!model.hasSchedule(toAddSchedule)) {
+            commit = <span class="predefined-constant">true</span>;
+            model.addSchedule(toAddSchedule);
+        }
+    }
+}</code></pre>
+</div>
 </div>
 </div>
 <div class="sect3">
@@ -1419,6 +1500,28 @@ Shown below is the normal flow of the sequence diagram for deleting multiple wor
 employees shown.</p>
 </li>
 </ol>
+</div>
+<div class="paragraph">
+<p>The <code>deleteWorksParser</code> parses a set of dates <code>Set&lt;Date&gt;</code> to be deleted work to the <code>DeleteWorks</code> command.</p>
+</div>
+<div class="paragraph">
+<p>For each date specified by the user in the set of dates <code>for (Date date :setOfDates)</code>,
+it will be checked by for each observable employee in the employee list <code>for (Person person : model.getFilteredPersonList())</code>
+for the possibility of deleting work. Work schedule will be deleted <code>model.deleteSchedule(toDeleteSchedule)</code>
+if found on that date <code>model.hasSchedule(toDeleteSchedule)</code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">for</span> (<span class="predefined-type">Date</span> date : setOfDates) {
+    <span class="keyword">for</span> (Person person : model.getFilteredPersonList()) {
+        Schedule toDeleteSchedule = <span class="keyword">new</span> Schedule(person.getEmployeeId(), work , date);
+        <span class="keyword">if</span> (model.hasSchedule(toDeleteSchedule)) {
+            commit = <span class="predefined-constant">true</span>;
+            model.deleteSchedule(toDeleteSchedule);
+        }
+    }
+}</code></pre>
+</div>
 </div>
 </div>
 <div class="sect3">
@@ -1496,6 +1599,45 @@ Shown below is the normal flow of the sequence diagram for calculating leaves.</
 <p>Employee Id has not taken any leaves in the specified year.</p>
 </li>
 </ol>
+</div>
+<div class="paragraph">
+<p>The <code>CalculateLeavesCommandParser</code> parses a <code>EmployeeId</code> and <code>Year</code> object
+to the <code>CalculateLeaves</code> command.
+<code>CalculateLeaves</code> filters the schedule list to show only schedules that
+contains the <code>employeeId</code> to be calculated.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="predefined-type">List</span>&lt;<span class="predefined-type">String</span>&gt; employeeIdList = <span class="keyword">new</span> <span class="predefined-type">ArrayList</span>&lt;&gt;();
+employeeIdList.add(employeeId.value);
+EmployeeIdScheduleContainsKeywordsPredicate employeeIdPredicate =
+        <span class="keyword">new</span> EmployeeIdScheduleContainsKeywordsPredicate(employeeIdList);
+model.updateFilteredScheduleList(employeeIdPredicate);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For each schedule in the filtered schedule list <code>for (Schedule schedule : model.getFilteredScheduleList()</code>
+if the leave and year matches the one to be calculated, it
+increments the number of leaves <code>numLeaves</code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">for</span> (Schedule schedule : model.getFilteredScheduleList()) {
+    <span class="keyword">if</span> (schedule.getScheduleYear().equals(year.toString())
+            &amp;&amp; schedule.getType().toString().equals(<span class="predefined-type">Type</span>.LEAVE)) {
+        numLeaves++;
+    }
+}
+...</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Finally it returns the calculated leave.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">CommandResult(<span class="predefined-type">String</span>.format(MESSAGE_SUCCESS, employeeId, year, numLeaves))</code></pre>
+</div>
 </div>
 </div>
 <div class="sect3">
@@ -4899,4 +5041,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 08:19:20 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 09:02:51 UTC</div></div></div></body></html>
