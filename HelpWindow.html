@@ -438,7 +438,8 @@ Any usage of <code>edit</code> command that will result in duplicated phone numb
 <div class="sect2">
 <h3 id="locating-persons-by-name-or-employee-id-code-find-code"><a class="link" href="#locating-persons-by-name-or-employee-id-code-find-code">4.3. Locating persons by name or employee ID : <code>find</code></a></h3>
 <div class="paragraph">
-<p>Find the employee&#8217;s Name whose name contains the input or find the Employee Id that matches the input.</p>
+<p>Find the employee&#8217;s name that contains the input or find the employee id that matches the input.
+The expenses and schedule list will also be updated accordingly to show only the matched employee(s)' expenses and schedule.</p>
 </div>
 <div class="paragraph">
 <p>Format: <code>find [NAME] [EMPLOYEEID]</code></p>
@@ -463,11 +464,11 @@ The NAME parameter is case-insensitive, i.e. The command <code>find john</code> 
 <ul>
 <li>
 <p><code>find John</code><br>
-Find all instances of John</p>
+Find all instances of John, and his associated expenses and schedule</p>
 </li>
 <li>
 <p><code>find 000001</code><br>
-Find the employee with employee ID <code>000001</code></p>
+Find the employee with employee ID <code>000001</code>, and his/her associated expenses and schedule</p>
 </li>
 </ul>
 </div>
@@ -487,7 +488,8 @@ Any usage of <code>find</code> command will be rejected if it contains special c
 <div class="sect2">
 <h3 id="filter-and-list-of-specific-employee-s-data-code-filter-code"><a class="link" href="#filter-and-list-of-specific-employee-s-data-code-filter-code">4.4. Filter and list of specific employee&#8217;s data : <code>filter</code></a></h3>
 <div class="paragraph">
-<p>Filters the employee list by their department and/or rank/position and list the employees whose department and/or rank/position contains the keyword(s) input from the user in ascending or descending name order.</p>
+<p>Filters out the employees whose department and/or rank/position contains the keyword(s) input from the user and list them in ascending or descending name order.
+The expenses and schedule list will also be updated accordingly to show only the matched employees' expenses and schedule.</p>
 </div>
 <div class="paragraph">
 <p>Format: <code>filter SORT_ORDER [d/DEPARTMENT] [r/POSITION]</code></p>
@@ -512,11 +514,13 @@ Include either department or rank/position or both, at least one of the field mu
 <ul>
 <li>
 <p><code>filter asc d/Human Resource r/Manager</code><br>
-List all employees whose department contains the keyword of either human or resource and rank/position contains the keyword of manager</p>
+List all employees whose department contains the keyword of either human or resource and rank/position contains the keyword of manager in ascending name order.
+Expenses and schedule list will also be updated to show only matched employee(s)' expenses and schedule(s).</p>
 </li>
 <li>
 <p><code>filter dsc d/Finance</code><br>
-List all employees whose department contains the keyword of finance</p>
+List all employees whose department contains the keyword of finance in descending name order.
+Expenses and schedule list will also be updated to show only matched employee(s)' expenses and schedule(s).</p>
 </li>
 </ul>
 </div>
@@ -1686,4 +1690,4 @@ website. <em>[Upcoming in 2.0]</em></p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 10:14:45 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 10:27:01 UTC</div></div></div></body></html>

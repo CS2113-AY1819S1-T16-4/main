@@ -1860,8 +1860,7 @@ If the input Index isn&#8217;t found in the list, an error message will be shown
 <p>The <code>filter</code> command&#8217;s mechanism is facilitated by <code>FilterCommandParser</code>.
 The <code>FilterCommandParser</code> implements the <code>Parser</code> interface, parses the arguments parameter, which is the input from the user, and creates a new <code>FilterCommand</code> object.
 Apart from parsing the input, the <code>FilterCommandParser</code> also checks whether the input complies with the required format.
-The checking of input compliance is facilitated by two helper methods, namely <code>processDepartmentKeywords</code> and <code>processPositionKeywords</code>, that is within the class.
-This guide will focus on explaining how <code>processDepartmentKeywords</code> work instead of both as the methods <code>processDepartmentKeywords</code> and <code>processPositionKeywords</code> are quite similar.</p>
+The checking of input compliance is assisted by a helper method, <code>didPrefixesAppearOnlyOnce</code>, which checks whether the department prefix and/or position prefix appears only once.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -1876,7 +1875,7 @@ If the input does not comply with the required format, an error message will be 
 </table>
 </div>
 <div class="paragraph">
-<p>Code snippet of <code>FilterCommandParser</code> showing the input compliance checks:</p>
+<p>Code snippet of the <code>parse</code> method within <code>FilterCommandParser</code> showing the checks for input compliance:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1892,7 +1891,40 @@ If the input does not comply with the required format, an error message will be 
         <span class="keyword">throw</span> <span class="keyword">new</span> <span class="exception">ParseException</span>(<span class="predefined-type">String</span>.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
     }
 
-    <span class="keyword">if</span> (!argMultimap.getValue(PREFIX_DEPARTMENT).isPresent()) {
+    ...
+    ...
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Code snippet of the helper method <code>didPrefixesAppearOnlyOnce</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">boolean</span> didPrefixesAppearOnlyOnce(<span class="predefined-type">String</span> argument) {
+    <span class="predefined-type">String</span> departmentPrefix = <span class="string"><span class="delimiter">&quot;</span><span class="content"> </span><span class="delimiter">&quot;</span></span> + PREFIX_DEPARTMENT.toString();
+    <span class="predefined-type">String</span> positionPrefix = <span class="string"><span class="delimiter">&quot;</span><span class="content"> </span><span class="delimiter">&quot;</span></span> + PREFIX_POSITION.toString();
+
+    <span class="keyword">return</span> argument.indexOf(departmentPrefix) == argument.lastIndexOf(departmentPrefix)
+            &amp;&amp; argument.indexOf(positionPrefix) == argument.lastIndexOf(positionPrefix);
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If the input complies with the required format, further checks will be performed on the keywords to ensure that the keywords are valid.
+This keywords checking is completed by the <code>processDepartmentKeywords</code> and <code>processPositionKeywords</code> methods that are both within the <code>FilterCommandParser</code> class.
+This guide will focus on explaining how <code>processDepartmentKeywords</code> work instead of both as the methods <code>processDepartmentKeywords</code> and <code>processPositionKeywords</code> are similar.</p>
+</div>
+<div class="paragraph">
+<p>Code snippet of the <code>parse</code> method in <code>FilterCommandParser</code> calling <code>processDepartmentKeywords</code> method:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> FilterCommand parse(<span class="predefined-type">String</span> args) <span class="directive">throws</span> <span class="exception">ParseException</span> {
+    ...
+    ...
+
+    if (!argMultimap.getValue(PREFIX_DEPARTMENT).isPresent()) {
         filterCommand.setIsDepartmentPrefixPresent(<span class="predefined-constant">false</span>);
     } <span class="keyword">else</span> <span class="keyword">if</span> (argMultimap.getValue(PREFIX_DEPARTMENT).isPresent()
             &amp;&amp; !processDepartmentKeywords(argMultimap, filterCommand)) {
@@ -1918,8 +1950,24 @@ If the input does not comply with the required format, an error message will be 
 </div>
 </div>
 <div class="paragraph">
-<p>The <code>processDepartmentKeywords</code> is further assisted by two other helper methods, namely, <code>validityCheckForDepartments</code> and <code>areDepartmentKeywordsValid</code> which are also within the <code>FilterCommandParser</code> class.
-The code snippet of the two helper methods are as follow:</p>
+<p>The <code>processDepartmentKeywords</code> is further assisted by the <code>validityCheckForDepartments</code> method which calls another method <code>areDepartmentKeywordsValid</code> to check whether the given keywords comply with the <code>DEPARTMENT_KEYWORD_VALIDATION_REGEX</code>.
+If the keywords from the user are all valid, the departmentPredicate will be created and passed to the <code>FilterCommand</code> object through a setter.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The <code>DEPARTMENT_KEYWORD_VALIDATION_REGEX</code> is a regular expression that accepts only spaces and case-insensitive alphabets.
+It only allows 1 to 30 characters per keyword.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Code snippet of <code>validityCheckForDepartments</code> and <code>areDepartmentKeywordsValid</code> methods in <code>FilterCommandParser</code> class:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1949,8 +1997,8 @@ The code snippet of the two helper methods are as follow:</p>
 <div class="paragraph">
 <p>The <code>FilterCommand</code> is being executed in this phase.
 <code>FilterCommand</code> first checks which prefix(es) is(are) present prior to calling the <code>updateFilteredPersonList</code> method, which updates <code>filteredPersonList</code>
- with the relevant department(s) and/or position(s) that matches the keyword(s) input from the user.
- Additionally, the methods <code>updateFilteredExpensesList</code> and <code>updateFilteredScheduleList</code> will be called to update the <code>filteredExpensesList</code> and <code>filteredScheduleList</code> respectively to show only the matched employees' expenses and schedules.</p>
+ with the employees of the relevant department(s) and/or position(s) that matches the keyword(s) input from the user.
+ Additionally, the methods <code>updateFilteredExpensesList</code> and <code>updateFilteredScheduleList</code> will also be called to update the <code>filteredExpensesList</code> and <code>filteredScheduleList</code> respectively to show only the matched employees' expenses and schedules.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -2004,11 +2052,11 @@ Example: If <code>filter asc d/hello</code> results in 0 person found, the CLI w
 </div>
 <div class="paragraph">
 <p>The result of the execution of <code>FilterCommand</code> is then encapsulated as a <code>CommandResult</code> object which is returned to the <code>LogicManager</code>.
-After the execution of <code>FilterCommand</code>, the <code>filteredPersonList</code>, <code>filteredExpensesList</code> and <code>filteredScheduleList</code> will be updated accordingly and the program will display only employees alongside their respective expenses and schedule that are of the specific department(s)
- and/or position(s) as specified by the input from the user.</p>
+During the execution of <code>FilterCommand</code>, the <code>filteredPersonList</code>, <code>filteredExpensesList</code> and <code>filteredScheduleList</code> will be updated accordingly to display only employees, that belongs to the department(s)
+ and/or hold the specified position(s) as specified by the user input.</p>
 </div>
 <div class="paragraph">
-<p>The sequence diagram below illustrates the operation of the <code>filter</code> command:</p>
+<p>The sequence diagram below illustrates the operation of <code>filter</code> command:</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -4389,9 +4437,6 @@ Expected: The most recent window size and location is retained.</p>
 </li>
 </ol>
 </div>
-<div class="paragraph">
-<p><em>{ more test cases &#8230;&#8203; }</em></p>
-</div>
 </div>
 <div class="sect2">
 <h3 id="adding-an-employee"><a class="link" href="#adding-an-employee">H.2. Adding an employee</a></h3>
@@ -4405,6 +4450,9 @@ Expected: The most recent window size and location is retained.</p>
 <p>Prerequisites: There must be no existing data in the system and the following <code>add</code> command must be executed first prior to all test cases.</p>
 <div class="olist lowerroman">
 <ol class="lowerroman" type="i">
+<li>
+<p><code>clear</code></p>
+</li>
 <li>
 <p><code>add id/999999 n/Amanda Chan dob/16/06/1995 d/Finance r/Intern p/92346666 a/21 Lower Kent Ridge Rd e/amandachan@gmail.com s/1000.00</code></p>
 </li>
@@ -4441,6 +4489,9 @@ Expected: Employee is added to the list. Details of the added employee shown in 
 <p>Prerequisites: There must be no existing data in the system and the following commands must be executed first prior to all test cases.</p>
 <div class="olist lowerroman">
 <ol class="lowerroman" type="i">
+<li>
+<p><code>clear</code></p>
+</li>
 <li>
 <p><code>add id/999999 n/Amanda Chan dob/16/06/1995 d/Finance r/Intern p/92346666 a/21 Lower Kent Ridge Rd e/amandachan@gmail.com s/1000.00</code></p>
 </li>
@@ -4484,6 +4535,9 @@ Expected: No changes on Employees column. No employee is edited. Error details s
 <div class="olist lowerroman">
 <ol class="lowerroman" type="i">
 <li>
+<p><code>clear</code></p>
+</li>
+<li>
 <p><code>add id/999999 n/Amanda Chan dob/16/06/1995 d/Finance r/Intern p/92346666 a/21 Lower Kent Ridge Rd e/amandachan@gmail.com s/1000.00</code></p>
 </li>
 <li>
@@ -4526,6 +4580,9 @@ Expected: No changes on Employees column. Error details shown in the status mess
 <div class="olist lowerroman">
 <ol class="lowerroman" type="i">
 <li>
+<p><code>clear</code></p>
+</li>
+<li>
 <p><code>add id/999999 n/Amanda Chan dob/16/06/1995 d/Finance r/Intern p/92346666 a/21 Lower Kent Ridge Rd e/amandachan@gmail.com s/1000.00</code></p>
 </li>
 <li>
@@ -4564,7 +4621,7 @@ Expected: No changes on Employees column. Error details shown in the status mess
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
-<p>Prerequisites: List all employees using the <code>list</code> command. Multiple employees in the list.</p>
+<p>Prerequisites: Ensure the storage is not empty and list all employees using the <code>list</code> command. Multiple employees should be in the list.</p>
 </li>
 <li>
 <p>Test case: selectPerson 1<br>
@@ -5050,4 +5107,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 10:14:45 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 10:27:01 UTC</div></div></div></body></html>
