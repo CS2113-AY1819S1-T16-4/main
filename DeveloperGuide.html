@@ -4953,34 +4953,34 @@ including only comma, full stop and single right quote. At least one field shoul
 than 1 post added.</p>
 </li>
 <li>
-<p>Test case: addRecruitmentPost jp/IT Manager me/5 jd/To maintain the network server, and company&#8217;s IT framework.
+<p>Test case: addRecruitmentPost jp/IT Manager me/5 jd/To maintain the network server, and company&#8217;s IT framework.<br>
 Expected: New recruitment post is added:
           Job Position: IT Manager
           Minimal years of working experience: 5
           Job Description: To maintain the network server, and company&#8217;s IT framework.</p>
 </li>
 <li>
-<p>Test case: addRecruitmentPost jp/IT Manager1 me/5 jd/To maintain the network server in company
+<p>Test case: addRecruitmentPost jp/IT Manager1 me/5 jd/To maintain the network server in company<br>
 Expected: Job Position accepts only characters. It should not include numbers or should not be blank.
 And the maximum length of the job position is 20 characters</p>
 </li>
 <li>
-<p>Test case: addRecruitmentPost jp/IT Manager me/31 jd/To maintain the network server in company
+<p>Test case: addRecruitmentPost jp/IT Manager me/31 jd/To maintain the network server in company<br>
 Expected: Working Experience should only contain integers with length of at least 1 digit longAnd the range of the
 working experience is from 0 to 30</p>
 </li>
 <li>
-<p>Test case: addRecruitmentPost jp/IT Manager me/-1 jd/To maintain the network server in company
+<p>Test case: addRecruitmentPost jp/IT Manager me/-1 jd/To maintain the network server in company<br>
 Expected: Working Experience should only contain integers with length of at least 1 digit longAnd the range of the
 working experience is from 0 to 30</p>
 </li>
 <li>
-<p>Test case: addRecruitmentPost jp/IT Manager me/5 jd/To maintain the network server in company
+<p>Test case: addRecruitmentPost jp/IT Manager me/5 jd/To maintain the network server in company<br>
 Expected: Working Experience should only contain integers with length of at least 1 digit longAnd the range of the
 working experience is from 0 to 30</p>
 </li>
 <li>
-<p>Test case: addRecruitmentPost jp/IT Manager me/5 jd/To maintain the network server in company!
+<p>Test case: addRecruitmentPost jp/IT Manager me/5 jd/To maintain the network server in company!<br>
 Expected: Job description accepts only characters. It should not include numbers or should not be blank.
 For the purpose of using punctuation marks, it only allows comma, full stop and single right quote.
 The length of job description is from 1 to 200 characters.</p>
@@ -5004,18 +5004,18 @@ The length of job description is from 1 to 200 characters.</p>
 should be different from the existing recruitment post that is about to be edited.</p>
 </li>
 <li>
-<p>Test case: editRecruitmentPost 1 jp/Accountants me/5 jd/To maintain the network server, and company&#8217;s IT framework.
+<p>Test case: editRecruitmentPost 1 jp/Accountants me/5 jd/To maintain the network server, and company&#8217;s IT framework.<br>
 Expected: Edited Recruitment Post:
           Job Position: Accountants
           Minimal years of working experience: 5
           Job Description: To maintain the network server, and company&#8217;s IT framework.</p>
 </li>
 <li>
-<p>Test case: editRecruitmentPost 1 jp/Accountants me/5 jd/To maintain the network server, and company&#8217;s IT framework.
+<p>Test case: editRecruitmentPost 1 jp/Accountants me/5 jd/To maintain the network server, and company&#8217;s IT framework.<br>
 Expected: This job position already exists in the address book</p>
 </li>
 <li>
-<p>Test case: editRecruitmentPost 0 jp/Accountants me/5 jd/To maintain the network server, and company&#8217;s IT framework.
+<p>Test case: editRecruitmentPost 0 jp/Accountants me/5 jd/To maintain the network server, and company&#8217;s IT framework.<br>
 Expected: Invalid command format!
           editRecruitmentPost: Edits the details of the recruitment post identified by the index number used in the
           displayed recruitment list. Existing values will be overwritten by the input values. Parameters:
@@ -5040,7 +5040,7 @@ Expected: Invalid command format!
 <p>Prerequisites: at least one recruitment post should be added before performing selectRecruitPostCommand.</p>
 </li>
 <li>
-<p>Test case: selectRecruitmentPost 1
+<p>Test case: selectRecruitmentPost 1<br>
 Expected: Selected Recruitment Post: 1</p>
 </li>
 </ol>
@@ -5062,7 +5062,7 @@ Expected: Selected Recruitment Post: 1</p>
 <div class="olist lowerroman">
 <ol class="lowerroman" type="i">
 <li>
-<p>Test Case: deleteRecruitmentPost 1
+<p>Test Case: deleteRecruitmentPost 1<br>
 Expected: Deleted Recruitment Post:
           Job Position: Accountants
           Minimal years of working experience: 5
@@ -5107,4 +5107,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 11:13:04 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 11:13:41 UTC</div></div></div></body></html>
