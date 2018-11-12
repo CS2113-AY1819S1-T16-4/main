@@ -1285,9 +1285,11 @@ First, the schedule parsers ensure that the prefix required are all present with
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java">    <span class="directive">private</span> <span class="directive">static</span> <span class="type">boolean</span> arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+<pre class="CodeRay highlight"><code data-lang="java">    ...
+    private <span class="directive">static</span> <span class="type">boolean</span> arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         <span class="keyword">return</span> Stream.of(prefixes).allMatch(prefix -&gt; argumentMultimap.getValue(prefix).isPresent());
-    }</code></pre>
+    }
+    ...</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1295,10 +1297,12 @@ First, the schedule parsers ensure that the prefix required are all present with
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java">        <span class="predefined-type">Type</span> type = ParserUtil.parseStatus(argMultimap.getValue(PREFIX_SCHEDULE_TYPE).get());
+<pre class="CodeRay highlight"><code data-lang="java">        ...
+        Type type = ParserUtil.parseStatus(argMultimap.getValue(PREFIX_SCHEDULE_TYPE).get());
         <span class="predefined-type">Date</span> date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_SCHEDULE_DATE).get());
         EmployeeId id = ParserUtil.parseEmployeeId(argMultimap.getValue(PREFIX_EMPLOYEEID).get());
-        Schedule schedule = <span class="keyword">new</span> Schedule(id, type, date);</code></pre>
+        Schedule schedule = <span class="keyword">new</span> Schedule(id, type, date);
+        ...</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1463,7 +1467,8 @@ or existing work schedule <code>model.hasSchedule(hasLeaveSchedule)</code> is fo
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">for</span> (<span class="predefined-type">Date</span> date :setOfDates) {
+<pre class="CodeRay highlight"><code data-lang="java">...
+for (<span class="predefined-type">Date</span> date :setOfDates) {
     <span class="keyword">for</span> (Person person : model.getFilteredPersonList()) {
         Schedule toAddSchedule = <span class="keyword">new</span> Schedule(person.getEmployeeId(), work , date);
         Schedule hasLeaveSchedule = <span class="keyword">new</span> Schedule(person.getEmployeeId(), leave , date);
@@ -1474,7 +1479,8 @@ or existing work schedule <code>model.hasSchedule(hasLeaveSchedule)</code> is fo
             model.addSchedule(toAddSchedule);
         }
     }
-}</code></pre>
+}
+...</code></pre>
 </div>
 </div>
 </div>
@@ -1512,7 +1518,8 @@ if found on that date <code>model.hasSchedule(toDeleteSchedule)</code>.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">for</span> (<span class="predefined-type">Date</span> date : setOfDates) {
+<pre class="CodeRay highlight"><code data-lang="java">...
+for (<span class="predefined-type">Date</span> date : setOfDates) {
     <span class="keyword">for</span> (Person person : model.getFilteredPersonList()) {
         Schedule toDeleteSchedule = <span class="keyword">new</span> Schedule(person.getEmployeeId(), work , date);
         <span class="keyword">if</span> (model.hasSchedule(toDeleteSchedule)) {
@@ -1520,7 +1527,8 @@ if found on that date <code>model.hasSchedule(toDeleteSchedule)</code>.</p>
             model.deleteSchedule(toDeleteSchedule);
         }
     }
-}</code></pre>
+}
+...</code></pre>
 </div>
 </div>
 </div>
@@ -1622,7 +1630,8 @@ increments the number of leaves <code>numLeaves</code>.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">for</span> (Schedule schedule : model.getFilteredScheduleList()) {
+<pre class="CodeRay highlight"><code data-lang="java">...
+for (Schedule schedule : model.getFilteredScheduleList()) {
     <span class="keyword">if</span> (schedule.getScheduleYear().equals(year.toString())
             &amp;&amp; schedule.getType().toString().equals(<span class="predefined-type">Type</span>.LEAVE)) {
         numLeaves++;
@@ -5041,4 +5050,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 09:54:56 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 10:14:45 UTC</div></div></div></body></html>

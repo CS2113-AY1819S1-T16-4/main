@@ -22,6 +22,16 @@ CHRS is capable of checking work schedule, creating recruitment posts, checking 
 <div class="ulist">
 <ul>
 <li>
+<p><strong>Project Management</strong>:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Assists in approving, reviewing and merging pull requests.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
 <p><strong>Major enhancement</strong>: Implements Schedule feature with the following commands:
 <code>addSchedule</code>, <code>deleteSchedule</code>, <code>addWorks</code>, <code>deleteWorks</code>, <code>addLeaves</code>,  <code>deleteLeaves</code>, <code>calculateLeaves</code>,
  <code>clearSchedules</code>,  <code>selectSchedule</code>.</p>
@@ -490,9 +500,11 @@ First, the schedule parsers ensure that the prefix required are all present with
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java">    <span class="directive">private</span> <span class="directive">static</span> <span class="type">boolean</span> arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+<pre class="CodeRay highlight"><code data-lang="java">    ...
+    private <span class="directive">static</span> <span class="type">boolean</span> arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         <span class="keyword">return</span> Stream.of(prefixes).allMatch(prefix -&gt; argumentMultimap.getValue(prefix).isPresent());
-    }</code></pre>
+    }
+    ...</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -500,10 +512,12 @@ First, the schedule parsers ensure that the prefix required are all present with
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java">        <span class="predefined-type">Type</span> type = ParserUtil.parseStatus(argMultimap.getValue(PREFIX_SCHEDULE_TYPE).get());
+<pre class="CodeRay highlight"><code data-lang="java">        ...
+        Type type = ParserUtil.parseStatus(argMultimap.getValue(PREFIX_SCHEDULE_TYPE).get());
         <span class="predefined-type">Date</span> date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_SCHEDULE_DATE).get());
         EmployeeId id = ParserUtil.parseEmployeeId(argMultimap.getValue(PREFIX_EMPLOYEEID).get());
-        Schedule schedule = <span class="keyword">new</span> Schedule(id, type, date);</code></pre>
+        Schedule schedule = <span class="keyword">new</span> Schedule(id, type, date);
+        ...</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -668,7 +682,8 @@ or existing work schedule <code>model.hasSchedule(hasLeaveSchedule)</code> is fo
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">for</span> (<span class="predefined-type">Date</span> date :setOfDates) {
+<pre class="CodeRay highlight"><code data-lang="java">...
+for (<span class="predefined-type">Date</span> date :setOfDates) {
     <span class="keyword">for</span> (Person person : model.getFilteredPersonList()) {
         Schedule toAddSchedule = <span class="keyword">new</span> Schedule(person.getEmployeeId(), work , date);
         Schedule hasLeaveSchedule = <span class="keyword">new</span> Schedule(person.getEmployeeId(), leave , date);
@@ -679,7 +694,8 @@ or existing work schedule <code>model.hasSchedule(hasLeaveSchedule)</code> is fo
             model.addSchedule(toAddSchedule);
         }
     }
-}</code></pre>
+}
+...</code></pre>
 </div>
 </div>
 </div>
@@ -717,7 +733,8 @@ if found on that date <code>model.hasSchedule(toDeleteSchedule)</code>.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">for</span> (<span class="predefined-type">Date</span> date : setOfDates) {
+<pre class="CodeRay highlight"><code data-lang="java">...
+for (<span class="predefined-type">Date</span> date : setOfDates) {
     <span class="keyword">for</span> (Person person : model.getFilteredPersonList()) {
         Schedule toDeleteSchedule = <span class="keyword">new</span> Schedule(person.getEmployeeId(), work , date);
         <span class="keyword">if</span> (model.hasSchedule(toDeleteSchedule)) {
@@ -725,60 +742,9 @@ if found on that date <code>model.hasSchedule(toDeleteSchedule)</code>.</p>
             model.deleteSchedule(toDeleteSchedule);
         }
     }
-}</code></pre>
+}
+...</code></pre>
 </div>
-</div>
-</div>
-<div class="sect3">
-<h4 id="add-leaves"><a class="link" href="#add-leaves">Add Leaves</a></h4>
-<div class="paragraph">
-<p><code>addLeaves</code> command allows multiple leave schedules to be added based on
-the employees shown in the employee&#8217;s panel.
-Shown below is the normal flow of the sequence diagram for adding a leave schedule.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/Schedule/addLeaves_seq.png" alt="addLeaves seq" width="650">
-</div>
-</div>
-<div class="paragraph">
-<p>In addition, Command Exception will be thrown due to the following:</p>
-</div>
-<div class="olist loweralpha">
-<ol class="loweralpha" type="a">
-<li>
-<p>Size of the filtered person list is 0. This happens when there are no
-employees shown.</p>
-</li>
-<li>
-<p>Commit is false. This happens either when all employees have been
-added work, or some had leave on the same day.</p>
-</li>
-</ol>
-</div>
-</div>
-<div class="sect3">
-<h4 id="delete-leaves"><a class="link" href="#delete-leaves">Delete Leaves</a></h4>
-<div class="paragraph">
-<p><code>deleteLeaves</code> command allows multiple leave schedules to be deleted based on
-the employees shown in the employee&#8217;s panel.
-Shown below is the normal flow of the sequence diagram for deleting multiple leave schedules.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/Schedule/deleteLeaves_seq.png" alt="deleteLeaves seq" width="650">
-</div>
-</div>
-<div class="paragraph">
-<p>In addition, Command Exception will be thrown due to the following:</p>
-</div>
-<div class="olist loweralpha">
-<ol class="loweralpha" type="a">
-<li>
-<p>Size of the filtered person list is 0. This happens when there is no
-employees shown.</p>
-</li>
-</ol>
 </div>
 </div>
 <div class="sect3">
@@ -827,7 +793,8 @@ increments the number of leaves <code>numLeaves</code>.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">for</span> (Schedule schedule : model.getFilteredScheduleList()) {
+<pre class="CodeRay highlight"><code data-lang="java">...
+for (Schedule schedule : model.getFilteredScheduleList()) {
     <span class="keyword">if</span> (schedule.getScheduleYear().equals(year.toString())
             &amp;&amp; schedule.getType().toString().equals(<span class="predefined-type">Type</span>.LEAVE)) {
         numLeaves++;
@@ -930,4 +897,4 @@ fields to describe the schedule.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 09:54:56 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 10:14:45 UTC</div></div></div></body></html>
