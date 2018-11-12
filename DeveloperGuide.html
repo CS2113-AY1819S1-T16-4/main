@@ -31,7 +31,7 @@
 <ul class="sectlevel2">
 <li><a href="#undo-redo-feature">3.1. Undo/Redo feature</a></li>
 <li><a href="#modify-pay-feature">3.2. Modify Pay Feature</a></li>
-<li><a href="#add-recruitment-post-feature">3.3. Add Recruitment Post Feature</a></li>
+<li><a href="#recruitment-post-feature">3.3. Recruitment Post Feature</a></li>
 <li><a href="#schedule-feature">3.4. Schedule Feature</a></li>
 <li><a href="#expenses-feature">3.5. Expenses Feature</a></li>
 <li><a href="#filter-feature">3.6. Filter Feature</a></li>
@@ -96,7 +96,11 @@
 <li><a href="#delete-schedule-2">H.14. Delete Schedule</a></li>
 <li><a href="#delete-works-2">H.15. Delete Works</a></li>
 <li><a href="#delete-leaves-2">H.16. Delete Leaves</a></li>
-<li><a href="#deleting-an-employee">H.17. Deleting an employee</a></li>
+<li><a href="#add-a-recruitment-post">H.17. Add A Recruitment Post</a></li>
+<li><a href="#edit-a-recruitment-post">H.18. Edit A Recruitment Post</a></li>
+<li><a href="#select-a-recruitment-post">H.19. Select A Recruitment Post</a></li>
+<li><a href="#delete-a-recruitment-post">H.20. Delete A Recruitment Post</a></li>
+<li><a href="#deleting-an-employee">H.21. Deleting an employee</a></li>
 </ul>
 </li>
 </ul>
@@ -1058,59 +1062,188 @@ The sequence diagram below illustrates the operation of <code>modifyPay</code> c
 </div>
 </div>
 <div class="sect2">
-<h3 id="add-recruitment-post-feature"><a class="link" href="#add-recruitment-post-feature">3.3. Add Recruitment Post Feature</a></h3>
+<h3 id="recruitment-post-feature"><a class="link" href="#recruitment-post-feature">3.3. Recruitment Post Feature</a></h3>
 <div class="paragraph">
-<p>The command addRecruitmentPost allows HR staffs to add recruitment Posts based on open Job positions.</p>
+<p><code>Recruitment post</code> features allows HR staffs to manage internal recruitment posts easily before publishing to the public
+. It allows users to do add, delete, clear, select and edit recruitment post based on 3 fields including job position,
+working experience, and job description.</p>
 </div>
+<div class="paragraph">
+<p>All logic commands come with a dedicated parser. These parsers ensure that the input conforms to the following
+field restrictions before in phase 1 before parsing to the actual command for execution in phase 2:</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 27.7777%;">
+<col style="width: 16.6666%;">
+<col style="width: 55.5557%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Field Name</th>
+<th class="tableblock halign-left valign-top">Prefix</th>
+<th class="tableblock halign-left valign-top">Limitations</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">JOB_POSITION</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">jp/</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Job position accepts only characters. It must not be blank and should not include numbers and
+punctuation mark. And users are not allowed to exceed the character limit which is from 1 to 20</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MINIMAL_YEARS_OF_WORKING_EXPERIENCE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">me/</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Minimal years of working experience must be integers and should not be blank
+. And It is limited from 0 to 30</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">JOB_DESCRIPTION</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">jd/</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Job description accepts only characters and Punctuation mark including only comma, full stop,
+and single right quote. It must not be blank and should not include numbers. And users are not allowed to exceed the
+character limit which is from 1 to 200</p></td>
+</tr>
+</tbody>
+</table>
 <div class="sect3">
-<h4 id="current-implementation-3"><a class="link" href="#current-implementation-3">3.3.1. Current Implementation</a></h4>
+<h4 id="current-implementation-for-code-addrecruitmentpost-code"><a class="link" href="#current-implementation-for-code-addrecruitmentpost-code">3.3.1. Current Implementation for <code>addRecruitmentPost</code></a></h4>
 <div class="paragraph">
-<p>The implementation of addRecruitmentPost command is supported by addRecruitmentPostCommandParser
-that implements the parser interface. The interface parse the arguments parameter entered by
-users to form the addRecruitmentPost object.</p>
+<p><code>addRecruitmentPost</code> command allows a new recruitment post to be added. The sequence diagram below illustrates the
+operation of <code>addRecruitmentPost</code> command:</p>
 </div>
-<div class="paragraph">
-<p>The implementation of addRecruitmentPost command checks that command without job position will be flagged
-as invalid post.</p>
-</div>
-<div class="paragraph">
-<p>Code snippet of addRecruitmentPostCommandParser:</p>
-</div>
-<div class="listingblock">
+<div class="imageblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">AddRecruitmentPostCommandParser</span> <span class="directive">implements</span> <span class="predefined-type">Parser</span>&lt;AddRecruitmentPostCommand&gt; {
-
-    <span class="comment">/**
-     * Parses the given {@code String} of arguments in the context of the AddRecruitmentPostCommand
-     * and returns an AddRecruitmentPostCommand object for execution.
-     * @throws ParseException if the user input does not conform the expected format
-     */</span>
-    <span class="directive">public</span> AddRecruitmentPostCommand parse(<span class="predefined-type">String</span> args) <span class="directive">throws</span> <span class="exception">ParseException</span> {
-
-        Post post = ParserUtil.parsePost(args);
-
-        Recruitment recruitment = <span class="keyword">new</span> Recruitment(post);
-
-        <span class="keyword">return</span> <span class="keyword">new</span> AddRecruitmentPostCommand(recruitment);
-    }
-
-}</code></pre>
+<img src="images/Recruitment/addRecruitmentPost.png" alt="addRecruitmentPost" width="650">
 </div>
 </div>
 <div class="paragraph">
-<p><strong>Coming soon</strong></p>
+<p>In addition, Command Exception will be thrown due to the following:</p>
+</div>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Invalid command format is used.</p>
+</li>
+<li>
+<p>A duplicated recruitment field exists. Minimal 1 field should be different.</p>
+</li>
+<li>
+<p>Fields' restrictions are not followed.</p>
+</li>
+</ol>
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">3.3.2. Design Considerations</a></h4>
+<h4 id="current-implementation-for-code-editrecruitmentpost-code"><a class="link" href="#current-implementation-for-code-editrecruitmentpost-code">3.3.2. Current Implementation for <code>editRecruitmentPost</code></a></h4>
 <div class="paragraph">
-<p>Additional consideration of addRecruitmentPost command:
-* Check the validity input</p>
+<p><code>editRecruitmentPost</code> command allows an existing recruitment post to be edited.</p>
+</div>
+<div class="paragraph">
+<p>In addition, Command Exception will be thrown due to the following:</p>
+</div>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Invalid command format is used.</p>
+</li>
+<li>
+<p>A duplicated recruitment field exists. Minimal 1 field should be different from existing recruitment post that is
+about to be edited.</p>
+</li>
+<li>
+<p>Fields' restrictions are not followed.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="current-implementation-for-code-selectrecruitmentpost-code"><a class="link" href="#current-implementation-for-code-selectrecruitmentpost-code">3.3.3. Current Implementation for <code>selectRecruitmentPost</code></a></h4>
+<div class="paragraph">
+<p><code>selectRecruitmentPost</code> command allows users to select an existing recruitment post based on recruit post index number
+displayed in the recruitment post list panel.</p>
+</div>
+<div class="paragraph">
+<p>In addition, Command Exception will be thrown due to the following:</p>
+</div>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Invalid command format is used.</p>
+</li>
+<li>
+<p>Recruitment post list is empty.</p>
+</li>
+<li>
+<p>Invalid index number is used.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="current-implementation-for-code-deleterecruitmentpost-code"><a class="link" href="#current-implementation-for-code-deleterecruitmentpost-code">3.3.4. Current Implementation for <code>deleteRecruitmentPost</code></a></h4>
+<div class="paragraph">
+<p><code>deleteRecruitmentPost</code> command allows users to delete an existing recruitment post based on recruit post index number
+displayed in the recruitment post list panel.</p>
+</div>
+<div class="paragraph">
+<p>In addition, Command Exception will be thrown due to the following:</p>
+</div>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Invalid command format is used.</p>
+</li>
+<li>
+<p>Recruitment post list is empty.</p>
+</li>
+<li>
+<p>Invalid index number is used.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="future-implementation-for-publishrecruitmentpost-em-upcoming-in-2-0-em"><a class="link" href="#future-implementation-for-publishrecruitmentpost-em-upcoming-in-2-0-em">3.3.5. Future Implementation for `publishRecruitmentPost`<em>[Upcoming in 2.0]</em></a></h4>
+<div class="paragraph">
+<p><code>publishRecruitmentPost</code> command allows users to publish an existing recruitment post to job portal such as job street
+website. <em>[Upcoming in 2.0]</em></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-for-recruitment-post-feature"><a class="link" href="#design-considerations-for-recruitment-post-feature">3.3.6. Design Considerations for Recruitment Post Feature</a></h4>
+<div class="paragraph">
+<p>Aspect implementation of all Recruitment Post Commands</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Usage of prefix to have more fields of input onto the posts.</p>
+<p><strong>Alternative 1 (current choice):</strong> Have separate commands
+to manage recruitment posts.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Individual command is easier for user to use and easier for developer to debug and test.</p>
+</li>
+<li>
+<p>Cons: More methods and implementation is required.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Have a single command to manage recruitment posts.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Lesser methods and implementation is required.</p>
+</li>
+<li>
+<p>Cons: The command could be too complicated for users to use as more fields would be needed.</p>
+</li>
+</ul>
+</div>
 </li>
 </ul>
 </div>
@@ -1548,7 +1681,7 @@ If the input Index isn&#8217;t found in the list, an error message will be shown
 <p>The command <code>filter</code> allows the user to filter employees based on their respective department and/or position within the company.</p>
 </div>
 <div class="sect3">
-<h4 id="current-implementation-4"><a class="link" href="#current-implementation-4">3.6.1. Current Implementation</a></h4>
+<h4 id="current-implementation-3"><a class="link" href="#current-implementation-3">3.6.1. Current Implementation</a></h4>
 <div class="paragraph">
 <p>The implementation of this command is separated into two phases.</p>
 </div>
@@ -1716,7 +1849,7 @@ After the execution of <code>FilterCommand</code>, the <code>filteredPersonList<
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">3.6.2. Design Considerations</a></h4>
+<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">3.6.2. Design Considerations</a></h4>
 <div class="paragraph">
 <p>Aspect: Implementation of <code>filter</code> command</p>
 </div>
@@ -4580,7 +4713,146 @@ Expected: Leaves deleted for all observable employees that contain date : [04/02
 </div>
 </div>
 <div class="sect2">
-<h3 id="deleting-an-employee"><a class="link" href="#deleting-an-employee">H.17. Deleting an employee</a></h3>
+<h3 id="add-a-recruitment-post"><a class="link" href="#add-a-recruitment-post">H.17. Add A Recruitment Post</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Add a single recruitment post</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: none of the fields should be blank. As for job position field, it takes in only characters with
+maximum 20 character limits. As for working experience field, it takes in only integers from 0 to 30. As for
+job description field, it takes in only characters with character limits from 1 to 200 and punctuation marks
+including only comma, full stop and single right quote.</p>
+</li>
+<li>
+<p>Test case: addRecruitmentPost jp/IT Manager me/5 jd/To maintain the network server, and company&#8217;s IT framework.
+Expected: New recruitment post is added:
+          Job Position: IT Manager
+          Minimal years of working experience: 5
+          Job Description: To maintain the network server, and company&#8217;s IT framework.</p>
+</li>
+<li>
+<p>Test case: addRecruitmentPost jp/IT Manager1 me/5 jd/To maintain the network server in company
+Expected: Job Position accepts only characters. It should not include numbers or should not be blank.
+And the maximum length of the job position is 20 characters</p>
+</li>
+<li>
+<p>Test case: addRecruitmentPost jp/IT Manager me/31 jd/To maintain the network server in company
+Expected: Working Experience should only contain integers with length of at least 1 digit longAnd the range of the
+working experience is from 0 to 30</p>
+</li>
+<li>
+<p>Test case: addRecruitmentPost jp/IT Manager me/-1 jd/To maintain the network server in company
+Expected: Working Experience should only contain integers with length of at least 1 digit longAnd the range of the
+working experience is from 0 to 30</p>
+</li>
+<li>
+<p>Test case: addRecruitmentPost jp/IT Manager me/5 jd/To maintain the network server in company
+Expected: Working Experience should only contain integers with length of at least 1 digit longAnd the range of the
+working experience is from 0 to 30</p>
+</li>
+<li>
+<p>Test case: addRecruitmentPost jp/IT Manager me/5 jd/To maintain the network server in company!
+Expected: Job description accepts only characters. It should not include numbers or should not be blank.
+For the purpose of using punctuation marks, it only allows comma, full stop and single right quote.
+The length of job description is from 1 to 200 characters.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="edit-a-recruitment-post"><a class="link" href="#edit-a-recruitment-post">H.18. Edit A Recruitment Post</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Edit a single recruitment post</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: at least one recruitment post has been added to the recruitmentPost list panel. Minimal one field
+should be different from the existing recruitment post that is about to be edited.</p>
+</li>
+<li>
+<p>Test case: editRecruitmentPost 1 jp/Accountants me/5 jd/To maintain the network server, and company&#8217;s IT framework.
+Expected: Edited Recruitment Post:
+          Job Position: Accountants
+          Minimal years of working experience: 5
+          Job Description: To maintain the network server, and company&#8217;s IT framework.</p>
+</li>
+<li>
+<p>Test case: editRecruitmentPost 1 jp/Accountants me/5 jd/To maintain the network server, and company&#8217;s IT framework.
+Expected: This job position already exists in the address book</p>
+</li>
+<li>
+<p>Test case: editRecruitmentPost 0 jp/Accountants me/5 jd/To maintain the network server, and company&#8217;s IT framework.
+Expected: Invalid command format!
+          editRecruitmentPost: Edits the details of the recruitment post identified by the index number used in the
+          displayed recruitment list. Existing values will be overwritten by the input values. Parameters:
+          INDEX (must be a positive integer) [jp/Job Position] [me/Minimal Working experience] [jd/Job description]
+          Example: editRecruitmentPost 1 jp/IT Manager me/3 jd/To maintain the company server</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="select-a-recruitment-post"><a class="link" href="#select-a-recruitment-post">H.19. Select A Recruitment Post</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Select a recruitment post</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: at least one recruitment post should be added before performing selectRecruitPostCommand.</p>
+</li>
+<li>
+<p>Test case: selectRecruitmentPost 1
+Expected: Selected Recruitment Post: 1</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="delete-a-recruitment-post"><a class="link" href="#delete-a-recruitment-post">H.20. Delete A Recruitment Post</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Delete a recruitment post</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: at least one recruitment post should be added before performing deleteRecruitmentPostCommand.</p>
+<div class="olist lowerroman">
+<ol class="lowerroman" type="i">
+<li>
+<p>Test Case: deleteRecruitmentPost 1
+Expected: Deleted Recruitment Post:
+          Job Position: Accountants
+          Minimal years of working experience: 5
+          Job Description: To maintain the network server, and company&#8217;s IT framework.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="deleting-an-employee"><a class="link" href="#deleting-an-employee">H.21. Deleting an employee</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -4609,4 +4881,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 06:31:05 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 06:59:33 UTC</div></div></div></body></html>

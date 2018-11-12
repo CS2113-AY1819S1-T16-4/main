@@ -22,53 +22,37 @@ CHRS is capable of checking work schedule, creating recruitment posts, checking 
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Major enhancement</strong>: added <strong>the ability to undo/redo previous commands</strong></p>
+<p><strong>Major enhancement</strong>: added <code>addRecruitmentPostCommand</code>, <code>deleteRecruitmentPostCommand</code>, <code>clearRecruitmentPostCommand</code>
+<code>editRecruitmentPostCommand</code>, <code>selectRecruitmentPostCommand</code></p>
 <div class="ulist">
 <ul>
 <li>
-<p>What it does: allows the user to undo all previous commands one at a time. Preceding undo commands can be reversed by using the redo command.</p>
+<p>What it does: Allow users to manage recruitment posts for the company.</p>
 </li>
 <li>
-<p>Justification: This feature improves the product significantly because a user can make mistakes in commands and the app should provide a convenient way to rectify them.</p>
+<p>Justification: This feature improves the product significantly because managing recruitment is one of the main responsibilities for HR admin.</p>
 </li>
 <li>
-<p>Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.</p>
-</li>
-<li>
-<p>Credits: <em>{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}</em></p>
+<p>Highlights: This enhancement provides an integrated function for HR admin to manage internal recruitment posts easily before publish to the public.</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p><strong>Minor enhancement</strong>: added a history command that allows the user to navigate to previous commands using up/down keys.</p>
-</li>
-<li>
-<p><strong>Code contributed</strong>: [<a href="https://github.com">Functional code</a>] [<a href="https://github.com">Test code</a>] <em>{give links to collated code files}</em></p>
+<p><strong>Code contributed</strong>: [<a href="https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&amp;search=ryanchen2018&amp;sort=displayName&amp;since=2018-09-12&amp;until=2018-11-04&amp;timeframe=day&amp;reverse=false&amp;repoSort=true">Reposense Dashboard</a>}_</p>
 </li>
 <li>
 <p><strong>Other contributions</strong>:</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Project management:</p>
+<p>Test cases:</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Managed releases <code>v1.3</code> - <code>v1.5rc</code> (3 releases) on GitHub</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>Enhancements to existing features:</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Updated the GUI color scheme (Pull requests <a href="https://github.com">#33</a>, <a href="https://github.com">#34</a>)</p>
-</li>
-<li>
-<p>Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests <a href="https://github.com">#36</a>, <a href="https://github.com">#38</a>)</p>
+<p>Wrote additional tests for existing features to increase coverage from 70.2% to 80.4%(<a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/229">#229</a>),
+82.3% to 84.9%(<a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/239">#239</a>),
+84.9% to 88.7%(<a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/243">#243</a>)</p>
 </li>
 </ul>
 </div>
@@ -78,7 +62,22 @@ CHRS is capable of checking work schedule, creating recruitment posts, checking 
 <div class="ulist">
 <ul>
 <li>
-<p>Did cosmetic tweaks to existing contents of the User Guide: <a href="https://github.com">#14</a></p>
+<p>Update developer guide for recruitment feature(<a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/101">#101</a>,
+<a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/107">#107</a>,
+<a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/108">#108</a>)</p>
+</li>
+<li>
+<p>Update user guide for recruitment feature(<a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/108">#108</a>,
+<a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/125">#125</a>,
+<a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/147">#147</a>,
+<a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/149">#149</a>,
+<a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/151">#151</a>,
+<a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/155">#155</a>,
+<a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/157">#157</a>,
+<a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/160">#160</a>,
+<a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/175">#175</a>,
+<a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/179">#179</a>,
+<a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/239">#239</a>)</p>
 </li>
 </ul>
 </div>
@@ -88,29 +87,23 @@ CHRS is capable of checking work schedule, creating recruitment posts, checking 
 <div class="ulist">
 <ul>
 <li>
-<p>PRs reviewed (with non-trivial review comments): <a href="https://github.com">#12</a>, <a href="https://github.com">#32</a>, <a href="https://github.com">#19</a>, <a href="https://github.com">#42</a></p>
+<p>PRs reviewed (with non-trivial review comments): (
+<a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/74">#74</a>,
+<a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/75">#75</a>,
+<a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/76">#76</a>,
+<a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/95">#95</a>,
+<a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/97">#97</a>,
+<a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/112">#112</a>,
+<a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/120">#120</a>)</p>
 </li>
 <li>
-<p>Contributed to forum discussions (examples:  <a href="https://github.com">1</a>, <a href="https://github.com">2</a>, <a href="https://github.com">3</a>, <a href="https://github.com">4</a>)</p>
-</li>
-<li>
-<p>Reported bugs and suggestions for other teams in the class (examples:  <a href="https://github.com">1</a>, <a href="https://github.com">2</a>, <a href="https://github.com">3</a>)</p>
-</li>
-<li>
-<p>Some parts of the history feature I added was adopted by several other class mates (<a href="https://github.com">1</a>, <a href="https://github.com">2</a>)</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>Tools:</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Integrated a third party library (Natty) to the project (<a href="https://github.com">#42</a>)</p>
-</li>
-<li>
-<p>Integrated a new Github plugin (CircleCI) to the team repo</p>
+<p>Reported bugs and suggestions for other teams in the class (
+<a href="https://github.com/CS2113-AY1819S1-W13-2/main/issues/83">#83</a>,
+<a href="https://github.com/CS2113-AY1819S1-W13-2/main/issues/85">#85</a>,
+<a href="https://github.com/CS2113-AY1819S1-W13-2/main/issues/91">#91</a>,
+<a href="https://github.com/CS2113-AY1819S1-W13-2/main/issues/95">#95</a>,
+<a href="https://github.com/CS2113-AY1819S1-W13-2/main/issues/99">#99</a>,
+<a href="https://github.com/CS2113-AY1819S1-W13-2/main/issues/103">#103</a>)</p>
 </li>
 </ul>
 </div>
@@ -119,9 +112,6 @@ CHRS is capable of checking work schedule, creating recruitment posts, checking 
 </div>
 </li>
 </ul>
-</div>
-<div class="paragraph">
-<p><em>{you can add/remove categories in the list above}</em></p>
 </div>
 </div>
 </div>
@@ -139,14 +129,13 @@ CHRS is capable of checking work schedule, creating recruitment posts, checking 
 </tbody>
 </table>
 <div class="sect2">
-<h3 id="undoing-previous-command-code-undo-code"><a class="link" href="#undoing-previous-command-code-undo-code">Undoing previous command : <code>undo</code></a></h3>
+<h3 id="add-new-recruitment-post-code-addrecruitmentpost-code"><a class="link" href="#add-new-recruitment-post-code-addrecruitmentpost-code">Add new recruitment post : <code>addRecruitmentPost</code></a></h3>
 <div class="paragraph">
-<p>Restores CHRS to the state before the previous <em>undoable</em> command was executed.
-If a <em>undoable</em> command is executed after undo, then the command that was undone
-will not be undoable anymore as it is already undone.</p>
+<p>Add a recruitment post based on job position, minimal years of working experience and job description.</p>
 </div>
 <div class="paragraph">
-<p>Format: <code>undo</code></p>
+<p>Format: <code>addRecruitmentPost jp/JOB_POSITION me/MINIMAL_YEARS_OF_WORKING_EXPERIENCE jd/JOB_DESCRIPTION</code> or
+<code>arp jp/JOB_POSITION me/MINIMAL_YEARS_OF_WORKING EXPERIENCE jd/JOB_DESCRIPTION</code></p>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -154,28 +143,16 @@ will not be undoable anymore as it is already undone.</p>
 <div class="ulist">
 <ul>
 <li>
-<p><code>delete 1</code><br>
-<code>list</code><br>
-<code>undo</code> (reverses the <code>delete 1</code> command)<br></p>
+<p><code>addRecruitmentPost jp/IT Manager me/3 jd/maintain the functionality of company server</code><br>
+Add an recruitment post with the available position called IT Manager, and the job requires minimal 3 years of
+working experience in similar field. The job position requires the candidates' ability to maintain the
+functionality of company server</p>
 </li>
 <li>
-<p><code>selectEmployee 1</code><br>
-<code>list</code><br>
-<code>undo</code><br>
-The <code>undo</code> command fails as there are no undoable commands executed previously</p>
-</li>
-<li>
-<p><code>delete 1</code><br>
-<code>clear</code><br>
-<code>undo</code> (reverses the <code>clear</code> command)<br>
-<code>undo</code> (reverses the <code>delete 1</code> command)<br></p>
-</li>
-<li>
-<p><code>delete 1</code><br>
-<code>undo</code> (reverses the <code>delete 1</code> command)<br>
-<code>clear</code>(<code>delete 1</code> commmand will no longer be undoable as it is already undone)<br>
-<code>undo</code> (reverses the <code>clear</code> command)<br>
-<code>undo</code> (no more commands to undo)<br></p>
+<p><code>arp jp/IT Manager me/3 jd/maintain the functionality of company server</code><br>
+Add an recruitment post with the available position called IT Manager, and the job requires minimal 3 years of
+working experience in similar field. The job position requires the candidates' ability to maintain the
+functionality of company server</p>
 </li>
 </ul>
 </div>
@@ -186,24 +163,16 @@ The <code>undo</code> command fails as there are no undoable commands executed p
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-<div class="paragraph">
-<p>Undoable commands: those commands that modify CHRS content.
-For commands similar functions to<br>
-(list*, find*, filter*, select*, calculate*)
-the command will not be able to undo or redo).</p>
-</div>
+Duplicate recruitment posts are not allowed. Minimal one field should be different.
+=== Edit an existing recruitment post : <code>editRecruitmentPost</code>
+Edit a recruitment post based on its index no.
 </td>
 </tr>
 </table>
 </div>
-</div>
-<div class="sect2">
-<h3 id="redoing-the-previously-undone-command-code-redo-code"><a class="link" href="#redoing-the-previously-undone-command-code-redo-code">Redoing the previously undone command : <code>redo</code></a></h3>
 <div class="paragraph">
-<p>Reverses the most recent <code>undo</code> command.</p>
-</div>
-<div class="paragraph">
-<p>Format: <code>redo</code></p>
+<p>Format: <code>editRecruitmentPost [Index] jp/JOB POSITION me/MINIMAL YEARS OF WORKING EXPERIENCE jd/JOB DESCRIPTION</code>
+or <code>erp [Index] jp/JOB POSITION me/MINIMAL YEARS OF WORKING EXPERIENCE jd/JOB DESCRIPTION</code></p>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -211,22 +180,18 @@ the command will not be able to undo or redo).</p>
 <div class="ulist">
 <ul>
 <li>
-<p><code>delete 1</code><br>
-<code>undo</code> (reverses the <code>delete 1</code> command)<br>
-<code>redo</code> (reapplies the <code>delete 1</code> command)<br></p>
+<p><code>editRecruitmentPost 1 jp/IT Manager me/3 jd/To maintain the company server</code><br>
+Edit the recruitment post with index 1. And the post information from job position, minimal
+working experience to job description respectively changes to IT manager, minimal working
+experience of 3 years in relevant field and the job description is to maintain the company
+server.</p>
 </li>
 <li>
-<p><code>delete 1</code><br>
-<code>redo</code><br>
-The <code>redo</code> command fails as there are no <code>undo</code> commands executed previously</p>
-</li>
-<li>
-<p><code>delete 1</code><br>
-<code>clear</code><br>
-<code>undo</code> (reverses the <code>clear</code> command)<br>
-<code>undo</code> (reverses the <code>delete 1</code> command)<br>
-<code>redo</code> (reapplies the <code>delete 1</code> command)<br>
-<code>redo</code> (reapplies the <code>clear</code> command)<br></p>
+<p><code>erp 1 jp/IT Manager me/3 jd/To maintain the company server</code><br>
+Edit the recruitment post with index 1. And the post information from job position, minimal
+working experience to job description respectively changes to IT manager, minimal working
+experience of 3 years in relevant field and the job description is to maintain the company
+server.</p>
 </li>
 </ul>
 </div>
@@ -237,15 +202,47 @@ The <code>redo</code> command fails as there are no <code>undo</code> commands e
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-<div class="paragraph">
-<p>Redoable commands: those commands that modify CHRS content.
-For commands similar functions to<br>
-(list*, find*, filter*, select*, calculate*)
-the command will not be able to undo or redo.</p>
-</div>
+Minimal one field should be changed in order to make the editing recruitment post function work.
+=== Select recruitment post : <code>selectRecruitmentPost</code>
+Select a recruitment post based on post index ID.
 </td>
 </tr>
 </table>
+</div>
+<div class="paragraph">
+<p>Format: <code>selectRecruitmentPost INDEX</code> or <code>srp INDEX</code></p>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>selectRecruitmentPost 1</code><br>
+Select the recruitment post with the index of '1'
+=== Delete recruitment post : <code>deleteRecruitmentPost</code>
+Delete a recruitment post based on post index ID.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Format: <code>deleteRecruitmentPost INDEX</code> or <code>drp INDEX</code></p>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>deleteRecruitmentPost 1</code><br>
+Deletes the recruitment post with the index of '1'
+=== Clear recruitment posts : <code>clearRecruitmentPost</code>
+Clear all recruitment posts at one go.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Format: <code>clearRecruitmentPost</code> or <code>crp</code></p>
 </div>
 </div>
 </div>
@@ -264,245 +261,192 @@ the command will not be able to undo or redo.</p>
 </tbody>
 </table>
 <div class="sect2">
-<h3 id="undo-redo-feature"><a class="link" href="#undo-redo-feature">Undo/Redo feature</a></h3>
+<h3 id="recruitment-post-feature"><a class="link" href="#recruitment-post-feature">Recruitment Post Feature</a></h3>
+<div class="paragraph">
+<p><code>Recruitment post</code> features allows HR staffs to manage internal recruitment posts easily before publishing to the public
+. It allows users to do add, delete, clear, select and edit recruitment post based on 3 fields including job position,
+working experience, and job description.</p>
+</div>
+<div class="paragraph">
+<p>All logic commands come with a dedicated parser. These parsers ensure that the input conforms to the following
+field restrictions before in phase 1 before parsing to the actual command for execution in phase 2:</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 27.7777%;">
+<col style="width: 16.6666%;">
+<col style="width: 55.5557%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Field Name</th>
+<th class="tableblock halign-left valign-top">Prefix</th>
+<th class="tableblock halign-left valign-top">Limitations</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">JOB_POSITION</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">jp/</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Job position accepts only characters. It must not be blank and should not include numbers and
+punctuation mark. And users are not allowed to exceed the character limit which is from 1 to 20</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MINIMAL_YEARS_OF_WORKING_EXPERIENCE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">me/</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Minimal years of working experience must be integers and should not be blank
+. And It is limited from 0 to 30</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">JOB_DESCRIPTION</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">jd/</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Job description accepts only characters and Punctuation mark including only comma, full stop,
+and single right quote. It must not be blank and should not include numbers. And users are not allowed to exceed the
+character limit which is from 1 to 200</p></td>
+</tr>
+</tbody>
+</table>
 <div class="sect3">
-<h4 id="current-implementation"><a class="link" href="#current-implementation">Current Implementation</a></h4>
+<h4 id="current-implementation-for-code-addrecruitmentpost-code"><a class="link" href="#current-implementation-for-code-addrecruitmentpost-code">Current Implementation for <code>addRecruitmentPost</code></a></h4>
 <div class="paragraph">
-<p>The undo/redo mechanism is facilitated by <code>VersionedModelList</code>, which oversees all the undo and redo for other
-storage, namely, <code>VersionedAddressBook</code>, <code>VersionedScheduleList</code>, <code>VersionedExpensesList</code>
-and <code>VersionedRecruitmentList</code>.</p>
+<p><code>addRecruitmentPost</code> command allows a new recruitment post to be added. The sequence diagram below illustrates the
+operation of <code>addRecruitmentPost</code> command:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/Recruitment/addRecruitmentPost.png" alt="addRecruitmentPost" width="650">
+</div>
 </div>
 <div class="paragraph">
-<p><code>VersionedModelList</code> stored internally as an <code>modelTypesStateList</code> and <code>currentStatePointer</code>.
-Additionally, it implements the following operations:</p>
+<p>In addition, Command Exception will be thrown due to the following:</p>
 </div>
-<div class="ulist">
-<ul>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
 <li>
-<p><code>VersionedAddressBook#add()</code>&#8201;&#8212;&#8201;Save the storage model type that has committed in its history.</p>
+<p>Invalid command format is used.</p>
 </li>
 <li>
-<p><code>VersionedAddressBook#addMultiple()</code>&#8201;&#8212;&#8201;Saves the set of storage model types that has committed in its history.</p>
+<p>A duplicated recruitment field exists. Minimal 1 field should be different.</p>
 </li>
 <li>
-<p><code>VersionedAddressBook#undo()</code>&#8201;&#8212;&#8201;Delegate <code>VersionedAddressBook</code>, <code>VersionedScheduleList</code>, <code>VersionedExpensesList</code>
-and <code>VersionedRecruitmentList</code> to restore the previous storage model state from its history.</p>
+<p>Fields' restrictions are not followed.</p>
 </li>
-<li>
-<p><code>VersionedAddressBook#redo()</code>&#8201;&#8212;&#8201; Delegate <code>VersionedAddressBook</code>, <code>VersionedScheduleList</code>, <code>VersionedExpensesList</code>
-and <code>VersionedRecruitmentList</code> to restore a previously undone address book state from its history.</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>The following is an example of <code>VersionedAddressBook</code> implementation. The implementation will
-be similar to <code>VersionedScheduleList</code>, <code>VersionedExpensesList</code> and <code>VersionedRecruitmentList</code>.</p>
-</div>
-<div class="paragraph">
-<p><code>VersionedAddressBook</code> extends <code>AddressBook</code> with an undo/redo history, stored internally as an <code>addressBookStateList</code> and <code>currentStatePointer</code>.
-Additionally, it implements the following operations:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>VersionedAddressBook#commit()</code>&#8201;&#8212;&#8201;Saves the current address book state in its history.</p>
-</li>
-<li>
-<p><code>VersionedAddressBook#undo()</code>&#8201;&#8212;&#8201;Restores the previous address book state from its history.</p>
-</li>
-<li>
-<p><code>VersionedAddressBook#redo()</code>&#8201;&#8212;&#8201;Restores a previously undone address book state from its history.</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>These operations are exposed in the <code>Model</code> interface as <code>Model#commitAddressBook()</code>, <code>Model#undoAddressBook()</code> and <code>Model#redoAddressBook()</code> respectively.</p>
-</div>
-<div class="paragraph">
-<p>Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.</p>
-</div>
-<div class="paragraph">
-<p>Step 1. The user launches the application for the first time. The <code>VersionedAddressBook</code> will be initialized with the initial address book state, and the <code>currentStatePointer</code> pointing to that single address book state.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/UndoRedoStartingStateListDiagram.png" alt="UndoRedoStartingStateListDiagram" width="800">
-</div>
-</div>
-<div class="paragraph">
-<p>Step 2. The user executes <code>delete 5</code> command to delete the 5th person in the address book. The <code>delete</code> command calls <code>Model#commitAddressBook()</code>, causing the modified state of the address book after the <code>delete 5</code> command executes to be saved in the <code>addressBookStateList</code>, and the <code>currentStatePointer</code> is shifted to the newly inserted address book state.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/UndoRedoNewCommand1StateListDiagram.png" alt="UndoRedoNewCommand1StateListDiagram" width="800">
-</div>
-</div>
-<div class="paragraph">
-<p>Step 3. The user executes <code>add n/David &#8230;&#8203;</code> to add a new person. The <code>add</code> command also calls <code>Model#commitAddressBook()</code>, causing another modified address book state to be saved into the <code>addressBookStateList</code>.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/UndoRedoNewCommand2StateListDiagram.png" alt="UndoRedoNewCommand2StateListDiagram" width="800">
-</div>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-If a command fails its execution, it will not call <code>Model#commitAddressBook()</code>, so the address book state will not be saved into the <code>addressBookStateList</code>.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the <code>undo</code> command. The <code>undo</code> command will call <code>Model#undoAddressBook()</code>, which will shift the <code>currentStatePointer</code> once to the left, pointing it to the previous address book state, and restores the address book to that state.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/UndoRedoExecuteUndoStateListDiagram.png" alt="UndoRedoExecuteUndoStateListDiagram" width="800">
-</div>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-If the <code>currentStatePointer</code> is at index 0, pointing to the initial address book state, then there are no previous address book states to restore. The <code>undo</code> command uses <code>Model#canUndoAddressBook()</code> to check if this is the case. If so, it will return an error to the user rather than attempting to perform the undo.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>The following sequence diagram shows how the undo operation works:</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/UndoRedoSequenceDiagram.png" alt="UndoRedoSequenceDiagram" width="800">
-</div>
-</div>
-<div class="paragraph">
-<p>The <code>redo</code> command does the opposite&#8201;&#8212;&#8201;it calls <code>Model#redoAddressBook()</code>, which shifts the <code>currentStatePointer</code> once to the right, pointing to the previously undone state, and restores the address book to that state.</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-If the <code>currentStatePointer</code> is at index <code>addressBookStateList.size() - 1</code>, pointing to the latest address book state, then there are no undone address book states to restore. The <code>redo</code> command uses <code>Model#canRedoAddressBook()</code> to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>Step 5. The user then decides to execute the command <code>list</code>. Commands that do not modify the address book, such as <code>list</code>, will usually not call <code>Model#commitAddressBook()</code>, <code>Model#undoAddressBook()</code> or <code>Model#redoAddressBook()</code>. Thus, the <code>addressBookStateList</code> remains unchanged.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/UndoRedoNewCommand3StateListDiagram.png" alt="UndoRedoNewCommand3StateListDiagram" width="800">
-</div>
-</div>
-<div class="paragraph">
-<p>Step 6. The user executes <code>clear</code>, which calls <code>Model#commitAddressBook()</code>. Since the <code>currentStatePointer</code> is not pointing at the end of the <code>addressBookStateList</code>, all address book states after the <code>currentStatePointer</code> will be purged. We designed it this way because it no longer makes sense to redo the <code>add n/David &#8230;&#8203;</code> command. This is the behavior that most modern desktop applications follow.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/UndoRedoNewCommand4StateListDiagram.png" alt="UndoRedoNewCommand4StateListDiagram" width="800">
-</div>
-</div>
-<div class="paragraph">
-<p>The following activity diagram summarizes what happens when a user executes a new command:</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/UndoRedoActivityDiagram.png" alt="UndoRedoActivityDiagram" width="650">
-</div>
+</ol>
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations"><a class="link" href="#design-considerations">Design Considerations</a></h4>
-<div class="sect4">
-<h5 id="aspect-how-undo-redo-executes"><a class="link" href="#aspect-how-undo-redo-executes">Aspect: How undo &amp; redo executes</a></h5>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Alternative 1 (current choice):</strong> Saves the entire address book.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: Easy to implement.</p>
-</li>
-<li>
-<p>Cons: May have performance issues in terms of memory usage.</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p><strong>Alternative 2:</strong> Individual command knows how to undo/redo by itself.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: Will use less memory (e.g. for <code>delete</code>, just save the person being deleted).</p>
-</li>
-<li>
-<p>Cons: We must ensure that the implementation of each individual command are correct.</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect4">
-<h5 id="aspect-data-structure-to-support-the-undo-redo-commands"><a class="link" href="#aspect-data-structure-to-support-the-undo-redo-commands">Aspect: Data structure to support the undo/redo commands</a></h5>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Alternative 1 (current choice):</strong> Use a list to store the history of address book states.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: Easy for new Computer Science student undergraduates to understand, who are likely to be the new incoming developers of our project.</p>
-</li>
-<li>
-<p>Cons: Logic is duplicated twice. For example, when a new command is executed, we must remember to update both <code>HistoryManager</code> and <code>VersionedAddressBook</code>.</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p><strong>Alternative 2:</strong> Use <code>HistoryManager</code> for undo/redo</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: We do not need to maintain a separate list, and just reuse what is already in the codebase.</p>
-</li>
-<li>
-<p>Cons: Requires dealing with commands that have already been undone: We must remember to skip these commands. Violates Single Responsibility Principle and Separation of Concerns as <code>HistoryManager</code> now needs to do two different things.</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="project-powerpointlabs"><a class="link" href="#project-powerpointlabs">PROJECT: PowerPointLabs</a></h2>
-<div class="sectionbody">
-<hr>
+<h4 id="current-implementation-for-code-editrecruitmentpost-code"><a class="link" href="#current-implementation-for-code-editrecruitmentpost-code">Current Implementation for <code>editRecruitmentPost</code></a></h4>
 <div class="paragraph">
-<p><em>{Optionally, you may include other projects in your portfolio.}</em></p>
+<p><code>editRecruitmentPost</code> command allows an existing recruitment post to be edited.</p>
+</div>
+<div class="paragraph">
+<p>In addition, Command Exception will be thrown due to the following:</p>
+</div>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Invalid command format is used.</p>
+</li>
+<li>
+<p>A duplicated recruitment field exists. Minimal 1 field should be different from existing recruitment post that is
+about to be edited.</p>
+</li>
+<li>
+<p>Fields' restrictions are not followed.</p>
+</li>
+</ol>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 06:31:05 UTC</div></div></div></body></html>
+<div class="sect3">
+<h4 id="current-implementation-for-code-selectrecruitmentpost-code"><a class="link" href="#current-implementation-for-code-selectrecruitmentpost-code">Current Implementation for <code>selectRecruitmentPost</code></a></h4>
+<div class="paragraph">
+<p><code>selectRecruitmentPost</code> command allows users to select an existing recruitment post based on recruit post index number
+displayed in the recruitment post list panel.</p>
+</div>
+<div class="paragraph">
+<p>In addition, Command Exception will be thrown due to the following:</p>
+</div>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Invalid command format is used.</p>
+</li>
+<li>
+<p>Recruitment post list is empty.</p>
+</li>
+<li>
+<p>Invalid index number is used.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="current-implementation-for-code-deleterecruitmentpost-code"><a class="link" href="#current-implementation-for-code-deleterecruitmentpost-code">Current Implementation for <code>deleteRecruitmentPost</code></a></h4>
+<div class="paragraph">
+<p><code>deleteRecruitmentPost</code> command allows users to delete an existing recruitment post based on recruit post index number
+displayed in the recruitment post list panel.</p>
+</div>
+<div class="paragraph">
+<p>In addition, Command Exception will be thrown due to the following:</p>
+</div>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Invalid command format is used.</p>
+</li>
+<li>
+<p>Recruitment post list is empty.</p>
+</li>
+<li>
+<p>Invalid index number is used.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="future-implementation-for-publishrecruitmentpost-em-upcoming-in-2-0-em"><a class="link" href="#future-implementation-for-publishrecruitmentpost-em-upcoming-in-2-0-em">Future Implementation for `publishRecruitmentPost`<em>[Upcoming in 2.0]</em></a></h4>
+<div class="paragraph">
+<p><code>publishRecruitmentPost</code> command allows users to publish an existing recruitment post to job portal such as job street
+website. <em>[Upcoming in 2.0]</em></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-for-recruitment-post-feature"><a class="link" href="#design-considerations-for-recruitment-post-feature">Design Considerations for Recruitment Post Feature</a></h4>
+<div class="paragraph">
+<p>Aspect implementation of all Recruitment Post Commands</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Have separate commands
+to manage recruitment posts.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Individual command is easier for user to use and easier for developer to debug and test.</p>
+</li>
+<li>
+<p>Cons: More methods and implementation is required.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Have a single command to manage recruitment posts.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Lesser methods and implementation is required.</p>
+</li>
+<li>
+<p>Cons: The command could be too complicated for users to use as more fields would be needed.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 06:59:33 UTC</div></div></div></body></html>
