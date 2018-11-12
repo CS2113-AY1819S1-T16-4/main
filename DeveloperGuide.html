@@ -33,7 +33,7 @@
 <li><a href="#modify-pay-feature">3.2. Modify Pay Feature</a></li>
 <li><a href="#recruitment-post-feature">3.3. Recruitment Post Feature</a></li>
 <li><a href="#schedule-feature">3.4. Schedule Feature</a></li>
-<li><a href="#expenses-feature">3.5. Expenses Feature</a></li>
+<li><a href="#add-expenses">3.5. Add Expenses</a></li>
 <li><a href="#filter-feature">3.6. Filter Feature</a></li>
 <li><a href="#logging">3.7. Logging</a></li>
 <li><a href="#Implementation-Configuration">3.8. Configuration</a></li>
@@ -96,11 +96,14 @@
 <li><a href="#delete-schedule-2">H.14. Delete Schedule</a></li>
 <li><a href="#delete-works-2">H.15. Delete Works</a></li>
 <li><a href="#delete-leaves-2">H.16. Delete Leaves</a></li>
-<li><a href="#add-a-recruitment-post">H.17. Add A Recruitment Post</a></li>
-<li><a href="#edit-a-recruitment-post">H.18. Edit A Recruitment Post</a></li>
-<li><a href="#select-a-recruitment-post">H.19. Select A Recruitment Post</a></li>
-<li><a href="#delete-a-recruitment-post">H.20. Delete A Recruitment Post</a></li>
-<li><a href="#deleting-an-employee">H.21. Deleting an employee</a></li>
+<li><a href="#add-expenses-2">H.17. Add Expenses</a></li>
+<li><a href="#delete-expenses">H.18. Delete Expenses</a></li>
+<li><a href="#select-expenses">H.19. Select Expenses</a></li>
+<li><a href="#add-a-recruitment-post">H.20. Add A Recruitment Post</a></li>
+<li><a href="#edit-a-recruitment-post">H.21. Edit A Recruitment Post</a></li>
+<li><a href="#select-a-recruitment-post">H.22. Select A Recruitment Post</a></li>
+<li><a href="#delete-a-recruitment-post">H.23. Delete A Recruitment Post</a></li>
+<li><a href="#deleting-an-employee">H.24. Deleting an employee</a></li>
 </ul>
 </li>
 </ul>
@@ -1058,7 +1061,7 @@ The sequence diagram below illustrates the operation of <code>modifyPay</code> c
 <p>Pros: Lesser Class to handle different fields</p>
 </li>
 <li>
-<p>Cons: User may accidentally touched on sensitive data and ended up editing them</p>
+<p>Cons: User may accidentally touch on sensitive data and ended up editing them</p>
 </li>
 </ul>
 </div>
@@ -1740,27 +1743,54 @@ fields to describe the schedule.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="expenses-feature"><a class="link" href="#expenses-feature">3.5. Expenses Feature</a></h3>
+<h3 id="add-expenses"><a class="link" href="#add-expenses">3.5. Add Expenses</a></h3>
 <div class="paragraph">
 <p>The expenses feature contains to two commands.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>The command <code>addex</code> allows the user to add expenses for each employee.</p>
-</li>
-<li>
-<p>The command <code>removeex</code> allows the user to remove expenses for each employee.</p>
+<p>The command <code>addExpenses</code> allows the user to add expenses for each employee.</p>
 </li>
 </ul>
 </div>
 <div class="sect3">
-<h4 id="current-implementation-for-code-addex-code-command"><a class="link" href="#current-implementation-for-code-addex-code-command">3.5.1. Current Implementation for <code>addex</code> command</a></h4>
+<h4 id="current-implementation-for-code-addexpenses-code-command"><a class="link" href="#current-implementation-for-code-addexpenses-code-command">3.5.1. Current Implementation for <code>addExpenses</code> command</a></h4>
+<div class="sect4">
+<h5 id="phase-1-2"><a class="link" href="#phase-1-2">Phase 1</a></h5>
 <div class="paragraph">
-<p>The <code>addex</code> mechanism is facilitated by <code>AddExpensesCommandParser</code>.
-The <code>AddExpensesCommandParser</code> implements the <code>Parser</code> interface, parses the arguments parameter, which is the input from the user, and creates a new <code>AddExpensesCommand</code> object.
-Checks on whether the input complies with the required format is handled by other classes.
-This checking of input compliance is facilitated by two helper methods, namely <code>isValidEmployeeId</code> from <code>EmployeeId</code> class and <code>isValidExpensesAmount</code> from <code>ExpensesAmount</code> class.</p>
+<p>The <code>addExpenses</code> command is handled by <code>AddExpensesCommandParser</code>.
+The <code>AddExpensesCommandParser</code> implements the <code>Parser</code> interface, takes in input from the user as a form of argument,
+The <code>AddExpensesCommandParser</code> will then check if user input contains too many prefixes or check for multiple entries of
+same prefix.</p>
+</div>
+<div class="paragraph">
+<p>Next, the <code>AddExpensesCommandParser</code> will compute the value of <code>expensesAmount</code> to be added by summing the
+the values of <code>travelExpenses</code>, <code>medicalExpenses</code> and <code>miscellaneousExpenses</code>. The <code>AddExpensesCommandParser</code> will then
+create the <code>Expenses</code> and <code>EditExpensesDescriptor</code> objects. Other classes will handle validation of the input, check if
+it has the correct input format.</p>
+</div>
+<div class="paragraph">
+<p>The five methods that helps to valid the input are:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>isValidEmployeeId</code> from <code>EmployeeId</code> class</p>
+</li>
+<li>
+<p><code>isValidExpensesAmount</code> from <code>ExpensesAmount</code> class</p>
+</li>
+<li>
+<p><code>isValidTravelExpenses</code> from <code>TravelExpenses</code> class</p>
+</li>
+<li>
+<p><code>isValidMedicalExpenses</code> from <code>MedicalExpenses</code> class</p>
+</li>
+<li>
+<p><code>isValidMiscellaneousExpenses</code> from <code>MiscellaneousExpenses</code> class</p>
+</li>
+</ul>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -1794,7 +1824,7 @@ If the input does not comply with the required format, an error message will be 
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="directive">static</span> <span class="directive">final</span> <span class="predefined-type">String</span> EMPLOYE_EXPENSES_AMOUNT_VALIDATION_REGEX = <span class="string"><span class="delimiter">&quot;</span><span class="char">\\</span><span class="content">d{1,}</span><span class="delimiter">&quot;</span></span>;
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="directive">static</span> <span class="directive">final</span> <span class="predefined-type">String</span> EMPLOYE_EXPENSES_AMOUNT_VALIDATION_REGEX = <span class="string"><span class="delimiter">&quot;</span><span class="content">[-]?[0-9]+(.[0-9]{0,2})?</span><span class="delimiter">&quot;</span></span>;
 
 <span class="comment">/**
      * Returns true if a given string is a valid Expenses Amount.
@@ -1805,48 +1835,294 @@ If the input does not comply with the required format, an error message will be 
 </div>
 </div>
 </div>
-<div class="sect3">
-<h4 id="current-implementation-for-code-removeex-code-command"><a class="link" href="#current-implementation-for-code-removeex-code-command">3.5.2. Current Implementation for <code>removeex</code> command</a></h4>
+<div class="sect4">
+<h5 id="phase-2-2"><a class="link" href="#phase-2-2">Phase 2</a></h5>
 <div class="paragraph">
-<p>The <code>removeex</code> mechanism is facilitated by <code>RemoveExpensesCommandParser</code>.
-The <code>RemoveExpensesCommandParser</code> implements the <code>Parser</code> interface, parses the arguments parameter, which is the input from the user, and creates a new <code>RemoveExpensesCommand</code> object.
-Only Index will be required as input.
-Removing of expenses is to delete selected expenses from the list based on the input Index.
-Checking of whether Index is within list is facilitated by a method, <code>CommandResult</code> of the <code>RemoveExpensesCommand</code> class.
-The <code>CommandResult</code> method also calls the <code>deleteExpenses</code> method and <code>commitExpenses</code> method from <code>model</code> interface to delete the expenses and commit the changes into the xml storage.</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-If the input Index isn&#8217;t found in the list, an error message will be shown to the user.
-</td>
-</tr>
-</table>
+<p>The <code>AddExpensesCommand</code> will take in the <code>Expenses</code> and <code>EditExpensesDescriptor</code> objects.</p>
 </div>
 <div class="paragraph">
-<p>Code snippet of <code>CommandResult</code> from <code>RemoveExpensesCommand</code> class that checks the input Index and calling the <code>deleteExpenses</code> method and <code>commitExpenses</code> to delete the expenses and commit the changes:</p>
+<p>The <code>AddExpensesCommand</code> will first check if there exists a person in the person list that has the same employeeId  as
+<code>Expenses</code> object using the condition <code>(!model.hasEmployeeId(toCheckEmployeeId)</code>.
+The <code>AddExpensesCommand</code> will next check if there exists an expenses in the expenses list that has the same employeeId
+as <code>Expenses</code> object using the condition <code>(!model.hasExpenses(toAddExpenses)</code>.</p>
+</div>
+<div class="paragraph">
+<p>Code snippet of condition that checks the person and expenses list for person and expenses with same employeeId:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@Override</span>
-    <span class="directive">public</span> CommandResult execute(Model model, CommandHistory history) <span class="directive">throws</span> CommandException {
-        requireNonNull(model);
-        <span class="predefined-type">List</span>&lt;Expenses&gt; lastShownList = model.getFilteredExpensesList();
-
-        <span class="keyword">if</span> (targetIndex.getZeroBased() &gt;= lastShownList.size()) {
-            <span class="keyword">throw</span> <span class="keyword">new</span> CommandException(Messages.MESSAGE_INVALID_EXPENSES_DISPLAYED_INDEX);
-        }
-
-        Expenses expensesToRemove = lastShownList.get(targetIndex.getZeroBased());
-        model.deleteExpenses(expensesToRemove);
+<pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">if</span> (!model.hasEmployeeId(toCheckEmployeeId)) {
+            <span class="keyword">throw</span> <span class="keyword">new</span> CommandException(MESSAGE_EMPLOYEE_ID_NOT_FOUND);
+        } <span class="keyword">else</span> <span class="keyword">if</span> (!model.hasExpenses(toAddExpenses)) {</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>If Expenses List don&#8217;t have expenses with same EmployeeId,</p>
+<div class="ulist">
+<ul>
+<li>
+<p>The <code>AddExpensesCommand</code> will then check if any of the fields will contains negative value or exceed the limit. An exception will be
+thrown if at least one of the fields contains negative value or exceed the limit.</p>
+</li>
+<li>
+<p>The <code>AddExpensesCommand</code> will then add the expenses into CHRS.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Code snippet of <code>If Expenses List don&#8217;t have expenses with same EmployeeId</code></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">else</span> <span class="keyword">if</span> (!model.hasExpenses(toAddExpenses)) {
+    <span class="keyword">if</span> (<span class="predefined-type">Double</span>.parseDouble(toAddExpenses.getExpensesAmount().toString()) &lt; <span class="integer">0</span>
+        || <span class="predefined-type">Double</span>.parseDouble(toAddExpenses.getTravelExpenses().toString()) &lt; <span class="integer">0</span>
+        || <span class="predefined-type">Double</span>.parseDouble(toAddExpenses.getMedicalExpenses().toString()) &lt; <span class="integer">0</span>
+        || <span class="predefined-type">Double</span>.parseDouble(toAddExpenses.getMiscellaneousExpenses().toString()) &lt; <span class="integer">0</span>) {
+        <span class="keyword">throw</span> <span class="keyword">new</span> CommandException(MESSAGE_NEGATIVE_LEFTOVER);
+    } <span class="keyword">else</span> <span class="keyword">if</span> (<span class="predefined-type">Double</span>.parseDouble(toAddExpenses.getExpensesAmount().toString()) &gt; MAX_TOTAL_EXPENSES
+        || <span class="predefined-type">Double</span>.parseDouble(toAddExpenses.getTravelExpenses().toString()) &gt; MAX_EXPENSES_AMOUNT
+        || <span class="predefined-type">Double</span>.parseDouble(toAddExpenses.getMedicalExpenses().toString()) &gt; MAX_EXPENSES_AMOUNT
+        || <span class="predefined-type">Double</span>.parseDouble(toAddExpenses.getMiscellaneousExpenses().toString()) &gt; MAX_EXPENSES_AMOUNT
+    ) {
+        <span class="keyword">throw</span> <span class="keyword">new</span> CommandException(MESSAGE_VALUE_OVER_LIMIT);
+    } <span class="keyword">else</span> <span class="keyword">if</span> (<span class="predefined-type">Double</span>.parseDouble(toAddExpenses.getExpensesAmount().toString()) &gt;= <span class="integer">0</span>
+            &amp;&amp; <span class="predefined-type">Double</span>.parseDouble(toAddExpenses.getTravelExpenses().toString()) &gt;= <span class="integer">0</span>
+            &amp;&amp; <span class="predefined-type">Double</span>.parseDouble(toAddExpenses.getMedicalExpenses().toString()) &gt;= <span class="integer">0</span>
+            &amp;&amp; <span class="predefined-type">Double</span>.parseDouble(toAddExpenses.getMiscellaneousExpenses().toString()) &gt;= <span class="integer">0</span>
+            &amp;&amp; <span class="predefined-type">Double</span>.parseDouble(toAddExpenses.getExpensesAmount().toString()) &lt;= MAX_TOTAL_EXPENSES
+            &amp;&amp; <span class="predefined-type">Double</span>.parseDouble(toAddExpenses.getTravelExpenses().toString()) &lt;= MAX_EXPENSES_AMOUNT
+            &amp;&amp; <span class="predefined-type">Double</span>.parseDouble(toAddExpenses.getMedicalExpenses().toString()) &lt;= MAX_EXPENSES_AMOUNT
+            &amp;&amp; <span class="predefined-type">Double</span>.parseDouble(toAddExpenses.getMiscellaneousExpenses().toString()) &lt;= MAX_EXPENSES_AMOUNT
+    ) {
+        model.addExpenses(toAddExpenses);
         model.commitExpensesList();
-        <span class="keyword">return</span> <span class="keyword">new</span> CommandResult(<span class="predefined-type">String</span>.format(MESSAGE_REMOVE_EXPENSES_SUCCESS, expensesToRemove));
+        messageToShow = MESSAGE_SUCCESS;
     }</code></pre>
 </div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>If Expenses List have expenses with same EmployeeId,</p>
+<div class="ulist">
+<ul>
+<li>
+<p>The <code>AddExpensesCommand</code> will create an <code>expensesToEdit</code> object The <code>AddExpensesCommand</code> will then call
+<code>createEditedExpenses</code> method with <code>expensesToEdit</code> and <code>EditExpensesDescriptor</code> object as parameters.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Code snippet creating <code>expensesToEdit</code> object and calling <code>createdEditedExpenses</code> method</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">else</span> <span class="keyword">if</span> (model.hasExpenses(toAddExpenses)) {
+    EmployeeIdExpensesContainsKeywordsPredicate predicatEmployeeId;
+    <span class="predefined-type">List</span>&lt;<span class="predefined-type">String</span>&gt; employeeIdList = <span class="keyword">new</span> <span class="predefined-type">ArrayList</span>&lt;&gt;();
+    <span class="predefined-type">List</span>&lt;Expenses&gt; lastShownListExpenses;
+
+    employeeIdList.add(toCheckEmployeeId.getEmployeeId().value);
+    predicatEmployeeId = <span class="keyword">new</span> EmployeeIdExpensesContainsKeywordsPredicate(employeeIdList);
+
+    model.updateFilteredExpensesList(predicatEmployeeId);
+    lastShownListExpenses = model.getFilteredExpensesList();
+
+    Expenses expensesToEdit = lastShownListExpenses.get(<span class="integer">0</span>);
+    Expenses editedExpenses = createEditedExpenses(expensesToEdit, editExpensesDescriptor);</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The <code>createEditedExpenses</code> method will call <code>modifyExpensesAmount</code>, <code>modifyTravelExpenses</code>, <code>modifyMedicalExpenses</code>,
+<code>modifyMiscellaneousExpenses</code>, methods with <code>expensesToEdit</code> and <code>EditExpensesDescriptor</code> object as parameter.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Code snippet <code>createdEditedExpenses</code> method</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">    <span class="directive">private</span> Expenses createEditedExpenses(Expenses expensesToEdit, EditExpensesDescriptor
+            editExpensesDescriptor) {
+        <span class="keyword">assert</span> expensesToEdit != <span class="predefined-constant">null</span>;
+        ExpensesAmount updatedExpensesAmount = <span class="predefined-constant">null</span>;
+        TravelExpenses updatedTravelExpenses = <span class="predefined-constant">null</span>;
+        MedicalExpenses updatedMedicalExpenses = <span class="predefined-constant">null</span>;
+        MiscellaneousExpenses updatedMiscellaneousExpenses = <span class="predefined-constant">null</span>;
+
+        EmployeeId updatedEmployeeId = expensesToEdit.getEmployeeId();
+        <span class="keyword">try</span> {
+            updatedExpensesAmount = ParserUtil.parseExpensesAmount(modifyExpensesAmount(expensesToEdit,
+                    editExpensesDescriptor));
+            updatedTravelExpenses = ParserUtil.parseTravelExpenses(modifyTravelExpenses(expensesToEdit,
+                    editExpensesDescriptor));
+            updatedMedicalExpenses = ParserUtil.parseMedicalExpenses(modifyMedicalExpenses(expensesToEdit,
+                    editExpensesDescriptor));
+            updatedMiscellaneousExpenses = ParserUtil.parseMiscellaneousExpenses(modifyMiscellaneousExpenses(
+                    expensesToEdit, editExpensesDescriptor));
+        } <span class="keyword">catch</span> (<span class="exception">ParseException</span> pe) {
+            pe.printStackTrace();
+        }
+
+        <span class="keyword">return</span> <span class="keyword">new</span> Expenses(updatedEmployeeId, updatedExpensesAmount, updatedTravelExpenses, updatedMedicalExpenses,
+                updatedMiscellaneousExpenses);
+    }</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Each method will edit their respective field from <code>expensesToEdit</code> with the same field from <code>EditExpensesDescriptor</code>.
+The method will set isNegativeLeftover to be true and set isOverLimit to be true if the values is below 0 or exceed max
+value.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Code snippet <code>modifyExpensesAmount</code> method, one of the methods being called</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">private</span> <span class="predefined-type">String</span> modifyExpensesAmount (Expenses expensesToEdit, EditExpensesDescriptor
+        editExpensesDescriptor) {
+    <span class="predefined-type">NumberFormat</span> formatter = <span class="keyword">new</span> <span class="predefined-type">DecimalFormat</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">#0.00</span><span class="delimiter">&quot;</span></span>);
+    <span class="predefined-type">String</span> newExpensesAmount = expensesToEdit.getExpensesAmount().toString();
+    <span class="type">double</span> updateExpensesAmount = <span class="predefined-type">Double</span>.parseDouble(newExpensesAmount);
+    <span class="predefined-type">String</span> change = editExpensesDescriptor.getExpensesAmount().toString().replaceAll(<span class="string"><span class="delimiter">&quot;</span><span class="content">[^0-9.-]</span><span class="delimiter">&quot;</span></span>,
+            <span class="string"><span class="delimiter">&quot;</span><span class="delimiter">&quot;</span></span>);
+    updateExpensesAmount += <span class="predefined-type">Double</span>.parseDouble(change);
+    <span class="keyword">if</span> (updateExpensesAmount &lt; <span class="integer">0</span>) {
+        setIsNegativeLeftover(<span class="predefined-constant">true</span>);
+    } <span class="keyword">else</span> <span class="keyword">if</span> (updateExpensesAmount &gt; MAX_TOTAL_EXPENSES) {
+        setIsOverLimit(<span class="predefined-constant">true</span>);
+    } <span class="keyword">else</span> <span class="keyword">if</span> (updateExpensesAmount &gt;= <span class="integer">0</span>) {
+        newExpensesAmount = <span class="predefined-type">String</span>.valueOf(formatter.format(updateExpensesAmount));
+    }
+    <span class="keyword">return</span> newExpensesAmount;
+}</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The <code>AddExpensesCommand</code> will check for isNegativeLeftover and isOverLimit. If both are false, the
+<code>AddExpensesCommand</code> will then update the updated expenses into CHRS.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Code snippet of isNegativeLeftover and isOverLimit check</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">if</span> (getIsNegativeLeftover()) {
+        <span class="keyword">throw</span> <span class="keyword">new</span> CommandException(MESSAGE_NEGATIVE_LEFTOVER);
+    } <span class="keyword">else</span> <span class="keyword">if</span> (getIsOverLimit()) {
+        <span class="keyword">throw</span> <span class="keyword">new</span> CommandException(MESSAGE_VALUE_OVER_LIMIT);
+    } <span class="keyword">else</span> <span class="keyword">if</span> (!getIsNegativeLeftover() &amp;&amp; !getIsOverLimit()) {
+        messageToShow = MESSAGE_SUCCESS;
+        model.updateExpenses(expensesToEdit, editedExpenses);
+        model.commitExpensesList();
+    }
+    model.updateFilteredExpensesList(PREDICATE_SHOW_ALL_EXPENSES);
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The sequence diagram below illustrates the operation of the <code>AddExpensesCommand</code>:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/Add_ExpensesCommandSequenceDiagram.png" alt="Add ExpensesCommandSequenceDiagram" width="900">
+</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">3.5.2. Design Considerations</a></h4>
+<div class="paragraph">
+<p>Aspect implementation of <code>AddExpenses</code> command:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Have a single command to add and modify expenses.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: User isn&#8217;t require to ensure that there exist an expenses for the employee before modifying the expenses</p>
+</li>
+<li>
+<p>Cons: Have to handle more conditions and possibly more prone to bugs.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Have separate commands to add or modify expenses.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: User won&#8217;t have the possibly of mixing up if they want to add new expenses or modify old expenses.</p>
+</li>
+<li>
+<p>Cons: Requires user to know more commands.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Aspect: <code>Expenses List</code> Storage</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Have expenses stored in XML format.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easier to read, code and test XML files.</p>
+</li>
+<li>
+<p>Cons: Can&#8217;t compute or tabulate data from file.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Have schedules stored in CSV format.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: More efficient way of storing tabular data like expenses</p>
+</li>
+<li>
+<p>Cons: Harder to read as compared to XML file.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="expenses-report-code-expensesreport-code-em-upcoming-in-2-0-em"><a class="link" href="#expenses-report-code-expensesreport-code-em-upcoming-in-2-0-em">3.5.3. Expenses Report: <code>expensesReport</code> <em>[Upcoming in 2.0]</em></a></h4>
+<div class="paragraph">
+<p>Generates an expenses report with the total expenses amount claimed and have not been claimed for a year <em>[Upcoming in 2.0]</em></p>
 </div>
 </div>
 </div>
@@ -1861,7 +2137,7 @@ If the input Index isn&#8217;t found in the list, an error message will be shown
 <p>The implementation of this command is separated into two phases.</p>
 </div>
 <div class="sect4">
-<h5 id="phase-1-2"><a class="link" href="#phase-1-2">Phase 1</a></h5>
+<h5 id="phase-1-3"><a class="link" href="#phase-1-3">Phase 1</a></h5>
 <div class="paragraph">
 <p>The <code>filter</code> command&#8217;s mechanism is facilitated by <code>FilterCommandParser</code>.
 The <code>FilterCommandParser</code> implements the <code>Parser</code> interface, parses the arguments parameter, which is the input from the user, and creates a new <code>FilterCommand</code> object.
@@ -1999,7 +2275,7 @@ It only allows 1 to 30 characters per keyword.
 </div>
 </div>
 <div class="sect4">
-<h5 id="phase-2-2"><a class="link" href="#phase-2-2">Phase 2</a></h5>
+<h5 id="phase-2-3"><a class="link" href="#phase-2-3">Phase 2</a></h5>
 <div class="paragraph">
 <p>The <code>FilterCommand</code> is being executed in this phase.
 <code>FilterCommand</code> first checks which prefix(es) is(are) present prior to calling the <code>updateFilteredPersonList</code> method, which updates <code>filteredPersonList</code>
@@ -2072,7 +2348,7 @@ During the execution of <code>FilterCommand</code>, the <code>filteredPersonList
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">3.6.2. Design Considerations</a></h4>
+<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">3.6.2. Design Considerations</a></h4>
 <div class="paragraph">
 <p>Aspect: Implementation of <code>filter</code> command</p>
 </div>
@@ -3930,7 +4206,7 @@ for <code>RemarkCommandParser</code>.</p>
 </div>
 </li>
 <li>
-<p>1b. CHRS detects invalid input format or missing details.</p>
+<p>1b. CHRS detects invalid input format or expenses exceed limit or result in negative value.</p>
 <div class="ulist none">
 <ul class="none">
 <li>
@@ -4656,7 +4932,7 @@ Expected: Similar to previous.</p>
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
-<p>Prerequisites: Salary are not allowed to exceed 999999.99(max value) or goes below 0.01(min value).<br>
+<p>Prerequisites: There must be at least 1 employee in the list. Salary are not allowed to exceed 999999.99(max value) or goes below 0.01(min value).<br>
 Allocated Bonus should not be more than 24 months of Salary.</p>
 </li>
 <li>
@@ -4707,7 +4983,7 @@ Else, error details shown in the status message. Status bar remains the same.</p
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
-<p>Prerequisites: Salary are not allowed to exceed 999999.99(max value) or goes below 0.01(min value).<br>
+<p>Prerequisites: There must be at least 1 employee in the list. Salary are not allowed to exceed 999999.99(max value) or goes below 0.01(min value).<br>
 Allocated Bonus should not be more than 24 months of Salary.</p>
 </li>
 <li>
@@ -4938,7 +5214,82 @@ Expected: Leaves deleted for all observable employees that contain date : [04/02
 </div>
 </div>
 <div class="sect2">
-<h3 id="add-a-recruitment-post"><a class="link" href="#add-a-recruitment-post">H.17. Add A Recruitment Post</a></h3>
+<h3 id="add-expenses-2"><a class="link" href="#add-expenses-2">H.17. Add Expenses</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Add an expenses or modify existing expenses</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: Employee with employeeId "000001" must exist in person list and doesn&#8217;t have an expenses in the expenses list<br></p>
+</li>
+<li>
+<p>Test Case: addExpenses id/000001 tra/50 med/100 misc/150<br>
+Expected: Travel Expenses has value of 50.00. Medical Expenses has value of 100.00. Miscellaneous Expenses has value of 150.00. Total Expenses has value of 300.00. Timestamp in the status bar is updated.<br></p>
+<div class="paragraph">
+<p>Test Case: addExpenses id/000001 tra/100 med/50 misc/25<br>
+Expected: Travel expenses is increased to 150.00, medical expenses is increased to 150.00 and miscellaneous expenses is increased to 175.00, total expenses is increased to 475.00. Timestamp in the status bar is updated.</p>
+</div>
+</li>
+<li>
+<p>Test Case: addExpenses id/000001 tra/50 med/100 misc/150<br>
+Expected: Travel Expenses has value of 50.00. Medical Expenses has value of 100.00. Miscellaneous Expenses has value of 150.00. Total Expenses has value of 300.00. Timestamp in the status bar is updated.<br></p>
+<div class="paragraph">
+<p>Test Case: addExpenses id/000001 tra/-20 med/-30 misc/-50<br>
+Expected: Travel expenses is decreased to 30.00, medical expenses is decreased to 70.00 and miscellaneous expenses is decreased to 100.00, total expenses is decreased to 200.00. Timestamp in the status bar is updated.</p>
+</div>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="delete-expenses"><a class="link" href="#delete-expenses">H.18. Delete Expenses</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Delete an expenses</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>There must be at least 1 employee in the observable expenses list panel</p>
+</li>
+<li>
+<p>Test Case: deleteExpenses 1<br>
+Expected: Deletes expenses claim from expenses list with Index '1' in the expenses list.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="select-expenses"><a class="link" href="#select-expenses">H.19. Select Expenses</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Select an expenses</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>There must be at least 1 employee in the observable expenses list panel</p>
+</li>
+<li>
+<p>Test Case: selectExpenses 1<br>
+Expected: Select an expenses claim from expenses list with Index '1' in the expenses list.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="add-a-recruitment-post"><a class="link" href="#add-a-recruitment-post">H.20. Add A Recruitment Post</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -4992,7 +5343,7 @@ The length of job description is from 1 to 200 characters.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="edit-a-recruitment-post"><a class="link" href="#edit-a-recruitment-post">H.18. Edit A Recruitment Post</a></h3>
+<h3 id="edit-a-recruitment-post"><a class="link" href="#edit-a-recruitment-post">H.21. Edit A Recruitment Post</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -5029,7 +5380,7 @@ Expected: Invalid command format!
 </div>
 </div>
 <div class="sect2">
-<h3 id="select-a-recruitment-post"><a class="link" href="#select-a-recruitment-post">H.19. Select A Recruitment Post</a></h3>
+<h3 id="select-a-recruitment-post"><a class="link" href="#select-a-recruitment-post">H.22. Select A Recruitment Post</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -5050,7 +5401,7 @@ Expected: Selected Recruitment Post: 1</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="delete-a-recruitment-post"><a class="link" href="#delete-a-recruitment-post">H.20. Delete A Recruitment Post</a></h3>
+<h3 id="delete-a-recruitment-post"><a class="link" href="#delete-a-recruitment-post">H.23. Delete A Recruitment Post</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -5078,7 +5429,7 @@ Expected: Deleted Recruitment Post:
 </div>
 </div>
 <div class="sect2">
-<h3 id="deleting-an-employee"><a class="link" href="#deleting-an-employee">H.21. Deleting an employee</a></h3>
+<h3 id="deleting-an-employee"><a class="link" href="#deleting-an-employee">H.24. Deleting an employee</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -5107,4 +5458,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 11:13:41 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 11:42:22 UTC</div></div></div></body></html>

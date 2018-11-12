@@ -22,29 +22,36 @@ CHRS is capable of checking work schedule, creating recruitment posts, checking 
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Major enhancement</strong>: added <strong>the ability to undo/redo previous commands</strong></p>
+<p><strong>Major enhancement</strong>: <code>AddExpenses</code> Command and <code>DeleteExpenses</code> Command</p>
 <div class="ulist">
 <ul>
 <li>
-<p>What it does: allows the user to undo all previous commands one at a time. Preceding undo commands can be reversed by using the redo command.</p>
+<p>What it does: The <code>AddExpenses</code> command allows user to create an expenses or modify an expenses that already expenses. <code>DeleteExpenses</code> command allows user to delete an expenses from the expenses list.</p>
 </li>
 <li>
-<p>Justification: This feature improves the product significantly because a user can make mistakes in commands and the app should provide a convenient way to rectify them.</p>
+<p>Justification: This feature improves the product significantly because a user can add or modify expenses that the employee wishes to claim.</p>
 </li>
 <li>
-<p>Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.</p>
-</li>
-<li>
-<p>Credits: <em>{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}</em></p>
+<p>Highlights: User can add or modify an individual employee&#8217;s single or multiple types of expenses in a single command. This enhancement enhances the user experience as the user can store new or update existing expenses and access it at any point time.</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p><strong>Minor enhancement</strong>: added a history command that allows the user to navigate to previous commands using up/down keys.</p>
+<p><strong>Minor enhancement</strong>:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Added <code>SelectExpenses</code> Command to allow user to select any expenses in expenses list<br></p>
 </li>
 <li>
-<p><strong>Code contributed</strong>: [<a href="https://github.com">Functional code</a>] [<a href="https://github.com">Test code</a>] <em>{give links to collated code files}</em></p>
+<p>Added <code>ClearExpenses</code> Command to allow user to clear the expenses list.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Code contributed</strong>: [<a href="https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&amp;search=xiiaopanda&amp;sort=displayName&amp;since=2018-09-12&amp;until=2018-11-04&amp;timeframe=day&amp;reverse=false&amp;repoSort=true">Reposense Dashboard</a>]</p>
 </li>
 <li>
 <p><strong>Other contributions</strong>:</p>
@@ -55,20 +62,17 @@ CHRS is capable of checking work schedule, creating recruitment posts, checking 
 <div class="ulist">
 <ul>
 <li>
-<p>Managed releases <code>v1.3</code> - <code>v1.5rc</code> (3 releases) on GitHub</p>
+<p>Assist in approving, reviewing and merging pull requests</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p>Enhancements to existing features:</p>
+<p>Test cases:</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Updated the GUI color scheme (Pull requests <a href="https://github.com">#33</a>, <a href="https://github.com">#34</a>)</p>
-</li>
-<li>
-<p>Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests <a href="https://github.com">#36</a>, <a href="https://github.com">#38</a>)</p>
+<p>Wrote additional tests for existing features to increase coverage from 68.678% to 69.978% (<a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/114">#114</a>), 67.323% to 70.223% (<a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/220">#220</a>), 80.621% to 80.921% (<a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/232">#232</a>), 84.889% to 87.789% (<a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/244">#244</a>), 87.744% to 93.744% (<a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/248">#248</a>)</p>
 </li>
 </ul>
 </div>
@@ -78,7 +82,10 @@ CHRS is capable of checking work schedule, creating recruitment posts, checking 
 <div class="ulist">
 <ul>
 <li>
-<p>Did cosmetic tweaks to existing contents of the User Guide: <a href="https://github.com">#14</a></p>
+<p>Updated Developer Guide on <code>addExpenses</code> feature alongside model component and instructions for manual testing (Pull requests: <a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/102">#102</a>, <a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/232/files">#232</a>, <a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/270">#270</a>)</p>
+</li>
+<li>
+<p>Updated User Guide to ensure <code>addExpenses</code>, <code>deleteExpenses</code>, <code>SelectExpenses</code> and <code>clearExpenses</code> commands alongside the fields added by me are up to date (Pull requests: <a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/114">#114</a>, <a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/154">#154</a>, <a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/174">#174</a>)</p>
 </li>
 </ul>
 </div>
@@ -88,29 +95,10 @@ CHRS is capable of checking work schedule, creating recruitment posts, checking 
 <div class="ulist">
 <ul>
 <li>
-<p>PRs reviewed (with non-trivial review comments): <a href="https://github.com">#12</a>, <a href="https://github.com">#32</a>, <a href="https://github.com">#19</a>, <a href="https://github.com">#42</a></p>
+<p>PRs reviewed (with non-trivial review comments): <a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/69">#69</a>, <a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/103">#103</a>, <a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/107">#107</a>, <a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/99">#99</a>, <a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/70">#70</a>, <a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/129">#129</a></p>
 </li>
 <li>
-<p>Contributed to forum discussions (examples:  <a href="https://github.com">1</a>, <a href="https://github.com">2</a>, <a href="https://github.com">3</a>, <a href="https://github.com">4</a>)</p>
-</li>
-<li>
-<p>Reported bugs and suggestions for other teams in the class (examples:  <a href="https://github.com">1</a>, <a href="https://github.com">2</a>, <a href="https://github.com">3</a>)</p>
-</li>
-<li>
-<p>Some parts of the history feature I added was adopted by several other class mates (<a href="https://github.com">1</a>, <a href="https://github.com">2</a>)</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>Tools:</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Integrated a third party library (Natty) to the project (<a href="https://github.com">#42</a>)</p>
-</li>
-<li>
-<p>Integrated a new Github plugin (CircleCI) to the team repo</p>
+<p>Reported bugs and suggestions for other teams in the class (examples:  <a href="https://github.com/CS2113-AY1819S1-F09-1/main/issues/110">1</a>, <a href="https://github.com/CS2113-AY1819S1-F09-1/main/issues/107">2</a>)</p>
 </li>
 </ul>
 </div>
@@ -119,9 +107,6 @@ CHRS is capable of checking work schedule, creating recruitment posts, checking 
 </div>
 </li>
 </ul>
-</div>
-<div class="paragraph">
-<p><em>{you can add/remove categories in the list above}</em></p>
 </div>
 </div>
 </div>
@@ -139,14 +124,16 @@ CHRS is capable of checking work schedule, creating recruitment posts, checking 
 </tbody>
 </table>
 <div class="sect2">
-<h3 id="undoing-previous-command-code-undo-code"><a class="link" href="#undoing-previous-command-code-undo-code">Undoing previous command : <code>undo</code></a></h3>
+<h3 id="add-expenses-claims-under-a-specific-employee-code-addexpenses-code"><a class="link" href="#add-expenses-claims-under-a-specific-employee-code-addexpenses-code">Add expenses claims under a specific employee : <code>addExpenses</code></a></h3>
 <div class="paragraph">
-<p>Restores CHRS to the state before the previous <em>undoable</em> command was executed.
-If a <em>undoable</em> command is executed after undo, then the command that was undone
-will not be undoable anymore as it is already undone.</p>
+<p>Add new expenses for employee or modify expenses if there already exists an expenses</p>
 </div>
 <div class="paragraph">
-<p>Format: <code>undo</code></p>
+<p>Format: <code>addExpenses id/EMPLOYEEID [tra/TRAVELEXPENSES] [med/MEDICALEXPENSES] [misc/MISCELLANEOUS]</code><br>
+Or <code>ae id/EMPLOYEEID [tra/TRAVELEXPENSES] [med/MEDICALEXPENSES] [misc/MISCELLANEOUS]</code></p>
+</div>
+<div class="paragraph">
+<p>At least one of the fields, Travel Expenses, Medical Expenses, Miscellaneous Expenses must be included.</p>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -154,28 +141,22 @@ will not be undoable anymore as it is already undone.</p>
 <div class="ulist">
 <ul>
 <li>
-<p><code>delete 1</code><br>
-<code>list</code><br>
-<code>undo</code> (reverses the <code>delete 1</code> command)<br></p>
+<p><code>ae id/000001 tra/111 med/222 misc/333</code><br>
+Creates a new expenses that contain 111.00, 222.00 and 333.00 for the above fields for employee with employee id
+'000001'.<br>
+Total Expenses will reflect 666.00.</p>
 </li>
 <li>
-<p><code>selectEmployee 1</code><br>
-<code>list</code><br>
-<code>undo</code><br>
-The <code>undo</code> command fails as there are no undoable commands executed previously</p>
-</li>
-<li>
-<p><code>delete 1</code><br>
-<code>clear</code><br>
-<code>undo</code> (reverses the <code>clear</code> command)<br>
-<code>undo</code> (reverses the <code>delete 1</code> command)<br></p>
-</li>
-<li>
-<p><code>delete 1</code><br>
-<code>undo</code> (reverses the <code>delete 1</code> command)<br>
-<code>clear</code>(<code>delete 1</code> commmand will no longer be undoable as it is already undone)<br>
-<code>undo</code> (reverses the <code>clear</code> command)<br>
-<code>undo</code> (no more commands to undo)<br></p>
+<p><code>addExpenses id/000002 med/111 misc/222</code><br>
+Creates a new expenses that contain 111.00, 222.00 for the above fields for employee with employee id
+'000002'. Expenses will contain 0.00 for fields not included in command.<br>
+Total Expenses will reflect 333.00.</p>
+<div class="paragraph">
+<p><code>addExpenses id/000002 tra/111 med/222 misc/-111</code><br>
+Add 111.00, 222.00 and minus 111.00 for the above fields for employee with
+employee id '000002'.<br>
+Total Expenses will reflect 555.00.</p>
+</div>
 </li>
 </ul>
 </div>
@@ -186,24 +167,19 @@ The <code>undo</code> command fails as there are no undoable commands executed p
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-<div class="paragraph">
-<p>Undoable commands: those commands that modify CHRS content.
-For commands similar functions to<br>
-(list*, find*, filter*, select*, calculate*)
-the command will not be able to undo or redo).</p>
-</div>
+Any usage of <code>addExpenses</code> Command that will result in negative value for any fields will be rejected.
 </td>
 </tr>
 </table>
 </div>
 </div>
 <div class="sect2">
-<h3 id="redoing-the-previously-undone-command-code-redo-code"><a class="link" href="#redoing-the-previously-undone-command-code-redo-code">Redoing the previously undone command : <code>redo</code></a></h3>
+<h3 id="delete-expenses-claims-of-a-specific-employee-code-deleteexpenses-code"><a class="link" href="#delete-expenses-claims-of-a-specific-employee-code-deleteexpenses-code">Delete expenses claims of a specific employee : <code>deleteExpenses</code></a></h3>
 <div class="paragraph">
-<p>Reverses the most recent <code>undo</code> command.</p>
+<p>Deletes expenses claim from an employee.</p>
 </div>
 <div class="paragraph">
-<p>Format: <code>redo</code></p>
+<p>Format: <code>deleteExpenses INDEX</code>  or <code>de INDEX</code></p>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -211,41 +187,45 @@ the command will not be able to undo or redo).</p>
 <div class="ulist">
 <ul>
 <li>
-<p><code>delete 1</code><br>
-<code>undo</code> (reverses the <code>delete 1</code> command)<br>
-<code>redo</code> (reapplies the <code>delete 1</code> command)<br></p>
-</li>
-<li>
-<p><code>delete 1</code><br>
-<code>redo</code><br>
-The <code>redo</code> command fails as there are no <code>undo</code> commands executed previously</p>
-</li>
-<li>
-<p><code>delete 1</code><br>
-<code>clear</code><br>
-<code>undo</code> (reverses the <code>clear</code> command)<br>
-<code>undo</code> (reverses the <code>delete 1</code> command)<br>
-<code>redo</code> (reapplies the <code>delete 1</code> command)<br>
-<code>redo</code> (reapplies the <code>clear</code> command)<br></p>
+<p><code>deleteExpenses 1</code><br>
+Deletes expenses claim from employee with Index '1' in the list.</p>
 </li>
 </ul>
 </div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-<div class="paragraph">
-<p>Redoable commands: those commands that modify CHRS content.
-For commands similar functions to<br>
-(list*, find*, filter*, select*, calculate*)
-the command will not be able to undo or redo.</p>
 </div>
-</td>
-</tr>
-</table>
+<div class="sect2">
+<h3 id="select-an-expenses-claim-code-selectexpenses-code"><a class="link" href="#select-an-expenses-claim-code-selectexpenses-code">Select an expenses claim : <code>selectExpenses</code></a></h3>
+<div class="paragraph">
+<p>Select an expenses based on expenses list index ID. User could use command_alias: 'se'.</p>
+</div>
+<div class="paragraph">
+<p>Format: <code>selectExpenses INDEX</code> or <code>se INDEX</code></p>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>selectExpenses 1</code><br>
+Select the expenses with the index of '1' in the list</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="clear-expenses-list-code-clearexpenses-code"><a class="link" href="#clear-expenses-list-code-clearexpenses-code">Clear expenses list : <code>clearExpenses</code></a></h3>
+<div class="paragraph">
+<p>Clear all expenses at one go. User could use command_alias: 'ce'.</p>
+</div>
+<div class="paragraph">
+<p>Format: <code>clearExpenses</code> or <code>ce</code></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="expenses-report-code-expensesreport-code-em-upcoming-in-2-0-em"><a class="link" href="#expenses-report-code-expensesreport-code-em-upcoming-in-2-0-em">Expenses Report: <code>expensesReport</code> <em>[Upcoming in 2.0]</em></a></h3>
+<div class="paragraph">
+<p>Generates an expenses report with the total expenses amount claimed and have not been claimed for a year <em>[Upcoming in 2.0]</em></p>
 </div>
 </div>
 </div>
@@ -264,228 +244,342 @@ the command will not be able to undo or redo.</p>
 </tbody>
 </table>
 <div class="sect2">
-<h3 id="undo-redo-feature"><a class="link" href="#undo-redo-feature">Undo/Redo feature</a></h3>
+<h3 id="add-expenses"><a class="link" href="#add-expenses">Add Expenses</a></h3>
+<div class="paragraph">
+<p>The expenses feature contains to two commands.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The command <code>addExpenses</code> allows the user to add expenses for each employee.</p>
+</li>
+</ul>
+</div>
 <div class="sect3">
-<h4 id="current-implementation"><a class="link" href="#current-implementation">Current Implementation</a></h4>
+<h4 id="current-implementation-for-code-addexpenses-code-command"><a class="link" href="#current-implementation-for-code-addexpenses-code-command">Current Implementation for <code>addExpenses</code> command</a></h4>
+<div class="sect4">
+<h5 id="phase-1"><a class="link" href="#phase-1">Phase 1</a></h5>
 <div class="paragraph">
-<p>The undo/redo mechanism is facilitated by <code>VersionedModelList</code>, which oversees all the undo and redo for other
-storage, namely, <code>VersionedAddressBook</code>, <code>VersionedScheduleList</code>, <code>VersionedExpensesList</code>
-and <code>VersionedRecruitmentList</code>.</p>
+<p>The <code>addExpenses</code> command is handled by <code>AddExpensesCommandParser</code>.
+The <code>AddExpensesCommandParser</code> implements the <code>Parser</code> interface, takes in input from the user as a form of argument,
+The <code>AddExpensesCommandParser</code> will then check if user input contains too many prefixes or check for multiple entries of
+same prefix.</p>
 </div>
 <div class="paragraph">
-<p><code>VersionedModelList</code> stored internally as an <code>modelTypesStateList</code> and <code>currentStatePointer</code>.
-Additionally, it implements the following operations:</p>
+<p>Next, the <code>AddExpensesCommandParser</code> will compute the value of <code>expensesAmount</code> to be added by summing the
+the values of <code>travelExpenses</code>, <code>medicalExpenses</code> and <code>miscellaneousExpenses</code>. The <code>AddExpensesCommandParser</code> will then
+create the <code>Expenses</code> and <code>EditExpensesDescriptor</code> objects. Other classes will handle validation of the input, check if
+it has the correct input format.</p>
+</div>
+<div class="paragraph">
+<p>The five methods that helps to valid the input are:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><code>VersionedAddressBook#add()</code>&#8201;&#8212;&#8201;Save the storage model type that has committed in its history.</p>
+<p><code>isValidEmployeeId</code> from <code>EmployeeId</code> class</p>
 </li>
 <li>
-<p><code>VersionedAddressBook#addMultiple()</code>&#8201;&#8212;&#8201;Saves the set of storage model types that has committed in its history.</p>
+<p><code>isValidExpensesAmount</code> from <code>ExpensesAmount</code> class</p>
 </li>
 <li>
-<p><code>VersionedAddressBook#undo()</code>&#8201;&#8212;&#8201;Delegate <code>VersionedAddressBook</code>, <code>VersionedScheduleList</code>, <code>VersionedExpensesList</code>
-and <code>VersionedRecruitmentList</code> to restore the previous storage model state from its history.</p>
+<p><code>isValidTravelExpenses</code> from <code>TravelExpenses</code> class</p>
 </li>
 <li>
-<p><code>VersionedAddressBook#redo()</code>&#8201;&#8212;&#8201; Delegate <code>VersionedAddressBook</code>, <code>VersionedScheduleList</code>, <code>VersionedExpensesList</code>
-and <code>VersionedRecruitmentList</code> to restore a previously undone address book state from its history.</p>
+<p><code>isValidMedicalExpenses</code> from <code>MedicalExpenses</code> class</p>
+</li>
+<li>
+<p><code>isValidMiscellaneousExpenses</code> from <code>MiscellaneousExpenses</code> class</p>
 </li>
 </ul>
 </div>
-<div class="paragraph">
-<p>The following is an example of <code>VersionedAddressBook</code> implementation. The implementation will
-be similar to <code>VersionedScheduleList</code>, <code>VersionedExpensesList</code> and <code>VersionedRecruitmentList</code>.</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If the input does not comply with the required format, an error message will be shown to the user.
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
-<p><code>VersionedAddressBook</code> extends <code>AddressBook</code> with an undo/redo history, stored internally as an <code>addressBookStateList</code> and <code>currentStatePointer</code>.
-Additionally, it implements the following operations:</p>
+<p>Code snippet of <code>isValidEmployeeId</code> that shows the checking of the input compliance:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="directive">static</span> <span class="directive">final</span> <span class="predefined-type">String</span> EMPLOYE_EXPENSES_ID_VALIDATION_REGEX = <span class="string"><span class="delimiter">&quot;</span><span class="char">\\</span><span class="content">d{3,}</span><span class="delimiter">&quot;</span></span>;
+
+<span class="comment">/**
+     * Returns true if a given string is a valid Employee Expenses Id.
+     */</span>
+    <span class="directive">public</span> <span class="directive">static</span> <span class="type">boolean</span> isValidEmployeeId(<span class="predefined-type">String</span> test) {
+        <span class="keyword">return</span> test.matches(EMPLOYE_EXPENSES_ID_VALIDATION_REGEX);
+    }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Code snippet of <code>isValidExpensesAmount</code> that shows the checking of the input compliance:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="directive">static</span> <span class="directive">final</span> <span class="predefined-type">String</span> EMPLOYE_EXPENSES_AMOUNT_VALIDATION_REGEX = <span class="string"><span class="delimiter">&quot;</span><span class="content">[-]?[0-9]+(.[0-9]{0,2})?</span><span class="delimiter">&quot;</span></span>;
+
+<span class="comment">/**
+     * Returns true if a given string is a valid Expenses Amount.
+     */</span>
+    <span class="directive">public</span> <span class="directive">static</span> <span class="type">boolean</span> isValidExpensesAmount(<span class="predefined-type">String</span> test) {
+        <span class="keyword">return</span> test.matches(EMPLOYE_EXPENSES_AMOUNT_VALIDATION_REGEX);
+    }</code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="phase-2"><a class="link" href="#phase-2">Phase 2</a></h5>
+<div class="paragraph">
+<p>The <code>AddExpensesCommand</code> will take in the <code>Expenses</code> and <code>EditExpensesDescriptor</code> objects.</p>
+</div>
+<div class="paragraph">
+<p>The <code>AddExpensesCommand</code> will first check if there exists a person in the person list that has the same employeeId  as
+<code>Expenses</code> object using the condition <code>(!model.hasEmployeeId(toCheckEmployeeId)</code>.
+The <code>AddExpensesCommand</code> will next check if there exists an expenses in the expenses list that has the same employeeId
+as <code>Expenses</code> object using the condition <code>(!model.hasExpenses(toAddExpenses)</code>.</p>
+</div>
+<div class="paragraph">
+<p>Code snippet of condition that checks the person and expenses list for person and expenses with same employeeId:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">if</span> (!model.hasEmployeeId(toCheckEmployeeId)) {
+            <span class="keyword">throw</span> <span class="keyword">new</span> CommandException(MESSAGE_EMPLOYEE_ID_NOT_FOUND);
+        } <span class="keyword">else</span> <span class="keyword">if</span> (!model.hasExpenses(toAddExpenses)) {</code></pre>
+</div>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><code>VersionedAddressBook#commit()</code>&#8201;&#8212;&#8201;Saves the current address book state in its history.</p>
+<p>If Expenses List don&#8217;t have expenses with same EmployeeId,</p>
+<div class="ulist">
+<ul>
+<li>
+<p>The <code>AddExpensesCommand</code> will then check if any of the fields will contains negative value or exceed the limit. An exception will be
+thrown if at least one of the fields contains negative value or exceed the limit.</p>
 </li>
 <li>
-<p><code>VersionedAddressBook#undo()</code>&#8201;&#8212;&#8201;Restores the previous address book state from its history.</p>
+<p>The <code>AddExpensesCommand</code> will then add the expenses into CHRS.</p>
 </li>
-<li>
-<p><code>VersionedAddressBook#redo()</code>&#8201;&#8212;&#8201;Restores a previously undone address book state from its history.</p>
+</ul>
+</div>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>These operations are exposed in the <code>Model</code> interface as <code>Model#commitAddressBook()</code>, <code>Model#undoAddressBook()</code> and <code>Model#redoAddressBook()</code> respectively.</p>
+<p>Code snippet of <code>If Expenses List don&#8217;t have expenses with same EmployeeId</code></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">else</span> <span class="keyword">if</span> (!model.hasExpenses(toAddExpenses)) {
+    <span class="keyword">if</span> (<span class="predefined-type">Double</span>.parseDouble(toAddExpenses.getExpensesAmount().toString()) &lt; <span class="integer">0</span>
+        || <span class="predefined-type">Double</span>.parseDouble(toAddExpenses.getTravelExpenses().toString()) &lt; <span class="integer">0</span>
+        || <span class="predefined-type">Double</span>.parseDouble(toAddExpenses.getMedicalExpenses().toString()) &lt; <span class="integer">0</span>
+        || <span class="predefined-type">Double</span>.parseDouble(toAddExpenses.getMiscellaneousExpenses().toString()) &lt; <span class="integer">0</span>) {
+        <span class="keyword">throw</span> <span class="keyword">new</span> CommandException(MESSAGE_NEGATIVE_LEFTOVER);
+    } <span class="keyword">else</span> <span class="keyword">if</span> (<span class="predefined-type">Double</span>.parseDouble(toAddExpenses.getExpensesAmount().toString()) &gt; MAX_TOTAL_EXPENSES
+        || <span class="predefined-type">Double</span>.parseDouble(toAddExpenses.getTravelExpenses().toString()) &gt; MAX_EXPENSES_AMOUNT
+        || <span class="predefined-type">Double</span>.parseDouble(toAddExpenses.getMedicalExpenses().toString()) &gt; MAX_EXPENSES_AMOUNT
+        || <span class="predefined-type">Double</span>.parseDouble(toAddExpenses.getMiscellaneousExpenses().toString()) &gt; MAX_EXPENSES_AMOUNT
+    ) {
+        <span class="keyword">throw</span> <span class="keyword">new</span> CommandException(MESSAGE_VALUE_OVER_LIMIT);
+    } <span class="keyword">else</span> <span class="keyword">if</span> (<span class="predefined-type">Double</span>.parseDouble(toAddExpenses.getExpensesAmount().toString()) &gt;= <span class="integer">0</span>
+            &amp;&amp; <span class="predefined-type">Double</span>.parseDouble(toAddExpenses.getTravelExpenses().toString()) &gt;= <span class="integer">0</span>
+            &amp;&amp; <span class="predefined-type">Double</span>.parseDouble(toAddExpenses.getMedicalExpenses().toString()) &gt;= <span class="integer">0</span>
+            &amp;&amp; <span class="predefined-type">Double</span>.parseDouble(toAddExpenses.getMiscellaneousExpenses().toString()) &gt;= <span class="integer">0</span>
+            &amp;&amp; <span class="predefined-type">Double</span>.parseDouble(toAddExpenses.getExpensesAmount().toString()) &lt;= MAX_TOTAL_EXPENSES
+            &amp;&amp; <span class="predefined-type">Double</span>.parseDouble(toAddExpenses.getTravelExpenses().toString()) &lt;= MAX_EXPENSES_AMOUNT
+            &amp;&amp; <span class="predefined-type">Double</span>.parseDouble(toAddExpenses.getMedicalExpenses().toString()) &lt;= MAX_EXPENSES_AMOUNT
+            &amp;&amp; <span class="predefined-type">Double</span>.parseDouble(toAddExpenses.getMiscellaneousExpenses().toString()) &lt;= MAX_EXPENSES_AMOUNT
+    ) {
+        model.addExpenses(toAddExpenses);
+        model.commitExpensesList();
+        messageToShow = MESSAGE_SUCCESS;
+    }</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>If Expenses List have expenses with same EmployeeId,</p>
+<div class="ulist">
+<ul>
+<li>
+<p>The <code>AddExpensesCommand</code> will create an <code>expensesToEdit</code> object The <code>AddExpensesCommand</code> will then call
+<code>createEditedExpenses</code> method with <code>expensesToEdit</code> and <code>EditExpensesDescriptor</code> object as parameters.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
 </div>
 <div class="paragraph">
-<p>Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.</p>
+<p>Code snippet creating <code>expensesToEdit</code> object and calling <code>createdEditedExpenses</code> method</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">else</span> <span class="keyword">if</span> (model.hasExpenses(toAddExpenses)) {
+    EmployeeIdExpensesContainsKeywordsPredicate predicatEmployeeId;
+    <span class="predefined-type">List</span>&lt;<span class="predefined-type">String</span>&gt; employeeIdList = <span class="keyword">new</span> <span class="predefined-type">ArrayList</span>&lt;&gt;();
+    <span class="predefined-type">List</span>&lt;Expenses&gt; lastShownListExpenses;
+
+    employeeIdList.add(toCheckEmployeeId.getEmployeeId().value);
+    predicatEmployeeId = <span class="keyword">new</span> EmployeeIdExpensesContainsKeywordsPredicate(employeeIdList);
+
+    model.updateFilteredExpensesList(predicatEmployeeId);
+    lastShownListExpenses = model.getFilteredExpensesList();
+
+    Expenses expensesToEdit = lastShownListExpenses.get(<span class="integer">0</span>);
+    Expenses editedExpenses = createEditedExpenses(expensesToEdit, editExpensesDescriptor);</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The <code>createEditedExpenses</code> method will call <code>modifyExpensesAmount</code>, <code>modifyTravelExpenses</code>, <code>modifyMedicalExpenses</code>,
+<code>modifyMiscellaneousExpenses</code>, methods with <code>expensesToEdit</code> and <code>EditExpensesDescriptor</code> object as parameter.</p>
+</li>
+</ul>
 </div>
 <div class="paragraph">
-<p>Step 1. The user launches the application for the first time. The <code>VersionedAddressBook</code> will be initialized with the initial address book state, and the <code>currentStatePointer</code> pointing to that single address book state.</p>
+<p>Code snippet <code>createdEditedExpenses</code> method</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">    <span class="directive">private</span> Expenses createEditedExpenses(Expenses expensesToEdit, EditExpensesDescriptor
+            editExpensesDescriptor) {
+        <span class="keyword">assert</span> expensesToEdit != <span class="predefined-constant">null</span>;
+        ExpensesAmount updatedExpensesAmount = <span class="predefined-constant">null</span>;
+        TravelExpenses updatedTravelExpenses = <span class="predefined-constant">null</span>;
+        MedicalExpenses updatedMedicalExpenses = <span class="predefined-constant">null</span>;
+        MiscellaneousExpenses updatedMiscellaneousExpenses = <span class="predefined-constant">null</span>;
+
+        EmployeeId updatedEmployeeId = expensesToEdit.getEmployeeId();
+        <span class="keyword">try</span> {
+            updatedExpensesAmount = ParserUtil.parseExpensesAmount(modifyExpensesAmount(expensesToEdit,
+                    editExpensesDescriptor));
+            updatedTravelExpenses = ParserUtil.parseTravelExpenses(modifyTravelExpenses(expensesToEdit,
+                    editExpensesDescriptor));
+            updatedMedicalExpenses = ParserUtil.parseMedicalExpenses(modifyMedicalExpenses(expensesToEdit,
+                    editExpensesDescriptor));
+            updatedMiscellaneousExpenses = ParserUtil.parseMiscellaneousExpenses(modifyMiscellaneousExpenses(
+                    expensesToEdit, editExpensesDescriptor));
+        } <span class="keyword">catch</span> (<span class="exception">ParseException</span> pe) {
+            pe.printStackTrace();
+        }
+
+        <span class="keyword">return</span> <span class="keyword">new</span> Expenses(updatedEmployeeId, updatedExpensesAmount, updatedTravelExpenses, updatedMedicalExpenses,
+                updatedMiscellaneousExpenses);
+    }</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Each method will edit their respective field from <code>expensesToEdit</code> with the same field from <code>EditExpensesDescriptor</code>.
+The method will set isNegativeLeftover to be true and set isOverLimit to be true if the values is below 0 or exceed max
+value.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Code snippet <code>modifyExpensesAmount</code> method, one of the methods being called</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">private</span> <span class="predefined-type">String</span> modifyExpensesAmount (Expenses expensesToEdit, EditExpensesDescriptor
+        editExpensesDescriptor) {
+    <span class="predefined-type">NumberFormat</span> formatter = <span class="keyword">new</span> <span class="predefined-type">DecimalFormat</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">#0.00</span><span class="delimiter">&quot;</span></span>);
+    <span class="predefined-type">String</span> newExpensesAmount = expensesToEdit.getExpensesAmount().toString();
+    <span class="type">double</span> updateExpensesAmount = <span class="predefined-type">Double</span>.parseDouble(newExpensesAmount);
+    <span class="predefined-type">String</span> change = editExpensesDescriptor.getExpensesAmount().toString().replaceAll(<span class="string"><span class="delimiter">&quot;</span><span class="content">[^0-9.-]</span><span class="delimiter">&quot;</span></span>,
+            <span class="string"><span class="delimiter">&quot;</span><span class="delimiter">&quot;</span></span>);
+    updateExpensesAmount += <span class="predefined-type">Double</span>.parseDouble(change);
+    <span class="keyword">if</span> (updateExpensesAmount &lt; <span class="integer">0</span>) {
+        setIsNegativeLeftover(<span class="predefined-constant">true</span>);
+    } <span class="keyword">else</span> <span class="keyword">if</span> (updateExpensesAmount &gt; MAX_TOTAL_EXPENSES) {
+        setIsOverLimit(<span class="predefined-constant">true</span>);
+    } <span class="keyword">else</span> <span class="keyword">if</span> (updateExpensesAmount &gt;= <span class="integer">0</span>) {
+        newExpensesAmount = <span class="predefined-type">String</span>.valueOf(formatter.format(updateExpensesAmount));
+    }
+    <span class="keyword">return</span> newExpensesAmount;
+}</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The <code>AddExpensesCommand</code> will check for isNegativeLeftover and isOverLimit. If both are false, the
+<code>AddExpensesCommand</code> will then update the updated expenses into CHRS.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Code snippet of isNegativeLeftover and isOverLimit check</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">if</span> (getIsNegativeLeftover()) {
+        <span class="keyword">throw</span> <span class="keyword">new</span> CommandException(MESSAGE_NEGATIVE_LEFTOVER);
+    } <span class="keyword">else</span> <span class="keyword">if</span> (getIsOverLimit()) {
+        <span class="keyword">throw</span> <span class="keyword">new</span> CommandException(MESSAGE_VALUE_OVER_LIMIT);
+    } <span class="keyword">else</span> <span class="keyword">if</span> (!getIsNegativeLeftover() &amp;&amp; !getIsOverLimit()) {
+        messageToShow = MESSAGE_SUCCESS;
+        model.updateExpenses(expensesToEdit, editedExpenses);
+        model.commitExpensesList();
+    }
+    model.updateFilteredExpensesList(PREDICATE_SHOW_ALL_EXPENSES);
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The sequence diagram below illustrates the operation of the <code>AddExpensesCommand</code>:</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="../images/UndoRedoStartingStateListDiagram.png" alt="UndoRedoStartingStateListDiagram" width="800">
+<img src="../images/Add_ExpensesCommandSequenceDiagram.png" alt="Add ExpensesCommandSequenceDiagram" width="900">
 </div>
-</div>
-<div class="paragraph">
-<p>Step 2. The user executes <code>delete 5</code> command to delete the 5th person in the address book. The <code>delete</code> command calls <code>Model#commitAddressBook()</code>, causing the modified state of the address book after the <code>delete 5</code> command executes to be saved in the <code>addressBookStateList</code>, and the <code>currentStatePointer</code> is shifted to the newly inserted address book state.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/UndoRedoNewCommand1StateListDiagram.png" alt="UndoRedoNewCommand1StateListDiagram" width="800">
-</div>
-</div>
-<div class="paragraph">
-<p>Step 3. The user executes <code>add n/David &#8230;&#8203;</code> to add a new person. The <code>add</code> command also calls <code>Model#commitAddressBook()</code>, causing another modified address book state to be saved into the <code>addressBookStateList</code>.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/UndoRedoNewCommand2StateListDiagram.png" alt="UndoRedoNewCommand2StateListDiagram" width="800">
-</div>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-If a command fails its execution, it will not call <code>Model#commitAddressBook()</code>, so the address book state will not be saved into the <code>addressBookStateList</code>.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the <code>undo</code> command. The <code>undo</code> command will call <code>Model#undoAddressBook()</code>, which will shift the <code>currentStatePointer</code> once to the left, pointing it to the previous address book state, and restores the address book to that state.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/UndoRedoExecuteUndoStateListDiagram.png" alt="UndoRedoExecuteUndoStateListDiagram" width="800">
-</div>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-If the <code>currentStatePointer</code> is at index 0, pointing to the initial address book state, then there are no previous address book states to restore. The <code>undo</code> command uses <code>Model#canUndoAddressBook()</code> to check if this is the case. If so, it will return an error to the user rather than attempting to perform the undo.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>The following sequence diagram shows how the undo operation works:</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/UndoRedoSequenceDiagram.png" alt="UndoRedoSequenceDiagram" width="800">
-</div>
-</div>
-<div class="paragraph">
-<p>The <code>redo</code> command does the opposite&#8201;&#8212;&#8201;it calls <code>Model#redoAddressBook()</code>, which shifts the <code>currentStatePointer</code> once to the right, pointing to the previously undone state, and restores the address book to that state.</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-If the <code>currentStatePointer</code> is at index <code>addressBookStateList.size() - 1</code>, pointing to the latest address book state, then there are no undone address book states to restore. The <code>redo</code> command uses <code>Model#canRedoAddressBook()</code> to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>Step 5. The user then decides to execute the command <code>list</code>. Commands that do not modify the address book, such as <code>list</code>, will usually not call <code>Model#commitAddressBook()</code>, <code>Model#undoAddressBook()</code> or <code>Model#redoAddressBook()</code>. Thus, the <code>addressBookStateList</code> remains unchanged.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/UndoRedoNewCommand3StateListDiagram.png" alt="UndoRedoNewCommand3StateListDiagram" width="800">
-</div>
-</div>
-<div class="paragraph">
-<p>Step 6. The user executes <code>clear</code>, which calls <code>Model#commitAddressBook()</code>. Since the <code>currentStatePointer</code> is not pointing at the end of the <code>addressBookStateList</code>, all address book states after the <code>currentStatePointer</code> will be purged. We designed it this way because it no longer makes sense to redo the <code>add n/David &#8230;&#8203;</code> command. This is the behavior that most modern desktop applications follow.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/UndoRedoNewCommand4StateListDiagram.png" alt="UndoRedoNewCommand4StateListDiagram" width="800">
-</div>
-</div>
-<div class="paragraph">
-<p>The following activity diagram summarizes what happens when a user executes a new command:</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/UndoRedoActivityDiagram.png" alt="UndoRedoActivityDiagram" width="650">
 </div>
 </div>
 </div>
 <div class="sect3">
 <h4 id="design-considerations"><a class="link" href="#design-considerations">Design Considerations</a></h4>
-<div class="sect4">
-<h5 id="aspect-how-undo-redo-executes"><a class="link" href="#aspect-how-undo-redo-executes">Aspect: How undo &amp; redo executes</a></h5>
+<div class="paragraph">
+<p>Aspect implementation of <code>AddExpenses</code> command:</p>
+</div>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Alternative 1 (current choice):</strong> Saves the entire address book.</p>
+<p><strong>Alternative 1 (current choice):</strong> Have a single command to add and modify expenses.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: Easy to implement.</p>
+<p>Pros: User isn&#8217;t require to ensure that there exist an expenses for the employee before modifying the expenses</p>
 </li>
 <li>
-<p>Cons: May have performance issues in terms of memory usage.</p>
+<p>Cons: Have to handle more conditions and possibly more prone to bugs.</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p><strong>Alternative 2:</strong> Individual command knows how to undo/redo by itself.</p>
+<p><strong>Alternative 2:</strong> Have separate commands to add or modify expenses.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: Will use less memory (e.g. for <code>delete</code>, just save the person being deleted).</p>
+<p>Pros: User won&#8217;t have the possibly of mixing up if they want to add new expenses or modify old expenses.</p>
 </li>
 <li>
-<p>Cons: We must ensure that the implementation of each individual command are correct.</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect4">
-<h5 id="aspect-data-structure-to-support-the-undo-redo-commands"><a class="link" href="#aspect-data-structure-to-support-the-undo-redo-commands">Aspect: Data structure to support the undo/redo commands</a></h5>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Alternative 1 (current choice):</strong> Use a list to store the history of address book states.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: Easy for new Computer Science student undergraduates to understand, who are likely to be the new incoming developers of our project.</p>
-</li>
-<li>
-<p>Cons: Logic is duplicated twice. For example, when a new command is executed, we must remember to update both <code>HistoryManager</code> and <code>VersionedAddressBook</code>.</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p><strong>Alternative 2:</strong> Use <code>HistoryManager</code> for undo/redo</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: We do not need to maintain a separate list, and just reuse what is already in the codebase.</p>
-</li>
-<li>
-<p>Cons: Requires dealing with commands that have already been undone: We must remember to skip these commands. Violates Single Responsibility Principle and Separation of Concerns as <code>HistoryManager</code> now needs to do two different things.</p>
+<p>Cons: Requires user to know more commands.</p>
 </li>
 </ul>
 </div>
@@ -493,15 +587,45 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 </ul>
 </div>
 <div class="paragraph">
-<p>a
-== PROJECT: PowerPointLabs</p>
+<p>Aspect: <code>Expenses List</code> Storage</p>
 </div>
-<hr>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Have expenses stored in XML format.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easier to read, code and test XML files.</p>
+</li>
+<li>
+<p>Cons: Can&#8217;t compute or tabulate data from file.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Have schedules stored in CSV format.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: More efficient way of storing tabular data like expenses</p>
+</li>
+<li>
+<p>Cons: Harder to read as compared to XML file.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="expenses-report-code-expensesreport-code-em-upcoming-in-2-0-em-2"><a class="link" href="#expenses-report-code-expensesreport-code-em-upcoming-in-2-0-em-2">Expenses Report: <code>expensesReport</code> <em>[Upcoming in 2.0]</em></a></h4>
 <div class="paragraph">
-<p><em>{Optionally, you may include other projects in your portfolio.}</em></p>
+<p>Generates an expenses report with the total expenses amount claimed and have not been claimed for a year <em>[Upcoming in 2.0]</em></p>
 </div>
 </div>
 </div>
 </div>
-</div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 11:13:41 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 11:42:22 UTC</div></div></div></body></html>
