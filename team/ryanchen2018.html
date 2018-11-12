@@ -64,7 +64,9 @@ CHRS is capable of checking work schedule, creating recruitment posts, checking 
 <li>
 <p>Update developer guide for recruitment feature(<a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/101">#101</a>,
 <a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/107">#107</a>,
-<a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/108">#108</a>)</p>
+<a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/108">#108</a>,
+<a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/259">#259</a>,
+<a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/260">#260</a>)</p>
 </li>
 <li>
 <p>Update user guide for recruitment feature(<a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/108">#108</a>,
@@ -77,7 +79,8 @@ CHRS is capable of checking work schedule, creating recruitment posts, checking 
 <a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/160">#160</a>,
 <a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/175">#175</a>,
 <a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/179">#179</a>,
-<a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/239">#239</a>)</p>
+<a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/239">#239</a>,
+<a href="https://github.com/CS2113-AY1819S1-T16-4/main/pull/259">#259</a>)</p>
 </li>
 </ul>
 </div>
@@ -164,11 +167,15 @@ functionality of company server</p>
 </td>
 <td class="content">
 Duplicate recruitment posts are not allowed. Minimal one field should be different.
-=== Edit an existing recruitment post : <code>editRecruitmentPost</code>
-Edit a recruitment post based on its index no.
 </td>
 </tr>
 </table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="edit-an-existing-recruitment-post-code-editrecruitmentpost-code"><a class="link" href="#edit-an-existing-recruitment-post-code-editrecruitmentpost-code">Edit an existing recruitment post : <code>editRecruitmentPost</code></a></h3>
+<div class="paragraph">
+<p>Edit a recruitment post based on its index no.</p>
 </div>
 <div class="paragraph">
 <p>Format: <code>editRecruitmentPost [Index] jp/JOB POSITION me/MINIMAL YEARS OF WORKING EXPERIENCE jd/JOB DESCRIPTION</code>
@@ -203,11 +210,15 @@ server.</p>
 </td>
 <td class="content">
 Minimal one field should be changed in order to make the editing recruitment post function work.
-=== Select recruitment post : <code>selectRecruitmentPost</code>
-Select a recruitment post based on post index ID.
 </td>
 </tr>
 </table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="select-recruitment-post-code-selectrecruitmentpost-code"><a class="link" href="#select-recruitment-post-code-selectrecruitmentpost-code">Select recruitment post : <code>selectRecruitmentPost</code></a></h3>
+<div class="paragraph">
+<p>Select a recruitment post based on post index ID.</p>
 </div>
 <div class="paragraph">
 <p>Format: <code>selectRecruitmentPost INDEX</code> or <code>srp INDEX</code></p>
@@ -219,11 +230,15 @@ Select a recruitment post based on post index ID.
 <ul>
 <li>
 <p><code>selectRecruitmentPost 1</code><br>
-Select the recruitment post with the index of '1'
-=== Delete recruitment post : <code>deleteRecruitmentPost</code>
-Delete a recruitment post based on post index ID.</p>
+Select the recruitment post with the index of '1'</p>
 </li>
 </ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="delete-recruitment-post-code-deleterecruitmentpost-code"><a class="link" href="#delete-recruitment-post-code-deleterecruitmentpost-code">Delete recruitment post : <code>deleteRecruitmentPost</code></a></h3>
+<div class="paragraph">
+<p>Delete a recruitment post based on post index ID.</p>
 </div>
 <div class="paragraph">
 <p>Format: <code>deleteRecruitmentPost INDEX</code> or <code>drp INDEX</code></p>
@@ -235,14 +250,25 @@ Delete a recruitment post based on post index ID.</p>
 <ul>
 <li>
 <p><code>deleteRecruitmentPost 1</code><br>
-Deletes the recruitment post with the index of '1'
-=== Clear recruitment posts : <code>clearRecruitmentPost</code>
-Clear all recruitment posts at one go.</p>
+Deletes the recruitment post with the index of '1'</p>
 </li>
 </ul>
 </div>
+</div>
+<div class="sect2">
+<h3 id="clear-recruitment-posts-code-clearrecruitmentpost-code"><a class="link" href="#clear-recruitment-posts-code-clearrecruitmentpost-code">Clear recruitment posts : <code>clearRecruitmentPost</code></a></h3>
+<div class="paragraph">
+<p>Clear all recruitment posts at one go.</p>
+</div>
 <div class="paragraph">
 <p>Format: <code>clearRecruitmentPost</code> or <code>crp</code></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="publish-recruitment-posts-to-job-portal-code-publishrecruitmentpost-code-em-upcoming-in-2-0-em"><a class="link" href="#publish-recruitment-posts-to-job-portal-code-publishrecruitmentpost-code-em-upcoming-in-2-0-em">Publish recruitment posts to job portal: <code>publishRecruitmentPost</code> <em>[Upcoming in 2.0]</em></a></h3>
+<div class="paragraph">
+<p><code>publishRecruitmentPost</code> command allows users to publish an existing recruitment post to job portal such as job street
+website. <em>[Upcoming in 2.0]</em></p>
 </div>
 </div>
 </div>
@@ -337,7 +363,13 @@ operation of <code>addRecruitmentPost</code> command:</p>
 <div class="sect3">
 <h4 id="current-implementation-for-code-editrecruitmentpost-code"><a class="link" href="#current-implementation-for-code-editrecruitmentpost-code">Current Implementation for <code>editRecruitmentPost</code></a></h4>
 <div class="paragraph">
-<p><code>editRecruitmentPost</code> command allows an existing recruitment post to be edited.</p>
+<p><code>editRecruitmentPost</code> command allows an existing recruitment post to be edited. The sequence diagram below illustrates
+the operation of <code>editRecruitmentPost</code> command:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/Recruitment/editRecruitmentPost.png" alt="editRecruitmentPost" width="650">
+</div>
 </div>
 <div class="paragraph">
 <p>In addition, Command Exception will be thrown due to the following:</p>
@@ -361,7 +393,13 @@ about to be edited.</p>
 <h4 id="current-implementation-for-code-selectrecruitmentpost-code"><a class="link" href="#current-implementation-for-code-selectrecruitmentpost-code">Current Implementation for <code>selectRecruitmentPost</code></a></h4>
 <div class="paragraph">
 <p><code>selectRecruitmentPost</code> command allows users to select an existing recruitment post based on recruit post index number
-displayed in the recruitment post list panel.</p>
+displayed in the recruitment post list panel. The sequence diagram below illustrates the operation
+of <code>selectRecruitmentPost</code> command:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/Recruitment/selectRecruitmentPost.png" alt="selectRecruitmentPost" width="650">
+</div>
 </div>
 <div class="paragraph">
 <p>In addition, Command Exception will be thrown due to the following:</p>
@@ -384,7 +422,13 @@ displayed in the recruitment post list panel.</p>
 <h4 id="current-implementation-for-code-deleterecruitmentpost-code"><a class="link" href="#current-implementation-for-code-deleterecruitmentpost-code">Current Implementation for <code>deleteRecruitmentPost</code></a></h4>
 <div class="paragraph">
 <p><code>deleteRecruitmentPost</code> command allows users to delete an existing recruitment post based on recruit post index number
-displayed in the recruitment post list panel.</p>
+displayed in the recruitment post list panel. The sequence diagram below illustrates the operation
+of <code>deleteRecruitmentPost</code> command:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/Recruitment/deleteRecruitmentPost.png" alt="deleteRecruitmentPost" width="650">
+</div>
 </div>
 <div class="paragraph">
 <p>In addition, Command Exception will be thrown due to the following:</p>
@@ -404,7 +448,7 @@ displayed in the recruitment post list panel.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="future-implementation-for-publishrecruitmentpost-em-upcoming-in-2-0-em"><a class="link" href="#future-implementation-for-publishrecruitmentpost-em-upcoming-in-2-0-em">Future Implementation for `publishRecruitmentPost`<em>[Upcoming in 2.0]</em></a></h4>
+<h4 id="future-implementation-for-code-publishrecruitmentpost-code-em-upcoming-in-2-0-em"><a class="link" href="#future-implementation-for-code-publishrecruitmentpost-code-em-upcoming-in-2-0-em">Future Implementation for <code>publishRecruitmentPost</code> <em>[Upcoming in 2.0]</em></a></h4>
 <div class="paragraph">
 <p><code>publishRecruitmentPost</code> command allows users to publish an existing recruitment post to job portal such as job street
 website. <em>[Upcoming in 2.0]</em></p>
@@ -449,4 +493,4 @@ to manage recruitment posts.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 06:59:33 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 08:19:20 UTC</div></div></div></body></html>
